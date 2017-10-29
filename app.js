@@ -11,9 +11,9 @@ var favicon = require('serve-favicon');
 var express = require('express');
 
 // Add required modules that exist within the project
+require('./app_api/models/db');
 var routesServer = require('./app_server/routes/index');
-//var routesApi = require('./app_api/routes/index');
-//require('./app_api/models/db');
+var routesApi = require('./app_api/routes/index');
 
 // Create Express application
 var app = express();
@@ -38,7 +38,7 @@ app.set('json spaces', 2);
 
 // Add the application routes
 app.use('/', routesServer);
-//app.use('/api/v1', routesApi);
+app.use('/api/v1', routesApi);
 
 // Catch 404 errors and forward to error handlers
 app.use(function(req, res, next) {

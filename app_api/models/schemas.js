@@ -1,6 +1,7 @@
 // Require mongoose to make a schemas with
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Create user schema
 var userSchema = new Schema({
@@ -18,7 +19,7 @@ var userSchema = new Schema({
 // Create viewsite schema
 var viewsiteSchema = new Schema({
   'userId': {
-    'type': Schema.ObjectId,
+    'type': ObjectId,
     'required': true
   },
   'viewsiteName': {
@@ -35,7 +36,7 @@ var viewsiteSchema = new Schema({
 // Create viewpage schema
 var viewpageSchema = new Schema({
   'viewsiteId': {
-    'type': Schema.ObjectId,
+    'type': ObjectId,
     'required': true
   },
   'viewpageName': {
@@ -55,7 +56,7 @@ var viewpageSchema = new Schema({
 // Create element schema
 var elementSchema = new Schema({
   'viewpageId': {
-    'type': Schema.ObjectId,
+    'type': ObjectId,
     'required': true
   },
   'elementType': {
