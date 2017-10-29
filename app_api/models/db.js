@@ -44,4 +44,5 @@ process.on('exit', function(code) {
 });
 
 // Bring in required schemas
-require('./schemas');
+require('./cadreSchemas');
+require('./userSchemas');
