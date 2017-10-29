@@ -31,7 +31,7 @@ var userTableSchema = new Schema({
 
 // Create user database schema
 var userDatabaseSchema = new Schema({
-  'viewsiteId: {
+  'viewsiteId': {
     'type': ObjectId,
     'required': true
   },
