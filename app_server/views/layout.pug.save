@@ -3,11 +3,10 @@ html
   head
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title= title
-    link(rel='stylesheet', href='/css/stylesheet.css')
   body
     noscript
       You need to enable JavaScript to run this app.
     div#root
       script
-        include:babel /lib/cadre.min.js
-    script(src='/scripts/script.js')
+        include:babel 
+/lib/cadre.min.js
