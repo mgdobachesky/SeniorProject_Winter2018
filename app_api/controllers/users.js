@@ -10,9 +10,18 @@ function sendJSONresponse(res, status, content) {
   res.json(content);
 }
 
-// Read a user
-function usersReadOne(request, response) {
-  usersDao.usersReadOne(request).then(function(results) {
+// Login a user
+function usersLogin(request, response) {
+  usersDao.usersLogin(request).then(function(results) {
+    sendJSONresponse(response, 200, results);
+  }, function(error) {
+    sendJSONresponse(response, 404, error);
+  });
+}
+
+// Check if a user exists
+function usersExists(request, response) {
+  usersDao.usersExists(request).then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -29,8 +38,8 @@ function usersCreate(request, response) {
 }
 
 // Update a user
-function usersUpdateOne(request, response) {
-  usersDao.usersUpdateOne(request).then(function(results) {
+function usersUpdate(request, response) {
+  usersDao.usersUpdate(request).then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -38,8 +47,8 @@ function usersUpdateOne(request, response) {
 }
 
 // Delete a user
-function usersDeleteOne(request, response) {
-  usersDao.usersDeleteOne(request).then(function(results) {
+function usersDelete(request, response) {
+  usersDao.usersDelete(request).then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -47,7 +56,8 @@ function usersDeleteOne(request, response) {
 }
 
 // Export functions
-module.exports.usersReadOne = usersReadOne;
+module.exports.usersLogin = usersLogin;
+module.exports.usersExists = usersExists;
 module.exports.usersCreate = usersCreate;
-module.exports.usersUpdateOne = usersUpdateOne;
-module.exports.usersDeleteOne = usersDeleteOne;
+module.exports.usersUpdate = usersUpdate;
+module.exports.usersDelete = usersDelete;

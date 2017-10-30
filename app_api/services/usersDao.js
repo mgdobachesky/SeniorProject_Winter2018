@@ -5,19 +5,21 @@ var users = mongoose.model('user');
 
 // ** CRUD OPERATIONS **
 
-// Read one
-function usersReadOne(request) {
+// Read operations
+function usersLogin(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.username) {
-      reject('Something went wrong!');
+      reject('Username required!');
     } else {
       users.findOne({'username': request.body.username}).exec(function(error, results) {
-        if(error || !results) {
+        if(error) {
           reject('Something went wrong!');
+        } else if(!results) {
+          reject('Username not found!');
         } else {
           bcrypt.compare(request.body.password, results.password, function(error, match) {
             if(!match) {
-              reject('Something went wrong!');
+              reject('Wrong username or password!');
             } else {
               resolve({
                 "_id": results._id,
@@ -32,7 +34,26 @@ function usersReadOne(request) {
   return promise;
 }
 
-// Create
+function usersExists(request) {
+  var promise = new Promise(function(resolve, reject) {
+    if(!request.params.username) {
+      reject('Username required!');
+    } else {
+      users.findOne({'username': request.params.username}).exec(function(error, results) {
+        if(error) {
+          reject('Something went wrong!');
+        } else if(!results) {
+          resolve(false);
+        } else if(results) {
+          resolve(true);
+        }
+      });
+    }
+  });
+  return promise;
+}
+
+// Create operations
 function usersCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     bcrypt.hash(request.body.password, 10, function(error, hash) {
@@ -55,26 +76,24 @@ function usersCreate(request) {
   return promise;
 }
 
-// Update
-function usersUpdateOne(request) {
+// Update operations
+function usersUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.params.id) {
-      reject('Something went wrong!');
+      reject('ID is required!');
     }
     users.findById(request.params.id).exec(function(error, userData) {
       if(!userData) {
-        reject('Something went wrong!');
+        reject('ID not found!');
       } else if (error) {
         reject('Something went wrong!');
       }
-      userData.username = request.body.username;
+      if(request.body.username) {
+        userData.username = request.body.username;
+      }
       if(request.body.password) {
-        bcrypt.hash(request.body.password, 10, function(error, hash) {
-          if(error) {
-            reject('Something went wrong!');    
-          }
-          userData.password = hash;
-        });
+        let hash = bcrypt.hashSync(request.body.password, 10);
+        userData.password = hash;
       }
       userData.save(function(error, results) {
         if(error) {
@@ -88,17 +107,17 @@ function usersUpdateOne(request) {
   return promise;
 }
 
-// Delete
-function usersDeleteOne(request) {
+// Delete operations
+function usersDelete(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.params.id) {
-      reject('Something went wrong!');
+      reject('ID is required!');
     }
     users.findByIdAndRemove(request.params.id).exec(function(error, results) {
       if(error) {
         reject('Something went wrong!');
       } else if(!results) {
-        reject('Something went wrong!');
+        reject('ID not found!');
       } else {
         resolve('User deleted successfully!');
       }
@@ -108,7 +127,8 @@ function usersDeleteOne(request) {
 }
 
 // Export functions
-module.exports.usersReadOne = usersReadOne;
+module.exports.usersLogin = usersLogin;
+module.exports.usersExists = usersExists;
 module.exports.usersCreate = usersCreate;
-module.exports.usersUpdateOne = usersUpdateOne;
-module.exports.usersDeleteOne = usersDeleteOne;
+module.exports.usersUpdate = usersUpdate;
+module.exports.usersDelete = usersDelete;
