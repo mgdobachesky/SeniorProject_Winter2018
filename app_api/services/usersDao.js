@@ -57,35 +57,35 @@ function usersCreate(request) {
 
 // Update
 function usersUpdateOne(request) {
-var promise = new Promise(function(resolve, reject) {
-  if(!request.params.id) {
-    reject('Something went wrong!');
-  }
-  users.findById(request.params.id).exec(function(error, userData) {
-    if(!userData) {
-      reject('Something went wrong!');
-    } else if (error) {
+  var promise = new Promise(function(resolve, reject) {
+    if(!request.params.id) {
       reject('Something went wrong!');
     }
-    userData.username = request.body.username;
-    if(request.body.password) {
-      bcrypt.hash(request.body.password, 10, function(error, hash) {
-        if(error) {
-          reject('Something went wrong!');    
-        }
-        userData.password = hash;
-      });
-    }
-    userData.save(function(error, results) {
-      if(error) {
+    users.findById(request.params.id).exec(function(error, userData) {
+      if(!userData) {
         reject('Something went wrong!');
-      } else {
-        resolve('User updated successfuly!');
+      } else if (error) {
+        reject('Something went wrong!');
       }
+      userData.username = request.body.username;
+      if(request.body.password) {
+        bcrypt.hash(request.body.password, 10, function(error, hash) {
+          if(error) {
+            reject('Something went wrong!');    
+          }
+          userData.password = hash;
+        });
+      }
+      userData.save(function(error, results) {
+        if(error) {
+          reject('Something went wrong!');
+        } else {
+          resolve('User updated successfuly!');
+        }
+      });
     });
   });
-});
-return promise;
+  return promise;
 }
 
 // Delete
