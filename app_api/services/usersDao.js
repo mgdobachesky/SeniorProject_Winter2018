@@ -87,21 +87,20 @@ function usersUpdate(request) {
         reject('ID not found!');
       } else if (error) {
         reject('Something went wrong!');
-      }
-      if(request.body.username) {
+      } else {
         userData.username = request.body.username;
-      }
-      if(request.body.password) {
-        let hash = bcrypt.hashSync(request.body.password, 10);
-        userData.password = hash;
-      }
-      userData.save(function(error, results) {
-        if(error) {
-          reject('Something went wrong!');
-        } else {
-          resolve('User updated successfuly!');
+        if(request.body.password) {
+          let hash = bcrypt.hashSync(request.body.password, 10);
+          userData.password = hash;
         }
-      });
+        userData.save(function(error, results) {
+          if(error) {
+            reject('Something went wrong!');
+          } else {
+            resolve('User updated successfuly!');
+          }
+        });
+      }
     });
   });
   return promise;
