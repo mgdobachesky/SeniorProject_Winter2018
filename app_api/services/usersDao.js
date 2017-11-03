@@ -97,7 +97,7 @@ function usersUpdate(request) {
           if(error) {
             reject('Something went wrong!');
           } else {
-            resolve('User updated successfuly!');
+            resolve('User updated successfully!');
           }
         });
       }
