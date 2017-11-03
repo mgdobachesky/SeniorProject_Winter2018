@@ -7,26 +7,34 @@ var viewsites = mongoose.model('viewsite');
 // Read operations
 function viewsitesReadAll(request) {
   var promise = new Promise(function(resolve, reject) {
-    viewsites.find({'userId': request.body.userId}).exec(function(error, results) {
-      if(error) {
-        reject('Something went wrong!');
-      } else {
-        resolve(results);
-      }
-    });
+    if(!request.body.userId) {
+      reject('User ID required!');
+    } else {
+      viewsites.find({'userId': request.body.userId}).exec(function(error, results) {
+        if(error) {
+          reject('Something went wrong!');
+        } else {
+          resolve(results);
+        }
+      });
+    }
   });
   return promise;
 }
 
 function viewsitesReadOne(request) {
   var promise = new Promise(function(resolve, reject) {
-    viewsites.findOne({'viewsiteName': request.params.viewsiteName}).exec(function(error, results) {
-      if(error) {
-        reject('Something went wrong!');
-      } else {
-        resolve(results);
-      }
-    });
+    if(!request.params.viewsiteName) {
+      reject('Viewsite name is required!');
+    } else {
+      viewsites.findOne({'viewsiteName': request.params.viewsiteName}).exec(function(error, results) {
+        if(error) {
+          reject('Something went wrong!');
+        } else {
+          resolve(results);
+        }
+      });
+    }
   });
   return promise;
 }
