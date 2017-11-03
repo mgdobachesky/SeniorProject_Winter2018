@@ -5,13 +5,13 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Create user schema
 var userSchema = new Schema({
-  'username': { 
-    'type': String, 
-    'required': true, 
-    'unique': true 
+  'username': {
+    'type': String,
+    'required': true,
+    'unique': true
   },
   'password': {
-    'type': String, 
+    'type': String,
     'required': true
   }
 });
@@ -23,9 +23,9 @@ var viewsiteSchema = new Schema({
     'required': true
   },
   'viewsiteName': {
-    'type': String, 
-    'required': true, 
-    'unique': true 
+    'type': String,
+    'required': true,
+    'unique': true
   },
   'loginEnabled': {
     'type': Boolean,
@@ -40,11 +40,7 @@ var viewpageSchema = new Schema({
     'required': true
   },
   'viewpageName': {
-    'type': String, 
-    'required': true
-  },
-  'viewpageType': {
-    'type': String, 
+    'type': String,
     'required': true
   },
   'permissionLevel': {
@@ -60,7 +56,7 @@ var elementSchema = new Schema({
     'required': true
   },
   'elementType': {
-    'type': String, 
+    'type': String,
     'required': true
   },
   'elementLabel': {

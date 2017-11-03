@@ -45,7 +45,6 @@ function viewpagesCreate(request) {
     viewpages.create({
       'viewsiteId': request.body.viewsiteId,
       'viewpageName': request.body.viewpageName,
-      'viewpageType': request.body.viewpageType,
       'permissionLevel': request.body.permissionLevel
     }, function(error, results) {
       if(error) {
@@ -71,7 +70,6 @@ function viewpagesUpdate(request) {
         reject('Something went wrong!');
       } else {
         viewpageData.viewpageName = request.body.viewpageName;
-        viewpageData.viewpageType = request.body.viewpageType;
         viewpageData.permissionLevel = request.body.permissionLevel;
         viewpageData.save(function(error, results) {
           if(error) {
