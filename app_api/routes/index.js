@@ -4,30 +4,55 @@ var router = express.Router();
 var controllerUsers = require('../controllers/users');
 var controllerViewsites = require('../controllers/viewsites');
 var controllerViewpages = require('../controllers/viewpages');
+var controllerElements = require('../controllers/elements');
+var controllerForms = require('../controllers/forms');
+var controllerFormFields = require('../controllers/formFields');
+var controllerUserDatabases= require('../controllers/userDatabases');
 
-// Create routes for interacting with the users collection
-router.get('/users', controllerUsers.usersLogin);
-router.post('/users', controllerUsers.usersCreate);
-router.put('/users/:id', controllerUsers.usersUpdate);
-router.delete('/users/:id', controllerUsers.usersDelete);
-
-// Create routes for interacting with the viewsites collection
-router.get('/viewsites', controllerViewsites.viewsitesReadAll);
-router.get('/viewsites/:viewsiteName', controllerViewsites.viewsitesReadOne);
-router.post('/viewsites', controllerViewsites.viewsitesCreate);
-router.put('/viewsites/:id', controllerViewsites.viewsitesUpdate);
-router.delete('/viewsites/:id', controllerViewsites.viewsitesDelete);
-
-// Create routes for interacting with the viewpages collection
-router.get('/viewpages', controllerViewpages.viewpagesReadAll);
-router.get('/viewpages/:id', controllerViewpages.viewpagesReadOne);
-router.post('/viewpages', controllerViewpages.viewpagesCreate);
-router.put('/viewpages/:id', controllerViewpages.viewpagesUpdate);
-router.delete('/viewpages/:id', controllerViewpages.viewpagesDelete);
-
-// Create routes for checking if unique fields already exist
+// Create routes for users
+router.get('/read_one/users', controllerUsers.usersReadOne);
+router.post('/create/users', controllerUsers.usersCreate);
+router.put('/update/users/:userId', controllerUsers.usersUpdate);
+router.delete('/delete/users/:userId', controllerUsers.usersDelete);
 router.get('/exists/users/:username', controllerUsers.usersExists);
+
+// Create routes for viewsites
+router.get('/read_one/viewsites/:viewsiteName', controllerViewsites.viewsitesReadOne);
+router.get('/read_all/viewsites/:userId', controllerViewsites.viewsitesReadAll);
+router.post('/create/viewsites', controllerViewsites.viewsitesCreate);
+router.put('/update/viewsites/:viewsiteId', controllerViewsites.viewsitesUpdate);
+router.delete('/delete/viewsites/:viewsiteId', controllerViewsites.viewsitesDelete);
 router.get('/exists/viewsites/:viewsiteName', controllerViewsites.viewsitesExists);
+
+// Create routes for viewpages
+router.get('/read_one/viewpages/:viewpageId', controllerViewpages.viewpagesReadOne);
+router.get('/read_all/viewpages/:viewsiteId', controllerViewpages.viewpagesReadAll);
+router.post('/create/viewpages', controllerViewpages.viewpagesCreate);
+router.put('/update/viewpages/:viewpageId', controllerViewpages.viewpagesUpdate);
+router.delete('/delete/viewpages/:viewpageId', controllerViewpages.viewpagesDelete);
+
+// Create routes for elements
+router.get('/read_one/elements/:elementId', controllerElements.elementsReadOne);
+router.get('/read_all/elements/:viewpageId', controllerElements.elementsReadAll);
+router.post('/create/elements', controllerElements.elementsCreate);
+router.put('/update/elements/:elementId', controllerElements.elementsUpdate);
+router.delete('/delete/elements/:elementId', controllerElements.elementsDelete);
+
+// Create routes for forms
+router.get('/read_one/forms/:formId', controllerForms.formsReadOne);
+router.get('/read_all/forms/:viewsiteId', controllerForms.formsReadAll);
+router.post('/create/forms', controllerForms.formsCreate);
+router.put('/update/forms/:formId', controllerForms.formsUpdate);
+router.delete('/delete/forms/:formId', controllerForms.formsDelete);
+
+// Create routes for formFields
+router.get('/read_one/form_fields/:formFieldId', controllerFormFields.formFieldsReadOne);
+router.get('/read_all/form_fields/:formId', controllerFormFields.formFieldsReadAll);
+router.post('/create/form_fields', controllerFormFields.formFieldsCreate);
+router.put('/update/form_fields/:formFieldId', controllerFormFields.formFieldsUpdate);
+router.delete('/delete/form_fields/:formFieldId', controllerFormFields.formFieldsDelete);
+
+// Create routes for userDatabases
 
 // Export the router
 module.exports = router;

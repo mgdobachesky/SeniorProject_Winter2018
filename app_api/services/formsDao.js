@@ -1,16 +1,16 @@
 // Required modules
 var mongoose = require('mongoose');
-var viewpages = mongoose.model('viewpage');
+var forms = mongoose.model('form');
 
 // ** CRUD OPERATIONS **
 
 // Read operations
-function viewpagesReadAll(request) {
+function formsReadAll(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.params.viewsiteId) {
       reject('Viewsite ID is required!');
     } else {
-      viewpages.find({'viewsiteId': request.params.viewsiteId}).exec(function(error, results) {
+      forms.find({'viewsiteId': request.params.viewsiteId}).exec(function(error, results) {
         if(error) {
           console.log(error);
           reject('Something went wrong!');
@@ -23,12 +23,12 @@ function viewpagesReadAll(request) {
   return promise;
 }
 
-function viewpagesReadOne(request) {
+function formsReadOne(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.viewpageId) {
-      reject('Viewpage ID is required!');
+    if(!request.params.formId) {
+      reject('Form ID is required!');
     } else {
-      viewpages.findOne({'_id': request.params.viewpageId}).exec(function(error, results) {
+      forms.findOne({'_id': request.params.formId}).exec(function(error, results) {
         if(error) {
           console.log(error);
           reject('Something went wrong!');
@@ -42,18 +42,17 @@ function viewpagesReadOne(request) {
 }
 
 // Create operations
-function viewpagesCreate(request) {
+function formsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    viewpages.create({
+    forms.create({
       'viewsiteId': request.body.viewsiteId,
-      'viewpageName': request.body.viewpageName,
-      'permissionLevel': request.body.permissionLevel
+      'formTitle': request.body.formTitle
     }, function(error, results) {
       if(error) {
         console.log(error);
         reject('Something went wrong!');
       } else {
-        resolve('Viewpage created successfully!');
+        resolve('Form created successfully!');
       }
     });
   });
@@ -61,26 +60,25 @@ function viewpagesCreate(request) {
 }
 
 // Update operations
-function viewpagesUpdate(request) {
+function formsUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.viewpageId) {
-      reject('Viewpage ID is required!');
+    if(!request.params.formId) {
+      reject('Form ID is required!');
     }
-    viewpages.findById(request.params.viewpageId).exec(function(error, viewpageData) {
-      if(!viewpageData) {
-        reject('Viewpage not found!');
+    forms.findById(request.params.formId).exec(function(error, formData) {
+      if(!formData) {
+        reject('Form not found!');
       } else if(error) {
         console.log(error);
         reject('Something went wrong!');
       } else {
-        viewpageData.viewpageName = request.body.viewpageName;
-        viewpageData.permissionLevel = request.body.permissionLevel;
-        viewpageData.save(function(error, results) {
+        formData.formTitle = request.body.formTitle;
+        formData.save(function(error, results) {
           if(error) {
             console.log(error);
             reject('Something went wrong!');
           } else {
-            resolve('Viewpage updated successfully!');
+            resolve('Form updated successfully!');
           }
         });
       }
@@ -90,17 +88,17 @@ function viewpagesUpdate(request) {
 }
 
 // Delete operations
-function viewpagesDelete(request) {
+function formsDelete(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.viewpageId) {
-      reject('Viewpage ID is required!');
+    if(!request.params.formId) {
+      reject('Form ID is required!');
     }
-    viewpages.findByIdAndRemove(request.params.viewpageId).exec(function(error, results) {
+    forms.findByIdAndRemove(request.params.formId).exec(function(error, results) {
       if(error) {
         console.log(error);
         reject('Something went wrong!');
       } else {
-        resolve('Viewpage deleted successfully!');
+        resolve('Form deleted successfully!');
       }
     });
   });
@@ -108,8 +106,8 @@ function viewpagesDelete(request) {
 }
 
 // Export functions
-module.exports.viewpagesReadAll = viewpagesReadAll;
-module.exports.viewpagesReadOne = viewpagesReadOne;
-module.exports.viewpagesCreate = viewpagesCreate;
-module.exports.viewpagesUpdate = viewpagesUpdate;
-module.exports.viewpagesDelete = viewpagesDelete;
+module.exports.formsReadAll = formsReadAll;
+module.exports.formsReadOne = formsReadOne;
+module.exports.formsCreate = formsCreate;
+module.exports.formsUpdate = formsUpdate;
+module.exports.formsDelete = formsDelete;

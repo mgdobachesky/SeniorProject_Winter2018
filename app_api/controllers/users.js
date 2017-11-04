@@ -1,7 +1,7 @@
 
 // Required modules
 var mongoose = require('mongoose');
-var user = mongoose.model('user');
+var users = mongoose.model('user');
 var usersDao = require('../services/usersDao');
 
 // Handle JSON responses
@@ -10,18 +10,9 @@ function sendJSONresponse(res, status, content) {
   res.json(content);
 }
 
-// Login a user
-function usersLogin(request, response) {
-  usersDao.usersLogin(request).then(function(results) {
-    sendJSONresponse(response, 200, results);
-  }, function(error) {
-    sendJSONresponse(response, 404, error);
-  });
-}
-
-// Check if a user exists
-function usersExists(request, response) {
-  usersDao.usersExists(request).then(function(results) {
+// Get a user
+function usersReadOne(request, response) {
+  usersDao.usersReadOne(request).then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -55,9 +46,18 @@ function usersDelete(request, response) {
   });
 }
 
+// Check if a user exists
+function usersExists(request, response) {
+  usersDao.usersExists(request).then(function(results) {
+    sendJSONresponse(response, 200, results);
+  }, function(error) {
+    sendJSONresponse(response, 404, error);
+  });
+}
+
 // Export functions
-module.exports.usersLogin = usersLogin;
-module.exports.usersExists = usersExists;
+module.exports.usersReadOne = usersReadOne;
 module.exports.usersCreate = usersCreate;
 module.exports.usersUpdate = usersUpdate;
 module.exports.usersDelete = usersDelete;
+module.exports.usersExists = usersExists;

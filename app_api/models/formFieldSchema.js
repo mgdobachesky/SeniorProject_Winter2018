@@ -17,7 +17,8 @@ var formFieldSchema = new Schema({
     'required': true
   },
   'formFieldValue': {
-    'type': String
+    'type': String,
+    'default': ''
   }
 });
 

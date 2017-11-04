@@ -14,10 +14,8 @@ var elementSchema = new Schema({
     'required': true
   },
   'elementValue': {
-    'type': String
-  },
-  'elementSource': {
-    'type': ObjectId
+    'type': String,
+    'default': ''
   }
 });
 

@@ -7,11 +7,12 @@ var viewsites = mongoose.model('viewsite');
 // Read operations
 function viewsitesReadAll(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.body.userId) {
+    if(!request.params.userId) {
       reject('User ID required!');
     } else {
-      viewsites.find({'userId': request.body.userId}).exec(function(error, results) {
+      viewsites.find({'userId': request.params.userId}).exec(function(error, results) {
         if(error) {
+          console.log(error);
           reject('Something went wrong!');
         } else {
           resolve(results);
@@ -29,28 +30,10 @@ function viewsitesReadOne(request) {
     } else {
       viewsites.findOne({'viewsiteName': request.params.viewsiteName}).exec(function(error, results) {
         if(error) {
+          console.log(error);
           reject('Something went wrong!');
         } else {
           resolve(results);
-        }
-      });
-    }
-  });
-  return promise;
-}
-
-function viewsitesExists(request) {
-  var promise = new Promise(function(resolve, reject) {
-    if(!request.params.viewsiteName) {
-      reject('Viewsite name is required!');
-    } else {
-      viewsites.findOne({'viewsiteName': request.params.viewsiteName}).exec(function(error, results) {
-        if(error) {
-          reject('Something went wrong!');
-        } else if(!results) {
-          resolve(false);
-        } else if(results) {
-          resolve(true);
         }
       });
     }
@@ -67,6 +50,7 @@ function viewsitesCreate(request) {
       'loginEnabled': request.body.loginEnabled
     }, function(error, results) {
       if(error) {
+        console.log(error);
         reject('Something went wrong!');
       } else {
         resolve('Viewsite created successfully!');
@@ -79,19 +63,21 @@ function viewsitesCreate(request) {
 // Update operations
 function viewsitesUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.id) {
-      reject('ID is required!');
+    if(!request.params.viewsiteId) {
+      reject('Viewsite ID is required!');
     }
-    viewsites.findById(request.params.id).exec(function(error, viewsiteData) {
+    viewsites.findById(request.params.viewsiteId).exec(function(error, viewsiteData) {
       if(!viewsiteData) {
-        reject('ID not found!');
+        reject('Viewsite not found!');
       } else if(error) {
+        console.log(error);
         reject('Something went wrong!');
       } else {
         viewsiteData.viewsiteName = request.body.viewsiteName;
         viewsiteData.loginEnabled = request.body.loginEnabled;
         viewsiteData.save(function(error, results) {
           if(error) {
+            console.log(error);
             reject('Something went wrong!');
           } else {
             resolve('Viewsite updated successfully!');
@@ -106,11 +92,12 @@ function viewsitesUpdate(request) {
 // Delete operations
 function viewsitesDelete(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.id) {
-      reject('ID is required!');
+    if(!request.params.viewsiteId) {
+      reject('Viewsite ID is required!');
     }
-    viewsites.findByIdAndRemove(request.params.id).exec(function(error, results) {
+    viewsites.findByIdAndRemove(request.params.viewsiteId).exec(function(error, results) {
       if(error) {
+        console.log(error);
         reject('Something went wrong!');
       } else {
         resolve('Viewsite deleted successfully!');
@@ -120,10 +107,31 @@ function viewsitesDelete(request) {
   return promise;
 }
 
+// Check if unique field exists
+function viewsitesExists(request) {
+  var promise = new Promise(function(resolve, reject) {
+    if(!request.params.viewsiteName) {
+      reject('Viewsite name is required!');
+    } else {
+      viewsites.findOne({'viewsiteName': request.params.viewsiteName}).exec(function(error, results) {
+        if(error) {
+          console.log(error);
+          reject('Something went wrong!');
+        } else if(!results) {
+          resolve(false);
+        } else if(results) {
+          resolve(true);
+        }
+      });
+    }
+  });
+  return promise;
+}
+
 // Export functions
 module.exports.viewsitesReadAll = viewsitesReadAll;
 module.exports.viewsitesReadOne = viewsitesReadOne;
-module.exports.viewsitesExists = viewsitesExists;
 module.exports.viewsitesCreate = viewsitesCreate;
 module.exports.viewsitesUpdate = viewsitesUpdate;
 module.exports.viewsitesDelete = viewsitesDelete;
+module.exports.viewsitesExists = viewsitesExists;
