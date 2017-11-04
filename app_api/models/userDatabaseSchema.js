@@ -5,7 +5,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Create user datum sub-schema for the user record schema
 var userDatumSchema = new Schema({
-  'elementId': {
+  'fieldId': {
     'type': ObjectId,
     'required': true
   },
@@ -22,11 +22,11 @@ var userRecordSchema = new Schema({
 
 // Create user table sub-schema for the user database schema
 var userTableSchema = new Schema({
-  'viewpageId': {
+  'formId': {
     'type': ObjectId,
     'required': true
   },
-  'records': [userRecordSchema] 
+  'records': [userRecordSchema]
 });
 
 // Create user database schema
@@ -43,4 +43,3 @@ var userDatabase = mongoose.model('userDatabase', userDatabaseSchema);
 
 // Export database models
 module.exports = userDatabase;
-
