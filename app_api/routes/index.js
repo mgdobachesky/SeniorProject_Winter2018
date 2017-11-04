@@ -7,7 +7,7 @@ var controllerViewpages = require('../controllers/viewpages');
 var controllerElements = require('../controllers/elements');
 var controllerForms = require('../controllers/forms');
 var controllerFormFields = require('../controllers/formFields');
-var controllerUserDatabases= require('../controllers/userDatabases');
+var controllerUserDatabases = require('../controllers/userDatabases');
 
 // Create routes for users
 router.get('/read_one/users', controllerUsers.usersReadOne);
@@ -53,6 +53,10 @@ router.put('/update/form_fields/:formFieldId', controllerFormFields.formFieldsUp
 router.delete('/delete/form_fields/:formFieldId', controllerFormFields.formFieldsDelete);
 
 // Create routes for userDatabases
+router.get('/read_one/user_databases/:viewsiteId', controllerUserDatabases.userDatabasesReadOne);
+router.post('/create/user_databases', controllerUserDatabases.userDatabasesCreate);
+router.post('/create/user_databases/user_tables/:viewsiteId', controllerUserDatabases.userTablesCreate);
+router.post('/create/user_databases/user_tables/user_records/:viewsiteId/:formId', controllerUserDatabases.userRecordsCreate);
 
 // Export the router
 module.exports = router;

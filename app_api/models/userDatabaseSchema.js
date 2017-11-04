@@ -5,10 +5,6 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Create user datum sub-schema for the user record schema
 var userDatumSchema = new Schema({
-  'fieldId': {
-    'type': ObjectId,
-    'required': true
-  },
   'datum': {
     'type': String,
     'default': ''
@@ -17,24 +13,16 @@ var userDatumSchema = new Schema({
 
 // Create user record sub-schema for the user table schema
 var userRecordSchema = new Schema({
-  'record': [userDatumSchema]
+  'data': [userDatumSchema]
 });
 
 // Create user table sub-schema for the user database schema
 var userTableSchema = new Schema({
-  'formId': {
-    'type': ObjectId,
-    'required': true
-  },
   'records': [userRecordSchema]
 });
 
 // Create user database schema
 var userDatabaseSchema = new Schema({
-  'viewsiteId': {
-    'type': ObjectId,
-    'required': true
-  },
   'tables': [userTableSchema]
 });
 
