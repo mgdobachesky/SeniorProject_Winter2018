@@ -1,7 +1,4 @@
-
 // Required modules
-var mongoose = require('mongoose');
-var viewsites = mongoose.model('viewsite');
 var viewsitesDao = require('../services/viewsitesDao');
 
 // Handle JSON responses

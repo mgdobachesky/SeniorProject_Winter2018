@@ -54,9 +54,15 @@ router.delete('/delete/form_fields/:formFieldId', controllerFormFields.formField
 
 // Create routes for userDatabases
 router.get('/read_one/user_databases/:viewsiteId', controllerUserDatabases.userDatabasesReadOne);
+router.get('/read_one/user_databases/:viewsiteId/user_tables/:formId', controllerUserDatabases.userTablesReadOne);
+router.get('/read_one/user_databases/:viewsiteId/user_tables/:formId/user_records/:recordId', controllerUserDatabases.userRecordsReadOne);
 router.post('/create/user_databases', controllerUserDatabases.userDatabasesCreate);
-router.post('/create/user_databases/user_tables/:viewsiteId', controllerUserDatabases.userTablesCreate);
-router.post('/create/user_databases/user_tables/user_records/:viewsiteId/:formId', controllerUserDatabases.userRecordsCreate);
+router.post('/create/user_databases/:viewsiteId/user_tables', controllerUserDatabases.userTablesCreate);
+router.post('/create/user_databases/:viewsiteId/user_tables/:formId/user_records', controllerUserDatabases.userRecordsCreate);
+router.put('/update/user_databases/:viewsiteId/user_tables/:formId/user_records/:recordId', controllerUserDatabases.userRecordsUpdate);
+router.delete('/delete/user_databases/:viewsiteId', controllerUserDatabases.userDatabasesDelete);
+router.delete('/delete/user_databases/:viewsiteId/user_tables/:formId', controllerUserDatabases.userTablesDelete);
+router.delete('/delete/user_databases/:viewsiteId/user_tables/:formId/user_records/:recordId', controllerUserDatabases.userRecordsDelete);
 
 // Export the router
 module.exports = router;

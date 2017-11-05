@@ -1,7 +1,4 @@
-
 // Required modules
-var mongoose = require('mongoose');
-var users = mongoose.model('user');
 var usersDao = require('../services/usersDao');
 
 // Handle JSON responses

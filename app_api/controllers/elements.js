@@ -1,7 +1,4 @@
-
 // Required modules
-var mongoose = require('mongoose');
-var elements = mongoose.model('element');
 var elementsDao = require('../services/elementsDao');
 
 // Handle JSON responses

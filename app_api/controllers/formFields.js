@@ -1,7 +1,4 @@
-
 // Required modules
-var mongoose = require('mongoose');
-var formFields = mongoose.model('formField');
 var formFieldsDao = require('../services/formFieldsDao');
 
 // Handle JSON responses
