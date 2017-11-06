@@ -12,8 +12,10 @@ function viewpagesReadAll(request) {
     } else {
       viewpages.find({'viewsiteId': request.params.viewsiteId}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
+        } else if(!results) {
+          reject('No Viewpages found!');
         } else {
           resolve(results);
         }
@@ -30,8 +32,10 @@ function viewpagesReadOne(request) {
     } else {
       viewpages.findOne({'_id': request.params.viewpageId}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
+        } else if(!results) {
+          reject('Viewpage not found!');
         } else {
           resolve(results);
         }
@@ -50,7 +54,7 @@ function viewpagesCreate(request) {
       'permissionLevel': request.body.permissionLevel
     }, function(error, results) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         resolve('Viewpage created successfully!');
@@ -70,14 +74,14 @@ function viewpagesUpdate(request) {
       if(!viewpageData) {
         reject('Viewpage not found!');
       } else if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         viewpageData.viewpageName = request.body.viewpageName;
         viewpageData.permissionLevel = request.body.permissionLevel;
         viewpageData.save(function(error, results) {
           if(error) {
-            console.log(error);
+            console.log(error.message);
             reject('Something went wrong!');
           } else {
             resolve('Viewpage updated successfully!');
@@ -97,7 +101,7 @@ function viewpagesDelete(request) {
     }
     viewpages.findByIdAndRemove(request.params.viewpageId).exec(function(error, results) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         resolve('Viewpage deleted successfully!');

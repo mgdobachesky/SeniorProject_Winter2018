@@ -13,10 +13,10 @@ function usersReadOne(request) {
     } else {
       users.findOne({'username': request.body.username}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
         } else if(!results) {
-          reject('Username not found!');
+          reject('User not found!');
         } else {
           bcrypt.compare(request.body.password, results.password, function(error, match) {
             if(!match) {
@@ -40,7 +40,7 @@ function usersCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     bcrypt.hash(request.body.password, 10, function(error, hash) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         users.create({
@@ -48,7 +48,7 @@ function usersCreate(request) {
           'password': hash
         }, function(error, results) {
           if(error) {
-            console.log(error);
+            console.log(error.message);
             reject('Something went wrong!');
           } else {
             resolve('User created successfully!');
@@ -70,7 +70,7 @@ function usersUpdate(request) {
       if(!userData) {
         reject('User not found!');
       } else if (error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         userData.username = request.body.username;
@@ -80,7 +80,7 @@ function usersUpdate(request) {
         }
         userData.save(function(error, results) {
           if(error) {
-            console.log(error);
+            console.log(error.message);
             reject('Something went wrong!');
           } else {
             resolve('User updated successfully!');
@@ -100,7 +100,7 @@ function usersDelete(request) {
     }
     users.findByIdAndRemove(request.params.userId).exec(function(error, results) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else if(!results) {
         reject('User not found!');
@@ -120,7 +120,7 @@ function usersExists(request) {
     } else {
       users.findOne({'username': request.params.username}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
         } else if(!results) {
           resolve(false);

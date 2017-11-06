@@ -12,8 +12,10 @@ function elementsReadAll(request) {
     } else {
       elements.find({'viewpageId': request.params.viewpageId}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
+        } else if(!results) {
+          reject('No Elements found!');
         } else {
           resolve(results);
         }
@@ -30,8 +32,10 @@ function elementsReadOne(request) {
     } else {
       elements.findOne({'_id': request.params.elementId}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
+        } else if(!results) {
+          reject('Element not found!');
         } else {
           resolve(results);
         }
@@ -50,7 +54,7 @@ function elementsCreate(request) {
       'elementValue': request.body.elementValue
     }, function(error, results) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         resolve('Element created successfully!');
@@ -70,13 +74,13 @@ function elementsUpdate(request) {
       if(!elementData) {
         reject('Element not found!');
       } else if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         elementData.elementValue = request.body.elementValue;
         elementData.save(function(error, results) {
           if(error) {
-            console.log(error);
+            console.log(error.message);
             reject('Something went wrong!');
           } else {
             resolve('Element updated successfully!');
@@ -96,7 +100,7 @@ function elementsDelete(request) {
     }
     elements.findByIdAndRemove(request.params.elementId).exec(function(error, results) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         resolve('Element deleted successfully!');

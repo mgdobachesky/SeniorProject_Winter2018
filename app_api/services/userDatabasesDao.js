@@ -5,15 +5,17 @@ var userDatabases = mongoose.model('userDatabase');
 // ** CRUD OPERATIONS **
 
 // Read operations
-function userDatabasesReadOne(request) {
+function userTablesReadOne(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.viewsiteId) {
-      reject('Viewsite ID is required!');
+    if(!request.params.formId) {
+      reject('Form ID is required!');
     } else {
-      userDatabases.findOne({'_id': request.params.viewsiteId}).exec(function(error, results) {
+      userDatabases.findOne({'_id': request.params.formId}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
+        } else if(!results) {
+          reject('User Table not found!');
         } else {
           resolve(results);
         }
@@ -23,35 +25,19 @@ function userDatabasesReadOne(request) {
   return promise;
 }
 
-function userTablesReadOne(request) {
-  var promise = new Promise(function(resolve, reject) {
-    if(!request.params.viewsiteId || !request.params.formId) {
-      reject('Viewsite ID and Form ID are both required!');
-    } else {
-      userDatabases.findOne({'_id': request.params.viewsiteId}).exec(function(error, results) {
-        if(error) {
-          console.log(error);
-          reject('Something went wrong!');
-        } else {
-          resolve(results.tables.id(request.params.formId));
-        }
-      });
-    }
-  });
-  return promise;
-}
-
 function userRecordsReadOne(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.viewsiteId || !request.params.formId || !request.params.recordId) {
-      reject('Viewsite ID, Form ID, and Record ID are all required!');
+    if(!request.params.recordId) {
+      reject('Record ID is required!');
     } else {
-      userDatabases.findOne({'_id': request.params.viewsiteId}).exec(function(error, results) {
+      userDatabases.findOne({'records._id': request.params.recordId}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
+        } else if(!results) {
+          reject('User Record not found!');
         } else {
-          resolve(results.tables.id(request.params.formId).records.id(request.params.recordId));
+          resolve(results.records.id(request.params.recordId));
         }
       });
     }
@@ -60,49 +46,19 @@ function userRecordsReadOne(request) {
 }
 
 // Create operations
-function userDatabasesCreate(request) {
-  var promise = new Promise(function(resolve, reject) {
-    if(!request.body.viewsiteId) {
-      reject('Viewsite ID is required!');
-    } else {
-      userDatabases.create({
-        '_id': request.body.viewsiteId
-      }, function(error, results) {
-        if(error) {
-          console.log(error);
-          reject('Something went wrong!');
-        } else {
-          resolve('User Database created successfully!');
-        }
-      });
-    }
-  });
-  return promise;
-}
-
 function userTablesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.viewsiteId) {
-      reject('Viewsite ID is required!');
+    if(!request.params.formId) {
+      reject('Form ID is required!');
     }
-    userDatabases.findOne({'_id': request.params.viewsiteId}).exec(function(error, userDatabaseData) {
-      if(!userDatabaseData) {
-        reject('User Database not found!');
-      } else if(error) {
-        console.log(error);
+    userDatabases.create({
+      '_id': request.params.formId
+    }, function(error, results) {
+      if(error) {
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
-        userDatabaseData.tables.push({
-          '_id': request.body.formId
-        });
-        userDatabaseData.save(function(error, results) {
-          if(error) {
-            console.log(error);
-            reject('Something went wrong!');
-          } else {
-            resolve('User Table created successfully!');
-          }
-        });
+        resolve('User Table created successfully!');
       }
     });
   });
@@ -111,28 +67,27 @@ function userTablesCreate(request) {
 
 function userRecordsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.viewsiteId || !request.params.formId) {
-      reject('Viewsite ID and Form ID are both required!');
+    if(!request.params.formId) {
+      reject('Form ID is required!');
     }
-    userDatabases.findOne({'_id': request.params.viewsiteId}).exec(function(error, userDatabaseData) {
-      if(!userDatabaseData) {
-        reject('User Database not found!');
+    userDatabases.findOne({'_id': request.params.formId}).exec(function(error, userTableData) {
+      if(!userTableData) {
+        reject('User Table not found!');
       } else if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
-        let userTable = userDatabaseData.tables.id(request.params.formId);
-        let newRecord = userTable.records.create();
+        let newRecord = userTableData.records.create();
         for(formFieldId in request.body) {
           newRecord.data.push({
             '_id': formFieldId,
             'datum': request.body[formFieldId]
           });
         }
-        userTable.records.push(newRecord);
-        userDatabaseData.save(function(error, results) {
+        userTableData.records.push(newRecord);
+        userTableData.save(function(error, results) {
           if(error) {
-            console.log(error);
+            console.log(error.message);
             reject('Something went wrong!');
           } else {
             resolve('User Record created successfully!');
@@ -147,19 +102,18 @@ function userRecordsCreate(request) {
 // Update operations
 function userRecordsUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.viewsiteId || !request.params.formId || !request.params.recordId) {
-      reject('Viewsite ID, Form ID, and Record ID are all required!');
+    if(!request.params.recordId) {
+      reject('Record ID is required!');
     }
-    userDatabases.findOneAndUpdate({'_id': request.params.viewsiteId}).exec(function(error, userDatabaseData) {
-      if(!userDatabaseData) {
-        reject('User Database not found!');
+    userDatabases.findOne({'records._id': request.params.recordId}).exec(function(error, userTableData) {
+      if(!userTableData) {
+        reject('User Record not found!');
       } else if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
-        let userTable = userDatabaseData.tables.id(request.params.formId);
-        let userRecord = userTable.records.id(request.params.recordId);
-        let updatedRecord = userTable.records.create();
+        let userRecord = userTableData.records.id(request.params.recordId);
+        let updatedRecord = userTableData.records.create();
         updatedRecord._id = userRecord._id;
         for(formFieldId in request.body) {
           updatedRecord.data.push({
@@ -168,9 +122,9 @@ function userRecordsUpdate(request) {
           });
         }
         userRecord.set(updatedRecord);
-        userDatabaseData.save(function(error, results) {
+        userTableData.save(function(error, results) {
           if(error) {
-            console.log(error);
+            console.log(error.message);
             reject('Something went wrong!');
           } else {
             resolve('User Record updated successfully!');
@@ -183,42 +137,19 @@ function userRecordsUpdate(request) {
 }
 
 // Delete operations
-function userDatabasesDelete(request) {
-  var promise = new Promise(function(resolve, reject) {
-    if(!request.params.viewsiteId) {
-      reject('Viewsite ID is required!');
-    }
-    userDatabases.findByIdAndRemove(request.params.viewsiteId).exec(function(error, results) {
-      if(error) {
-        console.log(error);
-        reject('Something went wrong!');
-      } else {
-        resolve('User Database deleted successfully!');
-      }
-    });
-  });
-  return promise;
-}
-
 function userTablesDelete(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.viewsiteId || !request.params.formId) {
-      reject('Viewsite ID and Form ID are both required!');
+    if(!request.params.formId) {
+      reject('Form ID is required!');
     }
-    userDatabases.findById(request.params.viewsiteId).exec(function(error, userDatabaseData) {
+    userDatabases.findByIdAndRemove(request.params.formId).exec(function(error, userTableData) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
+      } else if(!userTableData) {
+        reject('User Table not found!');
       } else {
-        userDatabaseData.tables.id(request.params.formId).remove();
-        userDatabaseData.save(function(error, results) {
-          if(error) {
-            console.log(error);
-            reject('Something went wrong!');
-          } else {
-            resolve('User Table deleted successfully!');
-          }
-        });
+        resolve('User Table deleted successfully!');
       }
     });
   });
@@ -227,18 +158,20 @@ function userTablesDelete(request) {
 
 function userRecordsDelete(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.viewsiteId || !request.params.formId || !request.params.recordId) {
-      reject('Viewsite ID, Form ID, and Record ID are all required!');
+    if(!request.params.recordId) {
+      reject('Record ID is required!');
     }
-    userDatabases.findById(request.params.viewsiteId).exec(function(error, userDatabaseData) {
+    userDatabases.findOne({'records._id': request.params.recordId}).exec(function(error, userTableData) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
+      } else if(!userTableData) {
+        reject('User Record not found!');
       } else {
-        userDatabaseData.tables.id(request.params.formId).records.id(request.params.recordId).remove();
-        userDatabaseData.save(function(error, results) {
+        userTableData.records.id(request.params.recordId).remove();
+        userTableData.save(function(error, results) {
           if(error) {
-            console.log(error);
+            console.log(error.message);
             reject('Something went wrong!');
           } else {
             resolve('User Record deleted successfully!');
@@ -251,13 +184,10 @@ function userRecordsDelete(request) {
 }
 
 // Export functions
-module.exports.userDatabasesReadOne = userDatabasesReadOne;
 module.exports.userTablesReadOne = userTablesReadOne;
 module.exports.userRecordsReadOne = userRecordsReadOne;
-module.exports.userDatabasesCreate = userDatabasesCreate;
 module.exports.userTablesCreate = userTablesCreate;
 module.exports.userRecordsCreate = userRecordsCreate;
 module.exports.userRecordsUpdate = userRecordsUpdate;
-module.exports.userDatabasesDelete = userDatabasesDelete;
 module.exports.userTablesDelete = userTablesDelete;
 module.exports.userRecordsDelete = userRecordsDelete;

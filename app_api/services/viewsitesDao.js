@@ -12,8 +12,10 @@ function viewsitesReadAll(request) {
     } else {
       viewsites.find({'userId': request.params.userId}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
+        } else if(!results) {
+          reject('No Viewsites found!');
         } else {
           resolve(results);
         }
@@ -30,8 +32,10 @@ function viewsitesReadOne(request) {
     } else {
       viewsites.findOne({'viewsiteName': request.params.viewsiteName}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
+        } else if(!results) {
+          reject('Viewsite not found!');
         } else {
           resolve(results);
         }
@@ -50,7 +54,7 @@ function viewsitesCreate(request) {
       'loginEnabled': request.body.loginEnabled
     }, function(error, results) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         resolve('Viewsite created successfully!');
@@ -70,14 +74,14 @@ function viewsitesUpdate(request) {
       if(!viewsiteData) {
         reject('Viewsite not found!');
       } else if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         viewsiteData.viewsiteName = request.body.viewsiteName;
         viewsiteData.loginEnabled = request.body.loginEnabled;
         viewsiteData.save(function(error, results) {
           if(error) {
-            console.log(error);
+            console.log(error.message);
             reject('Something went wrong!');
           } else {
             resolve('Viewsite updated successfully!');
@@ -97,7 +101,7 @@ function viewsitesDelete(request) {
     }
     viewsites.findByIdAndRemove(request.params.viewsiteId).exec(function(error, results) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         resolve('Viewsite deleted successfully!');
@@ -115,7 +119,7 @@ function viewsitesExists(request) {
     } else {
       viewsites.findOne({'viewsiteName': request.params.viewsiteName}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
         } else if(!results) {
           resolve(false);

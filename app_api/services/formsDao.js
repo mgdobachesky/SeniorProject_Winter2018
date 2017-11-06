@@ -12,8 +12,10 @@ function formsReadAll(request) {
     } else {
       forms.find({'viewsiteId': request.params.viewsiteId}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
+        } else if(!results) {
+          reject('No Forms found!');
         } else {
           resolve(results);
         }
@@ -30,8 +32,10 @@ function formsReadOne(request) {
     } else {
       forms.findOne({'_id': request.params.formId}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
+        } else if(!results) {
+          reject('Form not found!');
         } else {
           resolve(results);
         }
@@ -49,7 +53,7 @@ function formsCreate(request) {
       'formTitle': request.body.formTitle
     }, function(error, results) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         resolve('Form created successfully!');
@@ -69,13 +73,13 @@ function formsUpdate(request) {
       if(!formData) {
         reject('Form not found!');
       } else if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         formData.formTitle = request.body.formTitle;
         formData.save(function(error, results) {
           if(error) {
-            console.log(error);
+            console.log(error.message);
             reject('Something went wrong!');
           } else {
             resolve('Form updated successfully!');
@@ -95,7 +99,7 @@ function formsDelete(request) {
     }
     forms.findByIdAndRemove(request.params.formId).exec(function(error, results) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         resolve('Form deleted successfully!');

@@ -21,13 +21,8 @@ var userTableSchema = new Schema({
   'records': [userRecordSchema]
 });
 
-// Create user database schema
-var userDatabaseSchema = new Schema({
-  'tables': [userTableSchema]
-});
-
 // Create database models
-var userDatabase = mongoose.model('userDatabase', userDatabaseSchema);
+var userDatabase = mongoose.model('userDatabase', userTableSchema);
 
 // Export database models
 module.exports = userDatabase;

@@ -12,8 +12,10 @@ function formFieldsReadAll(request) {
     } else {
       formFields.find({'formId': request.params.formId}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
+        } else if(!results) {
+          reject('No Form Fields found!');
         } else {
           resolve(results);
         }
@@ -30,8 +32,10 @@ function formFieldsReadOne(request) {
     } else {
       formFields.findOne({'_id': request.params.formFieldId}).exec(function(error, results) {
         if(error) {
-          console.log(error);
+          console.log(error.message);
           reject('Something went wrong!');
+        } else if(!results) {
+          reject('Form Field not found!');
         } else {
           resolve(results);
         }
@@ -51,7 +55,7 @@ function formFieldsCreate(request) {
       'formFieldValue': request.body.formFieldValue
     }, function(error, results) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         resolve('Form Field created successfully!');
@@ -71,14 +75,14 @@ function formFieldsUpdate(request) {
       if(!formFieldData) {
         reject('Form Field not found!');
       } else if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         formFieldData.formFieldLabel = request.body.formFieldLabel;
         formFieldData.formFieldValue = request.body.formFieldValue;
         formFieldData.save(function(error, results) {
           if(error) {
-            console.log(error);
+            console.log(error.message);
             reject('Something went wrong!');
           } else {
             resolve('Form Field updated successfully!');
@@ -98,7 +102,7 @@ function formFieldsDelete(request) {
     }
     formFields.findByIdAndRemove(request.params.formFieldId).exec(function(error, results) {
       if(error) {
-        console.log(error);
+        console.log(error.message);
         reject('Something went wrong!');
       } else {
         resolve('Form Field deleted successfully!');
