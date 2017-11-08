@@ -10,7 +10,7 @@ var controllerFormFields = require('../controllers/formFields');
 var controllerUserDatabases = require('../controllers/userDatabases');
 
 // Create routes for users
-router.get('/read_one/users', controllerUsers.usersReadOne);
+router.post('/read_one/users', controllerUsers.usersReadOne);
 router.post('/create/users', controllerUsers.usersCreate);
 router.put('/update/users/:userId', controllerUsers.usersUpdate);
 router.delete('/delete/users/:userId', controllerUsers.usersDelete);

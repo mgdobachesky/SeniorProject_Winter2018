@@ -4,23 +4,35 @@ import axios from 'axios';
 class UserService {
   // Read a user
   readOneUser(data) {
-    axios.get('http://159.203.105.123:3000/api/v1/read_one/users', {
-      request: data
-    }).then(function(response) {
-      console.log(response);
-    }).catch(function(error) {
-      console.log(error);
+    return axios({
+      url: '/read_one/users',
+      method: 'post',
+      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        'username': data.username,
+        'password': data.password
+      }
     });
   }
 
   // Create new user
   createUser(data) {
-    axios.post('http://159.203.105.123:3000/api/v1/create/users', {
-      request: data
-    }).then(function(response) {
-      console.log(response);
-    }).catch(function(error) {
-      console.log(error);
+    return axios({
+      url: '/create/users',
+      method: 'post',
+      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        'username': data.username,
+        'password': data.password
+      }
     });
   }
 }
+
+export default UserService;

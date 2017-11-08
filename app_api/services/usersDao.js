@@ -9,7 +9,7 @@ var users = mongoose.model('user');
 function usersReadOne(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.username) {
-      reject('Username required!');
+      reject('Username is required!');
     } else {
       users.findOne({'username': request.body.username}).exec(function(error, results) {
         if(error) {
@@ -38,24 +38,28 @@ function usersReadOne(request) {
 // Create operations
 function usersCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    bcrypt.hash(request.body.password, 10, function(error, hash) {
-      if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        users.create({
-          'username': request.body.username,
-          'password': hash
-        }, function(error, results) {
-          if(error) {
-            console.log(error.message);
-            reject('Something went wrong!');
-          } else {
-            resolve('User created successfully!');
-          }
-        });
-      }
-    });
+    if(!request.body.username || !request.body.password) {
+      reject('Username and Password are both required!');
+    } else {
+      bcrypt.hash(request.body.password, 10, function(error, hash) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else {
+          users.create({
+            'username': request.body.username,
+            'password': hash
+          }, function(error, results) {
+            if(error) {
+              console.log(error.message);
+              reject('Something went wrong!');
+            } else {
+              resolve('User created successfully!');
+            }
+          });
+        }
+      });
+    }
   });
   return promise;
 }
