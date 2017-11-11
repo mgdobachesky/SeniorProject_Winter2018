@@ -1,8 +1,40 @@
 // Navbar Component
 import React, { Component } from 'react';
 
-class Navbar extends Component {
+class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  handleLogout(event) {
+    event.preventDefault();
+    this.props.onUserLogout(event.target);
+  }
+
   render() {
+    const userId = this.props.userId;
+    let loginOptions = null;
+    if(userId) {
+      loginOptions = (
+        <ul className="navbar-nav justify-content-end">
+          <li className="nav-item">
+            <a className="nav-link" href="#/logout" onClick={this.handleLogout}>Logout</a>
+          </li>
+        </ul>
+      );
+    } else {
+      loginOptions = (
+        <ul className="navbar-nav justify-content-end">
+          <li className="nav-item">
+            <a className="nav-link" href="#/signup">Sign-Up</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="#/login">Login</a>
+          </li>
+        </ul>
+      );
+    }
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="#">Cadre</a>
@@ -14,16 +46,8 @@ class Navbar extends Component {
             <li className="nav-item active">
               <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/signup">Sign-Up</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/login">Login</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/logout">Logout</a>
-            </li>
           </ul>
+          {loginOptions}
         </div>
       </nav>
     );
