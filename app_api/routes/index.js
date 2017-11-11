@@ -14,7 +14,7 @@ router.post('/read_one/users', controllerUsers.usersReadOne);
 router.post('/create/users', controllerUsers.usersCreate);
 router.put('/update/users/:userId', controllerUsers.usersUpdate);
 router.delete('/delete/users/:userId', controllerUsers.usersDelete);
-router.get('/exists/users/:username', controllerUsers.usersExists);
+//router.get('/exists/users/:username', controllerUsers.usersExists);
 
 // Create routes for viewsites
 router.get('/read_one/viewsites/:viewsiteName', controllerViewsites.viewsitesReadOne);
@@ -22,7 +22,7 @@ router.get('/read_all/viewsites/:userId', controllerViewsites.viewsitesReadAll);
 router.post('/create/viewsites', controllerViewsites.viewsitesCreate);
 router.put('/update/viewsites/:viewsiteId', controllerViewsites.viewsitesUpdate);
 router.delete('/delete/viewsites/:viewsiteId', controllerViewsites.viewsitesDelete);
-router.get('/exists/viewsites/:viewsiteName', controllerViewsites.viewsitesExists);
+//router.get('/exists/viewsites/:viewsiteName', controllerViewsites.viewsitesExists);
 
 // Create routes for viewpages
 router.get('/read_one/viewpages/:viewpageId', controllerViewpages.viewpagesReadOne);
@@ -52,16 +52,14 @@ router.post('/create/form_fields', controllerFormFields.formFieldsCreate);
 router.put('/update/form_fields/:formFieldId', controllerFormFields.formFieldsUpdate);
 router.delete('/delete/form_fields/:formFieldId', controllerFormFields.formFieldsDelete);
 
-// Create routes for userTables
-router.get('/read_one/user_tables/:formId', controllerUserDatabases.userTablesReadOne);
-router.post('/create/user_tables/:formId', controllerUserDatabases.userTablesCreate);
-router.delete('/delete/user_tables/:formId', controllerUserDatabases.userTablesDelete);
-
-// Create routes for userRecords
+// Create routes for userDatabases
 router.get('/read_one/user_records/:recordId', controllerUserDatabases.userRecordsReadOne);
+router.get('/read_all/user_records/:formId', controllerUserDatabases.userTablesReadOne);
 router.post('/create/user_records/:formId', controllerUserDatabases.userRecordsCreate);
 router.put('/update/user_records/:recordId', controllerUserDatabases.userRecordsUpdate);
 router.delete('/delete/user_records/:recordId', controllerUserDatabases.userRecordsDelete);
+//router.post('/create/user_tables/:formId', controllerUserDatabases.userTablesCreate);
+//router.delete('/delete/user_tables/:formId', controllerUserDatabases.userTablesDelete);
 
 // Export the router
 module.exports = router;
