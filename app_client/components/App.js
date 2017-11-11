@@ -19,9 +19,21 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.manageUserService = new UserService();
+    this.handleUserSignup = this.handleUserSignup.bind(this);
     this.handleUserLogin = this.handleUserLogin.bind(this);
     this.handleUserLogout = this.handleUserLogout.bind(this);
     this.state = {userId: "", username: ""};
+  }
+
+  handleUserSignup(event) {
+    let data = {};
+    data.username = event.username.value;
+    data.password = event.password.value;
+    this.manageUserService.createUser(data).then((results) => {
+      console.log(results);
+    }, (error) => {
+      console.log(error.response.data);
+    });
   }
 
   handleUserLogin(event) {
@@ -30,6 +42,7 @@ class App extends React.Component {
     data.password = event.password.value;
     this.manageUserService.readOneUser(data).then((results) => {
       this.setState({userId: results.data._id, username: results.data.username});
+      location.hash = "/";
     }, function(error) {
       console.log(error.response.data);
     });
@@ -37,6 +50,7 @@ class App extends React.Component {
 
   handleUserLogout(event) {
     this.setState({userId: "", username: ""});
+    location.hash = "/";
   }
 
   render() {
@@ -46,8 +60,8 @@ class App extends React.Component {
         <div>
           <Navbar userId={userId} onUserLogout={this.handleUserLogout} />
           <Route exact path='/' component={Home} />
-          <Route path='/signup' render={routeProps => <UserForm {...routeProps} title="Sign Up" />} />
-          <Route path='/login' render={routeProps => <Login {...routeProps} onUserSubmit={this.handleUserLogin} />} />
+          <Route path='/signup' render={routeProps => <UserForm {...routeProps} title="Sign Up" onSubmit={this.handleUserSignup} />} />
+          <Route path='/login' render={routeProps => <Login {...routeProps} onSubmit={this.handleUserLogin} />} />
         </div>
       </Router>
     );

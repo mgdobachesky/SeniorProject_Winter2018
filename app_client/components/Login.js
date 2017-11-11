@@ -9,7 +9,7 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onUserSubmit(event.target);
+    this.props.onSubmit(event.target);
   }
 
   render() {
