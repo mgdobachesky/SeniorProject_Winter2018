@@ -5,24 +5,18 @@ class ViewsiteService {
   // Read one
   readOneViewsite(requestData) {
     return axios({
-      url: '/read_one/viewsites',
+      url: '/read_one/viewsites/' + requestData.viewsiteName,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'viewsiteName': requestData.viewsiteName
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 
   // Read all
   readAllViewsites(requestData) {
     return axios({
-      url: '/read_all/viewsites',
+      url: '/read_all/viewsites/' + requestData.userId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'userId': requestData.userId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 
@@ -46,14 +40,11 @@ class ViewsiteService {
   // Update
   updateViewsite(requestData) {
     return axios({
-      url: '/update/viewsites',
+      url: '/update/viewsites/' + requestData.viewsiteId,
       method: 'put',
       baseURL: 'http://159.203.105.123:3000/api/v1/',
       headers: {
         'Content-Type': 'application/json'
-      },
-      params: {
-        'viewsiteId': requestData.viewsiteId
       },
       data: {
         'viewsiteName': requestData.viewsiteName,
@@ -65,12 +56,9 @@ class ViewsiteService {
   // Delete
   deleteViewsite(requestData) {
     return axios({
-      url: '/delete/viewsites',
+      url: '/delete/viewsites/' + requestData.viewsiteId,
       method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'viewsiteId': requestData.viewsiteId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 }

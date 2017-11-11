@@ -4,22 +4,28 @@ import React, { Component } from 'react';
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
-    this.handleLogout = this.handleLogout.bind(this);
+    this.handleUserLogout = this.handleUserLogout.bind(this);
   }
 
-  handleLogout(event) {
+  handleUserLogout(event) {
     event.preventDefault();
     this.props.onUserLogout(event.target);
   }
 
   render() {
-    const userId = this.props.userId;
+    // Define user state to check if a user is logged in
+    const user = this.props.user;
+
+    // Options for customizing the navbar based on state
     let loginOptions = null;
-    if(userId) {
+    let viewsiteLink = null;
+
+    // Choose login options based on user state
+    if(user.userId) {
       loginOptions = (
         <ul className="navbar-nav justify-content-end">
           <li className="nav-item">
-            <a className="nav-link" href="#/logout" onClick={this.handleLogout}>Logout</a>
+            <a className="nav-link" onClick={this.handleUserLogout}>Logout</a>
           </li>
         </ul>
       );
@@ -35,8 +41,19 @@ class Navbar extends React.Component {
         </ul>
       );
     }
+
+    // Choose navbar options based on user state
+    if(user.userId) {
+      viewsiteLink = (
+        <li className="nav-item">
+          <a className="nav-link" href="#/viewsites">Viewsites</a>
+        </li>
+      );
+    }
+
+    // Return navbar for rendering
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand" href="#">Cadre</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -46,6 +63,7 @@ class Navbar extends React.Component {
             <li className="nav-item active">
               <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
             </li>
+            {viewsiteLink}
           </ul>
           {loginOptions}
         </div>

@@ -5,24 +5,18 @@ class FormFieldService {
   // Read one
   readOneFormField(requestData) {
     return axios({
-      url: '/read_one/form_fields',
+      url: '/read_one/form_fields/' + requestData.formFieldId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'formFieldId': requestData.formFieldId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 
   // Read all
   readAllFormFields(requestData) {
     return axios({
-      url: '/read_all/form_fields',
+      url: '/read_all/form_fields/' + requestData.formId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'formId': requestData.formId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 
@@ -47,14 +41,11 @@ class FormFieldService {
   // Update
   updateFormField(requestData) {
     return axios({
-      url: '/update/form_fields',
+      url: '/update/form_fields/' + requestData.formFieldId,
       method: 'put',
       baseURL: 'http://159.203.105.123:3000/api/v1/',
       headers: {
         'Content-Type': 'application/json'
-      },
-      params: {
-        'formFieldId': requestData.formFieldId
       },
       data: {
         'formFieldLabel': requestData.formFieldLabel,
@@ -66,12 +57,9 @@ class FormFieldService {
   // Delete
   deleteFormField(requestData) {
     return axios({
-      url: '/delete/form_fields',
+      url: '/delete/form_fields/' + requestData.formFieldId,
       method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'formFieldId': requestData.formFieldId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 }

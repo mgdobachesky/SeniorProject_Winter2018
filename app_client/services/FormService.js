@@ -5,24 +5,18 @@ class FormService {
   // Read one
   readOneForm(requestData) {
     return axios({
-      url: '/read_one/forms',
+      url: '/read_one/forms/' + requestData.formId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'formId': requestData.formId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 
   // Read all
   readAllForms(requestData) {
     return axios({
-      url: '/read_all/forms',
+      url: '/read_all/forms/' + requestData.viewsiteId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'viewsiteId': requestData.viewsiteId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 
@@ -45,14 +39,11 @@ class FormService {
   // Update
   updateForm(requestData) {
     return axios({
-      url: '/update/forms',
+      url: '/update/forms/' + requestData.formId,
       method: 'put',
       baseURL: 'http://159.203.105.123:3000/api/v1/',
       headers: {
         'Content-Type': 'application/json'
-      },
-      params: {
-        'formId': requestData.formId
       },
       data: {
         'formTitle': requestData.formTitle
@@ -63,12 +54,9 @@ class FormService {
   // Delete
   deleteForm(requestData) {
     return axios({
-      url: '/delete/forms',
+      url: '/delete/forms/' + requestData.formId,
       method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'formId': requestData.formId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 }

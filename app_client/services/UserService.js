@@ -37,14 +37,11 @@ class UserService {
   // Update
   updateUser(requestData) {
     return axios({
-      url: '/update/users',
+      url: '/update/users/' + requestData.userId,
       method: 'put',
       baseURL: 'http://159.203.105.123:3000/api/v1/',
       headers: {
         'Content-Type': 'application/json'
-      },
-      params: {
-        'userId': requestData.userId
       },
       data: {
         'username': requestData.username,
@@ -56,12 +53,9 @@ class UserService {
   // Delete
   deleteUser(requestData) {
     return axios({
-      url: '/delete/users',
+      url: '/delete/users/' + requestData.userId,
       method: 'delete',
       baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'userId': requestData.userId
-      }
     });
   }
 }

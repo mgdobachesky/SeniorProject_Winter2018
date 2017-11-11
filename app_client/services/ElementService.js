@@ -5,24 +5,18 @@ class ElementService {
   // Read one
   readOneElement(requestData) {
     return axios({
-      url: '/read_one/elements',
+      url: '/read_one/elements/' + requestData.elementId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'elementId': requestData.elementId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 
   // Read all
   readAllElements(requestData) {
     return axios({
-      url: '/read_all/elements',
+      url: '/read_all/elements/' + requestData.viewpageId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'viewpageId': requestData.viewpageId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 
@@ -46,14 +40,11 @@ class ElementService {
   // Update
   updateElement(requestData) {
     return axios({
-      url: '/update/elements',
+      url: '/update/elements/' + requestData.elementId,
       method: 'put',
       baseURL: 'http://159.203.105.123:3000/api/v1/',
       headers: {
         'Content-Type': 'application/json'
-      },
-      params: {
-        'elementId': requestData.elementId
       },
       data: {
         'elementValue': requestData.elementValue
@@ -64,12 +55,9 @@ class ElementService {
   // Delete
   deleteElement {
     return axios({
-      url: '/delete/elements',
+      url: '/delete/elements/' + requestData.elementId,
       method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'elementId': requestData.elementId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 }

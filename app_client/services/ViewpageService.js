@@ -5,24 +5,18 @@ class ViewpageService {
   // Read one
   readOneViewpage(requestData) {
     return axios({
-      url: '/read_one/viewpages',
+      url: '/read_one/viewpages/' + requestData.viewpageId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'viewpageId': requestData.viewpageId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 
   // Read all
   readAllViewpages(requestData) {
     return axios({
-      url: '/read_all/viewpages',
+      url: '/read_all/viewpages/' + requestData.viewsiteId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'viewsiteId': requestData.viewsiteId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 
@@ -46,14 +40,11 @@ class ViewpageService {
   // Update
   updateViewpage(requestData) {
     return axios({
-      url: '/update/viewpages',
+      url: '/update/viewpages/' + requestData.viewpageId,
       method: 'put',
       baseURL: 'http://159.203.105.123:3000/api/v1/',
       headers: {
         'Content-Type': 'application/json'
-      },
-      params: {
-        'viewpageId': requestData.viewpageId
       },
       data: {
         'viewpageName': requestData.viewpageName,
@@ -65,12 +56,9 @@ class ViewpageService {
   // Delete
   deleteViewpage(requestData) {
     return axios({
-      url: '/delete/viewpages',
+      url: '/delete/viewpages/' + requestData.viewpageId,
       method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'viewpageId': requestData.viewpageId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 }

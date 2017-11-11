@@ -5,38 +5,29 @@ class UserDatabaseService {
   // Read one
   readOneUserRecord(requestData) {
     return axios({
-      url: '/read_one/user_records',
+      url: '/read_one/user_records/' + requestData.recordId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'recordId': requestData.recordId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 
   // Read all
   readAllUserRecords(requestData) {
     return axios({
-      url: '/read_all/user_records',
+      url: '/read_all/user_records/' + requestData.formId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'formId': requestData.formId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 
   // Create
   createUserRecord(requestData) {
     return axios({
-      url: '/create/user_records',
+      url: '/create/user_records/' + requestData.formId,
       method: 'post',
       baseURL: 'http://159.203.105.123:3000/api/v1/',
       headers: {
         'Content-Type': 'application/json'
-      },
-      params: {
-        'formId': requestData.formId
       },
       data: {
         requestData.record
@@ -47,14 +38,11 @@ class UserDatabaseService {
   // Update
   updateUserRecord(requestData) {
     return axios({
-      url: '/update/user_records',
+      url: '/update/user_records/' + requestData.recordId,
       method: 'put',
       baseURL: 'http://159.203.105.123:3000/api/v1/',
       headers: {
         'Content-Type': 'application/json'
-      },
-      params: {
-        'recordId': requestData.recordId
       },
       data: {
         requestData.record
@@ -65,12 +53,9 @@ class UserDatabaseService {
   // Delete
   deleteUserRecord(requestData) {
     return axios({
-      url: '/delete/user_records',
+      url: '/delete/user_records/' + requestData.recordId,
       method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      params: {
-        'recordId': requestData.recordId
-      }
+      baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
 }
