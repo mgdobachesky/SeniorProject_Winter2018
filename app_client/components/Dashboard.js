@@ -1,6 +1,9 @@
 // Navbar Component
 import React, { Component } from 'react';
 
+// Import requred components
+import ViewsiteForm from './ViewsiteForm';
+
 // Import required services
 import ViewsiteService from '../services/ViewsiteService';
 
@@ -8,14 +11,14 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.manageViewsiteService = new ViewsiteService();
-    this.handleNewViewsite = this.handleNewViewsite.bind(this);
+    this.handleCreateViewsite = this.handleCreateViewsite.bind(this);
+    this.handleEditViewsite = this.handleEditViewsite.bind(this);
+    this.handleDeleteViewsite = this.handleDeleteViewsite.bind(this);
   }
 
-  handleNewViewsite(event) {
-    event.preventDefault();
-    event = event.target;
+  handleCreateViewsite(event) {
     let requestData = {};
-    requestData.userId = this.props.user.userId;
+    requestData.userId = this.props.user._id;
     requestData.viewsiteName = event.viewsiteName.value;
     requestData.loginEnabled = event.loginEnabled.checked;
     this.manageViewsiteService.createViewsite(requestData).then((results) => {
@@ -23,11 +26,55 @@ class Dashboard extends React.Component {
     }, (error) => {
       console.log(error.response.data);
     });
-    $('#exampleModal').modal('hide');
-    this.props.updateViewsites();
+    $('#viewsiteForm').modal('hide');
+    this.props.updateViewsiteState();
+  }
+
+  handleEditViewsite(event) {
+    console.log(event);
+  }
+
+  handleDeleteViewsite(event) {
+    let requestData = {};
+    requestData.viewsiteId = event.viewsiteId;
+    this.manageViewsiteService.deleteViewsite(requestData).then((results) => {
+      console.log(results);
+    }, (error) => {
+      console.log(error.response.data);
+    });
+    this.props.updateViewsiteState();
   }
 
   render() {
+    // Define state as variables
+    const user = this.props.user;
+    const viewsites = this.props.viewsites;
+
+    // Options for customizing Dashboard based on state
+    let viewsiteList = null;
+
+    // Create item for each Viewsite
+    if(viewsites) {
+      viewsiteList = viewsites.map((viewsite, index) => {
+        const viewsiteId = viewsite._id;
+        const viewsiteName = viewsite.viewsiteName;
+        const loginEnabled = viewsite.loginEnabled;
+        const loginEnabledMessage = viewsite.loginEnabled ? "Yes" : "No";
+        let editClick = {viewsiteId: viewsiteId, viewsiteName: viewsiteName, loginEnabled: loginEnabled};
+        let deleteClick = {viewsiteId: viewsiteId};
+        return (
+          <div key={viewsiteId} className="card">
+            <div className="card-body">
+              <h4 className="card-title">{viewsiteName}</h4>
+              <p className="card-text">Login Enabled: {loginEnabledMessage}</p>
+              <a className="card-link" href="javascript:;" data-toggle="modal" data-target="#viewsiteEdit" onClick={() => this.handleEditViewsite(editClick)}>Edit</a>
+              <a className="card-link" href="javascript:;" onClick={() => this.handleDeleteViewsite(deleteClick)}>Delete</a>
+            </div>
+          </div>
+        );
+      });
+    }
+
     return (
       <div className="container">
 
@@ -46,42 +93,14 @@ class Dashboard extends React.Component {
                 TODO: Edit account Details
               </div>
               <div className="tab-pane fade" id="v-pills-viewsites" role="tabpanel" aria-labelledby="v-pills-viewsites-tab">
-                <button type="button" className="btn btn-link" data-toggle="modal" data-target="#exampleModal">New Viewsite</button>
+                <button type="button" className="btn btn-link" data-toggle="modal" data-target="#viewsiteForm">New Viewsite</button>
+                {viewsiteList}
               </div>
             </div>
           </div>
         </div>
 
-        <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">New Viewsite</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <form onSubmit={this.handleNewViewsite}>
-                  <div className="form-group">
-                    <label htmlFor="viewsiteName">Viewsite Name</label>
-                    <input type="text" className="form-control" id="viewsiteName" placeholder="Enter Viewsite Name" />
-                  </div>
-                  <div className="form-check">
-                    <label className="form-check-label">
-                      <input type="checkbox" className="form-check-input" id="loginEnabled" value="loginEnabled" />
-                        Login Enabled
-                    </label>
-                  </div>
-                  <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" className="btn btn-primary">Save Viewsite</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ViewsiteForm onCreateViewsite={this.handleCreateViewsite} />
 
       </div>
     );

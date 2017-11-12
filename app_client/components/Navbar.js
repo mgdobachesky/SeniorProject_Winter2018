@@ -13,7 +13,7 @@ class Navbar extends React.Component {
   }
 
   render() {
-    // Define user state to check if a user is logged in
+    // Define props as variables
     const user = this.props.user;
     const viewsites = this.props.viewsites;
 
@@ -23,11 +23,11 @@ class Navbar extends React.Component {
     let viewsiteLinks = null;
 
     // Choose login options based on user state
-    if(user.userId) {
+    if(user._id) {
       loginOptions = (
         <ul className="navbar-nav justify-content-end">
           <li className="nav-item">
-            <a className="nav-link" onClick={this.handleUserLogout}>Logout</a>
+            <a className="nav-link" href="javascript:;" onClick={this.handleUserLogout}>Logout</a>
           </li>
         </ul>
       );
@@ -45,7 +45,7 @@ class Navbar extends React.Component {
     }
 
     // Choose navbar options based on user state
-    if(user.userId) {
+    if(user._id) {
       dashboardLink = (
         <li className="nav-item active">
           <a className="nav-link" href="#/dashboard">Dashboard <span className="sr-only">(current)</span></a>
@@ -58,7 +58,7 @@ class Navbar extends React.Component {
       viewsiteLinks = viewsites.map((viewsite) => {
         const viewsiteId = viewsite._id;
         const viewsiteName = viewsite.viewsiteName;
-        const viewsiteHref = '#/' + viewsite.viewsiteName;
+        const viewsiteHref = '#/viewsite/' + viewsite.viewsiteName;
         return (
           <li key={viewsiteId} className="nav-item">
             <a id={viewsiteId} className="nav-link" href={viewsiteHref}>{viewsiteName}</a>

@@ -1,7 +1,7 @@
 // Navbar Component
 import React, { Component } from 'react';
 
-class User extends React.Component {
+class UserForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,4 +32,4 @@ class User extends React.Component {
   }
 }
 
-export default User;
+export default UserForm;

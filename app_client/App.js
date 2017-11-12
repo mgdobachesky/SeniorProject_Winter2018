@@ -6,7 +6,8 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
-import User from './components/User';
+import UserForm from './components/UserForm';
+import Viewsite from './components/Viewsite';
 
 // Import required services
 import UserService from './services/UserService';
@@ -28,14 +29,8 @@ class App extends React.Component {
     this.handleUserSignup = this.handleUserSignup.bind(this);
     this.handleUserLogin = this.handleUserLogin.bind(this);
     this.handleUserLogout = this.handleUserLogout.bind(this);
-    this.getAllViewsites = this.getAllViewsites.bind(this);
-    this.state = {
-      user: {
-        userId: "",
-        username: ""
-      },
-      viewsites: []
-    };
+    this.updateViewsiteState = this.updateViewsiteState.bind(this);
+    this.state = {user: {}, viewsites: []};
   }
 
   handleUserSignup(event) {
@@ -55,10 +50,9 @@ class App extends React.Component {
     requestData.username = event.username.value;
     requestData.password = event.password.value;
     this.manageUserService.readOneUser(requestData).then((results) => {
-      loginUser.userId = results.data._id;
-      loginUser.username = results.data.username;
-      this.setState({user: loginUser},() => {
-        this.getAllViewsites();
+      loginUser = results.data;
+      this.setState({user: loginUser}, () => {
+        this.updateViewsiteState();
       });
       location.hash = "/";
     }, function(error) {
@@ -69,8 +63,7 @@ class App extends React.Component {
   handleUserLogout(event) {
     let logoutUser = this.state.user;
     let logoutViewsites = this.state.viewsites;
-    logoutUser.userId = "";
-    logoutUser.username = "";
+    logoutUser = {};
     logoutViewsites = [];
     this.setState({
       user: logoutUser,
@@ -79,8 +72,8 @@ class App extends React.Component {
     location.hash = "/";
   }
 
-  getAllViewsites() {
-    const userId = this.state.user.userId;
+  updateViewsiteState() {
+    const userId = this.state.user._id;
     if(userId) {
       let requestData = {};
       requestData.userId = userId;
@@ -100,9 +93,10 @@ class App extends React.Component {
         <div>
           <Navbar user={user} viewsites={viewsites} onUserLogout={this.handleUserLogout} />
           <Route exact path='/' component={Home} />
-          <Route path='/signup' render={routeProps => <User {...routeProps} title="Sign Up" onSubmit={this.handleUserSignup} />} />
+          <Route path='/signup' render={routeProps => <UserForm {...routeProps} title="Sign Up" onSubmit={this.handleUserSignup} />} />
           <Route path='/login' render={routeProps => <Login {...routeProps} onSubmit={this.handleUserLogin} />} />
-          <Route path='/dashboard' render={routeProps => <Dashboard {...routeProps} user={user} updateViewsites={this.getAllViewsites} />} />
+          <Route path='/dashboard' render={routeProps => <Dashboard {...routeProps} user={user} viewsites={viewsites} updateViewsiteState={this.updateViewsiteState} />} />
+          <Route path='/viewsite/:viewsiteName' component={Viewsite} />
         </div>
       </Router>
     );
