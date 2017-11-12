@@ -57,7 +57,9 @@ class App extends React.Component {
     this.manageUserService.readOneUser(requestData).then((results) => {
       loginUser.userId = results.data._id;
       loginUser.username = results.data.username;
-      this.setState({user: loginUser});
+      this.setState({user: loginUser},() => {
+        this.getAllViewsites();
+      });
       location.hash = "/";
     }, function(error) {
       console.log(error.response.data);
@@ -69,13 +71,16 @@ class App extends React.Component {
     let logoutViewsites = this.state.viewsites;
     logoutUser.userId = "";
     logoutUser.username = "";
-    // TODO: Clear viewsite on logout
     logoutViewsites = [];
-    this.setState({user: logoutUser, viewsites: logoutViewsites});
+    this.setState({
+      user: logoutUser,
+      viewsites: logoutViewsites
+    });
     location.hash = "/";
   }
 
-  getAllViewsites(userId) {
+  getAllViewsites() {
+    const userId = this.state.user.userId;
     if(userId) {
       let requestData = {};
       requestData.userId = userId;
@@ -90,7 +95,6 @@ class App extends React.Component {
   render() {
     const user = this.state.user;
     const viewsites = this.state.viewsites;
-    this.getAllViewsites(user.userId);
     return(
       <Router basename="/">
         <div>
@@ -98,7 +102,7 @@ class App extends React.Component {
           <Route exact path='/' component={Home} />
           <Route path='/signup' render={routeProps => <User {...routeProps} title="Sign Up" onSubmit={this.handleUserSignup} />} />
           <Route path='/login' render={routeProps => <Login {...routeProps} onSubmit={this.handleUserLogin} />} />
-          <Route path='/dashboard' render={routeProps => <Dashboard {...routeProps} user={user} />} />
+          <Route path='/dashboard' render={routeProps => <Dashboard {...routeProps} user={user} updateViewsites={this.getAllViewsites} />} />
         </div>
       </Router>
     );

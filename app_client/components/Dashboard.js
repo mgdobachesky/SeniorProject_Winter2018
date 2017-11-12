@@ -24,6 +24,7 @@ class Dashboard extends React.Component {
       console.log(error.response.data);
     });
     $('#exampleModal').modal('hide');
+    this.props.updateViewsites();
   }
 
   render() {
