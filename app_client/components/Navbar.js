@@ -15,10 +15,12 @@ class Navbar extends React.Component {
   render() {
     // Define user state to check if a user is logged in
     const user = this.props.user;
+    const viewsites = this.props.viewsites;
 
     // Options for customizing the navbar based on state
     let loginOptions = null;
-    let viewsiteLink = null;
+    let dashboardLink = null;
+    let viewsiteLinks = null;
 
     // Choose login options based on user state
     if(user.userId) {
@@ -44,11 +46,25 @@ class Navbar extends React.Component {
 
     // Choose navbar options based on user state
     if(user.userId) {
-      viewsiteLink = (
-        <li className="nav-item">
-          <a className="nav-link" href="#/viewsites">Viewsites</a>
+      dashboardLink = (
+        <li className="nav-item active">
+          <a className="nav-link" href="#/dashboard">Dashboard <span className="sr-only">(current)</span></a>
         </li>
       );
+    }
+
+    // Create links for each Viewsite
+    if(viewsites) {
+      viewsiteLinks = viewsites.map((viewsite) => {
+        const viewsiteId = viewsite._id;
+        const viewsiteName = viewsite.viewsiteName;
+        const viewsiteHref = '#/' + viewsite.viewsiteName;
+        return (
+          <li key={viewsiteId} className="nav-item">
+            <a id={viewsiteId} className="nav-link" href={viewsiteHref}>{viewsiteName}</a>
+          </li>
+        );
+      });
     }
 
     // Return navbar for rendering
@@ -60,10 +76,8 @@ class Navbar extends React.Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-            </li>
-            {viewsiteLink}
+            {dashboardLink}
+            {viewsiteLinks}
           </ul>
           {loginOptions}
         </div>
