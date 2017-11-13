@@ -26,7 +26,6 @@ class Dashboard extends React.Component {
     }, (error) => {
       console.log(error.response.data);
     });
-    $('#viewsiteForm').modal('hide');
     this.props.updateViewsiteState();
   }
 
@@ -43,6 +42,10 @@ class Dashboard extends React.Component {
       console.log(error.response.data);
     });
     this.props.updateViewsiteState();
+  }
+
+  componentDidMount() {
+    $("#viewsiteForm").hide();
   }
 
   render() {
@@ -93,14 +96,21 @@ class Dashboard extends React.Component {
                 TODO: Edit account Details
               </div>
               <div className="tab-pane fade" id="v-pills-viewsites" role="tabpanel" aria-labelledby="v-pills-viewsites-tab">
-                <button type="button" className="btn btn-link" data-toggle="modal" data-target="#viewsiteForm">New Viewsite</button>
-                {viewsiteList}
+                <button type="button" className="btn btn-link" onClick={() => $( "#viewsiteForm" ).toggle("slow")}>+ New Viewsite</button>
+                <div id="viewsiteForm" className="card">
+                  <div className="card-body">
+                    <ViewsiteForm onCreateViewsite={this.handleCreateViewsite} title="Create Viewsite" />
+                  </div>
+                </div>
+                <div className="card-deck">
+                  {viewsiteList}
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <ViewsiteForm onCreateViewsite={this.handleCreateViewsite} />
+
 
       </div>
     );

@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# atom save-commands
+save-commands.json

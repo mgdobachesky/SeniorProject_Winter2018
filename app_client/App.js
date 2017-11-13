@@ -50,6 +50,7 @@ class App extends React.Component {
     requestData.username = event.username.value;
     requestData.password = event.password.value;
     this.manageUserService.readOneUser(requestData).then((results) => {
+      localStorage.setItem('user', JSON.stringify(results.data));
       loginUser = results.data;
       this.setState({user: loginUser}, () => {
         this.updateViewsiteState();
@@ -69,6 +70,7 @@ class App extends React.Component {
       user: logoutUser,
       viewsites: logoutViewsites
     });
+    localStorage.removeItem('user');
     location.hash = "/";
   }
 
@@ -81,6 +83,17 @@ class App extends React.Component {
         this.setState({viewsites: results.data});
       }, (error) => {
         console.log(error.response.data);
+      });
+    }
+  }
+
+  componentWillMount() {
+    let loginUser = this.state.user;
+    let user = localStorage.getItem('user');
+    if(user) {
+      loginUser = JSON.parse(user);
+      this.setState({user: loginUser}, () => {
+        this.updateViewsiteState();
       });
     }
   }
