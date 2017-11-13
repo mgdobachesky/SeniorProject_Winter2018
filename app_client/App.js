@@ -50,9 +50,12 @@ class App extends React.Component {
     requestData.username = event.username.value;
     requestData.password = event.password.value;
     this.manageUserService.readOneUser(requestData).then((results) => {
+      // Set user in local storage for login persistence
       localStorage.setItem('user', JSON.stringify(results.data));
+      // Set user in state
       loginUser = results.data;
       this.setState({user: loginUser}, () => {
+        // Update the list of viewsites in state
         this.updateViewsiteState();
       });
       location.hash = "/";

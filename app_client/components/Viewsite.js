@@ -1,8 +1,40 @@
+// Import required modules
 import React, { Component } from 'react';
+
+// Import required services
+import ViewsiteService from '../services/ViewsiteService';
 
 class Viewsite extends React.Component {
   constructor(props) {
     super(props);
+    this.manageViewsiteService = new ViewsiteService();
+    this.state = {viewsite: {}, viewpages: []};
+  }
+
+  componentDidMount(nextProps, nextState) {
+    // Load initial Viewsite
+    let requestData = {};
+    let currentViewsite = this.state.viewsite;
+    requestData.viewsiteName = this.props.match.params.viewsiteName;
+    this.manageViewsiteService.readOneViewsite(requestData).then((results) => {
+      currentViewsite = results.data;
+      this.setState({viewsite: currentViewsite});
+    }, (error) => {
+      console.log(error.response.data);
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("updated");
+    let requestData = {};
+    let currentViewsite = this.state.viewsite;
+    requestData.viewsiteName = nextProps.match.params.viewsiteName;
+    this.manageViewsiteService.readOneViewsite(requestData).then((results) => {
+      currentViewsite = results.data;
+      this.setState({viewsite: currentViewsite});
+    }, (error) => {
+      console.log(error.response.data);
+    });
   }
 
   render() {
