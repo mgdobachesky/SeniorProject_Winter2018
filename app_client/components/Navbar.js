@@ -1,5 +1,6 @@
 // Import required modules
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -35,10 +36,10 @@ class Navbar extends React.Component {
       loginOptions = (
         <ul className="navbar-nav justify-content-end">
           <li className="nav-item">
-            <a className="nav-link" href="#/signup">Sign-Up</a>
+            <Link className="nav-link" to="/signup">Sign-Up</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#/login">Login</a>
+            <Link className="nav-link" to="/login">Login</Link>
           </li>
         </ul>
       );
@@ -48,7 +49,7 @@ class Navbar extends React.Component {
     if(user._id) {
       dashboardLink = (
         <li className="nav-item active">
-          <a className="nav-link" href="#/dashboard">Dashboard <span className="sr-only">(current)</span></a>
+          <Link className="nav-link" to="/dashboard">Dashboard <span className="sr-only">(current)</span></Link>
         </li>
       );
     }
@@ -58,10 +59,10 @@ class Navbar extends React.Component {
       viewsiteLinks = viewsites.map((viewsite) => {
         const viewsiteId = viewsite._id;
         const viewsiteName = viewsite.viewsiteName;
-        const viewsiteHref = '#/viewsite/' + viewsite.viewsiteName;
+        const viewsiteHref = '/viewsite/' + viewsite.viewsiteName;
         return (
           <li key={viewsiteId} className="nav-item">
-            <a id={viewsiteId} className="nav-link" href={viewsiteHref}>{viewsiteName}</a>
+            <Link id={viewsiteId} className="nav-link" to={viewsiteHref}>{viewsiteName}</Link>
           </li>
         );
       });
@@ -70,7 +71,7 @@ class Navbar extends React.Component {
     // Return navbar for rendering
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="#">Cadre</a>
+        <Link className="navbar-brand" to="/">Cadre</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

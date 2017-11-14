@@ -1,6 +1,6 @@
 // Import required modules
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 // Import requred components
 import Navbar from './components/Navbar';
@@ -105,16 +105,16 @@ class App extends React.Component {
     const user = this.state.user;
     const viewsites = this.state.viewsites;
     return(
-      <Router basename="/">
-        <div>
-          <Navbar user={user} viewsites={viewsites} onUserLogout={this.handleUserLogout} />
+      <div>
+        <Navbar user={user} viewsites={viewsites} onUserLogout={this.handleUserLogout} />
+        <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/signup' render={routeProps => <UserForm {...routeProps} title="Sign Up" onSubmit={this.handleUserSignup} />} />
           <Route path='/login' render={routeProps => <Login {...routeProps} onSubmit={this.handleUserLogin} />} />
           <Route path='/dashboard' render={routeProps => <Dashboard {...routeProps} user={user} viewsites={viewsites} updateViewsiteState={this.updateViewsiteState} />} />
           <Route path='/viewsite/:viewsiteName' component={Viewsite} />
-        </div>
-      </Router>
+        </Switch>
+      </div>
     );
   }
 }

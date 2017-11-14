@@ -1,5 +1,6 @@
-// Navbar Component
+// Import required modules
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 // Import requred components
 import ViewsiteForm from './ViewsiteForm';
@@ -96,7 +97,7 @@ class Dashboard extends React.Component {
                 TODO: Edit account Details
               </div>
               <div className="tab-pane fade" id="v-pills-viewsites" role="tabpanel" aria-labelledby="v-pills-viewsites-tab">
-                <button type="button" className="btn btn-link" onClick={() => $( "#viewsiteForm" ).toggle("slow")}>+ New Viewsite</button>
+                <button type="button" className="btn btn-link" onClick={() => $( "#viewsiteForm" ).toggle("fast")}>+ New Viewsite</button>
                 <div id="viewsiteForm" className="card">
                   <div className="card-body">
                     <ViewsiteForm onCreateViewsite={this.handleCreateViewsite} title="Create Viewsite" />
