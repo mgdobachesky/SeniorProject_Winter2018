@@ -21,7 +21,7 @@ function ViewsiteLinks(props) {
     return props.viewsites.map((viewsite) => {
       const viewsiteId = viewsite._id;
       const viewsiteName = viewsite.viewsiteName;
-      const viewsiteHref = '/viewsite/' + viewsite.viewsiteName;
+      const viewsiteHref = '/' + viewsite.viewsiteName;
       return (
         <li key={viewsiteId} className="nav-item">
           <Link id={viewsiteId} className="nav-link" to={viewsiteHref}>{viewsiteName}</Link>

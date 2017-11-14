@@ -112,7 +112,7 @@ class App extends React.Component {
           <Route path='/signup' render={routeProps => <UserForm {...routeProps} title="Sign Up" onSubmit={this.handleUserSignup} />} />
           <Route path='/login' render={routeProps => <Login {...routeProps} onSubmit={this.handleUserLogin} />} />
           <Route path='/dashboard' render={routeProps => <Dashboard {...routeProps} user={user} viewsites={viewsites} updateViewsiteState={this.updateViewsiteState} />} />
-          <Route path='/viewsite/:viewsiteName' component={Viewsite} />
+          <Route path='/:viewsiteName' component={Viewsite} />
         </Switch>
       </div>
     );
