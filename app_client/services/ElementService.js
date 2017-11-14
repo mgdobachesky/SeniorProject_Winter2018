@@ -1,13 +1,16 @@
 // Service for interacting with API
 import axios from 'axios';
 
-class ElementService {
+// Import required modules
+import './ServiceOptions';
+
+class ElementService extends ServiceOptions {
   // Read one
   readOneElement(requestData) {
     return axios({
       url: '/read_one/elements/' + requestData.elementId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 
@@ -16,7 +19,7 @@ class ElementService {
     return axios({
       url: '/read_all/elements/' + requestData.viewpageId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 
@@ -25,7 +28,7 @@ class ElementService {
     return axios({
       url: '/create/elements',
       method: 'post',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -42,7 +45,7 @@ class ElementService {
     return axios({
       url: '/update/elements/' + requestData.elementId,
       method: 'put',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -57,7 +60,7 @@ class ElementService {
     return axios({
       url: '/delete/elements/' + requestData.elementId,
       method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 }

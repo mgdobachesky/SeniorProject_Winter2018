@@ -1,13 +1,16 @@
 // Service for interacting with API
 import axios from 'axios';
 
-class ViewpageService {
+// Import required modules
+import ServiceOptions from './ServiceOptions';
+
+class ViewpageService extends ServiceOptions {
   // Read one
   readOneViewpage(requestData) {
     return axios({
       url: '/read_one/viewpages/' + requestData.viewpageId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 
@@ -16,7 +19,7 @@ class ViewpageService {
     return axios({
       url: '/read_all/viewpages/' + requestData.viewsiteId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 
@@ -25,7 +28,7 @@ class ViewpageService {
     return axios({
       url: '/create/viewpages',
       method: 'post',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -42,7 +45,7 @@ class ViewpageService {
     return axios({
       url: '/update/viewpages/' + requestData.viewpageId,
       method: 'put',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -58,7 +61,7 @@ class ViewpageService {
     return axios({
       url: '/delete/viewpages/' + requestData.viewpageId,
       method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 }

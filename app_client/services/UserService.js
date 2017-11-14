@@ -1,13 +1,16 @@
 // Service for interacting with API
 import axios from 'axios';
 
-class UserService {
+// Import required modules
+import ServiceOptions from './ServiceOptions';
+
+class UserService extends ServiceOptions {
   // Read one
   readOneUser(requestData) {
     return axios({
       url: '/read_one/users',
       method: 'post',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -23,7 +26,7 @@ class UserService {
     return axios({
       url: '/create/users',
       method: 'post',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -39,7 +42,7 @@ class UserService {
     return axios({
       url: '/update/users/' + requestData.userId,
       method: 'put',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -55,7 +58,7 @@ class UserService {
     return axios({
       url: '/delete/users/' + requestData.userId,
       method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
     });
   }
 }

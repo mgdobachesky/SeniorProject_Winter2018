@@ -1,13 +1,16 @@
 // Service for interacting with API
 import axios from 'axios';
 
-class FormFieldService {
+// Import required modules
+import ServiceOptions from './ServiceOptions';
+
+class FormFieldService extends ServiceOptions {
   // Read one
   readOneFormField(requestData) {
     return axios({
       url: '/read_one/form_fields/' + requestData.formFieldId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 
@@ -16,7 +19,7 @@ class FormFieldService {
     return axios({
       url: '/read_all/form_fields/' + requestData.formId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 
@@ -25,7 +28,7 @@ class FormFieldService {
     return axios({
       url: '/create/form_fields',
       method: 'post',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -43,7 +46,7 @@ class FormFieldService {
     return axios({
       url: '/update/form_fields/' + requestData.formFieldId,
       method: 'put',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -59,7 +62,7 @@ class FormFieldService {
     return axios({
       url: '/delete/form_fields/' + requestData.formFieldId,
       method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 }

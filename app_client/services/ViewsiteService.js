@@ -1,13 +1,16 @@
 // Service for interacting with API
 import axios from 'axios';
 
-class ViewsiteService {
+// Import required modules
+import ServiceOptions from './ServiceOptions';
+
+class ViewsiteService extends ServiceOptions {
   // Read one
   readOneViewsite(requestData) {
     return axios({
       url: '/read_one/viewsites/' + requestData.viewsiteName,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 
@@ -16,7 +19,7 @@ class ViewsiteService {
     return axios({
       url: '/read_all/viewsites/' + requestData.userId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 
@@ -25,7 +28,7 @@ class ViewsiteService {
     return axios({
       url: '/create/viewsites',
       method: 'post',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -42,7 +45,7 @@ class ViewsiteService {
     return axios({
       url: '/update/viewsites/' + requestData.viewsiteId,
       method: 'put',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -58,7 +61,7 @@ class ViewsiteService {
     return axios({
       url: '/delete/viewsites/' + requestData.viewsiteId,
       method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 }

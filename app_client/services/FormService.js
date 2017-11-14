@@ -1,13 +1,16 @@
 // Service for interacting with API
 import axios from 'axios';
 
-class FormService {
+// Import required modules
+import ServiceOptions from './ServiceOptions';
+
+class FormService extends ServiceOptions {
   // Read one
   readOneForm(requestData) {
     return axios({
       url: '/read_one/forms/' + requestData.formId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 
@@ -16,7 +19,7 @@ class FormService {
     return axios({
       url: '/read_all/forms/' + requestData.viewsiteId,
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 
@@ -25,7 +28,7 @@ class FormService {
     return axios({
       url: '/create/forms',
       method: 'post',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -41,7 +44,7 @@ class FormService {
     return axios({
       url: '/update/forms/' + requestData.formId,
       method: 'put',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -56,7 +59,7 @@ class FormService {
     return axios({
       url: '/delete/forms/' + requestData.formId,
       method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 }
