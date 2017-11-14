@@ -1,4 +1,4 @@
-// Navbar Component
+// Import required modules
 import React, { Component } from 'react';
 
 class Navbar extends React.Component {
