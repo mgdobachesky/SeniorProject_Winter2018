@@ -2,6 +2,61 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+// Choose navbar options based on user state
+function NavbarOptions(props) {
+  if(props.user._id) {
+    return (
+      <li className="nav-item active">
+        <Link className="nav-link" to="/dashboard">Dashboard <span className="sr-only">(current)</span></Link>
+      </li>
+    );
+  } else {
+    return null;
+  }
+}
+
+// Create links for each Viewsite a user owns
+function ViewsiteLinks(props) {
+  if(props.viewsites) {
+    return props.viewsites.map((viewsite) => {
+      const viewsiteId = viewsite._id;
+      const viewsiteName = viewsite.viewsiteName;
+      const viewsiteHref = '/viewsite/' + viewsite.viewsiteName;
+      return (
+        <li key={viewsiteId} className="nav-item">
+          <Link id={viewsiteId} className="nav-link" to={viewsiteHref}>{viewsiteName}</Link>
+        </li>
+      );
+    });
+  } else {
+    return null;
+  }
+}
+
+// Choose login options based on user state
+function LoginOptions(props) {
+  if(props.user._id) {
+    return (
+      <ul className="navbar-nav justify-content-end">
+        <li className="nav-item">
+          <a className="nav-link" href="javascript:;" onClick={props.onLogout}>Logout</a>
+        </li>
+      </ul>
+    );
+  } else {
+    return (
+      <ul className="navbar-nav justify-content-end">
+        <li className="nav-item">
+          <Link className="nav-link" to="/signup">Sign-Up</Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/login">Login</Link>
+        </li>
+      </ul>
+    );
+  }
+}
+
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
@@ -14,61 +69,6 @@ class Navbar extends React.Component {
   }
 
   render() {
-    // Define props as variables
-    const user = this.props.user;
-    const viewsites = this.props.viewsites;
-
-    // Options for customizing the navbar based on state
-    let loginOptions = null;
-    let dashboardLink = null;
-    let viewsiteLinks = null;
-
-    // Choose login options based on user state
-    if(user._id) {
-      loginOptions = (
-        <ul className="navbar-nav justify-content-end">
-          <li className="nav-item">
-            <a className="nav-link" href="javascript:;" onClick={this.handleUserLogout}>Logout</a>
-          </li>
-        </ul>
-      );
-    } else {
-      loginOptions = (
-        <ul className="navbar-nav justify-content-end">
-          <li className="nav-item">
-            <Link className="nav-link" to="/signup">Sign-Up</Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/login">Login</Link>
-          </li>
-        </ul>
-      );
-    }
-
-    // Choose navbar options based on user state
-    if(user._id) {
-      dashboardLink = (
-        <li className="nav-item active">
-          <Link className="nav-link" to="/dashboard">Dashboard <span className="sr-only">(current)</span></Link>
-        </li>
-      );
-    }
-
-    // Create links for each Viewsite
-    if(viewsites) {
-      viewsiteLinks = viewsites.map((viewsite) => {
-        const viewsiteId = viewsite._id;
-        const viewsiteName = viewsite.viewsiteName;
-        const viewsiteHref = '/viewsite/' + viewsite.viewsiteName;
-        return (
-          <li key={viewsiteId} className="nav-item">
-            <Link id={viewsiteId} className="nav-link" to={viewsiteHref}>{viewsiteName}</Link>
-          </li>
-        );
-      });
-    }
-
-    // Return navbar for rendering
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <Link className="navbar-brand" to="/">Cadre</Link>
@@ -77,13 +77,14 @@ class Navbar extends React.Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-            {dashboardLink}
-            {viewsiteLinks}
+            <NavbarOptions user={this.props.user} />
+            <ViewsiteLinks viewsites={this.props.viewsites} />
           </ul>
-          {loginOptions}
+          <LoginOptions user={this.props.user} onLogout={this.handleUserLogout} />
         </div>
       </nav>
     );
   }
 }
+
 export default Navbar;

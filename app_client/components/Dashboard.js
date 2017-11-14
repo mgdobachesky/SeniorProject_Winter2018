@@ -8,6 +8,32 @@ import ViewsiteForm from './ViewsiteForm';
 // Import required services
 import ViewsiteService from '../services/ViewsiteService';
 
+// Create list of Viewsites a user owns
+function ViewsiteList(props) {
+  if(props.viewsites) {
+    return props.viewsites.map((viewsite, index) => {
+      const viewsiteId = viewsite._id;
+      const viewsiteName = viewsite.viewsiteName;
+      const loginEnabled = viewsite.loginEnabled;
+      const loginEnabledMessage = viewsite.loginEnabled ? "Yes" : "No";
+      let editClick = {viewsiteId: viewsiteId, viewsiteName: viewsiteName, loginEnabled: loginEnabled};
+      let deleteClick = {viewsiteId: viewsiteId};
+      return (
+        <div key={viewsiteId} className="card">
+          <div className="card-body">
+            <h4 className="card-title">{viewsiteName}</h4>
+            <p className="card-text">Login Enabled: {loginEnabledMessage}</p>
+            <a className="card-link" href="javascript:;" data-toggle="modal" data-target="#viewsiteEdit" onClick={() => props.onEditViewsite(editClick)}>Edit</a>
+            <a className="card-link" href="javascript:;" onClick={() => props.onDeleteViewsite(deleteClick)}>Delete</a>
+          </div>
+        </div>
+      );
+    });
+  } else {
+    return null;
+  }
+}
+
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -50,40 +76,9 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    // Define state as variables
-    const user = this.props.user;
-    const viewsites = this.props.viewsites;
-
-    // Options for customizing Dashboard based on state
-    let viewsiteList = null;
-
-    // Create item for each Viewsite
-    if(viewsites) {
-      viewsiteList = viewsites.map((viewsite, index) => {
-        const viewsiteId = viewsite._id;
-        const viewsiteName = viewsite.viewsiteName;
-        const loginEnabled = viewsite.loginEnabled;
-        const loginEnabledMessage = viewsite.loginEnabled ? "Yes" : "No";
-        let editClick = {viewsiteId: viewsiteId, viewsiteName: viewsiteName, loginEnabled: loginEnabled};
-        let deleteClick = {viewsiteId: viewsiteId};
-        return (
-          <div key={viewsiteId} className="card">
-            <div className="card-body">
-              <h4 className="card-title">{viewsiteName}</h4>
-              <p className="card-text">Login Enabled: {loginEnabledMessage}</p>
-              <a className="card-link" href="javascript:;" data-toggle="modal" data-target="#viewsiteEdit" onClick={() => this.handleEditViewsite(editClick)}>Edit</a>
-              <a className="card-link" href="javascript:;" onClick={() => this.handleDeleteViewsite(deleteClick)}>Delete</a>
-            </div>
-          </div>
-        );
-      });
-    }
-
     return (
       <div className="container">
-
         <h1>Dashboard</h1>
-
         <div className="row">
           <div className="col-md-auto">
             <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -104,15 +99,12 @@ class Dashboard extends React.Component {
                   </div>
                 </div>
                 <div className="card-deck">
-                  {viewsiteList}
+                  <ViewsiteList viewsites={this.props.viewsites} onEditViewsite={this.handleEditViewsite} onDeleteViewsite={this.handleDeleteViewsite} />
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-
-
       </div>
     );
   }
