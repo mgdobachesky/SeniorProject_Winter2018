@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import requred components
 import ViewsiteForm from './ViewsiteForm';
+import UserForm from './UserForm';
 
 // Import required services
 import ViewsiteService from '../services/ViewsiteService';
@@ -89,13 +90,23 @@ class Dashboard extends React.Component {
           <div className="col-md-auto">
             <div className="tab-content" id="v-pills-tabContent">
               <div className="tab-pane fade show active" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">
-                TODO: Edit account Details
+
+                <UserForm
+                  description="Update User"
+                  user={this.props.user}
+                  onInputChange={this.props.onInputChange}
+                  onSubmit={this.props.onUpdateUser} />
+
               </div>
               <div className="tab-pane fade" id="v-pills-viewsites" role="tabpanel" aria-labelledby="v-pills-viewsites-tab">
                 <button type="button" className="btn btn-link" onClick={() => $( "#viewsiteForm" ).toggle("fast")}>+ New Viewsite</button>
                 <div id="viewsiteForm" className="card">
                   <div className="card-body">
-                    <ViewsiteForm onCreateViewsite={this.handleCreateViewsite} title="Create Viewsite" />
+
+                    <ViewsiteForm
+                      onCreateViewsite={this.handleCreateViewsite}
+                      title="Create Viewsite" />
+
                   </div>
                 </div>
                 <div className="card-deck">
