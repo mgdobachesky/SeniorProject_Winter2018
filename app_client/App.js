@@ -30,17 +30,29 @@ class App extends React.Component {
     this.manageViewsiteService = new ViewsiteService();
     this.handleCreateUser = this.handleCreateUser.bind(this);
     this.handleReadOneUser = this.handleReadOneUser.bind(this);
-    this.handleUserLogout = this.handleUserLogout.bind(this);
-    this.updateViewsiteState = this.updateViewsiteState.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleUpdateUser = this.handleUpdateUser.bind(this);
+    this.handleUserLogout = this.handleUserLogout.bind(this);
+    this.handleReadAllViewsites = this.handleReadAllViewsites.bind(this);
+    this.handleCreateViewsite = this.handleCreateViewsite.bind(this);
+    this.handleUpdateViewsite = this.handleUpdateViewsite.bind(this);
+    this.handleDeleteViewsite = this.handleDeleteViewsite.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+
     // Set initial state
-    this.state = {user: {
-      _id: "",
-      username: "",
-      password: ""
-    }, viewsites: []};
-  }
+    this.state = {
+      user: {
+        _id: "",
+        username: "",
+        password: ""
+      },
+      viewsite: {
+        _id: "",
+        userId: "",
+        viewsiteName: "",
+        loginEnabled: false
+      },
+      viewsites: []};
+    }
 
   handleCreateUser(event) {
     let requestData = {};
@@ -68,7 +80,7 @@ class App extends React.Component {
       // Set user in state
       this.setState({user: foundUser}, () => {
         // Update the list of viewsites in state
-        this.updateViewsiteState();
+        this.handleReadAllViewsites();
       });
       location.hash = "/";
     }, function(error) {
@@ -107,7 +119,7 @@ class App extends React.Component {
     location.hash = "/";
   }
 
-  updateViewsiteState() {
+  handleReadAllViewsites() {
     const userId = this.state.user._id;
     if(userId) {
       let requestData = {};
@@ -120,14 +132,46 @@ class App extends React.Component {
     }
   }
 
-  handleInputChange(event) {
+  handleCreateViewsite(event) {
+    let requestData = {};
+    let newViewsite = this.state.viewsite;
+    let loggedInUser = this.state.user;
+    requestData.userId = loggedInUser._id;
+    requestData.viewsiteName = newViewsite.viewsiteName;
+    requestData.loginEnabled = newViewsite.loginEnabled;
+    this.manageViewsiteService.createViewsite(requestData).then((results) => {
+      console.log(results);
+    }, (error) => {
+      console.log(error.response.data);
+    });
+    this.handleReadAllViewsites();
+  }
+
+  handleUpdateViewsite(event) {
+    console.log(event);
+  }
+
+//TODO
+  handleDeleteViewsite(event) {
+    let requestData = {};
+    requestData.viewsiteId = event.viewsiteId;
+    this.manageViewsiteService.deleteViewsite(requestData).then((results) => {
+      console.log(results);
+    }, (error) => {
+      console.log(error.response.data);
+    });
+    this.handleReadAllViewsites();
+  }
+
+  handleInputChange(event, toChange) {
+    console.log(event.target.value, toChange);
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    let changedUser = this.state.user;
-    changedUser[name] = value;
+    let changeProp = this.state[toChange];
+    changeProp[name] = value;
     this.setState({
-      user: changedUser
+      [toChange]: changeProp
     });
   }
 
@@ -137,13 +181,14 @@ class App extends React.Component {
     if(user) {
       loginUser = JSON.parse(user);
       this.setState({user: loginUser}, () => {
-        this.updateViewsiteState();
+        this.handleReadAllViewsites();
       });
     }
   }
 
   render() {
     const user = this.state.user;
+    const viewsite = this.state.viewsite;
     const viewsites = this.state.viewsites;
     return(
       <div>
@@ -170,10 +215,13 @@ class App extends React.Component {
 
           <Route path='/dashboard' render={routeProps => <Dashboard {...routeProps}
             user={user}
+            viewsite={viewsite}
             viewsites={viewsites}
-            updateViewsiteState={this.updateViewsiteState}
             onInputChange={this.handleInputChange}
-            onUpdateUser={this.handleUpdateUser} />} />
+            onUpdateUser={this.handleUpdateUser}
+            onCreateViewsite={this.handleCreateViewsite}
+            onUpdateViewsite={this.handleUpdateViewsite}
+            onDeleteViewsite={this.handleDeleteViewsite} />} />
 
           <Route path='/:viewsiteName' component={Viewsite} />
 

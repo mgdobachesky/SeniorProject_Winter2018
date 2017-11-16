@@ -10,7 +10,7 @@ class Login extends React.Component {
   }
 
   handleChange(event) {
-    this.props.onInputChange(event);
+    this.props.onInputChange(event, "user");
   }
 
   handleSubmit(event) {

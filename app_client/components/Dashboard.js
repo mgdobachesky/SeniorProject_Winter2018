@@ -6,9 +6,6 @@ import { Link } from 'react-router-dom';
 import ViewsiteForm from './ViewsiteForm';
 import UserForm from './UserForm';
 
-// Import required services
-import ViewsiteService from '../services/ViewsiteService';
-
 // Create list of Viewsites a user owns
 function ViewsiteList(props) {
   if(props.viewsites) {
@@ -17,14 +14,14 @@ function ViewsiteList(props) {
       const viewsiteName = viewsite.viewsiteName;
       const loginEnabled = viewsite.loginEnabled;
       const loginEnabledMessage = viewsite.loginEnabled ? "Yes" : "No";
-      let editClick = {viewsiteId: viewsiteId, viewsiteName: viewsiteName, loginEnabled: loginEnabled};
+      let updateClick = {viewsiteId: viewsiteId, viewsiteName: viewsiteName, loginEnabled: loginEnabled};
       let deleteClick = {viewsiteId: viewsiteId};
       return (
         <div key={viewsiteId} className="card">
           <div className="card-body">
             <h4 className="card-title">{viewsiteName}</h4>
             <p className="card-text">Login Enabled: {loginEnabledMessage}</p>
-            <a className="card-link" href="javascript:;" data-toggle="modal" data-target="#viewsiteEdit" onClick={() => props.onEditViewsite(editClick)}>Edit</a>
+            <a className="card-link" href="javascript:;" data-toggle="modal" data-target="#viewsiteUpdate" onClick={() => props.onUpdateViewsite(updateClick)}>Edit</a>
             <a className="card-link" href="javascript:;" onClick={() => props.onDeleteViewsite(deleteClick)}>Delete</a>
           </div>
         </div>
@@ -38,38 +35,6 @@ function ViewsiteList(props) {
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.manageViewsiteService = new ViewsiteService();
-    this.handleCreateViewsite = this.handleCreateViewsite.bind(this);
-    this.handleEditViewsite = this.handleEditViewsite.bind(this);
-    this.handleDeleteViewsite = this.handleDeleteViewsite.bind(this);
-  }
-
-  handleCreateViewsite(event) {
-    let requestData = {};
-    requestData.userId = this.props.user._id;
-    requestData.viewsiteName = event.viewsiteName.value;
-    requestData.loginEnabled = event.loginEnabled.checked;
-    this.manageViewsiteService.createViewsite(requestData).then((results) => {
-      console.log(results);
-    }, (error) => {
-      console.log(error.response.data);
-    });
-    this.props.updateViewsiteState();
-  }
-
-  handleEditViewsite(event) {
-    console.log(event);
-  }
-
-  handleDeleteViewsite(event) {
-    let requestData = {};
-    requestData.viewsiteId = event.viewsiteId;
-    this.manageViewsiteService.deleteViewsite(requestData).then((results) => {
-      console.log(results);
-    }, (error) => {
-      console.log(error.response.data);
-    });
-    this.props.updateViewsiteState();
   }
 
   componentDidMount() {
@@ -104,13 +69,20 @@ class Dashboard extends React.Component {
                   <div className="card-body">
 
                     <ViewsiteForm
-                      onCreateViewsite={this.handleCreateViewsite}
-                      title="Create Viewsite" />
+                      description="Create Viewsite"
+                      viewsite={this.props.viewsite}
+                      onCreateViewsite={this.props.onCreateViewsite}
+                      onInputChange={this.props.onInputChange} />
 
                   </div>
                 </div>
                 <div className="card-deck">
-                  <ViewsiteList viewsites={this.props.viewsites} onEditViewsite={this.handleEditViewsite} onDeleteViewsite={this.handleDeleteViewsite} />
+
+                  <ViewsiteList
+                    viewsites={this.props.viewsites}
+                    onUpdateViewsite={this.props.onUpdateViewsite}
+                    onDeleteViewsite={this.props.onDeleteViewsite} />
+
                 </div>
               </div>
             </div>
