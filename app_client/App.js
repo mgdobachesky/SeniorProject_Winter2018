@@ -34,6 +34,7 @@ class App extends React.Component {
     this.handleUserLogout = this.handleUserLogout.bind(this);
     this.handleReadAllViewsites = this.handleReadAllViewsites.bind(this);
     this.handleCreateViewsite = this.handleCreateViewsite.bind(this);
+    this.handleEditViewsite = this.handleEditViewsite.bind(this);
     this.handleUpdateViewsite = this.handleUpdateViewsite.bind(this);
     this.handleDeleteViewsite = this.handleDeleteViewsite.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -140,31 +141,57 @@ class App extends React.Component {
     requestData.viewsiteName = newViewsite.viewsiteName;
     requestData.loginEnabled = newViewsite.loginEnabled;
     this.manageViewsiteService.createViewsite(requestData).then((results) => {
-      console.log(results);
+      this.handleReadAllViewsites();
     }, (error) => {
       console.log(error.response.data);
     });
-    this.handleReadAllViewsites();
+    $("#createViewsite").hide("medium");
+  }
+
+  handleEditViewsite(event) {
+    let editViewsite = this.state.viewsite;
+    editViewsite._id = event._id;
+    editViewsite.userId = event.userId;
+    editViewsite.viewsiteName = event.viewsiteName;
+    editViewsite.loginEnabled = event.loginEnabled;
+    this.setState({viewsite: editViewsite});
+    $("#updateViewsite").show("medium");
   }
 
   handleUpdateViewsite(event) {
-    console.log(event);
-  }
-
-//TODO
-  handleDeleteViewsite(event) {
+    // Update Viewsite
     let requestData = {};
-    requestData.viewsiteId = event.viewsiteId;
-    this.manageViewsiteService.deleteViewsite(requestData).then((results) => {
-      console.log(results);
+    let updateViewsite = this.state.viewsite;
+    requestData.viewsiteId = updateViewsite._id;
+    requestData.userId = updateViewsite.userId;
+    requestData.viewsiteName = updateViewsite.viewsiteName;
+    requestData.loginEnabled = updateViewsite.loginEnabled;
+    this.manageViewsiteService.updateViewsite(requestData).then((results) => {
+      this.handleReadAllViewsites();
     }, (error) => {
       console.log(error.response.data);
     });
-    this.handleReadAllViewsites();
+    // Follow up by clearing viewsite state
+    let clearViewsite = this.state.viewsite;
+    clearViewsite._id = "";
+    clearViewsite.userId = "";
+    clearViewsite.viewsiteName = "";
+    clearViewsite.loginEnabled = "";
+    this.setState({viewsite: clearViewsite});
+    $("#updateViewsite").hide("medium");
+  }
+
+  handleDeleteViewsite(event) {
+    let requestData = {};
+    requestData.viewsiteId = event._id;
+    this.manageViewsiteService.deleteViewsite(requestData).then((results) => {
+      this.handleReadAllViewsites();
+    }, (error) => {
+      console.log(error.response.data);
+    });
   }
 
   handleInputChange(event, toChange) {
-    console.log(event.target.value, toChange);
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -220,6 +247,7 @@ class App extends React.Component {
             onInputChange={this.handleInputChange}
             onUpdateUser={this.handleUpdateUser}
             onCreateViewsite={this.handleCreateViewsite}
+            onEditViewsite={this.handleEditViewsite}
             onUpdateViewsite={this.handleUpdateViewsite}
             onDeleteViewsite={this.handleDeleteViewsite} />} />
 

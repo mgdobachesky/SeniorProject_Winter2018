@@ -15,7 +15,7 @@ class ViewsiteForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onCreateViewsite(event.target);
+    this.props.onSubmit(event);
   }
 
   render() {
@@ -29,7 +29,7 @@ class ViewsiteForm extends React.Component {
           </div>
           <div className="form-check">
             <label className="form-check-label">
-              <input type="checkbox" name="loginEnabled" className="form-check-input" id="loginEnabled" value="loginEnabled" value={this.props.viewsite.loginEnabled} onChange={this.handleChange} />
+              <input type="checkbox" name="loginEnabled" className="form-check-input" id="loginEnabled" value="loginEnabled" checked={this.props.viewsite.loginEnabled} onChange={this.handleChange} />
               Login Enabled
             </label>
           </div>
