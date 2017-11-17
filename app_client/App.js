@@ -145,6 +145,13 @@ class App extends React.Component {
     }, (error) => {
       console.log(error.response.data);
     });
+    // Follow up by clearing viewsite state
+    let clearViewsite = this.state.viewsite;
+    clearViewsite._id = "";
+    clearViewsite.userId = "";
+    clearViewsite.viewsiteName = "";
+    clearViewsite.loginEnabled = "";
+    this.setState({viewsite: clearViewsite});
     $("#createViewsite").hide("medium");
   }
 

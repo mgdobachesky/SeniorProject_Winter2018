@@ -55,7 +55,7 @@ class Dashboard extends React.Component {
             </div>
           </div>
 
-          <div className="col-md-auto">
+          <div className="col-md">
             <div className="tab-content" id="v-pills-tabContent">
 
               <div className="tab-pane fade show active" id="v-pills-viewsites" role="tabpanel" aria-labelledby="v-pills-viewsites-tab">
@@ -78,12 +78,10 @@ class Dashboard extends React.Component {
                       onSubmit={this.props.onUpdateViewsite} />
                   </div>
                 </div>
-                <div className="card-deck">
-                  <ViewsiteList
-                    viewsites={this.props.viewsites}
-                    onEditViewsite={this.props.onEditViewsite}
-                    onDeleteViewsite={this.props.onDeleteViewsite} />
-                </div>
+                <ViewsiteList
+                  viewsites={this.props.viewsites}
+                  onEditViewsite={this.props.onEditViewsite}
+                  onDeleteViewsite={this.props.onDeleteViewsite} />
               </div>
 
               <div className="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">
