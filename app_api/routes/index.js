@@ -32,16 +32,11 @@ router.post('/create/viewpages', controllerViewpages.viewpagesCreate);
 router.put('/update/viewpages/:viewpageId', controllerViewpages.viewpagesUpdate);
 router.delete('/delete/viewpages/:viewpageId', controllerViewpages.viewpagesDelete);
 
-// Create routes for elements
-router.get('/read_one/elements/:elementId', controllerElements.elementsReadOne);
-router.get('/read_all/elements/:viewpageId', controllerElements.elementsReadAll);
-router.post('/create/elements', controllerElements.elementsCreate);
-router.delete('/delete/elements/:elementId', controllerElements.elementsDelete);
-
 // Create routes for forms
 router.get('/read_one/forms/:formId', controllerForms.formsReadOne);
-router.get('/read_all/forms/:viewsiteId', controllerForms.formsReadAll);
-router.post('/create/forms/:elementId', controllerForms.formsCreate);
+router.get('/read_all/forms/viewsite/:viewsiteId', controllerForms.formsReadAllByViewsite);
+router.get('/read_all/forms/viewpage/:viewpageId', controllerForms.formsReadAllByViewpage);
+router.post('/create/forms', controllerForms.formsCreate);
 router.put('/update/forms/:formId', controllerForms.formsUpdate);
 router.delete('/delete/forms/:formId', controllerForms.formsDelete);
 
@@ -61,7 +56,7 @@ router.delete('/delete/user_records/:recordId', controllerUserDatabases.userReco
 
 // Create routes for text
 router.get('/read_one/text/:textId', controllerText.textReadOne);
-router.post('/create/text/:elementId', controllerText.textCreate);
+router.post('/create/text', controllerText.textCreate);
 router.put('/update/text/:textId', controllerText.textUpdate);
 router.delete('/delete/text/:textId', controllerText.textDelete);
 

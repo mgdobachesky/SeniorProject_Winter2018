@@ -15,9 +15,17 @@ class FormService extends ServiceOptions {
   }
 
   // Read all
-  readAllForms(requestData) {
+  readAllFormsByViewsite(requestData) {
     return axios({
-      url: '/read_all/forms/' + requestData.viewsiteId,
+      url: '/read_all/forms/viewsite/' + requestData.viewsiteId,
+      method: 'get',
+      baseURL: super.getRequestLocation() + '/api/v1/'
+    });
+  }
+
+  readAllFormsByViewpage(requestData) {
+    return axios({
+      url: '/read_all/forms/viewpage/' + requestData.viewpageId,
       method: 'get',
       baseURL: super.getRequestLocation() + '/api/v1/'
     });
@@ -26,7 +34,7 @@ class FormService extends ServiceOptions {
   // Create
   createForm(requestData) {
     return axios({
-      url: '/create/forms/' + requestData.elementId,
+      url: '/create/forms/',
       method: 'post',
       baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
@@ -34,6 +42,7 @@ class FormService extends ServiceOptions {
       },
       data: {
         'viewsiteId': requestData.viewsiteId,
+        'viewpageId': requestData.viewpageId,
         'formTitle': requestData.formTitle
       }
     });

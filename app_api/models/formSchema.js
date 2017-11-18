@@ -8,6 +8,10 @@ var formSchema = new Schema({
     'type': ObjectId,
     'required': true
   },
+  'viewpageId': {
+    'type': ObjectId,
+    'required': true
+  },
   'formTitle': {
     'type': String,
     'required': true

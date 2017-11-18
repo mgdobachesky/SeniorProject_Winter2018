@@ -8,8 +8,16 @@ function sendJSONresponse(res, status, content) {
 }
 
 // Read all
-function formsReadAll(request, response) {
-  formsDao.formsReadAll(request).then(function(results) {
+function formsReadAllByViewsite(request, response) {
+  formsDao.formsReadAllByViewsite(request).then(function(results) {
+    sendJSONresponse(response, 200, results);
+  }, function(error) {
+    sendJSONresponse(response, 404, error);
+  });
+}
+
+function formsReadAllByViewpage(request, response) {
+  formsDao.formsReadAllByViewpage(request).then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -53,7 +61,8 @@ function formsDelete(request, response) {
 }
 
 // Export functions
-module.exports.formsReadAll = formsReadAll;
+module.exports.formsReadAllByViewsite = formsReadAllByViewsite;
+module.exports.formsReadAllByViewpage = formsReadAllByViewpage;
 module.exports.formsReadOne = formsReadOne;
 module.exports.formsCreate = formsCreate;
 module.exports.formsUpdate = formsUpdate;

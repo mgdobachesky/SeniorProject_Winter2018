@@ -1,16 +1,37 @@
 // Required modules
 var mongoose = require('mongoose');
 var forms = mongoose.model('form');
+var userDatabasesDao = require('./userDatabasesDao');
 
 // ** CRUD OPERATIONS **
 
 // Read operations
-function formsReadAll(request) {
+function formsReadAllByViewsite(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.params.viewsiteId) {
       reject('Viewsite ID is required!');
     } else {
       forms.find({'viewsiteId': request.params.viewsiteId}).exec(function(error, results) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else if(!results) {
+          reject('No Forms found!');
+        } else {
+          resolve(results);
+        }
+      });
+    }
+  });
+  return promise;
+}
+
+function formsReadAllByViewpage(request) {
+  var promise = new Promise(function(resolve, reject) {
+    if(!request.params.viewpageId) {
+      reject('Viewpage ID is required!');
+    } else {
+      forms.find({'viewpageId': request.params.viewpageId}).exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -49,15 +70,21 @@ function formsReadOne(request) {
 function formsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     forms.create({
-      '_id': request.params.elementId,
       'viewsiteId': request.body.viewsiteId,
+      'viewpageId': request.body.viewpageId,
       'formTitle': request.body.formTitle
     }, function(error, results) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
       } else {
-        resolve('Form created successfully!');
+        let tableRequest = {params: {formId: results._id}};
+        userDatabasesDao.userTablesCreate(tableRequest).then(function(results) {
+          resolve('Form created successfully!');
+        }, function(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        });
       }
     });
   });
@@ -103,7 +130,12 @@ function formsDelete(request) {
         console.log(error.message);
         reject('Something went wrong!');
       } else {
-        resolve('Form deleted successfully!');
+        userDatabasesDao.userTablesDelete(request).then(function(results) {
+          resolve('Form deleted successfully!');
+        }, function(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        });
       }
     });
   });
@@ -111,7 +143,8 @@ function formsDelete(request) {
 }
 
 // Export functions
-module.exports.formsReadAll = formsReadAll;
+module.exports.formsReadAllByViewsite = formsReadAllByViewsite;
+module.exports.formsReadAllByViewpage = formsReadAllByViewpage;
 module.exports.formsReadOne = formsReadOne;
 module.exports.formsCreate = formsCreate;
 module.exports.formsUpdate = formsUpdate;

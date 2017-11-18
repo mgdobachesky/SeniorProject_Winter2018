@@ -29,7 +29,7 @@ function textReadOne(request) {
 function textCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     text.create({
-      '_id': request.params.elementId,
+      'viewpageId': request.body.viewpageId,
       'textValue': request.body.textValue
     }, function(error, results) {
       if(error) {

@@ -7,6 +7,10 @@ var textSchema = new Schema({
   'textValue': {
     'type': String,
     'required': true
+  },
+  'viewpageId': {
+    'type': ObjectId,
+    'required': true
   }
 });
 

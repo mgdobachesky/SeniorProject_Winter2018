@@ -17,13 +17,14 @@ class TextService extends ServiceOptions {
   // Create
   createText(requestData) {
     return axios({
-      url: '/create/text/' + requestData.elementId,
+      url: '/create/text/',
       method: 'post',
       baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
       data: {
+        'viewpageId': requestData.viewpageId,
         'textValue': requestData.textValue
       }
     });
