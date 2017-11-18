@@ -61,6 +61,15 @@ class UserService extends ServiceOptions {
       baseURL: super.getRequestLocation() + '/api/v1/',
     });
   }
+
+  // Exists
+  existsUser(requestData) {
+    return axios({
+      url: '/exists/users/' + requestData.username,
+      method: 'get',
+      baseURL: super.getRequestLocation() + '/api/v1/'
+    });
+  }
 }
 
 export default UserService;

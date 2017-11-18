@@ -51,3 +51,4 @@ require('./elementSchema');
 require('./formSchema');
 require('./formFieldSchema');
 require('./userDatabaseSchema');
+require('./textSchema');

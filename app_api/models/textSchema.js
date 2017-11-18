@@ -3,20 +3,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
-// Create element schema
-var elementSchema = new Schema({
-  'viewpageId': {
-    'type': ObjectId,
-    'required': true
-  },
-  'elementType': {
+var textSchema = new Schema({
+  'textValue': {
     'type': String,
     'required': true
   }
 });
 
 // Create database models
-var element = mongoose.model('element', elementSchema);
+var text = mongoose.model('text', textSchema);
 
 // Export database models
-module.exports = element;
+module.exports = text;

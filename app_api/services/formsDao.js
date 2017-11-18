@@ -49,6 +49,7 @@ function formsReadOne(request) {
 function formsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     forms.create({
+      '_id': request.params.elementId,
       'viewsiteId': request.body.viewsiteId,
       'formTitle': request.body.formTitle
     }, function(error, results) {

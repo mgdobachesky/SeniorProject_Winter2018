@@ -48,17 +48,22 @@ function viewsitesReadOne(request) {
 // Create operations
 function viewsitesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    viewsites.create({
-      'userId': request.body.userId,
-      'viewsiteName': request.body.viewsiteName,
-      'loginEnabled': request.body.loginEnabled
-    }, function(error, results) {
-      if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        resolve('Viewsite created successfully!');
-      }
+    request.params.viewsiteName = request.body.viewsiteName;
+    viewsitesExists(request).then(function(results) {
+      viewsites.create({
+        'userId': request.body.userId,
+        'viewsiteName': request.body.viewsiteName,
+        'loginEnabled': request.body.loginEnabled
+      }, function(error, results) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else {
+          resolve('Viewsite created successfully!');
+        }
+      });
+    }, function(error) {
+      reject('Viewsite name taken!');
     });
   });
   return promise;
@@ -77,16 +82,34 @@ function viewsitesUpdate(request) {
         console.log(error.message);
         reject('Something went wrong!');
       } else {
-        viewsiteData.viewsiteName = request.body.viewsiteName;
-        viewsiteData.loginEnabled = request.body.loginEnabled;
-        viewsiteData.save(function(error, results) {
-          if(error) {
-            console.log(error.message);
-            reject('Something went wrong!');
-          } else {
-            resolve('Viewsite updated successfully!');
-          }
-        });
+        if(viewsiteData.viewsiteName != request.body.viewsiteName) {
+          request.params.viewsiteName = request.body.viewsiteName;
+          viewsitesExists(request).then(function(results) {
+            viewsiteData.viewsiteName = request.body.viewsiteName;
+            viewsiteData.loginEnabled = request.body.loginEnabled;
+            viewsiteData.save(function(error, results) {
+              if(error) {
+                console.log(error.message);
+                reject('Something went wrong!');
+              } else {
+                resolve('Viewsite updated successfully!');
+              }
+            });
+          }, function(error) {
+            reject('Viewsite name taken!');
+          });
+        } else {
+          viewsiteData.viewsiteName = request.body.viewsiteName;
+          viewsiteData.loginEnabled = request.body.loginEnabled;
+          viewsiteData.save(function(error, results) {
+            if(error) {
+              console.log(error.message);
+              reject('Something went wrong!');
+            } else {
+              resolve('Viewsite updated successfully!');
+            }
+          });
+        }
       }
     });
   });
@@ -122,9 +145,9 @@ function viewsitesExists(request) {
           console.log(error.message);
           reject('Something went wrong!');
         } else if(!results) {
-          resolve(false);
+          resolve('Viewsite name is available!');
         } else if(results) {
-          resolve(true);
+          reject('Viewsite name already exists!');
         }
       });
     }

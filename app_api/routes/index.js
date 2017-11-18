@@ -8,13 +8,14 @@ var controllerElements = require('../controllers/elements');
 var controllerForms = require('../controllers/forms');
 var controllerFormFields = require('../controllers/formFields');
 var controllerUserDatabases = require('../controllers/userDatabases');
+var controllerText = require('../controllers/text');
 
 // Create routes for users
 router.post('/read_one/users', controllerUsers.usersReadOne);
 router.post('/create/users', controllerUsers.usersCreate);
 router.put('/update/users/:userId', controllerUsers.usersUpdate);
 router.delete('/delete/users/:userId', controllerUsers.usersDelete);
-//router.get('/exists/users/:username', controllerUsers.usersExists);
+router.get('/exists/users/:username', controllerUsers.usersExists);
 
 // Create routes for viewsites
 router.get('/read_one/viewsites/:viewsiteName', controllerViewsites.viewsitesReadOne);
@@ -22,7 +23,7 @@ router.get('/read_all/viewsites/:userId', controllerViewsites.viewsitesReadAll);
 router.post('/create/viewsites', controllerViewsites.viewsitesCreate);
 router.put('/update/viewsites/:viewsiteId', controllerViewsites.viewsitesUpdate);
 router.delete('/delete/viewsites/:viewsiteId', controllerViewsites.viewsitesDelete);
-//router.get('/exists/viewsites/:viewsiteName', controllerViewsites.viewsitesExists);
+router.get('/exists/viewsites/:viewsiteName', controllerViewsites.viewsitesExists);
 
 // Create routes for viewpages
 router.get('/read_one/viewpages/:viewpageId', controllerViewpages.viewpagesReadOne);
@@ -35,13 +36,12 @@ router.delete('/delete/viewpages/:viewpageId', controllerViewpages.viewpagesDele
 router.get('/read_one/elements/:elementId', controllerElements.elementsReadOne);
 router.get('/read_all/elements/:viewpageId', controllerElements.elementsReadAll);
 router.post('/create/elements', controllerElements.elementsCreate);
-router.put('/update/elements/:elementId', controllerElements.elementsUpdate);
 router.delete('/delete/elements/:elementId', controllerElements.elementsDelete);
 
 // Create routes for forms
 router.get('/read_one/forms/:formId', controllerForms.formsReadOne);
 router.get('/read_all/forms/:viewsiteId', controllerForms.formsReadAll);
-router.post('/create/forms', controllerForms.formsCreate);
+router.post('/create/forms/:elementId', controllerForms.formsCreate);
 router.put('/update/forms/:formId', controllerForms.formsUpdate);
 router.delete('/delete/forms/:formId', controllerForms.formsDelete);
 
@@ -58,8 +58,12 @@ router.get('/read_all/user_records/:formId', controllerUserDatabases.userTablesR
 router.post('/create/user_records/:formId', controllerUserDatabases.userRecordsCreate);
 router.put('/update/user_records/:recordId', controllerUserDatabases.userRecordsUpdate);
 router.delete('/delete/user_records/:recordId', controllerUserDatabases.userRecordsDelete);
-//router.post('/create/user_tables/:formId', controllerUserDatabases.userTablesCreate);
-//router.delete('/delete/user_tables/:formId', controllerUserDatabases.userTablesDelete);
+
+// Create routes for text
+router.get('/read_one/text/:textId', controllerText.textReadOne);
+router.post('/create/text/:elementId', controllerText.textCreate);
+router.put('/update/text/:textId', controllerText.textUpdate);
+router.delete('/delete/text/:textId', controllerText.textDelete);
 
 // Export the router
 module.exports = router;

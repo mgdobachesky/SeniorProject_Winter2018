@@ -34,23 +34,7 @@ class ElementService extends ServiceOptions {
       },
       data: {
         'viewpageId': requestData.viewpageId,
-        'elementType': requestData.elementType,
-        'elementValue': requestData.elementValue
-      }
-    });
-  }
-
-  // Update
-  updateElement(requestData) {
-    return axios({
-      url: '/update/elements/' + requestData.elementId,
-      method: 'put',
-      baseURL: super.getRequestLocation() + '/api/v1/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        'elementValue': requestData.elementValue
+        'elementType': requestData.elementType
       }
     });
   }

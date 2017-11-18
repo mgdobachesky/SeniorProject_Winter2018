@@ -4,64 +4,54 @@ import axios from 'axios';
 // Import required modules
 import ServiceOptions from './ServiceOptions';
 
-class FormService extends ServiceOptions {
+class TextService extends ServiceOptions {
   // Read one
-  readOneForm(requestData) {
+  readOneText(requestData) {
     return axios({
-      url: '/read_one/forms/' + requestData.formId,
-      method: 'get',
-      baseURL: super.getRequestLocation() + '/api/v1/'
-    });
-  }
-
-  // Read all
-  readAllForms(requestData) {
-    return axios({
-      url: '/read_all/forms/' + requestData.viewsiteId,
+      url: '/read_one/text/' + requestData.textId,
       method: 'get',
       baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 
   // Create
-  createForm(requestData) {
+  createText(requestData) {
     return axios({
-      url: '/create/forms/' + requestData.elementId,
+      url: '/create/text/' + requestData.elementId,
       method: 'post',
       baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
       data: {
-        'viewsiteId': requestData.viewsiteId,
-        'formTitle': requestData.formTitle
+        'textValue': requestData.textValue
       }
     });
   }
 
   // Update
-  updateForm(requestData) {
+  updateText(requestData) {
     return axios({
-      url: '/update/forms/' + requestData.formId,
+      url: '/update/text/' + requestData.textId,
       method: 'put',
       baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
       data: {
-        'formTitle': requestData.formTitle
+        'textValue': requestData.textValue
       }
     });
   }
 
   // Delete
-  deleteForm(requestData) {
+  deleteText(requestData) {
     return axios({
-      url: '/delete/forms/' + requestData.formId,
+      url: '/delete/text/' + requestData.textId,
       method: 'delete',
       baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 }
 
-export default FormService;
+export default TextService;

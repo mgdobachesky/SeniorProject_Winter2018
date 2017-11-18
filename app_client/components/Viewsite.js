@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import requred components
 import ViewpageForm from './ViewpageForm';
+import Viewpage from './Viewpage';
 
 // Import required services
 import ViewsiteService from '../services/ViewsiteService';
@@ -84,7 +85,7 @@ function ViewpageContentList(props) {
 
       return (
         <div key={_id} className="tab-pane fade" id={pillId} role="tabpanel" aria-labelledby={pillControls}>
-          <h1>{viewpageName}</h1>
+          <Viewpage viewpage={viewpage} />
         </div>
       );
     });
@@ -162,7 +163,7 @@ class Viewsite extends React.Component {
   }
 
   handleUpdateViewpage(event) {
-    // Update Viewsite
+    // Update Viewpage
     let requestData = {};
     let updateViewpage = this.state.viewpage;
     requestData.viewpageId = updateViewpage._id;

@@ -34,15 +34,6 @@ function elementsCreate(request, response) {
   });
 }
 
-// Update
-function elementsUpdate(request, response) {
-  elementsDao.elementsUpdate(request).then(function(results) {
-    sendJSONresponse(response, 200, results);
-  }, function(error) {
-    sendJSONresponse(response, 404, error);
-  });
-}
-
 // Delete
 function elementsDelete(request, response) {
   elementsDao.elementsDelete(request).then(function(results) {
@@ -56,5 +47,4 @@ function elementsDelete(request, response) {
 module.exports.elementsReadAll = elementsReadAll;
 module.exports.elementsReadOne = elementsReadOne;
 module.exports.elementsCreate = elementsCreate;
-module.exports.elementsUpdate = elementsUpdate;
 module.exports.elementsDelete = elementsDelete;

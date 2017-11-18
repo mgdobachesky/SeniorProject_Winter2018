@@ -38,28 +38,33 @@ function usersReadOne(request) {
 // Create operations
 function usersCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.body.username || !request.body.password) {
-      reject('Username and Password are both required!');
-    } else {
-      bcrypt.hash(request.body.password, 10, function(error, hash) {
-        if(error) {
-          console.log(error.message);
-          reject('Something went wrong!');
-        } else {
-          users.create({
-            'username': request.body.username,
-            'password': hash
-          }, function(error, results) {
-            if(error) {
-              console.log(error.message);
-              reject('Something went wrong!');
-            } else {
-              resolve('User created successfully!');
-            }
-          });
-        }
-      });
-    }
+    request.params.username = request.body.username;
+    usersExists(request).then(function(results) {
+      if(!request.body.username || !request.body.password) {
+        reject('Username and Password are both required!');
+      } else {
+        bcrypt.hash(request.body.password, 10, function(error, hash) {
+          if(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          } else {
+            users.create({
+              'username': request.body.username,
+              'password': hash
+            }, function(error, results) {
+              if(error) {
+                console.log(error.message);
+                reject('Something went wrong!');
+              } else {
+                resolve('User created successfully!');
+              }
+            });
+          }
+        });
+      }
+    }, function(error) {
+      reject('Username already exists!');
+    });
   });
   return promise;
 }
@@ -77,19 +82,40 @@ function usersUpdate(request) {
         console.log(error.message);
         reject('Something went wrong!');
       } else {
-        userData.username = request.body.username;
-        if(request.body.password) {
-          let hash = bcrypt.hashSync(request.body.password, 10);
-          userData.password = hash;
-        }
-        userData.save(function(error, results) {
-          if(error) {
-            console.log(error.message);
-            reject('Something went wrong!');
-          } else {
-            resolve('User updated successfully!');
+        if(userData.username != request.body.username) {
+          request.params.username = request.body.username;
+          usersExists(request).then(function(results) {
+            userData.username = request.body.username;
+            if(request.body.password) {
+              let hash = bcrypt.hashSync(request.body.password, 10);
+              userData.password = hash;
+            }
+            userData.save(function(error, results) {
+              if(error) {
+                console.log(error.message);
+                reject('Something went wrong!');
+              } else {
+                resolve('User updated successfully!');
+              }
+            });
+          }, function(error) {
+            reject('Username already exists!');
+          });
+        } else {
+          userData.username = request.body.username;
+          if(request.body.password) {
+            let hash = bcrypt.hashSync(request.body.password, 10);
+            userData.password = hash;
           }
-        });
+          userData.save(function(error, results) {
+            if(error) {
+              console.log(error.message);
+              reject('Something went wrong!');
+            } else {
+              resolve('User updated successfully!');
+            }
+          });
+        }
       }
     });
   });
@@ -127,9 +153,9 @@ function usersExists(request) {
           console.log(error.message);
           reject('Something went wrong!');
         } else if(!results) {
-          resolve(false);
+          resolve('Username is available!');
         } else if(results) {
-          resolve(true);
+          reject('Username already exists!');
         }
       });
     }

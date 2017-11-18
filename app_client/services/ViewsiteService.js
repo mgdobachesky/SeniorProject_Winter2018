@@ -64,6 +64,15 @@ class ViewsiteService extends ServiceOptions {
       baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
+
+  // Exists
+  existsViewsite(requestData) {
+    return axios({
+      url: '/exists/viewsites/' + requestData.viewsiteName,
+      method: 'get',
+      baseURL: super.getRequestLocation() + '/api/v1/'
+    });
+  }
 }
 
 export default ViewsiteService;
