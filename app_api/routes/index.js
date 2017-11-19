@@ -5,7 +5,7 @@ var controllerUsers = require('../controllers/users');
 var controllerViewsites = require('../controllers/viewsites');
 var controllerViewpages = require('../controllers/viewpages');
 var controllerForms = require('../controllers/forms');
-var controllerFormFields = require('../controllers/formFields');
+var controllerFormTextInputs = require('../controllers/formTextInputs');
 var controllerUserDatabases = require('../controllers/userDatabases');
 var controllerText = require('../controllers/text');
 
@@ -39,12 +39,12 @@ router.post('/create/forms', controllerForms.formsCreate);
 router.put('/update/forms/:formId', controllerForms.formsUpdate);
 router.delete('/delete/forms/:formId', controllerForms.formsDelete);
 
-// Create routes for formFields
-router.get('/read_one/form_fields/:formFieldId', controllerFormFields.formFieldsReadOne);
-router.get('/read_all/form_fields/:formId', controllerFormFields.formFieldsReadAll);
-router.post('/create/form_fields', controllerFormFields.formFieldsCreate);
-router.put('/update/form_fields/:formFieldId', controllerFormFields.formFieldsUpdate);
-router.delete('/delete/form_fields/:formFieldId', controllerFormFields.formFieldsDelete);
+// Create routes for formTextInputs
+router.get('/read_one/form_text_inputs/:formTextInputId', controllerFormTextInputs.formTextInputsReadOne);
+router.get('/read_all/form_text_inputs/:formId', controllerFormTextInputs.formTextInputsReadAll);
+router.post('/create/form_text_inputs', controllerFormTextInputs.formTextInputsCreate);
+router.put('/update/form_text_inputs/:formTextInputId', controllerFormTextInputs.formTextInputsUpdate);
+router.delete('/delete/form_text_inputs/:formTextInputId', controllerFormTextInputs.formTextInputsDelete);
 
 // Create routes for userDatabases
 router.get('/read_one/user_records/:recordId', controllerUserDatabases.userRecordsReadOne);

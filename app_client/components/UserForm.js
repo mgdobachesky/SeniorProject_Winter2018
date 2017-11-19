@@ -21,7 +21,7 @@ class UserForm extends React.Component {
   render() {
     return (
       <div className="container">
-        <h1>{this.props.description}</h1>
+        <h2>{this.props.description}</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username</label>

@@ -38,10 +38,12 @@ function ViewpageList(props) {
       let editClick = {_id: _id, viewsiteId: viewsiteId, viewpageName: viewpageName, permissionLevel: permissionLevel};
       let deleteClick = {_id: _id};
       return (
-        <div key={_id} className="card">
+        <div key={_id} className="card border-primary mb-3">
           <div className="card-body">
-            <h4 className="card-title">{viewpageName}</h4>
+            <h4 className="card-title">Viewpage: {viewpageName}</h4>
             <p className="card-text">Permission Level: {permissionLevelMessage}</p>
+          </div>
+          <div className="card-footer">
             <a className="card-link" href="javascript:;" onClick={() => props.onEditViewpage(editClick)}>Edit</a>
             <a className="card-link" href="javascript:;" onClick={() => props.onDeleteViewpage(deleteClick)}>Delete</a>
           </div>
@@ -253,7 +255,7 @@ class Viewsite extends React.Component {
             <div className="tab-content" id="v-pills-tabContent">
               <div className="tab-pane fade show active" id="v-pills-viewpages" role="tabpanel" aria-labelledby="v-pills-viewpages-tab">
                 <button type="button" className="btn btn-link" onClick={() => $( "#createViewpage" ).toggle("medium")}>+ New Viewpage</button>
-                <div id="createViewpage" className="card">
+                <div id="createViewpage" className="card mb-3">
                   <div className="card-body">
                     <ViewpageForm
                       description="Create Viewpage"
@@ -262,7 +264,7 @@ class Viewsite extends React.Component {
                       onSubmit={this.handleCreateViewpage} />
                   </div>
                 </div>
-                <div id="updateViewpage" className="card">
+                <div id="updateViewpage" className="card mb-3">
                   <div className="card-body">
                     <ViewpageForm
                       description="Update Viewpage"

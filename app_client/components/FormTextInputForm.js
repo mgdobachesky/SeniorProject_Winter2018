@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class TextForm extends React.Component {
+class FormTextInputForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -10,7 +10,7 @@ class TextForm extends React.Component {
   }
 
   handleChange(event) {
-    this.props.onInputChange(event, "text");
+    this.props.onInputChange(event, "formTextInput");
   }
 
   handleSubmit(event) {
@@ -21,13 +21,14 @@ class TextForm extends React.Component {
   render() {
     return (
       <div className="container">
-        <h4>{this.props.description}</h4>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <textarea name="textValue" className="form-control" id="textValue" placeholder="Write some text..." value={this.props.text.textValue} onChange={this.handleChange} />
+            <label htmlFor="formTextInputLabel">Text Input Label
+              <input type="text" name="formTextInputLabel" className="form-control" id="formTextInputLabel" value={this.props.formTextInput.formTextInputLabel} onChange={this.handleChange} />
+            </label>
           </div>
-          <input name="_id" type="hidden" id="_id" value={this.props.text._id} />
-          <input name="viewpageId" type="hidden" id="viewpageId" value={this.props.text.viewpageId} />
+          <input name="_id" type="hidden" id="_id" value={this.props.formTextInput._id} />
+          <input name="viewsiteId" type="hidden" id="viewsiteId" value={this.props.formTextInput.formId} />
           <button type="submit" className="btn btn-primary">{this.props.description}</button>
         </form>
       </div>
@@ -35,4 +36,4 @@ class TextForm extends React.Component {
   }
 }
 
-export default TextForm;
+export default FormTextInputForm;

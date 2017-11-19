@@ -48,6 +48,6 @@ require('./userSchema');
 require('./viewsiteSchema');
 require('./viewpageSchema');
 require('./formSchema');
-require('./formFieldSchema');
+require('./formTextInputSchema');
 require('./userDatabaseSchema');
 require('./textSchema');

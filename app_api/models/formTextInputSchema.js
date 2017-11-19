@@ -3,27 +3,19 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
-var formFieldSchema = new Schema({
+var formTextInputSchema = new Schema({
   'formId': {
     'type': ObjectId,
     'required': true
   },
-  'formFieldType': {
+  'formTextInputLabel': {
     'type': String,
     'required': true
-  },
-  'formFieldLabel': {
-    'type': String,
-    'required': true
-  },
-  'formFieldValue': {
-    'type': String,
-    'default': ''
   }
 });
 
 // Create database models
-var formField = mongoose.model('formField', formFieldSchema);
+var formTextInput = mongoose.model('formTextInput', formTextInputSchema);
 
 // Export database models
-module.exports = formField;
+module.exports = formTextInput;

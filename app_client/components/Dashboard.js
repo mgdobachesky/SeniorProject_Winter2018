@@ -18,10 +18,12 @@ function ViewsiteList(props) {
       let editClick = {_id: _id, userId: userId, viewsiteName: viewsiteName, loginEnabled: loginEnabled};
       let deleteClick = {_id: _id};
       return (
-        <div key={_id} className="card">
+        <div key={_id} className="card border-primary mb-3">
           <div className="card-body">
-            <h4 className="card-title">{viewsiteName}</h4>
+            <h4 className="card-title">Viewsite: {viewsiteName}</h4>
             <p className="card-text">Login Enabled: {loginEnabledMessage}</p>
+          </div>
+          <div className="card-footer">
             <a className="card-link" href="javascript:;" onClick={() => props.onEditViewsite(editClick)}>Edit</a>
             <a className="card-link" href="javascript:;" onClick={() => props.onDeleteViewsite(deleteClick)}>Delete</a>
           </div>
@@ -60,7 +62,7 @@ class Dashboard extends React.Component {
 
               <div className="tab-pane fade show active" id="v-pills-viewsites" role="tabpanel" aria-labelledby="v-pills-viewsites-tab">
                 <button type="button" className="btn btn-link" onClick={() => $( "#createViewsite" ).toggle("medium")}>+ New Viewsite</button>
-                <div id="createViewsite" className="card">
+                <div id="createViewsite" className="card mb-3">
                   <div className="card-body">
                     <ViewsiteForm
                       description="Create Viewsite"
@@ -69,7 +71,7 @@ class Dashboard extends React.Component {
                       onSubmit={this.props.onCreateViewsite} />
                   </div>
                 </div>
-                <div id="updateViewsite" className="card">
+                <div id="updateViewsite" className="card mb-3">
                   <div className="card-body">
                     <ViewsiteForm
                       description="Update Viewsite"
@@ -85,11 +87,15 @@ class Dashboard extends React.Component {
               </div>
 
               <div className="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">
-                <UserForm
-                  description="Update User"
-                  user={this.props.user}
-                  onInputChange={this.props.onInputChange}
-                  onSubmit={this.props.onUpdateUser} />
+                <div className="card mb-3">
+                  <div className="card-body">
+                    <UserForm
+                      description="Update User"
+                      user={this.props.user}
+                      onInputChange={this.props.onInputChange}
+                      onSubmit={this.props.onUpdateUser} />
+                  </div>
+                </div>
               </div>
 
             </div>

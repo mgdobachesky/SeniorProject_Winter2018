@@ -4,29 +4,29 @@ import axios from 'axios';
 // Import required modules
 import ServiceOptions from './ServiceOptions';
 
-class FormFieldService extends ServiceOptions {
+class FormTextInputService extends ServiceOptions {
   // Read one
-  readOneFormField(requestData) {
+  readOneFormTextInput(requestData) {
     return axios({
-      url: '/read_one/form_fields/' + requestData.formFieldId,
+      url: '/read_one/form_text_inputs/' + requestData.formTextInputId,
       method: 'get',
       baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 
   // Read all
-  readAllFormFields(requestData) {
+  readAllFormTextInputs(requestData) {
     return axios({
-      url: '/read_all/form_fields/' + requestData.formId,
+      url: '/read_all/form_text_inputs/' + requestData.formId,
       method: 'get',
       baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 
   // Create
-  createFormField(requestData) {
+  createFormTextInput(requestData) {
     return axios({
-      url: '/create/form_fields',
+      url: '/create/form_text_inputs',
       method: 'post',
       baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
@@ -34,37 +34,34 @@ class FormFieldService extends ServiceOptions {
       },
       data: {
         'formId': requestData.formId,
-        'formFieldType': requestData.formFieldType,
-        'formFieldLabel': requestData.formFieldLabel,
-        'formFieldValue': requestData.formFieldValue
+        'formTextInputLabel': requestData.formTextInputLabel
       }
     });
   }
 
   // Update
-  updateFormField(requestData) {
+  updateFormTextInput(requestData) {
     return axios({
-      url: '/update/form_fields/' + requestData.formFieldId,
+      url: '/update/form_text_inputs/' + requestData.formTextInputId,
       method: 'put',
       baseURL: super.getRequestLocation() + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
       data: {
-        'formFieldLabel': requestData.formFieldLabel,
-        'formFieldValue': requestData.formFieldValue
+        'formTextInputLabel': requestData.formTextInputLabel
       }
     });
   }
 
   // Delete
-  deleteFormField(requestData) {
+  deleteFormTextInput(requestData) {
     return axios({
-      url: '/delete/form_fields/' + requestData.formFieldId,
+      url: '/delete/form_text_inputs/' + requestData.formTextInputId,
       method: 'delete',
       baseURL: super.getRequestLocation() + '/api/v1/'
     });
   }
 }
 
-export default FormFieldService;
+export default FormTextInputService;
