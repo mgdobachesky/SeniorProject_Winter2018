@@ -14,6 +14,15 @@ class TextService extends ServiceOptions {
     });
   }
 
+  // Read all
+  readAllText(requestData) {
+    return axios({
+      url: '/read_all/text/' + requestData.viewpageId,
+      method: 'get',
+      baseURL: super.getRequestLocation() + '/api/v1/'
+    });
+  }
+
   // Create
   createText(requestData) {
     return axios({

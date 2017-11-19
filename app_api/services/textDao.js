@@ -25,6 +25,26 @@ function textReadOne(request) {
   return promise;
 }
 
+function textReadAll(request) {
+  var promise = new Promise(function(resolve, reject) {
+    if(!request.params.viewpageId) {
+      reject('Viewpage ID is required!');
+    } else {
+      text.find({'viewpageId': request.params.viewpageId}).exec(function(error, results) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else if(!results) {
+          reject('No Text found!');
+        } else {
+          resolve(results);
+        }
+      });
+    }
+  });
+  return promise;
+}
+
 // Create operations
 function textCreate(request) {
   var promise = new Promise(function(resolve, reject) {
@@ -91,6 +111,7 @@ function textDelete(request) {
 
 // Export functions
 module.exports.textReadOne = textReadOne;
+module.exports.textReadAll = textReadAll;
 module.exports.textCreate = textCreate;
 module.exports.textUpdate = textUpdate;
 module.exports.textDelete = textDelete;

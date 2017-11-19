@@ -47,7 +47,6 @@ process.on('exit', function(code) {
 require('./userSchema');
 require('./viewsiteSchema');
 require('./viewpageSchema');
-require('./elementSchema');
 require('./formSchema');
 require('./formFieldSchema');
 require('./userDatabaseSchema');

@@ -4,7 +4,6 @@ var router = express.Router();
 var controllerUsers = require('../controllers/users');
 var controllerViewsites = require('../controllers/viewsites');
 var controllerViewpages = require('../controllers/viewpages');
-var controllerElements = require('../controllers/elements');
 var controllerForms = require('../controllers/forms');
 var controllerFormFields = require('../controllers/formFields');
 var controllerUserDatabases = require('../controllers/userDatabases');
@@ -56,6 +55,7 @@ router.delete('/delete/user_records/:recordId', controllerUserDatabases.userReco
 
 // Create routes for text
 router.get('/read_one/text/:textId', controllerText.textReadOne);
+router.get('/read_all/text/:viewpageId', controllerText.textReadAll);
 router.post('/create/text', controllerText.textCreate);
 router.put('/update/text/:textId', controllerText.textUpdate);
 router.delete('/delete/text/:textId', controllerText.textDelete);
