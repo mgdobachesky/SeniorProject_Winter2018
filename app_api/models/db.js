@@ -51,3 +51,4 @@ require('./formSchema');
 require('./formTextInputSchema');
 require('./userDatabaseSchema');
 require('./textSchema');
+require('./dataViewSchema');

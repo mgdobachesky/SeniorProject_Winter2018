@@ -8,6 +8,7 @@ var controllerForms = require('../controllers/forms');
 var controllerFormTextInputs = require('../controllers/formTextInputs');
 var controllerUserDatabases = require('../controllers/userDatabases');
 var controllerText = require('../controllers/text');
+var controllerDataViews = require('../controllers/dataViews');
 
 // Create routes for users
 router.post('/read_one/users', controllerUsers.usersReadOne);
@@ -59,6 +60,13 @@ router.get('/read_all/text/:viewpageId', controllerText.textReadAll);
 router.post('/create/text', controllerText.textCreate);
 router.put('/update/text/:textId', controllerText.textUpdate);
 router.delete('/delete/text/:textId', controllerText.textDelete);
+
+// Create routes for dataViews
+router.get('/read_one/data_view/:dataViewId', controllerDataViews.dataViewsReadOne);
+router.get('/read_all/data_view/:viewpageId', controllerDataViews.dataViewsReadAll);
+router.post('/create/data_view', controllerDataViews.dataViewsCreate);
+router.put('/update/data_view/:dataViewId', controllerDataViews.dataViewsUpdate);
+router.delete('/delete/data_view/:dataViewId', controllerDataViews.dataViewsDelete);
 
 // Export the router
 module.exports = router;
