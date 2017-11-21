@@ -23,13 +23,7 @@ class TextForm extends React.Component {
   }
 
   render() {
-    return (
-      <TextFormJSX
-        description={this.props.description}
-        text={this.props.text}
-        onChange={this.handleChange}
-        onSubmit={this.handleSubmit} />
-    );
+    return(TextFormJSX.call(this));
   }
 }
 

@@ -57,8 +57,7 @@ function LoginOptions(props) {
   }
 }
 
-class NavbarJSX extends React.Component {
-  render() {
+var NavbarJSX = function() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <Link className="navbar-brand" to="/">Cadre</Link>
@@ -70,11 +69,10 @@ class NavbarJSX extends React.Component {
             <NavbarOptions user={this.props.user} />
             <ViewsiteLinks viewsites={this.props.viewsites} />
           </ul>
-          <LoginOptions user={this.props.user} onLogout={this.props.onUserLogout} />
+          <LoginOptions user={this.props.user} onLogout={this.handleUserLogout} />
         </div>
       </nav>
     );
-  }
 }
 
 export default NavbarJSX;

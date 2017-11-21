@@ -92,54 +92,52 @@ function ViewpageContentList(props) {
   }
 }
 
-class ViewsiteJSX extends React.Component {
-  render() {
-    return (
-      <div className="container">
-        <h1>{this.props.match.params.viewsiteName}</h1>
-        <div className="row">
-          <div className="col-md-auto">
-            <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-              <a className="nav-link active" id="v-pills-viewpages-tab" data-toggle="pill" href="#v-pills-viewpages" role="tab" aria-controls="v-pills-viewpages" aria-selected="true">Manage Viewpages</a>
-              <ViewpagePillList
-                viewpages={this.props.viewpages} />
-            </div>
+var ViewsiteJSX = function() {
+  return (
+    <div className="container">
+      <h1>{this.props.match.params.viewsiteName}</h1>
+      <div className="row">
+        <div className="col-md-auto">
+          <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a className="nav-link active" id="v-pills-viewpages-tab" data-toggle="pill" href="#v-pills-viewpages" role="tab" aria-controls="v-pills-viewpages" aria-selected="true">Manage Viewpages</a>
+            <ViewpagePillList
+              viewpages={this.state.viewpages} />
           </div>
-          <div className="col-md">
-            <div className="tab-content" id="v-pills-tabContent">
-              <div className="tab-pane fade show active" id="v-pills-viewpages" role="tabpanel" aria-labelledby="v-pills-viewpages-tab">
-                <button type="button" className="btn btn-link" onClick={() => $( "#createViewpage" ).toggle("medium")}>+ New Viewpage</button>
-                <div id="createViewpage" className="card mb-3">
-                  <div className="card-body">
-                    <ViewpageForm
-                      description="Create Viewpage"
-                      viewpage={this.props.viewpage}
-                      onChange={this.props.onChange}
-                      onSubmit={this.props.onCreateViewpage} />
-                  </div>
+        </div>
+        <div className="col-md">
+          <div className="tab-content" id="v-pills-tabContent">
+            <div className="tab-pane fade show active" id="v-pills-viewpages" role="tabpanel" aria-labelledby="v-pills-viewpages-tab">
+              <button type="button" className="btn btn-link" onClick={() => $( "#createViewpage" ).toggle("medium")}>+ New Viewpage</button>
+              <div id="createViewpage" className="card mb-3">
+                <div className="card-body">
+                  <ViewpageForm
+                    description="Create Viewpage"
+                    viewpage={this.state.viewpage}
+                    onChange={this.handleChange}
+                    onSubmit={this.handleCreateViewpage} />
                 </div>
-                <div id="updateViewpage" className="card mb-3">
-                  <div className="card-body">
-                    <ViewpageForm
-                      description="Update Viewpage"
-                      viewpage={this.props.viewpage}
-                      onChange={this.props.onChange}
-                      onSubmit={this.props.onUpdateViewpage} />
-                  </div>
-                </div>
-                <ViewpageList
-                  viewpages={this.props.viewpages}
-                  onEditViewpage={this.props.onEditViewpage}
-                  onDeleteViewpage={this.props.onDeleteViewpage} />
               </div>
-              <ViewpageContentList
-                viewpages={this.props.viewpages} />
+              <div id="updateViewpage" className="card mb-3">
+                <div className="card-body">
+                  <ViewpageForm
+                    description="Update Viewpage"
+                    viewpage={this.state.viewpage}
+                    onChange={this.handleChange}
+                    onSubmit={this.handleUpdateViewpage} />
+                </div>
+              </div>
+              <ViewpageList
+                viewpages={this.state.viewpages}
+                onEditViewpage={this.handleEditViewpage}
+                onDeleteViewpage={this.handleDeleteViewpage} />
             </div>
+            <ViewpageContentList
+              viewpages={this.state.viewpages} />
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default ViewsiteJSX;

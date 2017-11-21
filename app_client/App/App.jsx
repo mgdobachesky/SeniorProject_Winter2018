@@ -7,29 +7,27 @@ import Navbar from './components/Navbar';
 import Routes from './components/Routes';
 
 // Create main App
-class AppJSX extends React.Component {
-  render() {
-    return(
-      <div>
-        <Navbar
-          user={this.props.user}
-          viewsites={this.props.viewsites}
-          onUserLogout={this.props.onUserLogout} />
+var AppJSX = function() {
+  return(
+    <div>
+      <Navbar
+        user={this.state.user}
+        viewsites={this.state.viewsites}
+        onUserLogout={this.handleUserLogout} />
 
-        <Routes
-          user={this.props.user}
-          viewsite={this.props.viewsite}
-          viewsites={this.props.viewsites}
-          onChange={this.props.onChange}
-          onReadOneUser={this.props.onReadOneUser}
-          onCreateUser={this.props.onCreateUser}
-          onUpdateUser={this.props.onUpdateUser}
-          onCreateViewsite={this.props.onCreateViewsite}
-          onEditViewsite={this.props.onEditViewsite}
-          onUpdateViewsite={this.props.onUpdateViewsite}
-          onDeleteViewsite={this.props.onDeleteViewsite} />
-      </div>
-    );
-  }
+      <Routes
+        user={this.state.user}
+        viewsite={this.state.viewsite}
+        viewsites={this.state.viewsites}
+        onChange={this.handleChange}
+        onReadOneUser={this.handleReadOneUser}
+        onCreateUser={this.handleCreateUser}
+        onUpdateUser={this.handleUpdateUser}
+        onCreateViewsite={this.handleCreateViewsite}
+        onEditViewsite={this.handleEditViewsite}
+        onUpdateViewsite={this.handleUpdateViewsite}
+        onDeleteViewsite={this.handleDeleteViewsite} />
+    </div>
+  );
 }
 export default AppJSX;

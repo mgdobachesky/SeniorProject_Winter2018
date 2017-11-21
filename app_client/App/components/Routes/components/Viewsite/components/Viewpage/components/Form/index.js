@@ -119,20 +119,7 @@ class Form extends React.Component {
   }
 
   render() {
-    return(
-      <FormJSX
-        form={this.props.form}
-        formTextInput={this.state.formTextInput}
-        formTextInputs={this.state.formTextInputs}
-        onChange={this.handleChange}
-        onSubmit={this.handleSubmit}
-        onCreateFormTextInput={this.handleCreateFormTextInput}
-        onUpdateFormTextInput={this.handleUpdateFormTextInput}
-        onEditFormTextInput={this.handleEditFormTextInput}
-        onDeleteFormTextInput={this.handleDeleteFormTextInput}
-        onEditForm={this.props.onEditForm}
-        onDeleteForm={this.props.onDeleteForm} />
-    );
+    return(FormJSX.call(this));
   }
 }
 

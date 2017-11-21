@@ -304,30 +304,7 @@ class Viewpage extends React.Component {
   }
 
   render() {
-    return (
-      <ViewpageJSX
-        viewpage={this.props.viewpage}
-        text={this.state.text}
-        texts={this.state.texts}
-        form={this.state.form}
-        forms={this.state.forms}
-        globalForms={this.state.formsByViewsite}
-        dataView={this.state.dataView}
-        dataViews={this.state.dataViews}
-        onCreateText={this.handleCreateText}
-        onEditText={this.handleEditText}
-        onUpdateText={this.handleUpdateText}
-        onDeleteText={this.handleDeleteText}
-        onCreateForm={this.handleCreateForm}
-        onEditForm={this.handleEditForm}
-        onUpdateForm={this.handleUpdateForm}
-        onDeleteForm={this.handleDeleteForm}
-        onCreateDataView={this.handleCreateDataView}
-        onEditDataView={this.handleEditDataView}
-        onUpdateDataView={this.handleUpdateDataView}
-        onDeleteDataView={this.handleDeleteDataView}
-        onChange={this.handleChange} />
-    );
+    return(ViewpageJSX.call(this));
   }
 }
 

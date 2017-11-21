@@ -23,13 +23,7 @@ class ViewsiteForm extends React.Component {
   }
 
   render() {
-    return (
-      <ViewsiteFormJSX
-        viewsite={this.props.viewsite}
-        description={this.props.description}
-        onSubmit={this.handleSubmit}
-        onChange={this.handleChange} />
-    );
+    return(ViewsiteFormJSX.call(this));
   }
 }
 

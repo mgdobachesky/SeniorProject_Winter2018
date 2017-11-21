@@ -23,12 +23,7 @@ class Login extends React.Component {
   }
 
   render() {
-    return (
-      <LoginJSX
-        user={this.props.user}
-        onChange={this.handleChange}
-        onSubmit={this.handleSubmit} />
-    );
+    return(LoginJSX.call(this));
   }
 }
 

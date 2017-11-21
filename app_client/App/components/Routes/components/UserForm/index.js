@@ -23,13 +23,7 @@ class UserForm extends React.Component {
   }
 
   render() {
-    return (
-      <UserFormJSX
-        description={this.props.description}
-        user={this.props.user}
-        onChange={this.handleChange}
-        onSubmit={this.handleSubmit} />
-    );
+    return (UserFormJSX.call(this));
   }
 }
 

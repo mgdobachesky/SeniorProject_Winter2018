@@ -23,13 +23,7 @@ class ViewpageForm extends React.Component {
   }
 
   render() {
-    return (
-      <ViewpageFormJSX
-        description={this.props.description}
-        viewpage={this.props.viewpage}
-        onChange={this.handleChange}
-        onSubmit={this.handleSubmit} />
-    );
+    return(ViewpageFormJSX.call(this));
   }
 }
 

@@ -18,12 +18,7 @@ class Navbar extends React.Component {
   }
 
   render() {
-    return (
-      <NavbarJSX
-        user={this.props.user}
-        viewsites={this.props.viewsites}
-        onUserLogout={this.handleUserLogout} />
-    );
+    return (NavbarJSX.call(this));
   }
 }
 

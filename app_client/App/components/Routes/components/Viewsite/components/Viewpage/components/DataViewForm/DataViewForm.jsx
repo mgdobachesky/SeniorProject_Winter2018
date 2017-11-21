@@ -17,28 +17,26 @@ function DataViewOptions(props) {
   }
 }
 
-class DataViewFormJSX extends React.Component {
-  render() {
-    return (
-      <div className="container">
-        <h4>{this.props.description}</h4>
-        <form onSubmit={this.props.onSubmit}>
-          <div className="form-group">
-            <label htmlFor="formId">
-              Data-View:
-              <select id="formId" name="formId" className="form-control" value={this.props.dataView.formId} onChange={this.props.onChange}>
-                <option value="" disabled hidden>Choose Data-View...</option>
-                <DataViewOptions forms={this.props.forms} />
-              </select>
-            </label>
-          </div>
-          <input name="_id" type="hidden" id="_id" value={this.props.dataView._id} />
-          <input name="viewpageId" type="hidden" id="viewpageId" value={this.props.dataView.viewpageId} />
-          <button type="submit" className="btn btn-primary">{this.props.description}</button>
-        </form>
-      </div>
-    );
-  }
+var DataViewFormJSX = function() {
+  return (
+    <div className="container">
+      <h4>{this.props.description}</h4>
+      <form onSubmit={this.handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="formId">
+            Data-View:
+            <select id="formId" name="formId" className="form-control" value={this.props.dataView.formId} onChange={this.handleChange}>
+              <option value="" disabled hidden>Choose Data-View...</option>
+              <DataViewOptions forms={this.props.forms} />
+            </select>
+          </label>
+        </div>
+        <input name="_id" type="hidden" id="_id" value={this.props.dataView._id} />
+        <input name="viewpageId" type="hidden" id="viewpageId" value={this.props.dataView.viewpageId} />
+        <button type="submit" className="btn btn-primary">{this.props.description}</button>
+      </form>
+    </div>
+  );
 }
 
 export default DataViewFormJSX;

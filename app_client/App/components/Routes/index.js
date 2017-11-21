@@ -12,22 +12,7 @@ class Routes extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <RoutesJSX
-          user={this.props.user}
-          viewsite={this.props.viewsite}
-          viewsites={this.props.viewsites}
-          onChange={this.props.onChange}
-          onReadOneUser={this.props.onReadOneUser}
-          onCreateUser={this.props.onCreateUser}
-          onUpdateUser={this.props.onUpdateUser}
-          onCreateViewsite={this.props.onCreateViewsite}
-          onEditViewsite={this.props.onEditViewsite}
-          onUpdateViewsite={this.props.onUpdateViewsite}
-          onDeleteViewsite={this.props.onDeleteViewsite} />
-      </div>
-    );
+    return(RoutesJSX.call(this));
   }
 }
 

@@ -17,18 +17,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    return (
-      <DashboardJSX
-        user={this.props.user}
-        viewsite={this.props.viewsite}
-        viewsites={this.props.viewsites}
-        onChange={this.props.onChange}
-        onCreateViewsite={this.props.onCreateViewsite}
-        onUpdateViewsite={this.props.onUpdateViewsite}
-        onEditViewsite={this.props.onEditViewsite}
-        onDeleteViewsite={this.props.onDeleteViewsite}
-        onUpdateUser={this.props.onUpdateUser} />
-    );
+    return(DashboardJSX.call(this));
   }
 }
 

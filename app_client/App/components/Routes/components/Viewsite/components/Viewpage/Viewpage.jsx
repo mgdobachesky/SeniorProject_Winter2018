@@ -81,92 +81,90 @@ function DataViewList(props) {
   }
 }
 
-class ViewpageJSX extends React.Component {
-  render() {
-    return (
-      <div className="container">
-        <h2>{this.props.viewpage.viewpageName}</h2>
-        <button type="button" className="btn btn-link" onClick={() => $( ".createText" ).toggle("medium")}>+ Add Text</button>
-        <button type="button" className="btn btn-link" onClick={() => $( ".createForm" ).toggle("medium")}>+ Add Form</button>
-        <button type="button" className="btn btn-link" onClick={() => $( ".createDataView" ).toggle("medium")}>+ Add Data-View</button>
+var ViewpageJSX = function() {
+  return (
+    <div className="container">
+      <h2>{this.props.viewpage.viewpageName}</h2>
+      <button type="button" className="btn btn-link" onClick={() => $( ".createText" ).toggle("medium")}>+ Add Text</button>
+      <button type="button" className="btn btn-link" onClick={() => $( ".createForm" ).toggle("medium")}>+ Add Form</button>
+      <button type="button" className="btn btn-link" onClick={() => $( ".createDataView" ).toggle("medium")}>+ Add Data-View</button>
 
-        <div id="createText" className="card createText mb-3">
-          <div className="card-body">
-            <TextForm
-              description="Add Text"
-              text={this.props.text}
-              onChange={this.props.onChange}
-              onSubmit={this.props.onCreateText} />
-          </div>
+      <div id="createText" className="card createText mb-3">
+        <div className="card-body">
+          <TextForm
+            description="Add Text"
+            text={this.state.text}
+            onChange={this.handleChange}
+            onSubmit={this.handleCreateText} />
         </div>
-        <div id="updateText" className="card updateText mb-3">
-          <div className="card-body">
-            <TextForm
-              description="Update Text"
-              text={this.props.text}
-              onChange={this.props.onChange}
-              onSubmit={this.props.onUpdateText} />
-          </div>
-        </div>
-
-        <div id="createForm" className="card createForm mb-3">
-          <div className="card-body">
-            <FormForm
-              description="Add Form"
-              form={this.props.form}
-              onChange={this.props.onChange}
-              onSubmit={this.props.onCreateForm} />
-          </div>
-        </div>
-        <div id="updateForm" className="card updateForm mb-3">
-          <div className="card-body">
-            <FormForm
-              description="Update Form"
-              form={this.props.form}
-              onChange={this.props.onChange}
-              onSubmit={this.props.onUpdateForm} />
-          </div>
-        </div>
-
-        <div id="createDataView" className="card createDataView mb-3">
-          <div className="card-body">
-            <DataViewForm
-              description="Create Data-View"
-              dataView={this.props.dataView}
-              forms={this.props.globalForms}
-              onChange={this.props.onChange}
-              onSubmit={this.props.onCreateDataView} />
-          </div>
-        </div>
-        <div id="updateDataView" className="card updateDataView mb-3">
-          <div className="card-body">
-            <DataViewForm
-              description="Update Data-View"
-              dataView={this.props.dataView}
-              forms={this.props.globalForms}
-              onChange={this.props.onChange}
-              onSubmit={this.props.onUpdateDataView} />
-          </div>
-        </div>
-
-        <TextList
-          texts={this.props.texts}
-          onEditText={this.props.onEditText}
-          onDeleteText={this.props.onDeleteText} />
-
-        <FormList
-          forms={this.props.forms}
-          onEditForm={this.props.onEditForm}
-          onDeleteForm={this.props.onDeleteForm} />
-
-        <DataViewList
-          dataViews={this.props.dataViews}
-          onEditDataView={this.props.onEditDataView}
-          onDeleteDataView={this.props.onDeleteDataView} />
-
       </div>
-    );
-  }
+      <div id="updateText" className="card updateText mb-3">
+        <div className="card-body">
+          <TextForm
+            description="Update Text"
+            text={this.state.text}
+            onChange={this.handleChange}
+            onSubmit={this.handleUpdateText} />
+        </div>
+      </div>
+
+      <div id="createForm" className="card createForm mb-3">
+        <div className="card-body">
+          <FormForm
+            description="Add Form"
+            form={this.state.form}
+            onChange={this.handleChange}
+            onSubmit={this.handleCreateForm} />
+        </div>
+      </div>
+      <div id="updateForm" className="card updateForm mb-3">
+        <div className="card-body">
+          <FormForm
+            description="Update Form"
+            form={this.state.form}
+            onChange={this.handleChange}
+            onSubmit={this.handleUpdateForm} />
+        </div>
+      </div>
+
+      <div id="createDataView" className="card createDataView mb-3">
+        <div className="card-body">
+          <DataViewForm
+            description="Create Data-View"
+            dataView={this.state.dataView}
+            forms={this.state.formsByViewsite}
+            onChange={this.handleChange}
+            onSubmit={this.handleCreateDataView} />
+        </div>
+      </div>
+      <div id="updateDataView" className="card updateDataView mb-3">
+        <div className="card-body">
+          <DataViewForm
+            description="Update Data-View"
+            dataView={this.state.dataView}
+            forms={this.state.formsByViewsite}
+            onChange={this.handleChange}
+            onSubmit={this.handleUpdateDataView} />
+        </div>
+      </div>
+
+      <TextList
+        texts={this.state.texts}
+        onEditText={this.handleEditText}
+        onDeleteText={this.handleDeleteText} />
+
+      <FormList
+        forms={this.state.forms}
+        onEditForm={this.handleEditForm}
+        onDeleteForm={this.handleDeleteForm} />
+
+      <DataViewList
+        dataViews={this.state.dataViews}
+        onEditDataView={this.handleEditDataView}
+        onDeleteDataView={this.handleDeleteDataView} />
+
+    </div>
+  );
 }
 
 export default ViewpageJSX;

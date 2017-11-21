@@ -151,18 +151,7 @@ class Viewsite extends React.Component {
   }
 
   render() {
-    return (
-      <ViewsiteJSX
-        match={this.props.match}
-        viewsite={this.state.viewsite}
-        viewpage={this.state.viewpage}
-        viewpages={this.state.viewpages}
-        onChange={this.handleChange}
-        onCreateViewpage={this.handleCreateViewpage}
-        onEditViewpage={this.handleEditViewpage}
-        onUpdateViewpage={this.handleUpdateViewpage}
-        onDeleteViewpage={this.handleDeleteViewpage} />
-    );
+    return(ViewsiteJSX.call(this));
   }
 }
 

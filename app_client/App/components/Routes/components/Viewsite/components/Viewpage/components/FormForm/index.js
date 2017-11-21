@@ -23,13 +23,7 @@ class FormForm extends React.Component {
   }
 
   render() {
-    return (
-      <FormFormJSX
-        description={this.props.description}
-        form={this.props.form}
-        onChange={this.handleChange}
-        onSubmit={this.handleSubmit} />
-    );
+    return(FormFormJSX.call(this));
   }
 }
 

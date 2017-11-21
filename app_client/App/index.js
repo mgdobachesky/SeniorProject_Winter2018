@@ -211,21 +211,7 @@ class App extends React.Component {
   }
 
   render() {
-    return(
-      <AppJSX
-        user={this.state.user}
-        viewsite={this.state.viewsite}
-        viewsites={this.state.viewsites}
-        onUserLogout={this.handleUserLogout}
-        onChange={this.handleChange}
-        onReadOneUser={this.handleReadOneUser}
-        onCreateUser={this.handleCreateUser}
-        onUpdateUser={this.handleUpdateUser}
-        onCreateViewsite={this.handleCreateViewsite}
-        onEditViewsite={this.handleEditViewsite}
-        onUpdateViewsite={this.handleUpdateViewsite}
-        onDeleteViewsite={this.handleDeleteViewsite} />
-    );
+    return(AppJSX.call(this));
   }
 }
 export default App;

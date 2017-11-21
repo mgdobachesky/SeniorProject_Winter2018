@@ -23,13 +23,7 @@ class FormTextInputForm extends React.Component {
   }
 
   render() {
-    return (
-      <FormTextInputFormJSX
-        description={this.props.description}
-        formTextInput={this.props.formTextInput}
-        onChange={this.handleChange}
-        onSubmit={this.handleSubmit} />
-    );
+    return(FormTextInputFormJSX.call(this));
   }
 }
 

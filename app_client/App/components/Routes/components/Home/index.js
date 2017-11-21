@@ -12,9 +12,7 @@ class Home extends React.Component {
   }
 
   render() {
-    return (
-      <HomeJSX />
-    );
+    return(HomeJSX.call(this));
   }
 }
 

@@ -23,14 +23,7 @@ class DataViewForm extends React.Component {
   }
 
   render() {
-    return (
-      <DataViewFormJSX
-        description={this.props.description}
-        onChange={this.handleChange}
-        onSubmit={this.handleSubmit}
-        dataView={this.props.dataView}
-        forms={this.props.forms} />
-    );
+    return(DataViewFormJSX.call(this));
   }
 }
 
