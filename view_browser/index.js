@@ -9,7 +9,7 @@ import { HashRouter } from 'react-router-dom';
 // Render main App
 ReactDOM.render((
   <HashRouter>
-
+    <h1>{document.body.id}</h1>
   </HashRouter>
   ), document.getElementById('root')
 );
