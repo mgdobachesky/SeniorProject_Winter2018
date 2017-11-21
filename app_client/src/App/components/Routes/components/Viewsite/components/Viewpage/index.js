@@ -198,6 +198,7 @@ class Viewpage extends React.Component {
     this.manageFormService.deleteForm(requestData).then((results) => {
       this.handleReadAllForms();
       this.handleReadAllFormsByViewsite();
+      this.handleReadAllDataViews();
     }, (error) => {
       console.log(error.response.data);
     });

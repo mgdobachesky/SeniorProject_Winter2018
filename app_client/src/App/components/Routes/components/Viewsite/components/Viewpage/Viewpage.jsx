@@ -56,23 +56,25 @@ function FormList(props) {
 function DataViewList(props) {
   if(props.dataViews) {
     return props.dataViews.map((dataView, index) => {
-      const _id = dataView._id;
-      const formId = dataView.form._id;
-      const formTitle = dataView.form.formTitle;
-      let editClick = {_id: _id, formId: formId};
-      let deleteClick = {_id: _id};
-      return (
-        <div key={_id} className="card border-primary mb-3">
-          <div className="card-body">
-            <h4 className="card-title">Data-View</h4>
-            <p className="card-text">Source: {formTitle}</p>
+      if(dataView.form) {
+        const _id = dataView._id;
+        const formId = dataView.form._id;
+        const formTitle = dataView.form.formTitle;
+        let editClick = {_id: _id, formId: formId};
+        let deleteClick = {_id: _id};
+        return (
+          <div key={_id} className="card border-primary mb-3">
+            <div className="card-body">
+              <h4 className="card-title">Data-View</h4>
+              <p className="card-text">Source: {formTitle}</p>
+            </div>
+            <div className="card-footer">
+              <a className="card-link" href="javascript:;" onClick={() => props.onEditDataView(editClick)}>Edit</a>
+              <a className="card-link" href="javascript:;" onClick={() => props.onDeleteDataView(deleteClick)}>Delete</a>
+            </div>
           </div>
-          <div className="card-footer">
-            <a className="card-link" href="javascript:;" onClick={() => props.onEditDataView(editClick)}>Edit</a>
-            <a className="card-link" href="javascript:;" onClick={() => props.onDeleteDataView(deleteClick)}>Delete</a>
-          </div>
-        </div>
-      );
+        );
+      }
     });
   } else {
     return null;

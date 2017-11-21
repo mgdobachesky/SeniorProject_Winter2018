@@ -27,7 +27,7 @@ class DataViewFormJSX extends React.Component {
             <label htmlFor="formId">
               Data-View:
               <select id="formId" name="formId" className="form-control" value={this.props.dataView.formId} onChange={this.props.onChange}>
-                <option value="" selected disabled hidden>Choose Data-View...</option>
+                <option value="" disabled hidden>Choose Data-View...</option>
                 <DataViewOptions forms={this.props.forms} />
               </select>
             </label>
