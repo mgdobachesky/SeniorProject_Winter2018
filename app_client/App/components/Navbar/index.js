@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import requred components
 import NavbarJSX from './Navbar.jsx';
+import './navbar.css';
 
 class Navbar extends React.Component {
   constructor(props) {

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import required components
 import FormFormJSX from './FormForm.jsx';
+import './formForm.css';
 
 class FormForm extends React.Component {
   constructor(props) {

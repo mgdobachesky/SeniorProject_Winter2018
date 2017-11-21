@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import required components
 import TextFormJSX from './TextForm.jsx';
+import './textForm.css';
 
 class TextForm extends React.Component {
   constructor(props) {

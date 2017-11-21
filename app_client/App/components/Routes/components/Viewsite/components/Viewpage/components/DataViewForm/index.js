@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import required components
 import DataViewFormJSX from './DataViewForm.jsx';
+import './dataViewForm.css';
 
 class DataViewForm extends React.Component {
   constructor(props) {

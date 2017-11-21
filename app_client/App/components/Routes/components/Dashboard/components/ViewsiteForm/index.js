@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import required components
 import ViewsiteFormJSX from './ViewsiteForm.jsx';
+import './viewsiteForm.css';
 
 class ViewsiteForm extends React.Component {
   constructor(props) {

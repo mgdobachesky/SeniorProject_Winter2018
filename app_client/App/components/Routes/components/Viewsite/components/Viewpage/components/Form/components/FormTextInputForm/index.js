@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import required components
 import FormTextInputFormJSX from './FormTextInputForm.jsx';
+import './formTextInputForm.css';
 
 class FormTextInputForm extends React.Component {
   constructor(props) {

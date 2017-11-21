@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import required components
 import FormJSX from './Form.jsx';
+import './form.css';
 
 // Import required services
 import FormTextInputService from './services/FormTextInputService';

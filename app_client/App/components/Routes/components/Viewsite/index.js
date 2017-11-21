@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import requred components
 import ViewsiteJSX from './Viewsite.jsx';
+import './viewsite.css';
 
 // Import required services
 import ViewsiteService from '../../../../services/ViewsiteService';

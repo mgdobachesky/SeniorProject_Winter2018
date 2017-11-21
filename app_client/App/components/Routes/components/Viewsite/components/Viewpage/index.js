@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import requred components
 import ViewpageJSX from './Viewpage.jsx';
+import './viewpage.css';
 
 // Import required services
 import TextService from './services/TextService';

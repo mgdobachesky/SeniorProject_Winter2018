@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import requred components
 import DashboardJSX from './Dashboard.jsx';
+import './dashboard.css';
 
 class Dashboard extends React.Component {
   constructor(props) {

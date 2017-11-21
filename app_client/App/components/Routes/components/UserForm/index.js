@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import required components
 import UserFormJSX from './UserForm.jsx';
+import './userForm.css';
 
 class UserForm extends React.Component {
   constructor(props) {

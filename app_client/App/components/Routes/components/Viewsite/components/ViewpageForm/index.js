@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import required components
 import ViewpageFormJSX from './ViewpageForm.jsx';
+import './viewpageForm.css';
 
 class ViewpageForm extends React.Component {
   constructor(props) {

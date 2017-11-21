@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 // Import required components
 import AppJSX from './App.jsx';
+import './app.css';
 
 // Import required services
 import UserService from './services/UserService';
