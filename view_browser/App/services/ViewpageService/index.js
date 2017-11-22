@@ -4,59 +4,66 @@ import axios from 'axios';
 // Import the location of the API
 import { API_LOCATION } from 'Constants';
 
-class UserDatabaseService {
+class ViewpageService {
   // Read one
-  readOneUserRecord(requestData) {
+  readOneViewpage(requestData) {
     return axios({
-      url: '/read_one/user_records/' + requestData.recordId,
+      url: '/read_one/viewpages/' + requestData.viewpageId,
       method: 'get',
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
 
   // Read all
-  readAllUserRecords(requestData) {
+  readAllViewpages(requestData) {
     return axios({
-      url: '/read_all/user_records/' + requestData.formId,
+      url: '/read_all/viewpages/' + requestData.viewsiteId,
       method: 'get',
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
 
   // Create
-  createUserRecord(requestData) {
+  createViewpage(requestData) {
     return axios({
-      url: '/create/user_records/' + requestData.formId,
+      url: '/create/viewpages',
       method: 'post',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
-      data: requestData.record
+      data: {
+        'viewsiteId': requestData.viewsiteId,
+        'viewpageName': requestData.viewpageName,
+        'permissionLevel': requestData.permissionLevel
+      }
     });
   }
 
   // Update
-  updateUserRecord(requestData) {
+  updateViewpage(requestData) {
     return axios({
-      url: '/update/user_records/' + requestData.recordId,
+      url: '/update/viewpages/' + requestData.viewpageId,
       method: 'put',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
-      data: requestData.record
+      data: {
+        'viewpageName': requestData.viewpageName,
+        'permissionLevel': requestData.permissionLevel
+      }
     });
   }
 
   // Delete
-  deleteUserRecord(requestData) {
+  deleteViewpage(requestData) {
     return axios({
-      url: '/delete/user_records/' + requestData.recordId,
+      url: '/delete/viewpages/' + requestData.viewpageId,
       method: 'delete',
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
 }
 
-export default UserDatabaseService;
+export default ViewpageService;

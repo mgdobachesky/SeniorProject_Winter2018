@@ -4,59 +4,64 @@ import axios from 'axios';
 // Import the location of the API
 import { API_LOCATION } from 'Constants';
 
-class UserDatabaseService {
+class TextService {
   // Read one
-  readOneUserRecord(requestData) {
+  readOneText(requestData) {
     return axios({
-      url: '/read_one/user_records/' + requestData.recordId,
+      url: '/read_one/text/' + requestData.textId,
       method: 'get',
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
 
   // Read all
-  readAllUserRecords(requestData) {
+  readAllText(requestData) {
     return axios({
-      url: '/read_all/user_records/' + requestData.formId,
+      url: '/read_all/text/' + requestData.viewpageId,
       method: 'get',
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
 
   // Create
-  createUserRecord(requestData) {
+  createText(requestData) {
     return axios({
-      url: '/create/user_records/' + requestData.formId,
+      url: '/create/text/',
       method: 'post',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
-      data: requestData.record
+      data: {
+        'viewpageId': requestData.viewpageId,
+        'textValue': requestData.textValue
+      }
     });
   }
 
   // Update
-  updateUserRecord(requestData) {
+  updateText(requestData) {
     return axios({
-      url: '/update/user_records/' + requestData.recordId,
+      url: '/update/text/' + requestData.textId,
       method: 'put',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
-      data: requestData.record
+      data: {
+        'textValue': requestData.textValue
+      }
     });
   }
 
   // Delete
-  deleteUserRecord(requestData) {
+  deleteText(requestData) {
     return axios({
-      url: '/delete/user_records/' + requestData.recordId,
+      url: '/delete/text/' + requestData.textId,
       method: 'delete',
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
 }
 
-export default UserDatabaseService;
+export default TextService;

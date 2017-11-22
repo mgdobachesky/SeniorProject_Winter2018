@@ -4,59 +4,64 @@ import axios from 'axios';
 // Import the location of the API
 import { API_LOCATION } from 'Constants';
 
-class UserDatabaseService {
+class DataViewService {
   // Read one
-  readOneUserRecord(requestData) {
+  readOneDataView(requestData) {
     return axios({
-      url: '/read_one/user_records/' + requestData.recordId,
+      url: '/read_one/data_view/' + requestData.dataViewId,
       method: 'get',
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
 
   // Read all
-  readAllUserRecords(requestData) {
+  readAllDataViews(requestData) {
     return axios({
-      url: '/read_all/user_records/' + requestData.formId,
+      url: '/read_all/data_view/' + requestData.viewpageId,
       method: 'get',
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
 
   // Create
-  createUserRecord(requestData) {
+  createDataView(requestData) {
     return axios({
-      url: '/create/user_records/' + requestData.formId,
+      url: '/create/data_view/',
       method: 'post',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
-      data: requestData.record
+      data: {
+        'formId': requestData.formId,
+        'viewpageId': requestData.viewpageId
+      }
     });
   }
 
   // Update
-  updateUserRecord(requestData) {
+  updateDataView(requestData) {
     return axios({
-      url: '/update/user_records/' + requestData.recordId,
+      url: '/update/data_view/' + requestData.dataViewId,
       method: 'put',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
-      data: requestData.record
+      data: {
+        'formId': requestData.formId
+      }
     });
   }
 
   // Delete
-  deleteUserRecord(requestData) {
+  deleteDataView(requestData) {
     return axios({
-      url: '/delete/user_records/' + requestData.recordId,
+      url: '/delete/data_view/' + requestData.dataViewId,
       method: 'delete',
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
 }
 
-export default UserDatabaseService;
+export default DataViewService;

@@ -4,59 +4,64 @@ import axios from 'axios';
 // Import the location of the API
 import { API_LOCATION } from 'Constants';
 
-class UserDatabaseService {
+class FormTextInputService {
   // Read one
-  readOneUserRecord(requestData) {
+  readOneFormTextInput(requestData) {
     return axios({
-      url: '/read_one/user_records/' + requestData.recordId,
+      url: '/read_one/form_text_inputs/' + requestData.formTextInputId,
       method: 'get',
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
 
   // Read all
-  readAllUserRecords(requestData) {
+  readAllFormTextInputs(requestData) {
     return axios({
-      url: '/read_all/user_records/' + requestData.formId,
+      url: '/read_all/form_text_inputs/' + requestData.formId,
       method: 'get',
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
 
   // Create
-  createUserRecord(requestData) {
+  createFormTextInput(requestData) {
     return axios({
-      url: '/create/user_records/' + requestData.formId,
+      url: '/create/form_text_inputs',
       method: 'post',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
-      data: requestData.record
+      data: {
+        'formId': requestData.formId,
+        'formTextInputLabel': requestData.formTextInputLabel
+      }
     });
   }
 
   // Update
-  updateUserRecord(requestData) {
+  updateFormTextInput(requestData) {
     return axios({
-      url: '/update/user_records/' + requestData.recordId,
+      url: '/update/form_text_inputs/' + requestData.formTextInputId,
       method: 'put',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
-      data: requestData.record
+      data: {
+        'formTextInputLabel': requestData.formTextInputLabel
+      }
     });
   }
 
   // Delete
-  deleteUserRecord(requestData) {
+  deleteFormTextInput(requestData) {
     return axios({
-      url: '/delete/user_records/' + requestData.recordId,
+      url: '/delete/form_text_inputs/' + requestData.formTextInputId,
       method: 'delete',
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
 }
 
-export default UserDatabaseService;
+export default FormTextInputService;
