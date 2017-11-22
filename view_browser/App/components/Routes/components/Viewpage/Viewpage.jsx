@@ -54,6 +54,7 @@ var ViewpageJSX = function() {
       <h1>{this.state.viewpage.viewpageName}</h1>
       <TextList texts={this.state.texts} />
       <FormList forms={this.state.forms} />
+      <DataViewList dataViews={this.state.dataViews} />
     </div>
   );
 }

@@ -46,16 +46,6 @@ class Form extends React.Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    let requestData = {};
-    requestData.formId = nextProps.form._id;
-    this.manageFormTextInputService.readAllFormTextInputs(requestData).then((results) => {
-      this.setState({formTextInputs: results.data});
-    }, (error) => {
-      console.log(error.response.data);
-    });
-  }
-
   componentDidMount(nextProps) {
     let requestData = {};
     requestData.formId = this.props.form._id;
