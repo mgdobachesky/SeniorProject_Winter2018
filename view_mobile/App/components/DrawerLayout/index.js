@@ -51,12 +51,6 @@ class DrawerLayout extends React.Component {
   }
 
   render() {
-    closeDrawer = () => {
-      this.drawer._root.close()
-    };
-    openDrawer = () => {
-      this.drawer._root.open()
-    };
     return (DrawerLayoutJSX.call(this));
   }
 }
