@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 
 // Import requred components
 import DrawerLayoutJSX from './DrawerLayout.js';
-import './css.js';
 
 // Import required services
 import ViewsiteService from './services/ViewsiteService';
@@ -52,6 +51,12 @@ class DrawerLayout extends React.Component {
   }
 
   render() {
+    closeDrawer = () => {
+      this.drawer._root.close()
+    };
+    openDrawer = () => {
+      this.drawer._root.open()
+    };
     return (DrawerLayoutJSX.call(this));
   }
 }
