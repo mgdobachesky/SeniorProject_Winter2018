@@ -1,6 +1,6 @@
 // Import required modules
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { Content, Button, Text, Form, Item, Input, H1, H2, H3 } from 'native-base';
 import { Link } from 'react-router-native';
 
 // Import requred components
@@ -25,17 +25,18 @@ function FormTextInputList(props) {
 
 var FormViewJSX = function() {
   return(
-    <View>
-      <Text>{this.props.form.formTitle}</Text>
+    <Content>
+      <H2>{this.props.form.formTitle}</H2>
+      <Form>
         <FormTextInputList
           formTextInputs={this.state.formTextInputs}
           onChange={this.handleChange} />
-        <TouchableHighlight onPress={this.handleSubmit} underlayColor="white">
-          <View>
-            <Text>Submit</Text>
-          </View>
-        </TouchableHighlight>
-    </View>
+        <Button block
+           onPress={this.handleSubmit}>
+          <Text>Submit</Text>
+        </Button>
+      </Form>
+    </Content>
   );
 }
 

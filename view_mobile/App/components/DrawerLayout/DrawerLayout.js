@@ -1,6 +1,7 @@
 // Import required modules
 import React, { Component } from 'react';
-import { View, DrawerLayoutAndroid, Text, TouchableHighlight, TextInput } from 'react-native';
+import { DrawerLayoutAndroid } from 'react-native';
+import { Container, Header, TransparentButton, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Form, Item, Input, H1, H2, H3, List, ListItem } from 'native-base';
 import { Link } from 'react-router-native';
 
 // Import required components
@@ -12,11 +13,15 @@ function ViewpageLinks(props) {
     return props.viewpages.map((viewpage, index) => {
       let linkTo = "/" + viewpage._id;
       return(
-        <Link key={viewpage._id} to={linkTo}>
-          <Text>
-            {viewpage.viewpageName}
-          </Text>
-        </Link>
+        <ListItem key={viewpage._id}>
+          <Link
+            to={linkTo}
+            component={TransparentButton}>
+            <Text>
+              {viewpage.viewpageName}
+            </Text>
+          </Link>
+        </ListItem>
       );
     });
   } else {
@@ -27,12 +32,14 @@ function ViewpageLinks(props) {
 function NavigationView(props) {
   if(props.viewsite._id) {
     return(
-      <View>
-        <Text>
+      <Content>
+        <H1>
           {props.viewsite.viewsiteName}
-        </Text>
-        <ViewpageLinks viewpages={props.viewpages} />
-      </View>
+        </H1>
+        <List>
+          <ViewpageLinks viewpages={props.viewpages} />
+        </List>
+      </Content>
     );
   } else {
     return null;
@@ -42,39 +49,52 @@ function NavigationView(props) {
 function NavigationContent(props) {
   if(props.viewsite._id) {
     return (
-      <View>
+      <Content>
         <Routes />
-      </View>
+      </Content>
     );
   } else {
     return (
-      <View>
-        <TextInput
-          placeholder="Enter Viewsite Name..."
-          onChangeText={(text) => props.onChange(text)} />
-        <TouchableHighlight
-          onPress={props.onSubmit}
-          underlayColor="white">
-          <View>
+      <Content>
+        <Form>
+          <Item>
+            <Input
+              placeholder="Enter Viewsite Name..."
+              onChangeText={(text) => props.onChange(text)} />
+          </Item>
+          <Button block
+            onPress={props.onSubmit}>
             <Text>Get Viewsite</Text>
-          </View>
-        </TouchableHighlight>
-      </View>
+          </Button>
+        </Form>
+      </Content>
     );
   }
 }
 
 var DrawerLayoutJSX = function() {
   return (
-    <DrawerLayoutAndroid
-      drawerPosition={DrawerLayoutAndroid.positions.Left}
-      renderNavigationView={() => NavigationView(this.state)}>
-      <NavigationContent
-        viewsiteName={this.state.viewsiteName}
-        viewsite={this.state.viewsite}
-        onChange={this.handleChange}
-        onSubmit={this.handleSubmit} />
-    </DrawerLayoutAndroid>
+    <Container>
+      <DrawerLayoutAndroid
+        drawerPosition={DrawerLayoutAndroid.positions.Left}
+        renderNavigationView={() => NavigationView(this.state)}>
+        <Header>
+          <Left />
+          <Body>
+            <Title>
+              {this.state.viewsiteName}
+            </Title>
+          </Body>
+          <Right />
+        </Header>
+        <NavigationContent
+          viewsiteName={this.state.viewsiteName}
+          viewsite={this.state.viewsite}
+          onChange={this.handleChange}
+          onSubmit={this.handleSubmit} />
+        <Footer></Footer>
+      </DrawerLayoutAndroid>
+    </Container>
   );
 }
 

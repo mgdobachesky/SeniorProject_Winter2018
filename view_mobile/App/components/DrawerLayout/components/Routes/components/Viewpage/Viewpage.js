@@ -1,6 +1,6 @@
 // Import required modules
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { H1, Content } from 'native-base';
 import { Link } from 'react-router-native';
 
 // Import requred components
@@ -52,12 +52,12 @@ function DataViewList(props) {
 
 var ViewpageJSX = function() {
   return (
-    <View>
-      <Text>{this.state.viewpage.viewpageName}</Text>
+    <Content>
+      <H1>{this.state.viewpage.viewpageName}</H1>
       <TextList texts={this.state.texts} />
       <FormList forms={this.state.forms} />
       <DataViewList dataViews={this.state.dataViews} />
-    </View>
+    </Content>
   );
 }
 

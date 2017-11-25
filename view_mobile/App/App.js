@@ -1,6 +1,5 @@
 // Import required modules
 import React, { Component } from 'react';
-import { View } from 'react-native';
 import { NativeRouter, Route, Link, AndroidBackButton } from 'react-router-native';
 
 // Import requred components

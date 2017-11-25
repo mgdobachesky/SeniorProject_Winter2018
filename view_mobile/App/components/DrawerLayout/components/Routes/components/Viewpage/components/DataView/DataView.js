@@ -1,15 +1,14 @@
 // Import required modules
 import React, { Component } from 'react';
-import { View, Text, TextInput, FlatList } from 'react-native';
+import { Text, Content, List, ListItem, H2} from 'native-base';
 import { Link } from 'react-router-native';
 
 // Import requred components
 import styles from './styles.js';
 
-function prepareData(records) {
-  if(records) {
-    let theseRecords = [];
-    records.forEach(function(record) {
+function DataList(props) {
+  if(props.records) {
+    return props.records.map((record, index) => {
       let thisRecord = {};
       let thisRecordData = "";
       let thisRecordKey = record._id;
@@ -18,19 +17,22 @@ function prepareData(records) {
       });
       thisRecord.key = thisRecordKey;
       thisRecord.value = thisRecordData.slice(0, -3);
-      theseRecords.push(thisRecord);
+      console.debug(thisRecord);
+      return (
+        <ListItem key={thisRecord.key} _id={thisRecord.key}><Text>{thisRecord.value}</Text></ListItem>
+      );
     });
-    return theseRecords;
+  } else {
+    return null;
   }
 }
 
 function DisplayList(props) {
   if(props.userTable.records) {
-    let preparedData = prepareData(props.userTable.records);
     return(
-      <FlatList
-        data={preparedData}
-        renderItem={({item}) => <Text>{item.value}</Text>} />
+      <List>
+        <DataList records={props.userTable.records} />
+      </List>
     );
   } else {
     return null;
@@ -39,10 +41,10 @@ function DisplayList(props) {
 
 var DataViewJSX = function() {
   return (
-    <View>
-      <Text>{this.props.dataView.form.formTitle}</Text>
+    <Content>
+      <H2>{this.props.dataView.form.formTitle}</H2>
       <DisplayList userTable={this.props.dataView.userTable} />
-    </View>
+    </Content>
   );
 }
 
