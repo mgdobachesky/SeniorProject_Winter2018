@@ -1,7 +1,6 @@
 // Import required modules
 import React, { Component } from 'react';
-import { DrawerLayoutAndroid } from 'react-native';
-import { Container, Header, TransparentButton, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Form, Item, Input, H1, H2, H3, List, ListItem } from 'native-base';
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Form, Item, Input, H1, H2, H3, List, ListItem, Drawer } from 'native-base';
 import { Link } from 'react-router-native';
 
 // Import required components
@@ -14,9 +13,7 @@ function ViewpageLinks(props) {
       let linkTo = "/" + viewpage._id;
       return(
         <ListItem key={viewpage._id}>
-          <Link
-            to={linkTo}
-            component={TransparentButton}>
+          <Link to={linkTo}>
             <Text>
               {viewpage.viewpageName}
             </Text>
@@ -32,12 +29,13 @@ function ViewpageLinks(props) {
 function NavigationView(props) {
   if(props.viewsite._id) {
     return(
-      <Content>
+      <Content style={{backgroundColor:'#FFFFFF'}}>
         <H1>
           {props.viewsite.viewsiteName}
         </H1>
         <List>
-          <ViewpageLinks viewpages={props.viewpages} />
+          <ViewpageLinks
+            viewpages={props.viewpages} />
         </List>
       </Content>
     );
@@ -74,12 +72,19 @@ function NavigationContent(props) {
 
 var DrawerLayoutJSX = function() {
   return (
-    <Container>
-      <DrawerLayoutAndroid
-        drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={() => NavigationView(this.state)}>
+    <Drawer
+        ref={(ref) => {this.drawer = ref;}}
+        content={<NavigationView
+          viewsite={this.state.viewsite}
+          viewpages={this.state.viewpages}
+          closeDrawer={this.closeDrawer.bind(this)} />}
+        onClose={() => this.closeDrawer()}>
         <Header>
-          <Left />
+          <Left>
+            <Button transparent onPress={() => this.openDrawer()}>
+              <Icon name='menu' />
+            </Button>
+          </Left>
           <Body>
             <Title>
               {this.state.viewsiteName}
@@ -87,14 +92,14 @@ var DrawerLayoutJSX = function() {
           </Body>
           <Right />
         </Header>
+
         <NavigationContent
           viewsiteName={this.state.viewsiteName}
           viewsite={this.state.viewsite}
           onChange={this.handleChange}
           onSubmit={this.handleSubmit} />
         <Footer></Footer>
-      </DrawerLayoutAndroid>
-    </Container>
+      </Drawer>
   );
 }
 

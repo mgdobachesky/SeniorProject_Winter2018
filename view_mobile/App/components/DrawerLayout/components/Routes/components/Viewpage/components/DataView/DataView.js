@@ -17,7 +17,6 @@ function DataList(props) {
       });
       thisRecord.key = thisRecordKey;
       thisRecord.value = thisRecordData.slice(0, -3);
-      console.debug(thisRecord);
       return (
         <ListItem key={thisRecord.key} _id={thisRecord.key}><Text>{thisRecord.value}</Text></ListItem>
       );
