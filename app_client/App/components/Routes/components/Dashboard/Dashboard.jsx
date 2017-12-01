@@ -35,6 +35,12 @@ function ViewsiteList(props) {
   }
 }
 
+var createViewsite = function() {
+  $( "#createViewsite" ).toggle("medium");
+  $( "#updateViewsite" ).hide(false);
+  this.props.onClearViewsite();
+}
+
 var DashboardJSX = function() {
   return (
     <div className="container">
@@ -51,7 +57,7 @@ var DashboardJSX = function() {
           <div className="tab-content" id="v-pills-tabContent">
 
             <div className="tab-pane fade show active" id="v-pills-viewsites" role="tabpanel" aria-labelledby="v-pills-viewsites-tab">
-              <button type="button" className="btn btn-link" onClick={() => $( "#createViewsite" ).toggle("medium")}>+ New Viewsite</button>
+              <button type="button" className="btn btn-link" onClick={() => {createViewsite.call(this);}}>+ New Viewsite</button>
               <div id="createViewsite" className="card mb-3">
                 <div className="card-body">
                   <ViewsiteForm

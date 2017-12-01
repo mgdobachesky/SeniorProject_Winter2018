@@ -1,13 +1,13 @@
 // Import required modules
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 // Choose navbar options based on user state
 function NavbarOptions(props) {
   if(props.user._id) {
     return (
-      <li className="nav-item active">
-        <Link className="nav-link" to="/dashboard">Dashboard <span className="sr-only">(current)</span></Link>
+      <li className="nav-item">
+        <NavLink className="nav-link" to="/dashboard">Dashboard</NavLink>
       </li>
     );
   } else {
@@ -24,7 +24,7 @@ function ViewsiteLinks(props) {
       const viewsiteHref = '/' + viewsite.viewsiteName;
       return (
         <li key={viewsiteId} className="nav-item">
-          <Link id={viewsiteId} className="nav-link" to={viewsiteHref}>{viewsiteName}</Link>
+          <NavLink id={viewsiteId} className="nav-link" to={viewsiteHref}>{viewsiteName}</NavLink>
         </li>
       );
     });
@@ -47,10 +47,10 @@ function LoginOptions(props) {
     return (
       <ul className="navbar-nav justify-content-end">
         <li className="nav-item">
-          <Link className="nav-link" to="/signup">Sign-Up</Link>
+          <NavLink className="nav-link" to="/signup">Sign-Up</NavLink>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/login">Login</Link>
+          <NavLink className="nav-link" to="/login">Login</NavLink>
         </li>
       </ul>
     );
@@ -60,13 +60,15 @@ function LoginOptions(props) {
 var NavbarJSX = function() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <Link className="navbar-brand" to="/">Cadre</Link>
+        <NavLink className="navbar-brand" to="/">Cadre</NavLink>
+        <ul className="navbar-nav mr-auto">
+          <NavbarOptions user={this.props.user} />
+        </ul>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-            <NavbarOptions user={this.props.user} />
             <ViewsiteLinks viewsites={this.props.viewsites} />
           </ul>
           <LoginOptions user={this.props.user} onLogout={this.handleUserLogout} />

@@ -1,6 +1,6 @@
 // Import required modules
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 // Import requred components
 import ViewsiteJSX from './Viewsite.jsx';
@@ -21,6 +21,7 @@ class Viewsite extends React.Component {
     this.handleEditViewpage = this.handleEditViewpage.bind(this);
     this.handleUpdateViewpage = this.handleUpdateViewpage.bind(this);
     this.handleDeleteViewpage = this.handleDeleteViewpage.bind(this);
+    this.handleClearViewpage = this.handleClearViewpage.bind(this);
     this.state = {
       viewsite: {},
       viewpage: {
@@ -46,12 +47,7 @@ class Viewsite extends React.Component {
       console.log(error.response.data);
     });
     // Follow up by clearing viewpage state
-    let clearViewpage = this.state.viewpage;
-    clearViewpage._id = "";
-    clearViewpage.viewsiteId = "";
-    clearViewpage.viewpageName = "";
-    clearViewpage.permissionLevel = "";
-    this.setState({viewpage: clearViewpage});
+    this.handleClearViewpage();
     $("#createViewpage").hide("medium");
   }
 
@@ -75,7 +71,8 @@ class Viewsite extends React.Component {
     editViewpage.viewpageName = event.viewpageName;
     editViewpage.permissionLevel = event.permissionLevel;
     this.setState({viewpage: editViewpage});
-    $("#updateViewpage").show("medium");
+    $("#updateViewpage").toggle("medium");
+    $("#createViewpage").hide(false);
   }
 
   handleUpdateViewpage(event) {
@@ -92,12 +89,7 @@ class Viewsite extends React.Component {
       console.log(error.response.data);
     });
     // Follow up by clearing viewpage state
-    let clearViewpage = this.state.viewpage;
-    clearViewpage._id = "";
-    clearViewpage.viewsiteId = "";
-    clearViewpage.viewpageName = "";
-    clearViewpage.permissionLevel = "";
-    this.setState({viewpage: clearViewpage});
+    this.handleClearViewpage();
     $("#updateViewpage").hide("medium");
   }
 
@@ -109,6 +101,15 @@ class Viewsite extends React.Component {
     }, (error) => {
       console.log(error.response.data);
     });
+  }
+
+  handleClearViewpage() {
+    let clearViewpage = this.state.viewpage;
+    clearViewpage._id = "";
+    clearViewpage.viewsiteId = "";
+    clearViewpage.viewpageName = "";
+    clearViewpage.permissionLevel = "";
+    this.setState({viewpage: clearViewpage});
   }
 
   handleChange(event, toChange) {
@@ -133,8 +134,8 @@ class Viewsite extends React.Component {
     }, (error) => {
       console.log(error.response.data);
     });
-    $("#createViewpage").hide();
-    $("#updateViewpage").hide();
+    $("#createViewpage").hide(false);
+    $("#updateViewpage").hide(false);
     this.handleReadAllViewpages();
   }
 
@@ -151,7 +152,11 @@ class Viewsite extends React.Component {
   }
 
   render() {
-    return(ViewsiteJSX.call(this));
+    if(this.props.user._id) {
+      return(ViewsiteJSX.call(this));
+    } else {
+      return(<Redirect to="/" />);
+    }
   }
 }
 

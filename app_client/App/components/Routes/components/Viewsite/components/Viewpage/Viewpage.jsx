@@ -21,7 +21,16 @@ function TextList(props) {
         <div key={_id} className="card border-primary mb-3">
           <div className="card-body">
             <h4 className="card-title">Text</h4>
-            <p className="card-text">{textValue}</p>
+            <p className="card-text">
+              {textValue.split('\n').map(function(item, key) {
+                return (
+                  <span key={key}>
+                    {item}
+                    <br/>
+                  </span>
+                )
+              })}
+            </p>
           </div>
           <div className="card-footer">
             <a className="card-link" href="javascript:;" onClick={() => props.onEditText(editClick)}>Edit</a>
@@ -81,13 +90,52 @@ function DataViewList(props) {
   }
 }
 
+var createText = function() {
+  $( ".createText" ).toggle("medium");
+  $( ".updateText" ).hide(false);
+
+  $( ".createForm" ).hide(false);
+  $( ".updateForm" ).hide(false);
+
+  $( ".createDataView" ).hide(false);
+  $( ".updateDataView" ).hide(false);
+
+  this.handleClearText();
+};
+
+var createForm = function() {
+  $( ".createForm" ).toggle("medium");
+  $( ".updateForm" ).hide(false);
+
+  $( ".createText" ).hide(false);
+  $( ".updateText" ).hide(false);
+
+  $( ".createDataView" ).hide(false);
+  $( ".updateDataView" ).hide(false);
+
+  this.handleClearForm();
+};
+
+var createDataView = function() {
+  $( ".createDataView" ).toggle("medium");
+  $( ".updateDataView" ).hide(false);
+
+  $( ".createText" ).hide(false);
+  $( ".updateText" ).hide(false);
+
+  $( ".createForm" ).hide(false);
+  $( ".updateForm" ).hide(false);
+
+  this.handleClearDataView();
+};
+
 var ViewpageJSX = function() {
   return (
     <div className="container">
       <h2>{this.props.viewpage.viewpageName}</h2>
-      <button type="button" className="btn btn-link" onClick={() => $( ".createText" ).toggle("medium")}>+ Add Text</button>
-      <button type="button" className="btn btn-link" onClick={() => $( ".createForm" ).toggle("medium")}>+ Add Form</button>
-      <button type="button" className="btn btn-link" onClick={() => $( ".createDataView" ).toggle("medium")}>+ Add Data-View</button>
+      <button type="button" className="btn btn-link" onClick={() => {createText.call(this);}}>+ Add Text</button>
+      <button type="button" className="btn btn-link" onClick={() => {createForm.call(this);}}>+ Add Form</button>
+      <button type="button" className="btn btn-link" onClick={() => {createDataView.call(this);}}>+ Add Data-View</button>
 
       <div id="createText" className="card createText mb-3">
         <div className="card-body">

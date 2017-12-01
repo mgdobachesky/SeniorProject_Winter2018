@@ -1,6 +1,6 @@
 // Import required modules
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 // Import requred components
 import DashboardJSX from './Dashboard.jsx';
@@ -12,12 +12,16 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    $("#createViewsite").hide();
-    $("#updateViewsite").hide();
+    $("#createViewsite").hide(false);
+    $("#updateViewsite").hide(false);
   }
 
   render() {
-    return(DashboardJSX.call(this));
+    if(this.props.user._id) {
+      return(DashboardJSX.call(this));
+    } else {
+      return(<Redirect to="/" />);
+    }
   }
 }
 

@@ -27,6 +27,7 @@ class App extends React.Component {
     this.handleEditViewsite = this.handleEditViewsite.bind(this);
     this.handleUpdateViewsite = this.handleUpdateViewsite.bind(this);
     this.handleDeleteViewsite = this.handleDeleteViewsite.bind(this);
+    this.handleClearViewsite = this.handleClearViewsite.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
     // Set initial state
@@ -136,12 +137,7 @@ class App extends React.Component {
       console.log(error.response.data);
     });
     // Follow up by clearing viewsite state
-    let clearViewsite = this.state.viewsite;
-    clearViewsite._id = "";
-    clearViewsite.userId = "";
-    clearViewsite.viewsiteName = "";
-    clearViewsite.loginEnabled = "";
-    this.setState({viewsite: clearViewsite});
+    this.handleClearViewsite();
     $("#createViewsite").hide("medium");
   }
 
@@ -152,7 +148,8 @@ class App extends React.Component {
     editViewsite.viewsiteName = event.viewsiteName;
     editViewsite.loginEnabled = event.loginEnabled;
     this.setState({viewsite: editViewsite});
-    $("#updateViewsite").show("medium");
+    $("#updateViewsite").toggle("medium");
+    $("#createViewsite").hide(false);
   }
 
   handleUpdateViewsite(event) {
@@ -169,12 +166,7 @@ class App extends React.Component {
       console.log(error.response.data);
     });
     // Follow up by clearing viewsite state
-    let clearViewsite = this.state.viewsite;
-    clearViewsite._id = "";
-    clearViewsite.userId = "";
-    clearViewsite.viewsiteName = "";
-    clearViewsite.loginEnabled = "";
-    this.setState({viewsite: clearViewsite});
+    this.handleClearViewsite();
     $("#updateViewsite").hide("medium");
   }
 
@@ -186,6 +178,15 @@ class App extends React.Component {
     }, (error) => {
       console.log(error.response.data);
     });
+  }
+
+  handleClearViewsite() {
+    let clearViewsite = this.state.viewsite;
+    clearViewsite._id = "";
+    clearViewsite.userId = "";
+    clearViewsite.viewsiteName = "";
+    clearViewsite.loginEnabled = "";
+    this.setState({viewsite: clearViewsite});
   }
 
   handleChange(event, toChange) {

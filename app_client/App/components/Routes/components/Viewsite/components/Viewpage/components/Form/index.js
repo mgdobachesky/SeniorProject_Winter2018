@@ -20,6 +20,7 @@ class Form extends React.Component {
     this.handleEditFormTextInput = this.handleEditFormTextInput.bind(this);
     this.handleUpdateFormTextInput = this.handleUpdateFormTextInput.bind(this);
     this.handleDeleteFormTextInput = this.handleDeleteFormTextInput.bind(this);
+    this.handleClearFormTextInput = this.handleClearFormTextInput.bind(this);
     // Other Methods
     this.handleChange = this.handleChange.bind(this);
     this.state = {
@@ -39,9 +40,8 @@ class Form extends React.Component {
     }, (error) => {
       console.log(error.response.data);
     });
-    let clearFormTextInput = this.state.formTextInput;
-    clearFormTextInput.formTextInputLabel = "";
-    this.setState({formTextInput: clearFormTextInput});
+    // Follow up by clearing form state
+    this.handleClearFormTextInput();
     $(".createFormTextInput").hide("medium");
   }
 
@@ -63,7 +63,8 @@ class Form extends React.Component {
     editFormTextInput._id = event._id;
     editFormTextInput.formTextInputLabel = event.formTextInputLabel;
     this.setState({formTextInput: editFormTextInput});
-    $(".updateFormTextInput").show("medium");
+    $(".updateFormTextInput").toggle("medium");
+    $(".createFormTextInput").hide(false);
   }
 
   handleUpdateFormTextInput(event) {
@@ -78,10 +79,7 @@ class Form extends React.Component {
       console.log(error.response.data);
     });
     // Follow up by clearing form state
-    let clearFormTextInput = this.state.formTextInput;
-    clearFormTextInput._id = "";
-    clearFormTextInput.formTextInputLabel = "";
-    this.setState({formTextInput: clearFormTextInput});
+    this.handleClearFormTextInput();
     $(".updateFormTextInput").hide("medium");
   }
 
@@ -93,6 +91,13 @@ class Form extends React.Component {
     }, (error) => {
       console.log(error.response.data);
     });
+  }
+
+  handleClearFormTextInput() {
+    let clearFormTextInput = this.state.formTextInput;
+    clearFormTextInput._id = "";
+    clearFormTextInput.formTextInputLabel = "";
+    this.setState({formTextInput: clearFormTextInput});
   }
 
   handleChange(event, toChange) {
@@ -114,8 +119,8 @@ class Form extends React.Component {
 
     // Prepare to render viewpage
     this.handleReadAllFormTextInputs();
-    $( ".createFormTextInput" ).hide("medium");
-    $( ".updateFormTextInput" ).hide("medium");
+    $( ".createFormTextInput" ).hide(false);
+    $( ".updateFormTextInput" ).hide(false);
   }
 
   render() {

@@ -92,6 +92,12 @@ function ViewpageContentList(props) {
   }
 }
 
+var createViewpage = function() {
+  $( "#createViewpage" ).toggle("medium");
+  $( "#updateViewpage" ).hide(false);
+  this.handleClearViewpage();
+}
+
 var ViewsiteJSX = function() {
   return (
     <div className="container">
@@ -107,7 +113,7 @@ var ViewsiteJSX = function() {
         <div className="col-md">
           <div className="tab-content" id="v-pills-tabContent">
             <div className="tab-pane fade show active" id="v-pills-viewpages" role="tabpanel" aria-labelledby="v-pills-viewpages-tab">
-              <button type="button" className="btn btn-link" onClick={() => $( "#createViewpage" ).toggle("medium")}>+ New Viewpage</button>
+              <button type="button" className="btn btn-link" onClick={() =>  createViewpage.call(this)}>+ New Viewpage</button>
               <div id="createViewpage" className="card mb-3">
                 <div className="card-body">
                   <ViewpageForm

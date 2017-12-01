@@ -1,6 +1,6 @@
 // Import required modules
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 // Create links for each Viewpage a viewsite owns
 function ViewpageLinks(props) {
@@ -11,12 +11,12 @@ function ViewpageLinks(props) {
       const viewpageHref = '/' + viewpage._id;
       return (
         <li key={viewpageId} className="nav-item">
-          <Link
+          <NavLink
             id={viewpageId}
             className="nav-link"
             to={viewpageHref}>
             {viewpageName}
-          </Link>
+          </NavLink>
         </li>
       );
     });
@@ -28,9 +28,9 @@ function ViewpageLinks(props) {
 var NavbarJSX = function() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <Link className="navbar-brand" to="/">
+        <NavLink className="navbar-brand" to="/">
           {this.props.viewsite.viewsiteName}
-        </Link>
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"

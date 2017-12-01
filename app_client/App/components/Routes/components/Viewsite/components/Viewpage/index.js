@@ -24,6 +24,7 @@ class Viewpage extends React.Component {
     this.handleEditText = this.handleEditText.bind(this);
     this.handleUpdateText = this.handleUpdateText.bind(this);
     this.handleDeleteText = this.handleDeleteText.bind(this);
+    this.handleClearText = this.handleClearText.bind(this);
     // Form Methods
     this.handleCreateForm = this.handleCreateForm.bind(this);
     this.handleReadAllForms = this.handleReadAllForms.bind(this);
@@ -31,12 +32,14 @@ class Viewpage extends React.Component {
     this.handleEditForm = this.handleEditForm.bind(this);
     this.handleUpdateForm = this.handleUpdateForm.bind(this);
     this.handleDeleteForm = this.handleDeleteForm.bind(this);
+    this.handleClearForm = this.handleClearForm.bind(this);
     // Data View Methods
     this.handleCreateDataView = this.handleCreateDataView.bind(this);
     this.handleReadAllDataViews = this.handleReadAllDataViews.bind(this);
     this.handleEditDataView = this.handleEditDataView.bind(this);
     this.handleUpdateDataView = this.handleUpdateDataView.bind(this);
     this.handleDeleteDataView = this.handleDeleteDataView.bind(this);
+    this.handleClearDataView = this.handleClearDataView.bind(this);
     // Other Methods
     this.handleChange = this.handleChange.bind(this);
     this.state = {
@@ -70,9 +73,7 @@ class Viewpage extends React.Component {
     }, (error) => {
       console.log(error.response.data);
     });
-    let clearText = this.state.text;
-    clearText.textValue = "";
-    this.setState({text: clearText});
+    this.handleClearText();
     $(".createText").hide("medium");
   }
 
@@ -95,7 +96,14 @@ class Viewpage extends React.Component {
     editText._id = event._id;
     editText.textValue = event.textValue;
     this.setState({text: editText});
-    $(".updateText").show("medium");
+    $(".updateText").toggle("medium");
+    $(".createText").hide(false);
+
+    $( ".createForm" ).hide(false);
+    $( ".updateForm" ).hide(false);
+
+    $( ".createDataView" ).hide(false);
+    $( ".updateDataView" ).hide(false);
   }
 
   handleUpdateText(event) {
@@ -110,10 +118,7 @@ class Viewpage extends React.Component {
       console.log(error.response.data);
     });
     // Follow up by clearing text state
-    let clearText = this.state.text;
-    clearText._id = "";
-    clearText.textValue = "";
-    this.setState({text: clearText});
+    this.handleClearText();
     $(".updateText").hide("medium");
   }
 
@@ -127,17 +132,23 @@ class Viewpage extends React.Component {
     });
   }
 
+  handleClearText() {
+    let clearText = this.state.text;
+    clearText._id = "";
+    clearText.textValue = "";
+    this.setState({text: clearText});
+  }
+
   handleCreateForm(event) {
     const requestData = this.state.form;
     this.manageFormService.createForm(requestData).then((results) => {
       this.handleReadAllForms();
       this.handleReadAllFormsByViewsite();
+      this.handleReadAllDataViews();
     }, (error) => {
       console.log(error.response.data);
     });
-    let clearForm = this.state.form;
-    clearForm.formTitle = "";
-    this.setState({form: clearForm});
+    this.handleClearForm();
     $(".createForm").hide("medium");
   }
 
@@ -170,7 +181,14 @@ class Viewpage extends React.Component {
     editForm._id = event._id;
     editForm.formTitle = event.formTitle;
     this.setState({form: editForm});
-    $(".updateForm").show("medium");
+    $(".updateForm").toggle("medium");
+    $(".createForm").hide(false);
+
+    $( ".createText" ).hide(false);
+    $( ".updateText" ).hide(false);
+
+    $( ".createDataView" ).hide(false);
+    $( ".updateDataView" ).hide(false);
   }
 
   handleUpdateForm(event) {
@@ -182,14 +200,12 @@ class Viewpage extends React.Component {
     this.manageFormService.updateForm(requestData).then((results) => {
       this.handleReadAllForms();
       this.handleReadAllFormsByViewsite();
+      this.handleReadAllDataViews();
     }, (error) => {
       console.log(error.response.data);
     });
     // Follow up by clearing form state
-    let clearForm = this.state.form;
-    clearForm._id = "";
-    clearForm.formTitle = "";
-    this.setState({form: clearForm});
+    this.handleClearForm();
     $(".updateForm").hide("medium");
   }
 
@@ -205,6 +221,13 @@ class Viewpage extends React.Component {
     });
   }
 
+  handleClearForm() {
+    let clearForm = this.state.form;
+    clearForm._id = "";
+    clearForm.formTitle = "";
+    this.setState({form: clearForm});
+  }
+
   handleCreateDataView(event) {
     const requestData = this.state.dataView;
     this.manageDataViewService.createDataView(requestData).then((results) => {
@@ -212,9 +235,8 @@ class Viewpage extends React.Component {
     }, (error) => {
       console.log(error.response.data);
     });
-    let clearDataView = this.state.dataView;
-    clearDataView.formId = "";
-    this.setState({dataView: clearDataView});
+    // Follow up by clearing form state
+    this.handleClearDataView();
     $(".createDataView").hide("medium");
   }
 
@@ -236,7 +258,14 @@ class Viewpage extends React.Component {
     editDataView._id = event._id;
     editDataView.formId = event.formId;
     this.setState({dataView: editDataView});
-    $(".updateDataView").show("medium");
+    $(".updateDataView").toggle("medium");
+    $(".createDataView").hide(false);
+
+    $( ".createText" ).hide(false);
+    $( ".updateText" ).hide(false);
+
+    $( ".createForm" ).hide(false);
+    $( ".updateForm" ).hide(false);
   }
 
   handleUpdateDataView(event) {
@@ -251,10 +280,7 @@ class Viewpage extends React.Component {
       console.log(error.response.data);
     });
     // Follow up by clearing form state
-    let clearDataView = this.state.dataView;
-    clearDataView._id = "";
-    clearDataView.formId = "";
-    this.setState({dataView: clearDataView});
+    this.handleClearDataView();
     $(".updateDataView").hide("medium");
   }
 
@@ -266,6 +292,13 @@ class Viewpage extends React.Component {
     }, (error) => {
       console.log(error.response.data);
     });
+  }
+
+  handleClearDataView() {
+    let clearDataView = this.state.dataView;
+    clearDataView._id = "";
+    clearDataView.formId = "";
+    this.setState({dataView: clearDataView});
   }
 
   handleChange(event, toChange) {
@@ -295,12 +328,12 @@ class Viewpage extends React.Component {
     this.handleReadAllForms();
     this.handleReadAllFormsByViewsite();
     this.handleReadAllDataViews();
-    $(".createText").hide();
-    $(".updateText").hide();
-    $(".createForm").hide();
-    $(".updateForm").hide();
-    $(".createDataView").hide();
-    $(".updateDataView").hide();
+    $(".createText").hide(false);
+    $(".updateText").hide(false);
+    $(".createForm").hide(false);
+    $(".updateForm").hide(false);
+    $(".createDataView").hide(false);
+    $(".updateDataView").hide(false);
   }
 
   render() {

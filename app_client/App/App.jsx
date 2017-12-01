@@ -26,7 +26,8 @@ var AppJSX = function() {
         onCreateViewsite={this.handleCreateViewsite}
         onEditViewsite={this.handleEditViewsite}
         onUpdateViewsite={this.handleUpdateViewsite}
-        onDeleteViewsite={this.handleDeleteViewsite} />
+        onDeleteViewsite={this.handleDeleteViewsite}
+        onClearViewsite={this.handleClearViewsite} />
     </div>
   );
 }

@@ -27,11 +27,17 @@ function FormTextInputList(props) {
   }
 }
 
+var createFormTextInput = function() {
+  $( ".createFormTextInput" ).toggle("medium");
+  $( ".updateFormTextInput" ).hide(false);
+  this.handleClearFormTextInput();
+}
+
 var FormJSX = function() {
   return(
     <div key={this.props.form._id} className="card border-primary mb-3">
       <div className="card-header">
-        <button type="button" className="btn btn-link" onClick={() => $( ".createFormTextInput" ).toggle("medium")}>+ Add Form Input Text</button>
+        <button type="button" className="btn btn-link" onClick={() => {createFormTextInput.call(this);}}>+ Add Form Input Text</button>
       </div>
       <div className="card-body createFormTextInput">
         <FormTextInputForm
