@@ -81,7 +81,7 @@ class App extends React.Component {
     requestData.username = user.username;
     requestData.password = user.password;
     this.manageUserService.updateUser(requestData).then((results) => {
-      console.log(results);
+      console.log(results.data);
     }, function(error) {
       console.log(error.response.data);
     });
@@ -89,7 +89,7 @@ class App extends React.Component {
 
   handleUserLogout(event) {
     this.manageUserService.logoutUser().then((results) => {
-      console.log(results);
+      console.log(results.data);
       let logoutUser = this.state.user;
       let logoutViewsites = this.state.viewsites;
       logoutUser = {
@@ -120,6 +120,7 @@ class App extends React.Component {
     requestData.viewsiteName = newViewsite.viewsiteName;
     requestData.loginEnabled = newViewsite.loginEnabled;
     this.manageViewsiteService.createViewsite(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllViewsites();
     }, (error) => {
       console.log(error.response.data);
@@ -148,6 +149,7 @@ class App extends React.Component {
     requestData.viewsiteName = updateViewsite.viewsiteName;
     requestData.loginEnabled = updateViewsite.loginEnabled;
     this.manageViewsiteService.updateViewsite(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllViewsites();
     }, (error) => {
       console.log(error.response.data);
@@ -161,6 +163,7 @@ class App extends React.Component {
     let requestData = {};
     requestData.viewsiteId = event._id;
     this.manageViewsiteService.deleteViewsite(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllViewsites();
     }, (error) => {
       console.log(error.response.data);
@@ -190,12 +193,14 @@ class App extends React.Component {
   componentWillMount() {
     let loginUser = this.state.user;
     this.manageUserService.isLoggedInUser().then((results) => {
-      this.manageUserService.readOneUser().then((user) => {
-        this.setState({user: user.data, loggedIn: results.data});
-        if(results.data) {
-          this.handleReadAllViewsites();
-        }
-      });
+      if(results.data) {
+        this.manageUserService.readOneUser().then((user) => {
+          this.setState({user: user.data, loggedIn: results.data});
+          if(results.data) {
+            this.handleReadAllViewsites();
+          }
+        });
+      }
     });
   }
 

@@ -49,6 +49,7 @@ function viewpagesReadOne(request) {
 function viewpagesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     viewpages.create({
+      'userId': request.session.userId,
       'viewsiteId': request.body.viewsiteId,
       'viewpageName': request.body.viewpageName,
       'permissionLevel': request.body.permissionLevel
@@ -69,26 +70,29 @@ function viewpagesUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.params.viewpageId) {
       reject('Viewpage ID is required!');
+    } else {
+      viewpages.findById(request.params.viewpageId).exec(function(error, viewpageData) {
+        if(!viewpageData) {
+          reject('Viewpage not found!');
+        } else if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else if(viewpageData.userId != request.session.userId) {
+          reject('You can only update Viewpages you own!');
+        } else {
+          viewpageData.viewpageName = request.body.viewpageName;
+          viewpageData.permissionLevel = request.body.permissionLevel;
+          viewpageData.save(function(error, results) {
+            if(error) {
+              console.log(error.message);
+              reject('Something went wrong!');
+            } else {
+              resolve('Viewpage updated successfully!');
+            }
+          });
+        }
+      });
     }
-    viewpages.findById(request.params.viewpageId).exec(function(error, viewpageData) {
-      if(!viewpageData) {
-        reject('Viewpage not found!');
-      } else if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        viewpageData.viewpageName = request.body.viewpageName;
-        viewpageData.permissionLevel = request.body.permissionLevel;
-        viewpageData.save(function(error, results) {
-          if(error) {
-            console.log(error.message);
-            reject('Something went wrong!');
-          } else {
-            resolve('Viewpage updated successfully!');
-          }
-        });
-      }
-    });
   });
   return promise;
 }
@@ -99,12 +103,21 @@ function viewpagesDelete(request) {
     if(!request.params.viewpageId) {
       reject('Viewpage ID is required!');
     }
-    viewpages.findByIdAndRemove(request.params.viewpageId).exec(function(error, results) {
+    viewpages.findById(request.params.viewpageId).exec(function(error, viewpageData) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
+      } else if(viewpageData.userId != request.session.userId) {
+        reject('You can only delete Viewpages you own!');
       } else {
-        resolve('Viewpage deleted successfully!');
+        viewpages.findByIdAndRemove(request.params.viewpageId).exec(function(error, results) {
+          if(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          } else {
+            resolve('Viewpage deleted successfully!');
+          }
+        });
       }
     });
   });

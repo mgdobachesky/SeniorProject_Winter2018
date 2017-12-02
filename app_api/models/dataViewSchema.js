@@ -4,6 +4,11 @@ var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var dataViewSchema = new Schema({
+  'userId': {
+    'type': ObjectId,
+    'ref': 'user',
+    'required': true
+  },
   'form': {
     'type': ObjectId,
     'ref': 'form',

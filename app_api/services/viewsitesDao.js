@@ -74,17 +74,33 @@ function viewsitesUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.params.viewsiteId) {
       reject('Viewsite ID is required!');
-    }
-    viewsites.findById(request.params.viewsiteId).exec(function(error, viewsiteData) {
-      if(!viewsiteData) {
-        reject('Viewsite not found!');
-      } else if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        if(viewsiteData.viewsiteName != request.body.viewsiteName) {
-          request.params.viewsiteName = request.body.viewsiteName;
-          viewsitesExists(request).then(function(results) {
+    } else {
+      viewsites.findById(request.params.viewsiteId).exec(function(error, viewsiteData) {
+        if(!viewsiteData) {
+          reject('Viewsite not found!');
+        } else if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else if(viewsiteData.userId != request.session.userId) {
+          reject('You can only update Viewsites you own!');
+        } else {
+          if(viewsiteData.viewsiteName != request.body.viewsiteName) {
+            request.params.viewsiteName = request.body.viewsiteName;
+            viewsitesExists(request).then(function(results) {
+              viewsiteData.viewsiteName = request.body.viewsiteName;
+              viewsiteData.loginEnabled = request.body.loginEnabled;
+              viewsiteData.save(function(error, results) {
+                if(error) {
+                  console.log(error.message);
+                  reject('Something went wrong!');
+                } else {
+                  resolve('Viewsite updated successfully!');
+                }
+              });
+            }, function(error) {
+              reject('Viewsite name taken!');
+            });
+          } else {
             viewsiteData.viewsiteName = request.body.viewsiteName;
             viewsiteData.loginEnabled = request.body.loginEnabled;
             viewsiteData.save(function(error, results) {
@@ -95,23 +111,10 @@ function viewsitesUpdate(request) {
                 resolve('Viewsite updated successfully!');
               }
             });
-          }, function(error) {
-            reject('Viewsite name taken!');
-          });
-        } else {
-          viewsiteData.viewsiteName = request.body.viewsiteName;
-          viewsiteData.loginEnabled = request.body.loginEnabled;
-          viewsiteData.save(function(error, results) {
-            if(error) {
-              console.log(error.message);
-              reject('Something went wrong!');
-            } else {
-              resolve('Viewsite updated successfully!');
-            }
-          });
+          }
         }
-      }
-    });
+      });
+    }
   });
   return promise;
 }
@@ -122,12 +125,21 @@ function viewsitesDelete(request) {
     if(!request.params.viewsiteId) {
       reject('Viewsite ID is required!');
     }
-    viewsites.findByIdAndRemove(request.params.viewsiteId).exec(function(error, results) {
+    viewsites.findById(request.params.viewsiteId).exec(function(error, viewsiteData) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
+      } else if(viewsiteData.userId != request.session.userId) {
+        reject('You can only delete Viewsites you own!');
       } else {
-        resolve('Viewsite deleted successfully!');
+        viewsites.findByIdAndRemove(request.params.viewsiteId).exec(function(error, results) {
+          if(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          } else {
+            resolve('Viewsite deleted successfully!');
+          }
+        });
       }
     });
   });

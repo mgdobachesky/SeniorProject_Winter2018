@@ -70,6 +70,7 @@ function formsReadOne(request) {
 function formsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     forms.create({
+      'userId': request.session.userId,
       'viewsiteId': request.body.viewsiteId,
       'viewpageId': request.body.viewpageId,
       'formTitle': request.body.formTitle
@@ -96,25 +97,28 @@ function formsUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.params.formId) {
       reject('Form ID is required!');
+    } else {
+      forms.findById(request.params.formId).exec(function(error, formData) {
+        if(!formData) {
+          reject('Form not found!');
+        } else if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else if(formData.userId != request.session.userId) {
+          reject('You can only update Forms you own!');
+        } else {
+          formData.formTitle = request.body.formTitle;
+          formData.save(function(error, results) {
+            if(error) {
+              console.log(error.message);
+              reject('Something went wrong!');
+            } else {
+              resolve('Form updated successfully!');
+            }
+          });
+        }
+      });
     }
-    forms.findById(request.params.formId).exec(function(error, formData) {
-      if(!formData) {
-        reject('Form not found!');
-      } else if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        formData.formTitle = request.body.formTitle;
-        formData.save(function(error, results) {
-          if(error) {
-            console.log(error.message);
-            reject('Something went wrong!');
-          } else {
-            resolve('Form updated successfully!');
-          }
-        });
-      }
-    });
   });
   return promise;
 }
@@ -125,16 +129,25 @@ function formsDelete(request) {
     if(!request.params.formId) {
       reject('Form ID is required!');
     }
-    forms.findByIdAndRemove(request.params.formId).exec(function(error, results) {
+    forms.findById(request.params.formId).exec(function(error, formData) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
       } else {
-        userDatabasesDao.userTablesDelete(request).then(function(results) {
-          resolve('Form deleted successfully!');
-        }, function(error) {
-          console.log(error.message);
-          reject('Something went wrong!');
+        forms.findByIdAndRemove(request.params.formId).exec(function(error, results) {
+          if(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          } else if(formData.userId != request.session.userId) {
+            reject('You can only delete Forms you own!');
+          } else {
+            userDatabasesDao.userTablesDelete(request).then(function(results) {
+              resolve('Form deleted successfully!');
+            }, function(error) {
+              console.log(error.message);
+              reject('Something went wrong!');
+            });
+          }
         });
       }
     });

@@ -22,46 +22,6 @@ class TextService {
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
-
-  // Create
-  createText(requestData) {
-    return axios({
-      url: '/create/text/',
-      method: 'post',
-      baseURL: API_LOCATION + '/api/v1/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        'viewpageId': requestData.viewpageId,
-        'textValue': requestData.textValue
-      }
-    });
-  }
-
-  // Update
-  updateText(requestData) {
-    return axios({
-      url: '/update/text/' + requestData.textId,
-      method: 'put',
-      baseURL: API_LOCATION + '/api/v1/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        'textValue': requestData.textValue
-      }
-    });
-  }
-
-  // Delete
-  deleteText(requestData) {
-    return axios({
-      url: '/delete/text/' + requestData.textId,
-      method: 'delete',
-      baseURL: API_LOCATION + '/api/v1/'
-    });
-  }
 }
 
 export default TextService;

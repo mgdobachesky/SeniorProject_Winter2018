@@ -23,47 +23,6 @@ class ViewpageService {
     });
   }
 
-  // Create
-  createViewpage(requestData) {
-    return axios({
-      url: '/create/viewpages',
-      method: 'post',
-      baseURL: API_LOCATION + '/api/v1/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        'viewsiteId': requestData.viewsiteId,
-        'viewpageName': requestData.viewpageName,
-        'permissionLevel': requestData.permissionLevel
-      }
-    });
-  }
-
-  // Update
-  updateViewpage(requestData) {
-    return axios({
-      url: '/update/viewpages/' + requestData.viewpageId,
-      method: 'put',
-      baseURL: API_LOCATION + '/api/v1/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        'viewpageName': requestData.viewpageName,
-        'permissionLevel': requestData.permissionLevel
-      }
-    });
-  }
-
-  // Delete
-  deleteViewpage(requestData) {
-    return axios({
-      url: '/delete/viewpages/' + requestData.viewpageId,
-      method: 'delete',
-      baseURL: API_LOCATION + '/api/v1/'
-    });
-  }
 }
 
 export default ViewpageService;

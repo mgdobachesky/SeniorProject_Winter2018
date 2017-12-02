@@ -4,6 +4,11 @@ var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var textSchema = new Schema({
+  'userId': {
+    'type': ObjectId,
+    'ref': 'user',
+    'required': true
+  },
   'textValue': {
     'type': String,
     'required': true

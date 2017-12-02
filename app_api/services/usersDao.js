@@ -182,7 +182,7 @@ function usersExists(request) {
       });
     }
   });
-
+  return promise;
 }
 
 function usersLogout(request) {

@@ -49,6 +49,7 @@ function textReadAll(request) {
 function textCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     text.create({
+      'userId': request.session.userId,
       'viewpageId': request.body.viewpageId,
       'textValue': request.body.textValue
     }, function(error, results) {
@@ -68,25 +69,28 @@ function textUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.params.textId) {
       reject('Text ID is required!');
+    } else {
+      text.findById(request.params.textId).exec(function(error, textData) {
+        if(!textData) {
+          reject('Text not found!');
+        } else if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else if(textData.userId != request.session.userId) {
+          reject('You can only update Text you own!');
+        } else {
+          textData.textValue = request.body.textValue;
+          textData.save(function(error, results) {
+            if(error) {
+              console.log(error.message);
+              reject('Something went wrong!');
+            } else {
+              resolve('Text updated successfully!');
+            }
+          });
+        }
+      });
     }
-    text.findById(request.params.textId).exec(function(error, textData) {
-      if(!textData) {
-        reject('Text not found!');
-      } else if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        textData.textValue = request.body.textValue;
-        textData.save(function(error, results) {
-          if(error) {
-            console.log(error.message);
-            reject('Something went wrong!');
-          } else {
-            resolve('Text updated successfully!');
-          }
-        });
-      }
-    });
   });
   return promise;
 }
@@ -97,12 +101,21 @@ function textDelete(request) {
     if(!request.params.textId) {
       reject('Text ID is required!');
     }
-    text.findByIdAndRemove(request.params.textId).exec(function(error, results) {
+    text.findById(request.params.textId).exec(function(error, textData) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
+      } else if(textData.userId != request.session.userId) {
+        reject('You can only delete Text you own!');
       } else {
-        resolve('Text deleted successfully!');
+        text.findByIdAndRemove(request.params.textId).exec(function(error, results) {
+          if(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          } else {
+            resolve('Text deleted successfully!');
+          }
+        });
       }
     });
   });

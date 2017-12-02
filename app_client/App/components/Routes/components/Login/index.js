@@ -1,6 +1,6 @@
 // Import required modules
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 // Import required components
 import LoginJSX from './Login.jsx';
@@ -23,7 +23,11 @@ class Login extends React.Component {
   }
 
   render() {
-    return(LoginJSX.call(this));
+    if(this.props.loggedIn) {
+      return(<Redirect to="/" />);
+    } else {
+      return(LoginJSX.call(this));
+    }
   }
 }
 

@@ -30,47 +30,6 @@ class FormService {
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
-
-  // Create
-  createForm(requestData) {
-    return axios({
-      url: '/create/forms/',
-      method: 'post',
-      baseURL: API_LOCATION + '/api/v1/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        'viewsiteId': requestData.viewsiteId,
-        'viewpageId': requestData.viewpageId,
-        'formTitle': requestData.formTitle
-      }
-    });
-  }
-
-  // Update
-  updateForm(requestData) {
-    return axios({
-      url: '/update/forms/' + requestData.formId,
-      method: 'put',
-      baseURL: API_LOCATION + '/api/v1/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        'formTitle': requestData.formTitle
-      }
-    });
-  }
-
-  // Delete
-  deleteForm(requestData) {
-    return axios({
-      url: '/delete/forms/' + requestData.formId,
-      method: 'delete',
-      baseURL: API_LOCATION + '/api/v1/'
-    });
-  }
 }
 
 export default FormService;

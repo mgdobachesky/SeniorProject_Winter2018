@@ -5,6 +5,11 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Create viewpage schema
 var viewpageSchema = new Schema({
+  'userId': {
+    'type': ObjectId,
+    'ref': 'user',
+    'required': true
+  },
   'viewsiteId': {
     'type': ObjectId,
     'required': true

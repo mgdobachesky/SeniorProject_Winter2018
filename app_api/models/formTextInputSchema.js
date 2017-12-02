@@ -4,6 +4,11 @@ var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var formTextInputSchema = new Schema({
+  'userId': {
+    'type': ObjectId,
+    'ref': 'user',
+    'required': true
+  },
   'formId': {
     'type': ObjectId,
     'required': true

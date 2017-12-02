@@ -7,6 +7,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 var viewsiteSchema = new Schema({
   'userId': {
     'type': ObjectId,
+    'ref': 'user',
     'required': true
   },
   'viewsiteName': {

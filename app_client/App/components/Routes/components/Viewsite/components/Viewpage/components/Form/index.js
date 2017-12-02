@@ -36,6 +36,7 @@ class Form extends React.Component {
   handleCreateFormTextInput(event) {
     const requestData = this.state.formTextInput;
     this.manageFormTextInputService.createFormTextInput(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllFormTextInputs();
     }, (error) => {
       console.log(error.response.data);
@@ -74,6 +75,7 @@ class Form extends React.Component {
     requestData.formTextInputId = updateFormTextInput._id;
     requestData.formTextInputLabel = updateFormTextInput.formTextInputLabel;
     this.manageFormTextInputService.updateFormTextInput(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllFormTextInputs();
     }, (error) => {
       console.log(error.response.data);
@@ -87,6 +89,7 @@ class Form extends React.Component {
     let requestData = {};
     requestData.formTextInputId = event._id;
     this.manageFormTextInputService.deleteFormTextInput(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllFormTextInputs();
     }, (error) => {
       console.log(error.response.data);

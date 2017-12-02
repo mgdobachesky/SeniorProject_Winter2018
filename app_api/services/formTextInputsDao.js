@@ -49,6 +49,7 @@ function formTextInputsReadOne(request) {
 function formTextInputsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     formTextInputs.create({
+      'userId': request.session.userId,
       'formId': request.body.formId,
       'formTextInputLabel': request.body.formTextInputLabel
     }, function(error, results) {
@@ -68,25 +69,28 @@ function formTextInputsUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.params.formTextInputId) {
       reject('Form Text Input ID is required!');
+    } else {
+      formTextInputs.findById(request.params.formTextInputId).exec(function(error, formTextInputData) {
+        if(!formTextInputData) {
+          reject('Form Text Input not found!');
+        } else if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else if(formTextInputData.userId != request.session.userId) {
+          reject('You can only update Form Text Inputs you own!');
+        } else {
+          formTextInputData.formTextInputLabel = request.body.formTextInputLabel;
+          formTextInputData.save(function(error, results) {
+            if(error) {
+              console.log(error.message);
+              reject('Something went wrong!');
+            } else {
+              resolve('Form Text Input updated successfully!');
+            }
+          });
+        }
+      });
     }
-    formTextInputs.findById(request.params.formTextInputId).exec(function(error, formTextInputData) {
-      if(!formTextInputData) {
-        reject('Form Text Input not found!');
-      } else if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        formTextInputData.formTextInputLabel = request.body.formTextInputLabel;
-        formTextInputData.save(function(error, results) {
-          if(error) {
-            console.log(error.message);
-            reject('Something went wrong!');
-          } else {
-            resolve('Form Text Input updated successfully!');
-          }
-        });
-      }
-    });
   });
   return promise;
 }
@@ -97,12 +101,21 @@ function formTextInputsDelete(request) {
     if(!request.params.formTextInputId) {
       reject('Form Text Input ID is required!');
     }
-    formTextInputs.findByIdAndRemove(request.params.formTextInputId).exec(function(error, results) {
+    formTextInputs.findById(request.params.formTextInputId).exec(function(error, formTextInputData) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
+      } else if(formTextInputData.userId != request.session.userId) {
+        reject('You can only delete Form Text Inputs you own!');
       } else {
-        resolve('Form Text Input deleted successfully!');
+        formTextInputs.findByIdAndRemove(request.params.formTextInputId).exec(function(error, results) {
+          if(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          } else {
+            resolve('Form Text Input deleted successfully!');
+          }
+        });
       }
     });
   });

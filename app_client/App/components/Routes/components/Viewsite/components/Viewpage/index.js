@@ -69,6 +69,7 @@ class Viewpage extends React.Component {
   handleCreateText(event) {
     const requestData = this.state.text;
     this.manageTextService.createText(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllText();
     }, (error) => {
       console.log(error.response.data);
@@ -113,6 +114,7 @@ class Viewpage extends React.Component {
     requestData.textId = updateText._id;
     requestData.textValue = updateText.textValue;
     this.manageTextService.updateText(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllText();
     }, (error) => {
       console.log(error.response.data);
@@ -126,6 +128,7 @@ class Viewpage extends React.Component {
     let requestData = {};
     requestData.textId = event._id;
     this.manageTextService.deleteText(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllText();
     }, (error) => {
       console.log(error.response.data);
@@ -142,6 +145,7 @@ class Viewpage extends React.Component {
   handleCreateForm(event) {
     const requestData = this.state.form;
     this.manageFormService.createForm(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllForms();
       this.handleReadAllFormsByViewsite();
       this.handleReadAllDataViews();
@@ -198,6 +202,7 @@ class Viewpage extends React.Component {
     requestData.formId = updateForm._id;
     requestData.formTitle = updateForm.formTitle;
     this.manageFormService.updateForm(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllForms();
       this.handleReadAllFormsByViewsite();
       this.handleReadAllDataViews();
@@ -213,6 +218,7 @@ class Viewpage extends React.Component {
     let requestData = {};
     requestData.formId = event._id;
     this.manageFormService.deleteForm(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllForms();
       this.handleReadAllFormsByViewsite();
       this.handleReadAllDataViews();
@@ -231,6 +237,7 @@ class Viewpage extends React.Component {
   handleCreateDataView(event) {
     const requestData = this.state.dataView;
     this.manageDataViewService.createDataView(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllDataViews();
     }, (error) => {
       console.log(error.response.data);
@@ -275,6 +282,7 @@ class Viewpage extends React.Component {
     requestData.dataViewId = updateDataView._id;
     requestData.formId = updateDataView.formId;
     this.manageDataViewService.updateDataView(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllDataViews();
     }, (error) => {
       console.log(error.response.data);
@@ -288,6 +296,7 @@ class Viewpage extends React.Component {
     let requestData = {};
     requestData.dataViewId = event._id;
     this.manageDataViewService.deleteDataView(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllDataViews();
     }, (error) => {
       console.log(error.response.data);

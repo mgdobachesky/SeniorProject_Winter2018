@@ -42,6 +42,7 @@ class Viewsite extends React.Component {
     requestData.viewpageName = newViewpage.viewpageName;
     requestData.permissionLevel = newViewpage.permissionLevel;
     this.manageViewpageService.createViewpage(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllViewpages();
     }, (error) => {
       console.log(error.response.data);
@@ -84,6 +85,7 @@ class Viewsite extends React.Component {
     requestData.viewpageName = updateViewpage.viewpageName;
     requestData.permissionLevel = updateViewpage.permissionLevel;
     this.manageViewpageService.updateViewpage(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllViewpages();
     }, (error) => {
       console.log(error.response.data);
@@ -97,6 +99,7 @@ class Viewsite extends React.Component {
     let requestData = {};
     requestData.viewpageId = event._id;
     this.manageViewpageService.deleteViewpage(requestData).then((results) => {
+      console.log(results.data);
       this.handleReadAllViewpages();
     }, (error) => {
       console.log(error.response.data);

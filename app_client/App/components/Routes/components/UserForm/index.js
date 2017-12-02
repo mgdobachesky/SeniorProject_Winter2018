@@ -1,6 +1,6 @@
 // Import required modules
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 // Import required components
 import UserFormJSX from './UserForm.jsx';
@@ -23,7 +23,11 @@ class UserForm extends React.Component {
   }
 
   render() {
-    return (UserFormJSX.call(this));
+    if(this.props.loggedIn) {
+      return(<Redirect to="/" />);
+    } else {
+      return (UserFormJSX.call(this));
+    }
   }
 }
 

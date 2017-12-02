@@ -27,47 +27,6 @@ class FormService {
       baseURL: 'http://159.203.105.123:3000/api/v1/'
     });
   }
-
-  // Create
-  createForm(requestData) {
-    return axios({
-      url: '/create/forms/',
-      method: 'post',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        'viewsiteId': requestData.viewsiteId,
-        'viewpageId': requestData.viewpageId,
-        'formTitle': requestData.formTitle
-      }
-    });
-  }
-
-  // Update
-  updateForm(requestData) {
-    return axios({
-      url: '/update/forms/' + requestData.formId,
-      method: 'put',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        'formTitle': requestData.formTitle
-      }
-    });
-  }
-
-  // Delete
-  deleteForm(requestData) {
-    return axios({
-      url: '/delete/forms/' + requestData.formId,
-      method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
-    });
-  }
 }
 
 export default FormService;

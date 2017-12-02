@@ -49,6 +49,7 @@ function dataViewsReadAll(request) {
 function dataViewsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     dataView.create({
+      'userId': request.session.userId,
       'form': request.body.formId,
       'userTable': request.body.formId,
       'viewpageId': request.body.viewpageId
@@ -69,26 +70,29 @@ function dataViewsUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.params.dataViewId) {
       reject('Data View ID is required!');
+    } else {
+      dataView.findById(request.params.dataViewId).exec(function(error, dataViewData) {
+        if(!dataViewData) {
+          reject('Data View not found!');
+        } else if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else if(dataViewData.userId != request.session.userId) {
+          reject('You can only update Data Views you own!');
+        } else {
+          dataViewData.form = request.body.formId;
+          dataViewData.userTable = request.body.formId;
+          dataViewData.save(function(error, results) {
+            if(error) {
+              console.log(error.message);
+              reject('Something went wrong!');
+            } else {
+              resolve('Data View updated successfully!');
+            }
+          });
+        }
+      });
     }
-    dataView.findById(request.params.dataViewId).exec(function(error, dataViewData) {
-      if(!dataViewData) {
-        reject('Data View not found!');
-      } else if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        dataViewData.form = request.body.formId;
-        dataViewData.userTable = request.body.formId;
-        dataViewData.save(function(error, results) {
-          if(error) {
-            console.log(error.message);
-            reject('Something went wrong!');
-          } else {
-            resolve('Data View updated successfully!');
-          }
-        });
-      }
-    });
   });
   return promise;
 }
@@ -99,12 +103,21 @@ function dataViewsDelete(request) {
     if(!request.params.dataViewId) {
       reject('Data View ID is required!');
     }
-    dataView.findByIdAndRemove(request.params.dataViewId).exec(function(error, results) {
+    dataView.findById(request.params.dataViewId).exec(function(error, dataViewData) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
+      } else if(dataViewData.userId != request.session.userId) {
+        reject('You can only delete Data Views you own!');
       } else {
-        resolve('Data View deleted successfully!');
+        dataView.findByIdAndRemove(request.params.dataViewId).exec(function(error, results) {
+          if(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          } else {
+            resolve('Data View deleted successfully!');
+          }
+        });
       }
     });
   });

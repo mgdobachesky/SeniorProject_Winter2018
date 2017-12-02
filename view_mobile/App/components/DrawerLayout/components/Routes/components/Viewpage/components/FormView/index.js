@@ -36,7 +36,7 @@ class FormView extends React.Component {
     requestData.formId = this.props.form._id;
     requestData.record = this.state.record;
     this.manageUserDatabaseService.createUserRecord(requestData).then((results) => {
-      console.log(results);
+      console.log(results.data);
     }, (error) => {
       console.log(error.response.data);
     });
