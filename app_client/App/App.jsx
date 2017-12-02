@@ -13,12 +13,14 @@ var AppJSX = function() {
       <Navbar
         user={this.state.user}
         viewsites={this.state.viewsites}
-        onUserLogout={this.handleUserLogout} />
+        onUserLogout={this.handleUserLogout}
+        loggedIn={this.state.loggedIn} />
 
       <Routes
         user={this.state.user}
         viewsite={this.state.viewsite}
         viewsites={this.state.viewsites}
+        loggedIn={this.state.loggedIn}
         onChange={this.handleChange}
         onReadOneUser={this.handleReadOneUser}
         onCreateUser={this.handleCreateUser}

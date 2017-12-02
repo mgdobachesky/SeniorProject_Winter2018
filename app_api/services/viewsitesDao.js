@@ -7,10 +7,10 @@ var viewsites = mongoose.model('viewsite');
 // Read operations
 function viewsitesReadAll(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.userId) {
+    if(!request.session.userId) {
       reject('User ID required!');
     } else {
-      viewsites.find({'userId': request.params.userId}).exec(function(error, results) {
+      viewsites.find({'userId': request.session.userId}).exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -51,7 +51,7 @@ function viewsitesCreate(request) {
     request.params.viewsiteName = request.body.viewsiteName;
     viewsitesExists(request).then(function(results) {
       viewsites.create({
-        'userId': request.body.userId,
+        'userId': request.session.userId,
         'viewsiteName': request.body.viewsiteName,
         'loginEnabled': request.body.loginEnabled
       }, function(error, results) {

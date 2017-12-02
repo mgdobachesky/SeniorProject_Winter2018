@@ -9,11 +9,15 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 var express = require('express');
+var mongoose = require('mongoose');
+var session = require('express-session');
+var mongoStore = require('connect-mongo')(session);
 
 // Add required modules that exist within the project
 require('./app_api/models/db');
 var routesServer = require('./app_server/routes/index');
 var routesApi = require('./app_api/routes/index');
+var db = mongoose.connection;
 
 // Create Express application
 var app = express();
@@ -27,6 +31,10 @@ app.locals.basedir = path.join(__dirname, 'public');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 
 // Configure the application middleware
+app.use(session({
+  secret: '3Y8tQ9TUo9uJd6f',
+  store: new mongoStore({mongooseConnection: db})
+}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

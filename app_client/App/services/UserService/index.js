@@ -5,10 +5,10 @@ import axios from 'axios';
 import { API_LOCATION } from 'Constants';
 
 class UserService {
-  // Read one
-  readOneUser(requestData) {
+  // Login
+  loginUser(requestData) {
     return axios({
-      url: '/read_one/users',
+      url: '/login/users',
       method: 'post',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
@@ -18,6 +18,15 @@ class UserService {
         'username': requestData.username,
         'password': requestData.password
       }
+    });
+  }
+
+  // Read One
+  readOneUser(requestData) {
+    return axios({
+      url: '/read_one/users',
+      method: 'get',
+      baseURL: API_LOCATION + '/api/v1/'
     });
   }
 
@@ -40,7 +49,7 @@ class UserService {
   // Update
   updateUser(requestData) {
     return axios({
-      url: '/update/users/' + requestData.userId,
+      url: '/update/users',
       method: 'put',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
@@ -56,7 +65,7 @@ class UserService {
   // Delete
   deleteUser(requestData) {
     return axios({
-      url: '/delete/users/' + requestData.userId,
+      url: '/delete/users',
       method: 'delete',
       baseURL: API_LOCATION + '/api/v1/',
     });
@@ -66,6 +75,24 @@ class UserService {
   existsUser(requestData) {
     return axios({
       url: '/exists/users/' + requestData.username,
+      method: 'get',
+      baseURL: API_LOCATION + '/api/v1/'
+    });
+  }
+
+  // logout
+  logoutUser(requestData) {
+    return axios({
+      url: '/logout/users/',
+      method: 'get',
+      baseURL: API_LOCATION + '/api/v1/'
+    });
+  }
+
+  // logout
+  isLoggedInUser(requestData) {
+    return axios({
+      url: '/is_logged_in/users/',
       method: 'get',
       baseURL: API_LOCATION + '/api/v1/'
     });

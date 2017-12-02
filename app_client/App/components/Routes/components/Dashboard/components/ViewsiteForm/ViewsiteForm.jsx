@@ -18,7 +18,6 @@ var ViewsiteFormJSX = function() {
           </label>
         </div>
         <input name="_id" type="hidden" id="_id" value={this.props.viewsite._id} />
-        <input name="userId" type="hidden" id="userId" value={this.props.viewsite.userId} />
         <button type="submit" className="btn btn-primary">{this.props.description}</button>
       </form>
     </div>

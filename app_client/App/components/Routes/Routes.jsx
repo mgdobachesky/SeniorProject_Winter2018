@@ -29,6 +29,7 @@ var RoutesJSX = function() {
         user={this.props.user}
         viewsite={this.props.viewsite}
         viewsites={this.props.viewsites}
+        loggedIn={this.props.loggedIn}
         onChange={this.props.onChange}
         onUpdateUser={this.props.onUpdateUser}
         onCreateViewsite={this.props.onCreateViewsite}
@@ -38,7 +39,7 @@ var RoutesJSX = function() {
         onClearViewsite={this.props.onClearViewsite} />} />
 
       <Route path='/:viewsiteName' render={routeProps => <Viewsite {...routeProps}
-        user={this.props.user} />} />
+        loggedIn={this.props.loggedIn} />} />
     </Switch>
   );
 }

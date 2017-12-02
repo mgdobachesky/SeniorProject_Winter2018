@@ -15,7 +15,6 @@ var UserFormJSX = function() {
           <label htmlFor="password">Password</label>
           <input name="password" type="password" className="form-control" id="password" placeholder="Enter Password" value={this.props.user.password} onChange={this.handleChange} />
         </div>
-        <input name="_id" type="hidden" id="_id" value={this.props.user._id} />
         <button type="submit" className="btn btn-primary">{this.props.description}</button>
       </form>
     </div>

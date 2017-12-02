@@ -33,17 +33,16 @@ class App extends React.Component {
     // Set initial state
     this.state = {
       user: {
-        _id: "",
         username: "",
         password: ""
       },
       viewsite: {
         _id: "",
-        userId: "",
         viewsiteName: "",
         loginEnabled: false
       },
-      viewsites: []};
+      viewsites: [],
+      loggedIn: false};
     }
 
   handleCreateUser(event) {
@@ -63,17 +62,13 @@ class App extends React.Component {
     let loginUser = this.state.user;
     requestData.username = loginUser.username;
     requestData.password = loginUser.password;
-    this.manageUserService.readOneUser(requestData).then((results) => {
+    this.manageUserService.loginUser(requestData).then((results) => {
       let foundUser = {};
-      foundUser._id = results.data._id;
       foundUser.username = results.data.username;
-      // Set user in local storage for login persistence
-      localStorage.setItem('user', JSON.stringify(foundUser));
       // Set user in state
-      this.setState({user: foundUser}, () => {
-        // Update the list of viewsites in state
-        this.handleReadAllViewsites();
-      });
+      this.setState({user: foundUser, loggedIn: true});
+      // Update the list of viewsites in state
+      this.handleReadAllViewsites();
       location.hash = "/";
     }, function(error) {
       console.log(error.response.data);
@@ -83,52 +78,45 @@ class App extends React.Component {
   handleUpdateUser(event) {
     let requestData = {};
     let user = this.state.user;
-    requestData.userId = user._id;
     requestData.username = user.username;
     requestData.password = user.password;
     this.manageUserService.updateUser(requestData).then((results) => {
-      // Set user in local storage for login persistence
-      localStorage.setItem('user', JSON.stringify(user));
+      console.log(results);
     }, function(error) {
       console.log(error.response.data);
     });
   }
 
   handleUserLogout(event) {
-    let logoutUser = this.state.user;
-    let logoutViewsites = this.state.viewsites;
-    logoutUser = {
-      _id: "",
-      username: "",
-      password: ""
-    };
-    logoutViewsites = [];
-    this.setState({
-      user: logoutUser,
-      viewsites: logoutViewsites
+    this.manageUserService.logoutUser().then((results) => {
+      console.log(results);
+      let logoutUser = this.state.user;
+      let logoutViewsites = this.state.viewsites;
+      logoutUser = {
+        username: "",
+        password: ""
+      };
+      logoutViewsites = [];
+      this.setState({
+        user: logoutUser,
+        viewsites: logoutViewsites,
+        loggedIn: false
+      });
+      location.hash = "/";
     });
-    localStorage.removeItem('user');
-    location.hash = "/";
   }
 
   handleReadAllViewsites() {
-    const userId = this.state.user._id;
-    if(userId) {
-      let requestData = {};
-      requestData.userId = userId;
-      this.manageViewsiteService.readAllViewsites(requestData).then((results) => {
-        this.setState({viewsites: results.data});
-      }, (error) => {
-        console.log(error.response.data);
-      });
-    }
+    this.manageViewsiteService.readAllViewsites().then((results) => {
+      this.setState({viewsites: results.data});
+    }, (error) => {
+      console.log(error.response.data);
+    });
   }
 
   handleCreateViewsite(event) {
     let requestData = {};
     let newViewsite = this.state.viewsite;
-    let loggedInUser = this.state.user;
-    requestData.userId = loggedInUser._id;
     requestData.viewsiteName = newViewsite.viewsiteName;
     requestData.loginEnabled = newViewsite.loginEnabled;
     this.manageViewsiteService.createViewsite(requestData).then((results) => {
@@ -144,7 +132,6 @@ class App extends React.Component {
   handleEditViewsite(event) {
     let editViewsite = this.state.viewsite;
     editViewsite._id = event._id;
-    editViewsite.userId = event.userId;
     editViewsite.viewsiteName = event.viewsiteName;
     editViewsite.loginEnabled = event.loginEnabled;
     this.setState({viewsite: editViewsite});
@@ -202,13 +189,14 @@ class App extends React.Component {
 
   componentWillMount() {
     let loginUser = this.state.user;
-    let user = localStorage.getItem('user');
-    if(user) {
-      loginUser = JSON.parse(user);
-      this.setState({user: loginUser}, () => {
-        this.handleReadAllViewsites();
+    this.manageUserService.isLoggedInUser().then((results) => {
+      this.manageUserService.readOneUser().then((user) => {
+        this.setState({user: user.data, loggedIn: results.data});
+        if(results.data) {
+          this.handleReadAllViewsites();
+        }
       });
-    }
+    });
   }
 
   render() {

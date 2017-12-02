@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 // Choose navbar options based on user state
 function NavbarOptions(props) {
-  if(props.user._id) {
+  if(props.loggedIn) {
     return (
       <li className="nav-item">
         <NavLink className="nav-link" to="/dashboard">Dashboard</NavLink>
@@ -35,7 +35,7 @@ function ViewsiteLinks(props) {
 
 // Choose login options based on user state
 function LoginOptions(props) {
-  if(props.user._id) {
+  if(props.loggedIn) {
     return (
       <ul className="navbar-nav justify-content-end">
         <li className="nav-item">
@@ -62,7 +62,9 @@ var NavbarJSX = function() {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <NavLink className="navbar-brand" to="/">Cadre</NavLink>
         <ul className="navbar-nav mr-auto">
-          <NavbarOptions user={this.props.user} />
+          <NavbarOptions
+            user={this.props.user}
+            loggedIn={this.props.loggedIn} />
         </ul>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -71,7 +73,10 @@ var NavbarJSX = function() {
           <ul className="navbar-nav mr-auto">
             <ViewsiteLinks viewsites={this.props.viewsites} />
           </ul>
-          <LoginOptions user={this.props.user} onLogout={this.handleUserLogout} />
+          <LoginOptions
+            user={this.props.user}
+            onLogout={this.handleUserLogout}
+            loggedIn={this.props.loggedIn} />
         </div>
       </nav>
     );

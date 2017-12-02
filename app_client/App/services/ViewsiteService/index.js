@@ -17,7 +17,7 @@ class ViewsiteService {
   // Read all
   readAllViewsites(requestData) {
     return axios({
-      url: '/read_all/viewsites/' + requestData.userId,
+      url: '/read_all/viewsites',
       method: 'get',
       baseURL: API_LOCATION + '/api/v1/'
     });
@@ -33,7 +33,6 @@ class ViewsiteService {
         'Content-Type': 'application/json'
       },
       data: {
-        'userId': requestData.userId,
         'viewsiteName': requestData.viewsiteName,
         'loginEnabled': requestData.loginEnabled
       }

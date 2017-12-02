@@ -152,7 +152,7 @@ class Viewsite extends React.Component {
   }
 
   render() {
-    if(this.props.user._id) {
+    if(this.props.loggedIn) {
       return(ViewsiteJSX.call(this));
     } else {
       return(<Redirect to="/" />);

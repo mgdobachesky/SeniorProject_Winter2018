@@ -17,7 +17,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    if(this.props.user._id) {
+    if(this.props.loggedIn) {
       return(DashboardJSX.call(this));
     } else {
       return(<Redirect to="/" />);
