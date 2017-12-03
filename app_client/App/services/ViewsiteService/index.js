@@ -63,15 +63,6 @@ class ViewsiteService {
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
-
-  // Exists
-  existsViewsite(requestData) {
-    return axios({
-      url: '/exists/viewsites/' + requestData.viewsiteName,
-      method: 'get',
-      baseURL: API_LOCATION + '/api/v1/'
-    });
-  }
 }
 
 export default ViewsiteService;

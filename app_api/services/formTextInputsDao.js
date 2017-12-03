@@ -10,7 +10,7 @@ function formTextInputsReadAll(request) {
     if(!request.params.formId) {
       reject('Form ID is required!');
     } else {
-      formTextInputs.find({'formId': request.params.formId}).exec(function(error, results) {
+      formTextInputs.find({'formId': request.params.formId}).select('-userId').exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -30,7 +30,7 @@ function formTextInputsReadOne(request) {
     if(!request.params.formTextInputId) {
       reject('Form Text Input ID is required!');
     } else {
-      formTextInputs.findOne({'_id': request.params.formTextInputId}).exec(function(error, results) {
+      formTextInputs.findOne({'_id': request.params.formTextInputId}).select('-userId').exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');

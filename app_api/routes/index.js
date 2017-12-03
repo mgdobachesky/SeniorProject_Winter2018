@@ -11,14 +11,12 @@ var controllerText = require('../controllers/text');
 var controllerDataViews = require('../controllers/dataViews');
 
 // Create routes for users
-router.post('/login/users', controllerUsers.usersLogIn);
 router.get('/read_one/users', controllerUsers.usersReadOne);
 router.post('/create/users', controllerUsers.usersCreate);
 router.put('/update/users', controllerUsers.usersUpdate);
 router.delete('/delete/users', controllerUsers.usersDelete);
-router.get('/exists/users/:username', controllerUsers.usersExists);
+router.post('/login/users', controllerUsers.usersLogIn);
 router.get('/logout/users', controllerUsers.usersLogout);
-router.get('/is_logged_in/users', controllerUsers.usersIsLoggedIn);
 
 // Create routes for viewsites
 router.get('/read_one/viewsites/:viewsiteName', controllerViewsites.viewsitesReadOne);
@@ -26,7 +24,6 @@ router.get('/read_all/viewsites', controllerViewsites.viewsitesReadAll);
 router.post('/create/viewsites', controllerViewsites.viewsitesCreate);
 router.put('/update/viewsites/:viewsiteId', controllerViewsites.viewsitesUpdate);
 router.delete('/delete/viewsites/:viewsiteId', controllerViewsites.viewsitesDelete);
-router.get('/exists/viewsites/:viewsiteName', controllerViewsites.viewsitesExists);
 
 // Create routes for viewpages
 router.get('/read_one/viewpages/:viewpageId', controllerViewpages.viewpagesReadOne);

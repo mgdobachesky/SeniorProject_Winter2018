@@ -10,7 +10,7 @@ function dataViewsReadOne(request) {
     if(!request.params.dataViewId) {
       reject('Data View ID is required!');
     } else {
-      dataView.findOne({'_id': request.params.dataViewId}).populate('form').populate('userTable').exec(function(error, results) {
+      dataView.findOne({'_id': request.params.dataViewId}).populate({path: 'form', select: '-userId'}).populate('userTable').select('-userId').exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -30,7 +30,7 @@ function dataViewsReadAll(request) {
     if(!request.params.viewpageId) {
       reject('Viewpage ID is required!');
     } else {
-      dataView.find({'viewpageId': request.params.viewpageId}).populate('form').populate('userTable').exec(function(error, results) {
+      dataView.find({'viewpageId': request.params.viewpageId}).populate({path: 'form', select: '-userId'}).populate('userTable').select('-userId').exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');

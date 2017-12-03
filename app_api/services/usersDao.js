@@ -6,50 +6,19 @@ var users = mongoose.model('user');
 // ** CRUD OPERATIONS **
 
 // Read operations
-function usersLogIn(request) {
-  var promise = new Promise(function(resolve, reject) {
-    if(!request.body.username) {
-      reject('Username is required!');
-    } else {
-      users.findOne({'username': request.body.username}).exec(function(error, results) {
-        if(error) {
-          console.log(error.message);
-          reject('Something went wrong!');
-        } else if(!results) {
-          reject('User not found!');
-        } else {
-          bcrypt.compare(request.body.password, results.password, function(error, match) {
-            if(!match) {
-              reject('Wrong username or password!');
-            } else {
-              request.session.userId = results._id;
-              resolve({
-                "username": results.username
-              });
-            }
-          });
-        }
-      });
-    }
-  });
-  return promise;
-}
-
 function usersReadOne(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.session.userId) {
       reject('Username is required!');
     } else {
-      users.findOne({'_id': request.session.userId}).exec(function(error, results) {
+      users.findOne({'_id': request.session.userId}).select('-_id -password').exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
         } else if(!results) {
           reject('User not found!');
         } else {
-          resolve({
-            "username": results.username
-          });
+          resolve(results);
         }
       });
     }
@@ -185,6 +154,33 @@ function usersExists(request) {
   return promise;
 }
 
+function usersLogIn(request) {
+  var promise = new Promise(function(resolve, reject) {
+    if(!request.body.username) {
+      reject('Username is required!');
+    } else {
+      users.findOne({'username': request.body.username}).exec(function(error, results) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else if(!results) {
+          reject('User not found!');
+        } else {
+          bcrypt.compare(request.body.password, results.password, function(error, match) {
+            if(!match) {
+              reject('Wrong username or password!');
+            } else {
+              request.session.userId = results._id;
+              resolve('User logged in successfully!');
+            }
+          });
+        }
+      });
+    }
+  });
+  return promise;
+}
+
 function usersLogout(request) {
   var promise = new Promise(function(resolve, reject) {
     if(request.session) {
@@ -200,23 +196,10 @@ function usersLogout(request) {
   return promise;
 }
 
-function usersIsLoggedIn(request) {
-  var promise = new Promise(function(resolve, reject) {
-    if(request.session.userId) {
-      resolve(true);
-    } else {
-      resolve(false);
-    }
-  });
-  return promise;
-}
-
 // Export functions
-module.exports.usersLogIn = usersLogIn;
 module.exports.usersReadOne = usersReadOne;
 module.exports.usersCreate = usersCreate;
 module.exports.usersUpdate = usersUpdate;
 module.exports.usersDelete = usersDelete;
-module.exports.usersExists = usersExists;
+module.exports.usersLogIn = usersLogIn;
 module.exports.usersLogout = usersLogout;
-module.exports.usersIsLoggedIn = usersIsLoggedIn;

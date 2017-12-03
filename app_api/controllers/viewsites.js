@@ -52,19 +52,9 @@ function viewsitesDelete(request, response) {
   });
 }
 
-// Check if unique field exists
-function viewsitesExists(request, response) {
-  viewsitesDao.viewsitesExists(request).then(function(results) {
-    sendJSONresponse(response, 200, results);
-  }, function(error) {
-    sendJSONresponse(response, 404, error);
-  });
-}
-
 // Export functions
 module.exports.viewsitesReadAll = viewsitesReadAll;
 module.exports.viewsitesReadOne = viewsitesReadOne;
 module.exports.viewsitesCreate = viewsitesCreate;
 module.exports.viewsitesUpdate = viewsitesUpdate;
 module.exports.viewsitesDelete = viewsitesDelete;
-module.exports.viewsitesExists = viewsitesExists;

@@ -10,7 +10,7 @@ function textReadOne(request) {
     if(!request.params.textId) {
       reject('Text ID is required!');
     } else {
-      text.findOne({'_id': request.params.textId}).exec(function(error, results) {
+      text.findOne({'_id': request.params.textId}).select('-userId').exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -30,7 +30,7 @@ function textReadAll(request) {
     if(!request.params.viewpageId) {
       reject('Viewpage ID is required!');
     } else {
-      text.find({'viewpageId': request.params.viewpageId}).exec(function(error, results) {
+      text.find({'viewpageId': request.params.viewpageId}).select('-userId').exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');

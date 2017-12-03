@@ -21,6 +21,7 @@ class App extends React.Component {
     this.handleCreateUser = this.handleCreateUser.bind(this);
     this.handleReadOneUser = this.handleReadOneUser.bind(this);
     this.handleUpdateUser = this.handleUpdateUser.bind(this);
+    this.handleUserLogin = this.handleUserLogin.bind(this);
     this.handleUserLogout = this.handleUserLogout.bind(this);
     this.handleReadAllViewsites = this.handleReadAllViewsites.bind(this);
     this.handleCreateViewsite = this.handleCreateViewsite.bind(this);
@@ -51,27 +52,17 @@ class App extends React.Component {
     requestData.username = loginUser.username;
     requestData.password = loginUser.password;
     this.manageUserService.createUser(requestData).then((results) => {
-      this.handleReadOneUser(event);
+      this.handleUserLogin(event);
     }, (error) => {
       console.log(error.response.data);
     });
   }
 
   handleReadOneUser(event) {
-    let requestData = {};
-    let loginUser = this.state.user;
-    requestData.username = loginUser.username;
-    requestData.password = loginUser.password;
-    this.manageUserService.loginUser(requestData).then((results) => {
-      let foundUser = {};
-      foundUser.username = results.data.username;
-      // Set user in state
-      this.setState({user: foundUser, loggedIn: true});
-      // Update the list of viewsites in state
-      this.handleReadAllViewsites();
-      location.hash = "/";
-    }, function(error) {
-      console.log(error.response.data);
+    this.manageUserService.readOneUser().then((results) => {
+      if(results.data.username) {
+        this.setState({user: results.data, loggedIn: true}, () => this.handleReadAllViewsites());
+      }
     });
   }
 
@@ -82,6 +73,19 @@ class App extends React.Component {
     requestData.password = user.password;
     this.manageUserService.updateUser(requestData).then((results) => {
       console.log(results.data);
+    }, function(error) {
+      console.log(error.response.data);
+    });
+  }
+
+  handleUserLogin(event) {
+    let requestData = {};
+    let loginUser = this.state.user;
+    requestData.username = loginUser.username;
+    requestData.password = loginUser.password;
+    this.manageUserService.loginUser(requestData).then((results) => {
+      this.handleReadOneUser();
+      location.hash = "/";
     }, function(error) {
       console.log(error.response.data);
     });
@@ -191,17 +195,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    let loginUser = this.state.user;
-    this.manageUserService.isLoggedInUser().then((results) => {
-      if(results.data) {
-        this.manageUserService.readOneUser().then((user) => {
-          this.setState({user: user.data, loggedIn: results.data});
-          if(results.data) {
-            this.handleReadAllViewsites();
-          }
-        });
-      }
-    });
+    this.handleReadOneUser();
   }
 
   render() {

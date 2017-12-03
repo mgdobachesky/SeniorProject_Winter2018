@@ -10,7 +10,7 @@ function viewpagesReadAll(request) {
     if(!request.params.viewsiteId) {
       reject('Viewsite ID is required!');
     } else {
-      viewpages.find({'viewsiteId': request.params.viewsiteId}).exec(function(error, results) {
+      viewpages.find({'viewsiteId': request.params.viewsiteId}).select('-userId').exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -30,7 +30,7 @@ function viewpagesReadOne(request) {
     if(!request.params.viewpageId) {
       reject('Viewpage ID is required!');
     } else {
-      viewpages.findOne({'_id': request.params.viewpageId}).exec(function(error, results) {
+      viewpages.findOne({'_id': request.params.viewpageId}).select('-userId').exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');

@@ -5,22 +5,6 @@ import axios from 'axios';
 import { API_LOCATION } from 'Constants';
 
 class UserService {
-  // Login
-  loginUser(requestData) {
-    return axios({
-      url: '/login/users',
-      method: 'post',
-      baseURL: API_LOCATION + '/api/v1/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        'username': requestData.username,
-        'password': requestData.password
-      }
-    });
-  }
-
   // Read One
   readOneUser(requestData) {
     return axios({
@@ -71,12 +55,19 @@ class UserService {
     });
   }
 
-  // Exists
-  existsUser(requestData) {
+  // Login
+  loginUser(requestData) {
     return axios({
-      url: '/exists/users/' + requestData.username,
-      method: 'get',
-      baseURL: API_LOCATION + '/api/v1/'
+      url: '/login/users',
+      method: 'post',
+      baseURL: API_LOCATION + '/api/v1/',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        'username': requestData.username,
+        'password': requestData.password
+      }
     });
   }
 
@@ -84,15 +75,6 @@ class UserService {
   logoutUser(requestData) {
     return axios({
       url: '/logout/users/',
-      method: 'get',
-      baseURL: API_LOCATION + '/api/v1/'
-    });
-  }
-
-  // logout
-  isLoggedInUser(requestData) {
-    return axios({
-      url: '/is_logged_in/users/',
       method: 'get',
       baseURL: API_LOCATION + '/api/v1/'
     });

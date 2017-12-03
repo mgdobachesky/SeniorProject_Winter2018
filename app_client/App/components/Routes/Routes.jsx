@@ -18,7 +18,7 @@ var RoutesJSX = function() {
         user={this.props.user}
         loggedIn={this.props.loggedIn}
         onChange={this.props.onChange}
-        onSubmit={this.props.onReadOneUser} />} />
+        onSubmit={this.props.onUserLogin} />} />
 
       <Route path='/signup' render={routeProps => <UserForm {...routeProps}
         description="Sign Up"

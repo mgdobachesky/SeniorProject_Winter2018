@@ -11,7 +11,7 @@ function formsReadAllByViewsite(request) {
     if(!request.params.viewsiteId) {
       reject('Viewsite ID is required!');
     } else {
-      forms.find({'viewsiteId': request.params.viewsiteId}).exec(function(error, results) {
+      forms.find({'viewsiteId': request.params.viewsiteId}).select('-userId').exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -31,7 +31,7 @@ function formsReadAllByViewpage(request) {
     if(!request.params.viewpageId) {
       reject('Viewpage ID is required!');
     } else {
-      forms.find({'viewpageId': request.params.viewpageId}).exec(function(error, results) {
+      forms.find({'viewpageId': request.params.viewpageId}).select('-userId').exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
