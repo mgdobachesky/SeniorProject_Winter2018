@@ -9,7 +9,7 @@ var users = mongoose.model('user');
 function usersReadOne(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.session.userId) {
-      reject('Username is required!');
+      reject(false);
     } else {
       users.findOne({'_id': request.session.userId}).select('-_id -password').exec(function(error, results) {
         if(error) {

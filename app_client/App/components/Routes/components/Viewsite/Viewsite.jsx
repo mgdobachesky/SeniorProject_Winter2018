@@ -61,7 +61,18 @@ function ViewpagePillList(props) {
       const pillHref = "#v-pills-" + _id;
       const pillControls = "v-pills-" + _id;
       return (
-        <a key={_id} className="nav-link" id={pillId} data-toggle="pill" href={pillHref} role="tab" aria-controls={pillControls} aria-selected="false">{viewpageName}</a>
+        <a
+          key={_id}
+          className="nav-link"
+          id={pillId}
+          data-toggle="pill"
+          href={pillHref}
+          role="tab"
+          aria-controls={pillControls}
+          aria-selected="false"
+          onClick={() => {clearAll.call(this);}}>
+          {viewpageName}
+        </a>
       );
     });
   } else {
@@ -92,11 +103,24 @@ function ViewpageContentList(props) {
   }
 }
 
+var clearAll = function() {
+  $( ".createText" ).hide(false);
+  $( ".updateText" ).hide(false);
+
+  $( ".createForm" ).hide(false);
+  $( ".updateForm" ).hide(false);
+
+  $( ".createDataView" ).hide(false);
+  $( ".updateDataView" ).hide(false);
+
+  return true;
+};
+
 var createViewpage = function() {
   $( "#createViewpage" ).toggle("medium");
   $( "#updateViewpage" ).hide(false);
   this.handleClearViewpage();
-}
+};
 
 var ViewsiteJSX = function() {
   return (

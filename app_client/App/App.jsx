@@ -13,6 +13,7 @@ var AppJSX = function() {
       <Navbar
         user={this.state.user}
         viewsites={this.state.viewsites}
+        userError={this.state.userError}
         onUserLogout={this.handleUserLogout}
         loggedIn={this.state.loggedIn} />
 
@@ -20,6 +21,8 @@ var AppJSX = function() {
         user={this.state.user}
         viewsite={this.state.viewsite}
         viewsites={this.state.viewsites}
+        userError={this.state.userError}
+        viewsiteError={this.state.viewsiteError}
         loggedIn={this.state.loggedIn}
         onChange={this.handleChange}
         onUserLogin={this.handleUserLogin}

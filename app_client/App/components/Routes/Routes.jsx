@@ -17,6 +17,7 @@ var RoutesJSX = function() {
       <Route path='/login' render={routeProps => <Login {...routeProps}
         user={this.props.user}
         loggedIn={this.props.loggedIn}
+        userError={this.props.userError}
         onChange={this.props.onChange}
         onSubmit={this.props.onUserLogin} />} />
 
@@ -24,6 +25,7 @@ var RoutesJSX = function() {
         description="Sign Up"
         user={this.props.user}
         loggedIn={this.props.loggedIn}
+        userError={this.props.userError}
         onChange={this.props.onChange}
         onSubmit={this.props.onCreateUser} />} />
 
@@ -32,6 +34,8 @@ var RoutesJSX = function() {
         viewsite={this.props.viewsite}
         viewsites={this.props.viewsites}
         loggedIn={this.props.loggedIn}
+        userError={this.props.userError}
+        viewsiteError={this.props.viewsiteError}
         onChange={this.props.onChange}
         onUpdateUser={this.props.onUpdateUser}
         onCreateViewsite={this.props.onCreateViewsite}

@@ -2,10 +2,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+var ErrorAlert = function(props) {
+  if(props.userError) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        {props.userError}
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
 var UserFormJSX = function() {
   return (
     <div className="container">
       <h2>{this.props.description}</h2>
+      <ErrorAlert userError={this.props.userError} />
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">Username</label>

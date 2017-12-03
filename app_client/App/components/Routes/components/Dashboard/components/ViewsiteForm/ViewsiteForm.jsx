@@ -2,10 +2,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+var ErrorAlert = function(props) {
+  if(props.viewsiteError) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        {props.viewsiteError}
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
 var ViewsiteFormJSX = function() {
   return (
     <div className="container">
       <h2>{this.props.description}</h2>
+      <ErrorAlert viewsiteError={this.props.viewsiteError} />
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="viewsiteName">Viewsite Name</label>

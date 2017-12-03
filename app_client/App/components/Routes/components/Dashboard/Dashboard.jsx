@@ -63,6 +63,7 @@ var DashboardJSX = function() {
                   <ViewsiteForm
                     description="Create Viewsite"
                     viewsite={this.props.viewsite}
+                    viewsiteError={this.props.viewsiteError}
                     onChange={this.props.onChange}
                     onSubmit={this.props.onCreateViewsite} />
                 </div>
@@ -72,6 +73,7 @@ var DashboardJSX = function() {
                   <ViewsiteForm
                     description="Update Viewsite"
                     viewsite={this.props.viewsite}
+                    viewsiteError={this.props.viewsiteError}
                     onChange={this.props.onChange}
                     onSubmit={this.props.onUpdateViewsite} />
                 </div>
@@ -88,6 +90,7 @@ var DashboardJSX = function() {
                   <UserForm
                     description="Update User"
                     user={this.props.user}
+                    userError={this.props.userError}
                     onChange={this.props.onChange}
                     onSubmit={this.props.onUpdateUser} />
                 </div>
