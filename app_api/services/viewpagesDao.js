@@ -48,19 +48,23 @@ function viewpagesReadOne(request) {
 // Create operations
 function viewpagesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    viewpages.create({
-      'userId': request.session.userId,
-      'viewsiteId': request.body.viewsiteId,
-      'viewpageName': request.body.viewpageName,
-      'permissionLevel': request.body.permissionLevel
-    }, function(error, results) {
-      if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        resolve('Viewpage created successfully!');
-      }
-    });
+    if(!request.body.viewpageName) {
+      reject('All fields required!');
+    } else {
+      viewpages.create({
+        'userId': request.session.userId,
+        'viewsiteId': request.body.viewsiteId,
+        'viewpageName': request.body.viewpageName,
+        'permissionLevel': request.body.permissionLevel
+      }, function(error, results) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else {
+          resolve('Viewpage created successfully!');
+        }
+      });
+    }
   });
   return promise;
 }

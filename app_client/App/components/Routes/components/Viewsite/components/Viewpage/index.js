@@ -62,20 +62,22 @@ class Viewpage extends React.Component {
         viewpageId: ""
       },
       dataViews: [],
-      formsByViewsite: []
+      formsByViewsite: [],
+      textError: "",
+      formError: "",
+      dataViewError: ""
     };
   }
 
   handleCreateText(event) {
     const requestData = this.state.text;
     this.manageTextService.createText(requestData).then((results) => {
-      console.log(results.data);
       this.handleReadAllText();
+      this.handleClearText();
+      $(".createText").hide("medium");
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({textError: error.response.data});
     });
-    this.handleClearText();
-    $(".createText").hide("medium");
   }
 
   handleReadAllText() {
@@ -83,11 +85,10 @@ class Viewpage extends React.Component {
     let viewpageTexts = [];
     let requestData = this.state.text;
     requestData.viewpageId = currentViewpage._id;
-
     this.manageTextService.readAllText(requestData).then((results) => {
-      this.setState({texts: results.data});
+      this.setState({texts: results.data, textError: ""});
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({textError: error.response.data});
     });
 
   }
@@ -114,24 +115,22 @@ class Viewpage extends React.Component {
     requestData.textId = updateText._id;
     requestData.textValue = updateText.textValue;
     this.manageTextService.updateText(requestData).then((results) => {
-      console.log(results.data);
       this.handleReadAllText();
+      // Follow up by clearing text state
+      this.handleClearText();
+      $(".updateText").hide("medium");
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({textError: error.response.data});
     });
-    // Follow up by clearing text state
-    this.handleClearText();
-    $(".updateText").hide("medium");
   }
 
   handleDeleteText(event) {
     let requestData = {};
     requestData.textId = event._id;
     this.manageTextService.deleteText(requestData).then((results) => {
-      console.log(results.data);
       this.handleReadAllText();
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({textError: error.response.data});
     });
   }
 
@@ -145,26 +144,25 @@ class Viewpage extends React.Component {
   handleCreateForm(event) {
     const requestData = this.state.form;
     this.manageFormService.createForm(requestData).then((results) => {
-      console.log(results.data);
       this.handleReadAllForms();
       this.handleReadAllFormsByViewsite();
       this.handleReadAllDataViews();
+      // Follow up by clearing form state
+      this.handleClearForm();
+      $(".createForm").hide("medium");
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({formError: error.response.data});
     });
-    this.handleClearForm();
-    $(".createForm").hide("medium");
   }
 
   handleReadAllForms() {
     let currentViewpage = this.props.viewpage;
     let requestData = {};
     requestData.viewpageId = currentViewpage._id;
-
     this.manageFormService.readAllFormsByViewpage(requestData).then((results) => {
-      this.setState({forms: results.data});
+      this.setState({forms: results.data, formError: ""});
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({formError: error.response.data});
     });
   }
 
@@ -172,11 +170,10 @@ class Viewpage extends React.Component {
     let currentViewpage = this.props.viewpage;
     let requestData = {};
     requestData.viewsiteId = currentViewpage.viewsiteId;
-
     this.manageFormService.readAllFormsByViewsite(requestData).then((results) => {
-      this.setState({formsByViewsite: results.data});
+      this.setState({formsByViewsite: results.data, formError: ""});
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({formError: error.response.data});
     });
   }
 
@@ -202,28 +199,26 @@ class Viewpage extends React.Component {
     requestData.formId = updateForm._id;
     requestData.formTitle = updateForm.formTitle;
     this.manageFormService.updateForm(requestData).then((results) => {
-      console.log(results.data);
       this.handleReadAllForms();
       this.handleReadAllFormsByViewsite();
       this.handleReadAllDataViews();
+      // Follow up by clearing form state
+      this.handleClearForm();
+      $(".updateForm").hide("medium");
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({formError: error.response.data});
     });
-    // Follow up by clearing form state
-    this.handleClearForm();
-    $(".updateForm").hide("medium");
   }
 
   handleDeleteForm(event) {
     let requestData = {};
     requestData.formId = event._id;
     this.manageFormService.deleteForm(requestData).then((results) => {
-      console.log(results.data);
       this.handleReadAllForms();
       this.handleReadAllFormsByViewsite();
       this.handleReadAllDataViews();
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({formError: error.response.data});
     });
   }
 
@@ -237,25 +232,23 @@ class Viewpage extends React.Component {
   handleCreateDataView(event) {
     const requestData = this.state.dataView;
     this.manageDataViewService.createDataView(requestData).then((results) => {
-      console.log(results.data);
       this.handleReadAllDataViews();
+      // Follow up by clearing data view state
+      this.handleClearDataView();
+      $(".createDataView").hide("medium");
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({dataViewError: error.response.data});
     });
-    // Follow up by clearing form state
-    this.handleClearDataView();
-    $(".createDataView").hide("medium");
   }
 
   handleReadAllDataViews() {
     let currentViewpage = this.props.viewpage;
     let requestData = {};
     requestData.viewpageId = currentViewpage._id;
-
     this.manageDataViewService.readAllDataViews(requestData).then((results) => {
-      this.setState({dataViews: results.data});
+      this.setState({dataViews: results.data, dataViewError: ""});
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({dataViewError: error.response.data});
     });
 
   }
@@ -282,24 +275,22 @@ class Viewpage extends React.Component {
     requestData.dataViewId = updateDataView._id;
     requestData.formId = updateDataView.formId;
     this.manageDataViewService.updateDataView(requestData).then((results) => {
-      console.log(results.data);
       this.handleReadAllDataViews();
+      // Follow up by clearing form state
+      this.handleClearDataView();
+      $(".updateDataView").hide("medium");
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({dataViewError: error.response.data});
     });
-    // Follow up by clearing form state
-    this.handleClearDataView();
-    $(".updateDataView").hide("medium");
   }
 
   handleDeleteDataView(event) {
     let requestData = {};
     requestData.dataViewId = event._id;
     this.manageDataViewService.deleteDataView(requestData).then((results) => {
-      console.log(results.data);
       this.handleReadAllDataViews();
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({dataViewError: error.response.data});
     });
   }
 

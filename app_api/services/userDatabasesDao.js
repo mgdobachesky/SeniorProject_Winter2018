@@ -69,32 +69,33 @@ function userRecordsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.params.formId) {
       reject('Form ID is required!');
-    }
-    userDatabases.findOne({'_id': request.params.formId}).exec(function(error, userTableData) {
-      if(!userTableData) {
-        reject('User Table not found!');
-      } else if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        let newRecord = userTableData.records.create();
-        for(formFieldId in request.body) {
-          newRecord.data.push({
-            '_id': formFieldId,
-            'datum': request.body[formFieldId]
+    } else {
+      userDatabases.findOne({'_id': request.params.formId}).exec(function(error, userTableData) {
+        if(!userTableData) {
+          reject('User Table not found!');
+        } else if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else {
+          let newRecord = userTableData.records.create();
+          for(formFieldId in request.body) {
+            newRecord.data.push({
+              '_id': formFieldId,
+              'datum': request.body[formFieldId]
+            });
+          }
+          userTableData.records.push(newRecord);
+          userTableData.save(function(error, results) {
+            if(error) {
+              console.log(error.message);
+              reject('Something went wrong!');
+            } else {
+              resolve('User Record created successfully!');
+            }
           });
         }
-        userTableData.records.push(newRecord);
-        userTableData.save(function(error, results) {
-          if(error) {
-            console.log(error.message);
-            reject('Something went wrong!');
-          } else {
-            resolve('User Record created successfully!');
-          }
-        });
-      }
-    });
+      });
+    }
   });
   return promise;
 }

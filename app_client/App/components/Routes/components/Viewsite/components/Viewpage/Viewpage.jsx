@@ -142,6 +142,7 @@ var ViewpageJSX = function() {
           <TextForm
             description="Add Text"
             text={this.state.text}
+            textError={this.state.textError}
             onChange={this.handleChange}
             onSubmit={this.handleCreateText} />
         </div>
@@ -151,6 +152,7 @@ var ViewpageJSX = function() {
           <TextForm
             description="Update Text"
             text={this.state.text}
+            textError={this.state.textError}
             onChange={this.handleChange}
             onSubmit={this.handleUpdateText} />
         </div>
@@ -161,6 +163,7 @@ var ViewpageJSX = function() {
           <FormForm
             description="Add Form"
             form={this.state.form}
+            formError={this.state.formError}
             onChange={this.handleChange}
             onSubmit={this.handleCreateForm} />
         </div>
@@ -170,6 +173,7 @@ var ViewpageJSX = function() {
           <FormForm
             description="Update Form"
             form={this.state.form}
+            formError={this.state.formError}
             onChange={this.handleChange}
             onSubmit={this.handleUpdateForm} />
         </div>
@@ -181,6 +185,7 @@ var ViewpageJSX = function() {
             description="Create Data-View"
             dataView={this.state.dataView}
             forms={this.state.formsByViewsite}
+            dataViewError={this.state.dataViewError}
             onChange={this.handleChange}
             onSubmit={this.handleCreateDataView} />
         </div>
@@ -191,6 +196,7 @@ var ViewpageJSX = function() {
             description="Update Data-View"
             dataView={this.state.dataView}
             forms={this.state.formsByViewsite}
+            dataViewError={this.state.dataViewError}
             onChange={this.handleChange}
             onSubmit={this.handleUpdateDataView} />
         </div>

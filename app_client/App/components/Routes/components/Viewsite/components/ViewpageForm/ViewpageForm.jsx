@@ -2,10 +2,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+var ErrorAlert = function(props) {
+  if(props.viewpageError) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        {props.viewpageError}
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
 var ViewpageFormJSX = function() {
   return (
     <div className="container">
       <h2>{this.props.description}</h2>
+      <ErrorAlert viewpageError={this.props.viewpageError} />
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="viewpageName">Viewpage Name</label>

@@ -47,7 +47,7 @@ class App extends React.Component {
       userError: "",
       viewsiteError: ""
     };
-    }
+  }
 
   handleCreateUser(event) {
     let requestData = {};
@@ -133,7 +133,6 @@ class App extends React.Component {
     requestData.viewsiteName = newViewsite.viewsiteName;
     requestData.loginEnabled = newViewsite.loginEnabled;
     this.manageViewsiteService.createViewsite(requestData).then((results) => {
-      this.setState({viewsiteError: ""});
       this.handleReadAllViewsites();
       // Follow up by clearing viewsite state
       this.handleClearViewsite();
@@ -162,7 +161,6 @@ class App extends React.Component {
     requestData.viewsiteName = updateViewsite.viewsiteName;
     requestData.loginEnabled = updateViewsite.loginEnabled;
     this.manageViewsiteService.updateViewsite(requestData).then((results) => {
-      this.setState({viewsiteError: ""});
       this.handleReadAllViewsites();
       // Follow up by clearing viewsite state
       this.handleClearViewsite();
@@ -176,7 +174,6 @@ class App extends React.Component {
     let requestData = {};
     requestData.viewsiteId = event._id;
     this.manageViewsiteService.deleteViewsite(requestData).then((results) => {
-      this.setState({viewsiteError: ""});
       this.handleReadAllViewsites();
     }, (error) => {
       this.setState({viewsiteError: error.response.data});

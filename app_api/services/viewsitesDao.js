@@ -48,23 +48,27 @@ function viewsitesReadOne(request) {
 // Create operations
 function viewsitesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    request.params.viewsiteName = request.body.viewsiteName;
-    viewsitesExists(request).then(function(results) {
-      viewsites.create({
-        'userId': request.session.userId,
-        'viewsiteName': request.body.viewsiteName,
-        'loginEnabled': request.body.loginEnabled
-      }, function(error, results) {
-        if(error) {
-          console.log(error.message);
-          reject('Something went wrong!');
-        } else {
-          resolve('Viewsite created successfully!');
-        }
+    if(!request.body.viewsiteName) {
+      reject('All fields required!');
+    } else {
+      request.params.viewsiteName = request.body.viewsiteName;
+      viewsitesExists(request).then(function(results) {
+        viewsites.create({
+          'userId': request.session.userId,
+          'viewsiteName': request.body.viewsiteName,
+          'loginEnabled': request.body.loginEnabled
+        }, function(error, results) {
+          if(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          } else {
+            resolve('Viewsite created successfully!');
+          }
+        });
+      }, function(error) {
+        reject('Viewsite name taken!');
       });
-    }, function(error) {
-      reject('Viewsite name taken!');
-    });
+    }
   });
   return promise;
 }

@@ -2,9 +2,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+var ErrorAlert = function(props) {
+  if(props.formTextInputError) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        {props.formTextInputError}
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
 var FormTextInputFormJSX = function() {
   return (
     <div className="container">
+      <ErrorAlert formTextInputError={this.props.formTextInputError} />
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="formTextInputLabel">Text Input Label

@@ -2,6 +2,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+var ErrorAlert = function(props) {
+  if(props.dataViewError) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        {props.dataViewError}
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
 // Create list of Form Options for the Data View
 function DataViewOptions(props) {
   if(props.forms) {
@@ -21,6 +33,7 @@ var DataViewFormJSX = function() {
   return (
     <div className="container">
       <h4>{this.props.description}</h4>
+      <ErrorAlert dataViewError={this.props.dataViewError} />
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="formId">

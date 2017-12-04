@@ -69,25 +69,29 @@ function formsReadOne(request) {
 // Create operations
 function formsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    forms.create({
-      'userId': request.session.userId,
-      'viewsiteId': request.body.viewsiteId,
-      'viewpageId': request.body.viewpageId,
-      'formTitle': request.body.formTitle
-    }, function(error, results) {
-      if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        let tableRequest = {params: {formId: results._id}};
-        userDatabasesDao.userTablesCreate(tableRequest).then(function(results) {
-          resolve('Form created successfully!');
-        }, function(error) {
+    if(!request.body.formTitle) {
+      reject('All fields required!');
+    } else {
+      forms.create({
+        'userId': request.session.userId,
+        'viewsiteId': request.body.viewsiteId,
+        'viewpageId': request.body.viewpageId,
+        'formTitle': request.body.formTitle
+      }, function(error, results) {
+        if(error) {
           console.log(error.message);
           reject('Something went wrong!');
-        });
-      }
-    });
+        } else {
+          let tableRequest = {params: {formId: results._id}};
+          userDatabasesDao.userTablesCreate(tableRequest).then(function(results) {
+            resolve('Form created successfully!');
+          }, function(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          });
+        }
+      });
+    }
   });
   return promise;
 }

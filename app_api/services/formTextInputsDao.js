@@ -48,18 +48,22 @@ function formTextInputsReadOne(request) {
 // Create operations
 function formTextInputsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    formTextInputs.create({
-      'userId': request.session.userId,
-      'formId': request.body.formId,
-      'formTextInputLabel': request.body.formTextInputLabel
-    }, function(error, results) {
-      if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        resolve('Form Text Input created successfully!');
-      }
-    });
+    if(!request.body.formTextInputLabel) {
+      reject('All fields required!');
+    } else {
+      formTextInputs.create({
+        'userId': request.session.userId,
+        'formId': request.body.formId,
+        'formTextInputLabel': request.body.formTextInputLabel
+      }, function(error, results) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else {
+          resolve('Form Text Input created successfully!');
+        }
+      });
+    }
   });
   return promise;
 }

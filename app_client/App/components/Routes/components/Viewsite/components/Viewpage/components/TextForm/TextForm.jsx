@@ -2,10 +2,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+var ErrorAlert = function(props) {
+  if(props.textError) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        {props.textError}
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
 var TextFormJSX = function() {
   return (
     <div className="container">
       <h4>{this.props.description}</h4>
+      <ErrorAlert textError={this.props.textError} />
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <textarea name="textValue" className="form-control" id="textValue" placeholder="Write some text..." value={this.props.text.textValue} onChange={this.handleChange} />

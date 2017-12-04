@@ -2,10 +2,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+var ErrorAlert = function(props) {
+  if(props.formError) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        {props.formError}
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
 var FormFormJSX = function() {
   return (
     <div className="container">
       <h4>{this.props.description}</h4>
+      <ErrorAlert formError={this.props.formError} />
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="formTitle">Form Title

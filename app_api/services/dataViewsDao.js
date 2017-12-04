@@ -48,19 +48,23 @@ function dataViewsReadAll(request) {
 // Create operations
 function dataViewsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    dataView.create({
-      'userId': request.session.userId,
-      'form': request.body.formId,
-      'userTable': request.body.formId,
-      'viewpageId': request.body.viewpageId
-    }, function(error, results) {
-      if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        resolve('Data View created successfully!');
-      }
-    });
+    if(!request.body.formId) {
+      reject('All fields required!');
+    } else {
+      dataView.create({
+        'userId': request.session.userId,
+        'form': request.body.formId,
+        'userTable': request.body.formId,
+        'viewpageId': request.body.viewpageId
+      }, function(error, results) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else {
+          resolve('Data View created successfully!');
+        }
+      });
+    }
   });
   return promise;
 }

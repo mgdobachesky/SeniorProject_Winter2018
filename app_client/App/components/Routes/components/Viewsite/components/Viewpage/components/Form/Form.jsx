@@ -43,6 +43,7 @@ var FormJSX = function() {
         <FormTextInputForm
           description="Create Form Text Input"
           formTextInput={this.state.formTextInput}
+          formTextInputError={this.state.formTextInputError}
           onChange={this.handleChange}
           onSubmit={this.handleCreateFormTextInput} />
       </div>
@@ -50,6 +51,7 @@ var FormJSX = function() {
         <FormTextInputForm
           description="Update Form Text Input"
           formTextInput={this.state.formTextInput}
+          formTextInputError={this.state.formTextInputError}
           onChange={this.handleChange}
           onSubmit={this.handleUpdateFormTextInput} />
       </div>

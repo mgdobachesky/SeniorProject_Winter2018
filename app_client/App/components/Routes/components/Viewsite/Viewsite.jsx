@@ -143,6 +143,7 @@ var ViewsiteJSX = function() {
                   <ViewpageForm
                     description="Create Viewpage"
                     viewpage={this.state.viewpage}
+                    viewpageError={this.state.viewpageError}
                     onChange={this.handleChange}
                     onSubmit={this.handleCreateViewpage} />
                 </div>
@@ -152,6 +153,7 @@ var ViewsiteJSX = function() {
                   <ViewpageForm
                     description="Update Viewpage"
                     viewpage={this.state.viewpage}
+                    viewpageError={this.state.viewpageError}
                     onChange={this.handleChange}
                     onSubmit={this.handleUpdateViewpage} />
                 </div>

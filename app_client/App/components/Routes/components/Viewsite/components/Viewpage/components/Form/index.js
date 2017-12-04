@@ -29,32 +29,31 @@ class Form extends React.Component {
         formId: "",
         formTextInputLabel: ""
       },
-      formTextInputs: []
+      formTextInputs: [],
+      formTextInputError: ""
     };
   }
 
   handleCreateFormTextInput(event) {
     const requestData = this.state.formTextInput;
     this.manageFormTextInputService.createFormTextInput(requestData).then((results) => {
-      console.log(results.data);
       this.handleReadAllFormTextInputs();
+      // Follow up by clearing form state
+      this.handleClearFormTextInput();
+      $(".createFormTextInput").hide("medium");
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({formTextInputError: error.response.data});
     });
-    // Follow up by clearing form state
-    this.handleClearFormTextInput();
-    $(".createFormTextInput").hide("medium");
   }
 
   handleReadAllFormTextInputs() {
     let currentForm = this.props.form;
     let requestData = {};
     requestData.formId = currentForm._id;
-
     this.manageFormTextInputService.readAllFormTextInputs(requestData).then((results) => {
-      this.setState({formTextInputs: results.data});
+      this.setState({formTextInputs: results.data, formTextInputError: ""});
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({formTextInputError: error.response.data});
     });
 
   }
@@ -75,24 +74,22 @@ class Form extends React.Component {
     requestData.formTextInputId = updateFormTextInput._id;
     requestData.formTextInputLabel = updateFormTextInput.formTextInputLabel;
     this.manageFormTextInputService.updateFormTextInput(requestData).then((results) => {
-      console.log(results.data);
+      // Follow up by clearing form state
+      this.handleClearFormTextInput();
+      $(".updateFormTextInput").hide("medium");
       this.handleReadAllFormTextInputs();
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({formTextInputError: error.response.data});
     });
-    // Follow up by clearing form state
-    this.handleClearFormTextInput();
-    $(".updateFormTextInput").hide("medium");
   }
 
   handleDeleteFormTextInput(event) {
     let requestData = {};
     requestData.formTextInputId = event._id;
     this.manageFormTextInputService.deleteFormTextInput(requestData).then((results) => {
-      console.log(results.data);
       this.handleReadAllFormTextInputs();
     }, (error) => {
-      console.log(error.response.data);
+      this.setState({formTextInputError: error.response.data});
     });
   }
 

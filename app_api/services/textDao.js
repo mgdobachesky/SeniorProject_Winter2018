@@ -48,18 +48,22 @@ function textReadAll(request) {
 // Create operations
 function textCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    text.create({
-      'userId': request.session.userId,
-      'viewpageId': request.body.viewpageId,
-      'textValue': request.body.textValue
-    }, function(error, results) {
-      if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        resolve('Text created successfully!');
-      }
-    });
+    if(!request.body.textValue) {
+      reject('All fields required!');
+    } else {
+      text.create({
+        'userId': request.session.userId,
+        'viewpageId': request.body.viewpageId,
+        'textValue': request.body.textValue
+      }, function(error, results) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else {
+          resolve('Text created successfully!');
+        }
+      });
+    }
   });
   return promise;
 }
