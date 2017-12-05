@@ -1,6 +1,7 @@
 // Required modules
 var mongoose = require('mongoose');
 var formTextInputs = mongoose.model('formTextInput');
+var forms = mongoose.model('form');
 
 // ** CRUD OPERATIONS **
 
@@ -48,22 +49,27 @@ function formTextInputsReadOne(request) {
 // Create operations
 function formTextInputsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.body.formTextInputLabel) {
-      reject('All fields required!');
-    } else {
-      formTextInputs.create({
-        'userId': request.session.userId,
-        'formId': request.body.formId,
-        'formTextInputLabel': request.body.formTextInputLabel
-      }, function(error, results) {
-        if(error) {
-          console.log(error.message);
-          reject('Something went wrong!');
-        } else {
-          resolve('Form Text Input created successfully!');
-        }
-      });
-    }
+    forms.findById(request.body.formId).exec(function(error, formData) {
+      if(formData.userId != request.session.userId) {
+        reject('You can only create Form Text Inputs for Forms you own!');
+      } else if(!request.body.formTextInputLabel) {
+        reject('All fields required!');
+      } else {
+        formTextInputs.create({
+          'userId': request.session.userId,
+          'formId': request.body.formId,
+          'formTextInputLabel': request.body.formTextInputLabel
+        }, function(error, results) {
+          if(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          } else {
+            resolve('Form Text Input created successfully!');
+          }
+        });
+      }
+    });
+
   });
   return promise;
 }

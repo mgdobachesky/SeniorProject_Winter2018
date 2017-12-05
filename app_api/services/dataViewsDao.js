@@ -1,6 +1,7 @@
 // Required modules
 var mongoose = require('mongoose');
 var dataView = mongoose.model('dataView');
+var viewpages = mongoose.model('viewpage');
 
 // ** CRUD OPERATIONS **
 
@@ -48,23 +49,28 @@ function dataViewsReadAll(request) {
 // Create operations
 function dataViewsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.body.formId) {
-      reject('All fields required!');
-    } else {
-      dataView.create({
-        'userId': request.session.userId,
-        'form': request.body.formId,
-        'userTable': request.body.formId,
-        'viewpageId': request.body.viewpageId
-      }, function(error, results) {
-        if(error) {
-          console.log(error.message);
-          reject('Something went wrong!');
-        } else {
-          resolve('Data View created successfully!');
-        }
-      });
-    }
+    viewpages.findById(request.body.viewpageId).exec(function(error, viewpageData) {
+      if(viewpageData.userId != request.session.userId) {
+        reject('You can only create Data Views for Viewpages you own!');
+      } else if(!request.body.formId) {
+        reject('All fields required!');
+      } else {
+        dataView.create({
+          'userId': request.session.userId,
+          'form': request.body.formId,
+          'userTable': request.body.formId,
+          'viewpageId': request.body.viewpageId
+        }, function(error, results) {
+          if(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          } else {
+            resolve('Data View created successfully!');
+          }
+        });
+      }
+    });
+
   });
   return promise;
 }

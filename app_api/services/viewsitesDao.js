@@ -45,6 +45,34 @@ function viewsitesReadOne(request) {
   return promise;
 }
 
+function viewsitesReadOneById(request) {
+  var promise = new Promise(function(resolve, reject) {
+    viewsites.findOne({'_id': request.params.viewsiteId}).exec(function(error, viewsiteData) {
+      if(error) {
+        reject('Something went wrong!');
+      } else if(!viewsiteData) {
+        reject('Viewsite not found!');
+      } else if(viewsiteData.userId != request.session.userId) {
+        reject('You can only edit Viewsites you own!');
+      } else {
+        viewsites.findOne({'_id': request.params.viewsiteId}).select('-userId').exec(function(error, results) {
+          if(!request.params.viewsiteId) {
+            reject('Viewsite ID is required!');
+          } else if(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          } else if(!results) {
+            reject('Viewsite not found!');
+          } else {
+            resolve(results);
+          }
+        });
+      }
+    });
+  });
+  return promise;
+}
+
 // Create operations
 function viewsitesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
@@ -174,6 +202,7 @@ function viewsitesExists(request) {
 // Export functions
 module.exports.viewsitesReadAll = viewsitesReadAll;
 module.exports.viewsitesReadOne = viewsitesReadOne;
+module.exports.viewsitesReadOneById = viewsitesReadOneById;
 module.exports.viewsitesCreate = viewsitesCreate;
 module.exports.viewsitesUpdate = viewsitesUpdate;
 module.exports.viewsitesDelete = viewsitesDelete;

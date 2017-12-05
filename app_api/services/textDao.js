@@ -1,6 +1,7 @@
 // Required modules
 var mongoose = require('mongoose');
 var text = mongoose.model('text');
+var viewpages = mongoose.model('viewpage');
 
 // ** CRUD OPERATIONS **
 
@@ -48,22 +49,26 @@ function textReadAll(request) {
 // Create operations
 function textCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.body.textValue) {
-      reject('All fields required!');
-    } else {
-      text.create({
-        'userId': request.session.userId,
-        'viewpageId': request.body.viewpageId,
-        'textValue': request.body.textValue
-      }, function(error, results) {
-        if(error) {
-          console.log(error.message);
-          reject('Something went wrong!');
-        } else {
-          resolve('Text created successfully!');
-        }
-      });
-    }
+    viewpages.findById(request.body.viewpageId).exec(function(error, viewpageData) {
+      if(viewpageData.userId != request.session.userId) {
+        reject('You can only create Text for Viewpages you own!');
+      } else if(!request.body.textValue) {
+        reject('All fields required!');
+      } else {
+        text.create({
+          'userId': request.session.userId,
+          'viewpageId': request.body.viewpageId,
+          'textValue': request.body.textValue
+        }, function(error, results) {
+          if(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          } else {
+            resolve('Text created successfully!');
+          }
+        });
+      }
+    });
   });
   return promise;
 }

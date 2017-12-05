@@ -1,6 +1,7 @@
 // Required modules
 var mongoose = require('mongoose');
 var viewpages = mongoose.model('viewpage');
+var viewsites = mongoose.model('viewsite');
 
 // ** CRUD OPERATIONS **
 
@@ -48,23 +49,27 @@ function viewpagesReadOne(request) {
 // Create operations
 function viewpagesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.body.viewpageName) {
-      reject('All fields required!');
-    } else {
-      viewpages.create({
-        'userId': request.session.userId,
-        'viewsiteId': request.body.viewsiteId,
-        'viewpageName': request.body.viewpageName,
-        'permissionLevel': request.body.permissionLevel
-      }, function(error, results) {
-        if(error) {
-          console.log(error.message);
-          reject('Something went wrong!');
-        } else {
-          resolve('Viewpage created successfully!');
-        }
-      });
-    }
+    viewsites.findById(request.body.viewsiteId).exec(function(error, viewsiteData) {
+      if(viewsiteData.userId != request.session.userId) {
+        reject('You can only create Viewpages for Viewsites you own!');
+      } else if(!request.body.viewpageName) {
+        reject('All fields required!');
+      } else {
+        viewpages.create({
+          'userId': request.session.userId,
+          'viewsiteId': request.body.viewsiteId,
+          'viewpageName': request.body.viewpageName,
+          'permissionLevel': request.body.permissionLevel
+        }, function(error, results) {
+          if(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          } else {
+            resolve('Viewpage created successfully!');
+          }
+        });
+      }
+    });
   });
   return promise;
 }

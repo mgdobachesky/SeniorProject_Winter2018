@@ -128,8 +128,8 @@ class Viewsite extends React.Component {
     // Load initial Viewsite
     let requestData = {};
     let currentViewsite = this.state.viewsite;
-    requestData.viewsiteName = this.props.match.params.viewsiteName;
-    this.manageViewsiteService.readOneViewsite(requestData).then((results) => {
+    requestData.viewsiteId = this.props.match.params.viewsiteId;
+    this.manageViewsiteService.readOneViewsiteById(requestData).then((results) => {
       currentViewsite = results.data;
       this.setState({viewsite: currentViewsite}, () => this.handleReadAllViewpages());
     }, (error) => {
@@ -143,8 +143,8 @@ class Viewsite extends React.Component {
   componentWillReceiveProps(nextProps) {
     let requestData = {};
     let currentViewsite = this.state.viewsite;
-    requestData.viewsiteName = nextProps.match.params.viewsiteName;
-    this.manageViewsiteService.readOneViewsite(requestData).then((results) => {
+    requestData.viewsiteId = nextProps.match.params.viewsiteId;
+    this.manageViewsiteService.readOneViewsiteById(requestData).then((results) => {
       currentViewsite = results.data;
       this.setState({viewsite: currentViewsite}, () => this.handleReadAllViewpages());
     }, (error) => {

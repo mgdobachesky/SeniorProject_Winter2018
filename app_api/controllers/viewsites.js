@@ -25,6 +25,14 @@ function viewsitesReadOne(request, response) {
   });
 }
 
+function viewsitesReadOneById(request, response) {
+  viewsitesDao.viewsitesReadOneById(request).then(function(results) {
+    sendJSONresponse(response, 200, results);
+  }, function(error) {
+    sendJSONresponse(response, 404, error);
+  });
+}
+
 // Create
 function viewsitesCreate(request, response) {
   viewsitesDao.viewsitesCreate(request).then(function(results) {
@@ -55,6 +63,7 @@ function viewsitesDelete(request, response) {
 // Export functions
 module.exports.viewsitesReadAll = viewsitesReadAll;
 module.exports.viewsitesReadOne = viewsitesReadOne;
+module.exports.viewsitesReadOneById = viewsitesReadOneById;
 module.exports.viewsitesCreate = viewsitesCreate;
 module.exports.viewsitesUpdate = viewsitesUpdate;
 module.exports.viewsitesDelete = viewsitesDelete;

@@ -44,7 +44,7 @@ var RoutesJSX = function() {
         onDeleteViewsite={this.props.onDeleteViewsite}
         onClearViewsite={this.props.onClearViewsite} />} />
 
-      <Route path='/:viewsiteName' render={routeProps => <Viewsite {...routeProps}
+      <Route path='/:viewsiteId' render={routeProps => <Viewsite {...routeProps}
         loggedIn={this.props.loggedIn} />} />
     </Switch>
   );

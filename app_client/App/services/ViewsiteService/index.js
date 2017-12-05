@@ -13,6 +13,14 @@ class ViewsiteService {
       baseURL: API_LOCATION + '/api/v1/'
     });
   }
+  
+  readOneViewsiteById(requestData) {
+    return axios({
+      url: '/read_one/viewsites/viewsiteId/' + requestData.viewsiteId,
+      method: 'get',
+      baseURL: API_LOCATION + '/api/v1/'
+    });
+  }
 
   // Read all
   readAllViewsites(requestData) {
