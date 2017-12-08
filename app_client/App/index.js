@@ -45,6 +45,7 @@ class App extends React.Component {
       viewsites: [],
       loggedIn: false,
       userError: "",
+      userSuccess: "",
       viewsiteError: ""
     };
   }
@@ -58,7 +59,7 @@ class App extends React.Component {
       this.handleUserLogin(event);
       this.setState({userError: ""});
     }, (error) => {
-      this.setState({userError: error.response.data});
+      this.setState({userError: error.response.data, userSuccess: ""});
     });
   }
 
@@ -68,7 +69,7 @@ class App extends React.Component {
         this.setState({user: results.data, loggedIn: true, userError: ""}, () => this.handleReadAllViewsites());
       }
     }, (error) => {
-      this.setState({userError: error.response.data});
+      this.setState({userError: error.response.data, userSuccess: ""});
     });
   }
 
@@ -77,10 +78,11 @@ class App extends React.Component {
     let user = this.state.user;
     requestData.username = user.username;
     requestData.password = user.password;
+    user.password = "";
     this.manageUserService.updateUser(requestData).then((results) => {
-      this.setState({userError: ""});
+      this.setState({user: user, userSuccess: results.data, userError: ""});
     }, (error) => {
-      this.setState({userError: error.response.data});
+      this.setState({userError: error.response.data, userSuccess: ""});
     });
   }
 

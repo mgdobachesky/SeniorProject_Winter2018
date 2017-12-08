@@ -22,7 +22,7 @@ var FormFormJSX = function() {
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="formTitle">Form Title
-            <input type="text" name="formTitle" className="form-control" id="formTitle" value={this.props.form.formTitle} onChange={this.handleChange} />
+            <input type="text" name="formTitle" className="form-control" id="formTitle" placeholder="Enter Form Title" value={this.props.form.formTitle} onChange={this.handleChange} />
           </label>
       </div>
         <input name="_id" type="hidden" id="_id" value={this.props.form._id} />

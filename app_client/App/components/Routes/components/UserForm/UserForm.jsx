@@ -14,10 +14,23 @@ var ErrorAlert = function(props) {
   }
 }
 
+var SuccessAlert = function(props) {
+  if(props.userSuccess) {
+    return (
+      <div className="alert alert-success" role="alert">
+        {props.userSuccess}
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
 var UserFormJSX = function() {
   return (
     <div className="container">
       <h2>{this.props.description}</h2>
+      <SuccessAlert userSuccess={this.props.userSuccess} />
       <ErrorAlert userError={this.props.userError} />
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">

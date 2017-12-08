@@ -91,6 +91,7 @@ var DashboardJSX = function() {
                     description="Update User"
                     user={this.props.user}
                     userError={this.props.userError}
+                    userSuccess={this.props.userSuccess}
                     onChange={this.props.onChange}
                     onSubmit={this.props.onUpdateUser} />
                 </div>

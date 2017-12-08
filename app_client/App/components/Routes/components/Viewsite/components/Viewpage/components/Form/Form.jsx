@@ -37,11 +37,11 @@ var FormJSX = function() {
   return(
     <div key={this.props.form._id} className="card border-primary mb-3">
       <div className="card-header">
-        <button type="button" className="btn btn-link" onClick={() => {createFormTextInput.call(this);}}>+ Add Form Input Text</button>
+        <button type="button" className="btn btn-link" onClick={() => {createFormTextInput.call(this);}}>+ Add Text Input</button>
       </div>
       <div className="card-body createFormTextInput">
         <FormTextInputForm
-          description="Create Form Text Input"
+          description="Create Text Input"
           formTextInput={this.state.formTextInput}
           formTextInputError={this.state.formTextInputError}
           onChange={this.handleChange}
@@ -49,7 +49,7 @@ var FormJSX = function() {
       </div>
       <div className="card-body updateFormTextInput">
         <FormTextInputForm
-          description="Update Form Text Input"
+          description="Update Text Input"
           formTextInput={this.state.formTextInput}
           formTextInputError={this.state.formTextInputError}
           onChange={this.handleChange}

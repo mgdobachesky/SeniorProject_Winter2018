@@ -22,6 +22,7 @@ var AppJSX = function() {
         viewsite={this.state.viewsite}
         viewsites={this.state.viewsites}
         userError={this.state.userError}
+        userSuccess={this.state.userSuccess}
         viewsiteError={this.state.viewsiteError}
         loggedIn={this.state.loggedIn}
         onChange={this.handleChange}

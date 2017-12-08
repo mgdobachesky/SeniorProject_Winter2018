@@ -109,7 +109,7 @@ class Viewsite extends React.Component {
     clearViewpage._id = "";
     clearViewpage.viewsiteId = "";
     clearViewpage.viewpageName = "";
-    clearViewpage.permissionLevel = "";
+    clearViewpage.permissionLevel = 0;
     this.setState({viewpage: clearViewpage});
   }
 
@@ -137,7 +137,6 @@ class Viewsite extends React.Component {
     });
     $("#createViewpage").hide(false);
     $("#updateViewpage").hide(false);
-    this.handleReadAllViewpages();
   }
 
   componentWillReceiveProps(nextProps) {

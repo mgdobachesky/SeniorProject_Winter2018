@@ -34,6 +34,7 @@ var RoutesJSX = function() {
         viewsite={this.props.viewsite}
         viewsites={this.props.viewsites}
         loggedIn={this.props.loggedIn}
+        userSuccess={this.props.userSuccess}
         userError={this.props.userError}
         viewsiteError={this.props.viewsiteError}
         onChange={this.props.onChange}

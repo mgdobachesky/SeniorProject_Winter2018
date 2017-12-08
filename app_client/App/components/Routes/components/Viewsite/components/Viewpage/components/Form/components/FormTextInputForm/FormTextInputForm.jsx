@@ -21,7 +21,7 @@ var FormTextInputFormJSX = function() {
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="formTextInputLabel">Text Input Label
-            <input type="text" name="formTextInputLabel" className="form-control" id="formTextInputLabel" value={this.props.formTextInput.formTextInputLabel} onChange={this.handleChange} />
+            <input type="text" name="formTextInputLabel" className="form-control" id="formTextInputLabel" placeholder="Enter Text Input Label" value={this.props.formTextInput.formTextInputLabel} onChange={this.handleChange} />
           </label>
         </div>
         <input name="_id" type="hidden" id="_id" value={this.props.formTextInput._id} />
