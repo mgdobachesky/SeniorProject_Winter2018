@@ -11,10 +11,12 @@ import styles from './styles.js';
 function FormTextInputList(props) {
   if(props.formTextInputs) {
     return props.formTextInputs.map((formTextInput, index) => {
+      let formTextInputValue = props.record[formTextInput._id];
       return (
         <FormTextInput
           key={formTextInput._id}
           formTextInput={formTextInput}
+          formTextInputValue={formTextInputValue}
           onChange={props.onChange} />
       );
     });
@@ -30,6 +32,7 @@ var FormViewJSX = function() {
       <Form>
         <FormTextInputList
           formTextInputs={this.state.formTextInputs}
+          record={this.state.record}
           onChange={this.handleChange} />
         <Button block
            onPress={this.handleSubmit}>

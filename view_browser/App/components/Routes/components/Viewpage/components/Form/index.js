@@ -40,6 +40,10 @@ class Form extends React.Component {
     requestData.formId = this.props.form._id;
     requestData.record = this.state.record;
     this.manageUserDatabaseService.createUserRecord(requestData).then((results) => {
+      for(let key in requestData.record) {
+        requestData.record[key] = "";
+      }
+      this.setState({record: requestData.record});
       console.log(results.data);
     }, (error) => {
       console.log(error.response.data);

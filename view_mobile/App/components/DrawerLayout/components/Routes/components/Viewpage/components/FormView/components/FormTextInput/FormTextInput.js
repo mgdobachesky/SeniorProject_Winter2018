@@ -13,6 +13,7 @@ var FormTextInputFormJSX = function() {
         {this.props.formTextInput.formTextInputLabel}
       </Label>
       <Input
+        value={this.props.formTextInputValue}
         onChangeText={this.handleChange} />
     </Item>
   );

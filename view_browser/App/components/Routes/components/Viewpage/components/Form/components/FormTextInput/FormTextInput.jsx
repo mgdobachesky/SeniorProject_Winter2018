@@ -12,6 +12,7 @@ var FormTextInputFormJSX = function() {
           className="form-control"
           id={this.props.formTextInput._id}
           name={this.props.formTextInput._id}
+          value={this.props.formTextInputValue}
           onChange={this.handleChange} />
       </label>
     </div>
