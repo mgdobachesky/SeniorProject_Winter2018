@@ -12,18 +12,15 @@ import Home from './components/Home';
 var BodyJSX = function() {
   return (
     <Switch>
-
       <Route
       exact path='/'
       component={Home} />
-
       <Route path='/login' render={routeProps => <Login {...routeProps}
       user={this.props.user}
       loggedIn={this.props.loggedIn}
       userError={this.props.userError}
       onChange={this.props.onChange}
       onSubmit={this.props.onUserLogin} />} />
-
       <Route path='/signup' render={routeProps => <UserForm {...routeProps}
       description="Sign Up"
       user={this.props.user}
@@ -31,7 +28,6 @@ var BodyJSX = function() {
       userError={this.props.userError}
       onChange={this.props.onChange}
       onSubmit={this.props.onCreateUser} />} />
-
       <Route path='/dashboard' render={routeProps => <Dashboard {...routeProps}
       user={this.props.user}
       viewsite={this.props.viewsite}
@@ -47,10 +43,8 @@ var BodyJSX = function() {
       onUpdateViewsite={this.props.onUpdateViewsite}
       onDeleteViewsite={this.props.onDeleteViewsite}
       onClearViewsite={this.props.onClearViewsite} />} />
-
       <Route path='/:viewsiteId' render={routeProps => <Viewsite {...routeProps}
       loggedIn={this.props.loggedIn} />} />
-    
     </Switch>
   );
 }

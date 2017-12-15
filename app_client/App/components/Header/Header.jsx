@@ -8,13 +8,11 @@ function HeaderOptions(props) {
     return (
       <li
       className="nav-item">
-
         <NavLink
         className="nav-link"
         to="/dashboard">
           Dashboard
         </NavLink>
-
       </li>
     );
   } else {
@@ -33,14 +31,12 @@ function ViewsiteLinks(props) {
         <li
         key={viewsiteId}
         className="nav-item">
-
           <NavLink
           id={viewsiteId}
           className="nav-link"
           to={viewsiteHref}>
             {viewsiteName}
           </NavLink>
-
         </li>
       );
     });
@@ -55,17 +51,14 @@ function LoginOptions(props) {
     return (
       <ul
       className="navbar-nav justify-content-end">
-
         <li
         className="nav-item">
-
           <a
           className="nav-link"
           href="javascript:;"
           onClick={props.onLogout}>
             Logout
           </a>
-
         </li>
       </ul>
     );
@@ -73,27 +66,21 @@ function LoginOptions(props) {
     return (
       <ul
       className="navbar-nav justify-content-end">
-
         <li
         className="nav-item">
-
           <NavLink
           className="nav-link"
           to="/signup">
             Sign-Up
           </NavLink>
-
         </li>
-
         <li
         className="nav-item">
-
           <NavLink
           className="nav-link"
           to="/login">
             Login
           </NavLink>
-
         </li>
       </ul>
     );
@@ -104,22 +91,17 @@ var HeaderJSX = function() {
   return (
     <nav
     className="navbar navbar-expand-lg navbar-dark bg-dark">
-
       <NavLink
       className="navbar-brand"
       to="/">
         Cadre
       </NavLink>
-
       <ul
       className="navbar-nav mr-auto">
-
         <HeaderOptions
         user={this.props.user}
         loggedIn={this.props.loggedIn} />
-
       </ul>
-
       <button
       className="navbar-toggler"
       type="button" data-toggle="collapse"
@@ -127,29 +109,21 @@ var HeaderJSX = function() {
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
       aria-label="Toggle navigation">
-
         <span
         className="navbar-toggler-icon" />
-
       </button>
-
       <div
       className="collapse navbar-collapse"
       id="navbarSupportedContent">
-
         <ul
         className="navbar-nav mr-auto">
-
           <ViewsiteLinks
           viewsites={this.props.viewsites} />
-
         </ul>
-
         <LoginOptions
         user={this.props.user}
         onLogout={this.handleUserLogout}
         loggedIn={this.props.loggedIn} />
-
       </div>
     </nav>
   );

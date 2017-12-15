@@ -37,41 +37,32 @@ function ViewpageList(props) {
         <div
         key={_id}
         className="card border-primary mb-3">
-
           <div
           className="card-body">
-
             <h4
             className="card-title">
               Viewpage: {viewpageName}
             </h4>
-
             <p
             className="card-text">
               Permission Level: {permissionLevelMessage}
             </p>
-
           </div>
-
           <div
           className="card-footer">
-
             <a
             className="card-link"
             href="javascript:;"
             onClick={() => props.onEditViewpage(editClick)}>
               Edit
             </a>
-
             <a
             className="card-link"
             href="javascript:;"
             onClick={() => props.onDeleteViewpage(deleteClick)}>
               Delete
             </a>
-
           </div>
-
         </div>
       );
     });
@@ -93,7 +84,6 @@ function ViewpageTabs(props) {
         <li
         key={tabId}
         className="nav-item">
-
           <a
           className="nav-link"
           id={tabId}
@@ -105,7 +95,6 @@ function ViewpageTabs(props) {
           onClick={() => {clearAll.call(this);}}>
             {viewpageName}
           </a>
-
         </li>
       );
     });
@@ -133,10 +122,8 @@ function ViewpageContent(props) {
         id={contentId}
         role="tabpanel"
         aria-labelledby={contentControlledBy}>
-
           <Viewpage
           viewpage={viewpage} />
-
         </div>
       );
     });
@@ -168,34 +155,25 @@ var ViewsiteJSX = function() {
   return (
     <div
     className="container-fluid">
-
       <div
       className="row">
-
         <div
         className="col-2 offset-1">
-
           <h1>
             {this.state.viewsite.viewsiteName}
           </h1>
-
         </div>
       </div>
-
       <div
       className="row">
-
         <div
         className="col-10 offset-1">
-
           <ul
           className="nav nav-tabs"
           id="viewsite-tabs"
           role="tablist">
-
             <li
             className="nav-item">
-
               <a
               className="nav-link active"
               id="manage-viewpages-tab"
@@ -206,105 +184,77 @@ var ViewsiteJSX = function() {
               aria-selected="true">
                 Manage Viewpages
               </a>
-
             </li>
-
             <ViewpageTabs
             viewpages={this.state.viewpages} />
-
           </ul>
         </div>
       </div>
-
       <br />
-
       <div
       className="row">
-
         <div
         className="col-12">
-
           <div
           className="tab-content"
           id="manage-viewsites-tabContent">
-
             <div
             className="tab-pane fade show active"
             id="manage-viewpages"
             role="tabpanel"
             aria-labelledby="manage-viewpages-tab">
-
               <div
               className="row">
-
                 <div
                 className="col-1 offset-1">
-
                   <ul
                   className="nav flex-column">
-
                     <li
                     className="nav-item">
-
                       <button
                       type="button"
                       className="btn btn-link nav-link"
                       onClick={() =>  createViewpage.call(this)}>
                         + New Viewpage
                       </button>
-
                     </li>
                   </ul>
                 </div>
-
                 <div
                 className="col-9">
-
                   <div
                   id="createViewpage"
                   className="card mb-3">
-
                     <div className="card-body">
-
                       <ViewpageForm
                       description="Create Viewpage"
                       viewpage={this.state.viewpage}
                       viewpageError={this.state.viewpageError}
                       onChange={this.handleChange}
                       onSubmit={this.handleCreateViewpage} />
-
                     </div>
                   </div>
-
                   <div
                   id="updateViewpage"
                   className="card mb-3">
-
                     <div className="card-body">
-
                       <ViewpageForm
                       description="Update Viewpage"
                       viewpage={this.state.viewpage}
                       viewpageError={this.state.viewpageError}
                       onChange={this.handleChange}
                       onSubmit={this.handleUpdateViewpage} />
-
                     </div>
-
                   </div>
-
                   <ViewpageList
                   viewpages={this.state.viewpages}
                   onEditViewpage={this.handleEditViewpage}
                   onDeleteViewpage={this.handleDeleteViewpage} />
-
                 </div>
               </div>
             </div>
-
             <ViewpageContent
             viewpages={this.state.viewpages} />
-
           </div>
         </div>
       </div>
