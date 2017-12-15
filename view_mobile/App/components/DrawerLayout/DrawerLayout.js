@@ -4,7 +4,7 @@ import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Rig
 import { Link } from 'react-router-native';
 
 // Import required components
-import Routes from './components/Routes';
+import AppContent from './components/AppContent';
 import styles from './styles.js';
 
 function ViewpageLinks(props) {
@@ -48,7 +48,7 @@ function NavigationContent(props) {
   if(props.viewsite._id) {
     return (
       <Content>
-        <Routes />
+        <AppContent />
       </Content>
     );
   } else {

@@ -3,17 +3,17 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 // Import requred components
-import Navbar from './components/Navbar';
-import Routes from './components/Routes';
+import Header from './components/Header';
+import Body from './components/Body';
 
 // Create main App
 var AppJSX = function() {
   return(
     <div>
-      <Navbar
+      <Header
         viewsite={this.state.viewsite}
         viewpages={this.state.viewpages} />
-      <Routes />
+      <Body />
     </div>
   );
 }

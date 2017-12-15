@@ -3,21 +3,21 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 // Import requred components
-import Navbar from './components/Navbar';
-import Routes from './components/Routes';
+import Header from './components/Header';
+import Body from './components/Body';
 
 // Create main App
 var AppJSX = function() {
   return(
     <div>
-      <Navbar
+      <Header
         user={this.state.user}
         viewsites={this.state.viewsites}
         userError={this.state.userError}
         onUserLogout={this.handleUserLogout}
         loggedIn={this.state.loggedIn} />
 
-      <Routes
+      <Body
         user={this.state.user}
         viewsite={this.state.viewsite}
         viewsites={this.state.viewsites}
