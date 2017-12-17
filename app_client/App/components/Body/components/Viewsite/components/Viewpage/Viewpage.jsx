@@ -1,6 +1,5 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 // Import requred components
 import TextForm from './components/TextForm';
@@ -18,21 +17,15 @@ function TextList(props) {
       let editClick = {_id: _id, viewpageId: viewpageId, textValue: textValue};
       let deleteClick = {_id: _id};
       return (
-        <div
-        key={_id}
-        className="card border-primary mb-3">
-          <div
-          className="card-body">
-            <h4
-            className="card-title">
+        <div key={_id} className="card border-primary mb-3">
+          <div className="card-body">
+            <h4 className="card-title">
               Text
             </h4>
-            <p
-            className="card-text">
+            <p className="card-text">
               {textValue.split('\n').map(function(item, key) {
                 return (
-                  <span
-                  key={key}>
+                  <span key={key}>
                     {item}
                     <br />
                   </span>
@@ -40,14 +33,15 @@ function TextList(props) {
               })}
             </p>
           </div>
-          <div
-          className="card-footer">
+
+          <div className="card-footer">
             <a
             className="card-link"
             href="javascript:;"
             onClick={() => props.onEditText(editClick)}>
               Edit
             </a>
+
             <a
             className="card-link"
             href="javascript:;"
@@ -91,28 +85,25 @@ function DataViewList(props) {
         let editClick = {_id: _id, formId: formId};
         let deleteClick = {_id: _id};
         return (
-          <div
-          key={_id}
-          className="card border-primary mb-3">
-            <div
-            className="card-body">
-              <h4
-              className="card-title">
+          <div key={_id} className="card border-primary mb-3">
+            <div className="card-body">
+              <h4 className="card-title">
                 Data-View
               </h4>
-              <p
-              className="card-text">
+
+              <p className="card-text">
                 Source: {formTitle}
               </p>
             </div>
-            <div
-            className="card-footer">
+
+            <div className="card-footer">
               <a
               className="card-link"
               href="javascript:;"
               onClick={() => props.onEditDataView(editClick)}>
                 Edit
               </a>
+
               <a
               className="card-link"
               href="javascript:;"
@@ -170,38 +161,41 @@ var createDataView = function() {
 
 var ViewpageJSX = function() {
   return (
-    <div
-    className="container-fluid">
-      <div
-      className="row">
-        <div
-        className="col-1 offset-1">
-          <button
-          type="button"
-          className="btn btn-link"
-          onClick={() => {createText.call(this);}}>
-            + Add Text
-          </button>
-          <button
-          type="button"
-          className="btn btn-link"
-          onClick={() => {createForm.call(this);}}>
-            + Add Form
-          </button>
-          <button
-          type="button"
-          className="btn btn-link"
-          onClick={() => {createDataView.call(this);}}>
-            + Add Data-View
-          </button>
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-1"></div>
+        <div className="col-auto">
+          <div className="row">
+            <button
+            type="button"
+            className="btn btn-link"
+            onClick={() => {createText.call(this);}}>
+              + Add Text
+            </button>
+          </div>
+
+          <div className="row">
+            <button
+            type="button"
+            className="btn btn-link"
+            onClick={() => {createForm.call(this);}}>
+              + Add Form
+            </button>
+          </div>
+
+          <div className="row">
+            <button
+            type="button"
+            className="btn btn-link"
+            onClick={() => {createDataView.call(this);}}>
+              + Add Data-View
+            </button>
+          </div>
         </div>
-        <div
-        className="col-9">
-          <div
-          id="createText"
-          className="card createText mb-3">
-            <div
-            className="card-body">
+
+        <div className="col">
+          <div id="createText" className="card createText mb-3">
+            <div className="card-body">
               <TextForm
               description="Add Text"
               text={this.state.text}
@@ -210,11 +204,9 @@ var ViewpageJSX = function() {
               onSubmit={this.handleCreateText} />
             </div>
           </div>
-          <div
-          id="updateText"
-          className="card updateText mb-3">
-            <div
-            className="card-body">
+
+          <div id="updateText" className="card updateText mb-3">
+            <div className="card-body">
               <TextForm
               description="Update Text"
               text={this.state.text}
@@ -223,11 +215,9 @@ var ViewpageJSX = function() {
               onSubmit={this.handleUpdateText} />
             </div>
           </div>
-          <div
-          id="createForm"
-          className="card createForm mb-3">
-            <div
-            className="card-body">
+
+          <div id="createForm" className="card createForm mb-3">
+            <div className="card-body">
               <FormForm
               description="Add Form"
               form={this.state.form}
@@ -236,11 +226,9 @@ var ViewpageJSX = function() {
               onSubmit={this.handleCreateForm} />
             </div>
           </div>
-          <div
-          id="updateForm"
-          className="card updateForm mb-3">
-            <div
-            className="card-body">
+
+          <div id="updateForm" className="card updateForm mb-3">
+            <div className="card-body">
               <FormForm
               description="Update Form"
               form={this.state.form}
@@ -249,11 +237,9 @@ var ViewpageJSX = function() {
               onSubmit={this.handleUpdateForm} />
             </div>
           </div>
-          <div
-          id="createDataView"
-          className="card createDataView mb-3">
-            <div
-            className="card-body">
+
+          <div id="createDataView" className="card createDataView mb-3">
+            <div className="card-body">
               <DataViewForm
               description="Create Data-View"
               dataView={this.state.dataView}
@@ -263,11 +249,9 @@ var ViewpageJSX = function() {
               onSubmit={this.handleCreateDataView} />
             </div>
           </div>
-          <div
-          id="updateDataView"
-          className="card updateDataView mb-3">
-            <div
-            className="card-body">
+
+          <div id="updateDataView" className="card updateDataView mb-3">
+            <div className="card-body">
               <DataViewForm
               description="Update Data-View"
               dataView={this.state.dataView}
@@ -277,19 +261,24 @@ var ViewpageJSX = function() {
               onSubmit={this.handleUpdateDataView} />
             </div>
           </div>
+
           <TextList
           texts={this.state.texts}
           onEditText={this.handleEditText}
           onDeleteText={this.handleDeleteText} />
+
           <FormList
           forms={this.state.forms}
           onEditForm={this.handleEditForm}
           onDeleteForm={this.handleDeleteForm} />
+
           <DataViewList
           dataViews={this.state.dataViews}
           onEditDataView={this.handleEditDataView}
           onDeleteDataView={this.handleDeleteDataView} />
         </div>
+
+        <div className="col-1"></div>
       </div>
     </div>
   );

@@ -17,8 +17,8 @@ function viewsitesReadAll(request, response) {
 }
 
 // Read one
-function viewsitesReadOne(request, response) {
-  viewsitesDao.viewsitesReadOne(request).then(function(results) {
+function viewsitesReadOneByName(request, response) {
+  viewsitesDao.viewsitesReadOneByName(request).then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -62,7 +62,7 @@ function viewsitesDelete(request, response) {
 
 // Export functions
 module.exports.viewsitesReadAll = viewsitesReadAll;
-module.exports.viewsitesReadOne = viewsitesReadOne;
+module.exports.viewsitesReadOneByName = viewsitesReadOneByName;
 module.exports.viewsitesReadOneById = viewsitesReadOneById;
 module.exports.viewsitesCreate = viewsitesCreate;
 module.exports.viewsitesUpdate = viewsitesUpdate;

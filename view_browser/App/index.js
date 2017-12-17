@@ -1,6 +1,5 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 // Import required components
 import AppJSX from './App.jsx';
@@ -35,7 +34,7 @@ class App extends React.Component {
   componentWillMount() {
     let requestData = {};
     requestData.viewsiteName = this.props.viewsiteName;
-    this.manageViewsiteService.readOneViewsite(requestData).then((results) => {
+    this.manageViewsiteService.readOneViewsiteByName(requestData).then((results) => {
       this.setState({viewsite: results.data}, () => this.handleReadAllViewpages());
     }, (error) => {
       console.log(error.response.data);

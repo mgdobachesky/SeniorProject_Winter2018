@@ -1,31 +1,24 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 var HomeJSX = function() {
   return (
     <div>
-      <div
-      className="jumbotron jumbotron-fluid">
-        <div
-        className="container-fluid">
-          <div
-          className="offset-1">
-            <h1
-            className="display-3">
+      <div className="jumbotron jumbotron-fluid">
+        <div className="container-fluid">
+          <div className="offset-1">
+            <h1 className="display-3">
               Cadre
             </h1>
-            <p
-            className="lead">
+            <p className="lead">
               The place where anyone can make a website.
             </p>
           </div>
         </div>
       </div>
-      <div
-      className="container-fluid">
-        <div
-        className="offset-1">
+
+      <div className="container-fluid">
+        <div className="offset-1">
           <p>
             Welcome to the Cadre Website!
           </p>

@@ -1,6 +1,5 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 // Import required components
 import TextJSX from './Text.jsx';

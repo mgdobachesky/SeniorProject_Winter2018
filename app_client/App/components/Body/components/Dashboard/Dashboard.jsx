@@ -1,6 +1,5 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 // Import requred components
 import ViewsiteForm from './components/ViewsiteForm';
@@ -18,28 +17,23 @@ function ViewsiteList(props) {
       let editClick = {_id: _id, userId: userId, viewsiteName: viewsiteName, loginEnabled: loginEnabled};
       let deleteClick = {_id: _id};
       return (
-        <div
-        key={_id}
-        className="card border-primary mb-3">
-          <div
-          className="card-body">
-            <h4
-            className="card-title">
+        <div key={_id} className="card border-primary mb-3">
+          <div className="card-body">
+            <h4 className="card-title">
               Viewsite: {viewsiteName}
             </h4>
-            <p
-            className="card-text">
+            <p className="card-text">
               Login Enabled: {loginEnabledMessage}
             </p>
           </div>
-          <div
-          className="card-footer">
+          <div className="card-footer">
             <a
             className="card-link"
             href="javascript:;"
             onClick={() => props.onEditViewsite(editClick)}>
               Edit
             </a>
+
             <a
             className="card-link"
             href="javascript:;"
@@ -63,24 +57,21 @@ var createViewsite = function() {
 
 var DashboardJSX = function() {
   return (
-    <div
-    className="container-fluid">
-      <div
-      className="row">
-        <div
-        className="col-1 offset-1">
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-1 offset-1">
           <h1>
             Dashboard
           </h1>
         </div>
       </div>
-      <div
-      className="row">
-        <div
-        className="col-1 offset-1">
+      <div className="row">
+        <div className="col-1"></div>
+        <div className="col-auto">
           <div
           className="nav flex-column nav-pills"
-          id="v-pills-tab" role="tablist"
+          id="v-pills-tab"
+          role="tablist"
           aria-orientation="vertical">
             <a
             className="nav-link active"
@@ -92,6 +83,7 @@ var DashboardJSX = function() {
             aria-selected="true">
               Viewsites
             </a>
+
             <a
             className="nav-link"
             id="v-pills-account-tab"
@@ -104,11 +96,8 @@ var DashboardJSX = function() {
             </a>
           </div>
         </div>
-        <div
-        className="col-9">
-          <div
-          className="tab-content"
-          id="v-pills-tabContent">
+        <div className="col">
+          <div className="tab-content" id="v-pills-tabContent">
             <div
             className="tab-pane fade show active"
             id="v-pills-viewsites"
@@ -120,11 +109,8 @@ var DashboardJSX = function() {
               onClick={() => {createViewsite.call(this);}}>
                 + New Viewsite
               </button>
-              <div
-              id="createViewsite"
-              className="card mb-3">
-                <div
-                className="card-body">
+              <div id="createViewsite" className="card mb-3">
+                <div className="card-body">
                   <ViewsiteForm
                   description="Create Viewsite"
                   viewsite={this.props.viewsite}
@@ -133,11 +119,8 @@ var DashboardJSX = function() {
                   onSubmit={this.props.onCreateViewsite} />
                 </div>
               </div>
-              <div
-              id="updateViewsite"
-              className="card mb-3">
-                <div
-                className="card-body">
+              <div id="updateViewsite" className="card mb-3">
+                <div className="card-body">
                   <ViewsiteForm
                   description="Update Viewsite"
                   viewsite={this.props.viewsite}
@@ -146,6 +129,7 @@ var DashboardJSX = function() {
                   onSubmit={this.props.onUpdateViewsite} />
                 </div>
               </div>
+
               <ViewsiteList
               viewsites={this.props.viewsites}
               onEditViewsite={this.props.onEditViewsite}
@@ -156,10 +140,8 @@ var DashboardJSX = function() {
             id="v-pills-account"
             role="tabpanel"
             aria-labelledby="v-pills-account-tab">
-              <div
-              className="card mb-3">
-                <div
-                className="card-body">
+              <div className="card mb-3">
+                <div className="card-body">
                   <UserForm
                   description="Update User"
                   user={this.props.user}
@@ -172,6 +154,7 @@ var DashboardJSX = function() {
             </div>
           </div>
         </div>
+        <div className="col-1"></div>
       </div>
     </div>
   );

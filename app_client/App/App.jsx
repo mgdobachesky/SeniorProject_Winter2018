@@ -1,10 +1,10 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 // Import requred components
 import Header from './components/Header';
 import Body from './components/Body';
+import Footer from './components/Footer';
 
 // Create main App
 var AppJSX = function() {
@@ -16,6 +16,7 @@ var AppJSX = function() {
       userError={this.state.userError}
       onUserLogout={this.handleUserLogout}
       loggedIn={this.state.loggedIn} />
+
       <Body
       user={this.state.user}
       viewsite={this.state.viewsite}
@@ -33,6 +34,8 @@ var AppJSX = function() {
       onUpdateViewsite={this.handleUpdateViewsite}
       onDeleteViewsite={this.handleDeleteViewsite}
       onClearViewsite={this.handleClearViewsite} />
+
+      <Footer />
     </div>
   );
 }

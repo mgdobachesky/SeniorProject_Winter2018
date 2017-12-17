@@ -3,9 +3,9 @@ import axios from 'axios';
 
 class ViewsiteService {
   // Read one
-  readOneViewsite(requestData) {
+  readOneViewsiteByName(requestData) {
     return axios({
-      url: '/read_one/viewsites/' + requestData.viewsiteName,
+      url: '/read_one/viewsites/viewsiteName/' + requestData.viewsiteName,
       method: 'get',
       baseURL: 'http://159.203.105.123:3000/api/v1/'
     });

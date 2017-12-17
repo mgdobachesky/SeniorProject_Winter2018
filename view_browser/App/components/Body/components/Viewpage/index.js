@@ -1,6 +1,5 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 // Import requred components
 import ViewpageJSX from './Viewpage.jsx';
@@ -67,13 +66,15 @@ class Viewpage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let requestData = {};
-    requestData.viewpageId = nextProps.match.params.viewpageId;
-    this.manageViewpageService.readOneViewpage(requestData).then((results) => {
-      this.setState({viewpage: results.data}, () => this.handleReadAllComponents());
-    }, (error) => {
-      console.log(error.response.data);
-    });
+    if(nextProps.match.params.viewpageId) {
+      let requestData = {};
+      requestData.viewpageId = nextProps.match.params.viewpageId;
+      this.manageViewpageService.readOneViewpage(requestData).then((results) => {
+        this.setState({viewpage: results.data}, () => this.handleReadAllComponents());
+      }, (error) => {
+        console.log(error.response.data);
+      });
+    }
   }
 
   componentDidMount() {
@@ -84,7 +85,7 @@ class Viewpage extends React.Component {
     }, (error) => {
       console.log(error.response.data);
     });
-  }
+}
 
   render() {
     return(ViewpageJSX.call(this));

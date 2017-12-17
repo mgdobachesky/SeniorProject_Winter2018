@@ -19,7 +19,7 @@ router.post('/login/users', controllerUsers.usersLogIn);
 router.get('/logout/users', controllerUsers.usersLogout);
 
 // Create routes for viewsites
-router.get('/read_one/viewsites/:viewsiteName', controllerViewsites.viewsitesReadOne);
+router.get('/read_one/viewsites/viewsiteName/:viewsiteName', controllerViewsites.viewsitesReadOneByName);
 router.get('/read_one/viewsites/viewsiteId/:viewsiteId', controllerViewsites.viewsitesReadOneById);
 router.get('/read_all/viewsites', controllerViewsites.viewsitesReadAll);
 router.post('/create/viewsites', controllerViewsites.viewsitesCreate);

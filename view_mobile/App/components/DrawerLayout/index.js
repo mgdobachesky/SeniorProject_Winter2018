@@ -42,7 +42,7 @@ class DrawerLayout extends React.Component {
     if(this.state.viewsiteName) {
       let requestData = {};
       requestData.viewsiteName = this.state.viewsiteName;
-      this.manageViewsiteService.readOneViewsite(requestData).then((results) => {
+      this.manageViewsiteService.readOneViewsiteByName(requestData).then((results) => {
         this.setState({viewsite: results.data}, () => this.handleReadAllViewpages());
       }, (error) => {
         console.log(error.response.data);
@@ -53,7 +53,7 @@ class DrawerLayout extends React.Component {
   closeDrawer = () => {
     this.drawer._root.close()
   };
-  
+
   openDrawer = () => {
     this.drawer._root.open()
   };

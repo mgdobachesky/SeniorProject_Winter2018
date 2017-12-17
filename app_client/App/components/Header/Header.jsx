@@ -1,16 +1,13 @@
 // Import required modules
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 // Choose navbar options based on user state
 function HeaderOptions(props) {
   if(props.loggedIn) {
     return (
-      <li
-      className="nav-item">
-        <NavLink
-        className="nav-link"
-        to="/dashboard">
+      <li className="nav-item">
+        <NavLink className="nav-link" to="/dashboard">
           Dashboard
         </NavLink>
       </li>
@@ -28,13 +25,8 @@ function ViewsiteLinks(props) {
       const viewsiteName = viewsite.viewsiteName;
       const viewsiteHref = '/' + viewsite._id;
       return (
-        <li
-        key={viewsiteId}
-        className="nav-item">
-          <NavLink
-          id={viewsiteId}
-          className="nav-link"
-          to={viewsiteHref}>
+        <li key={viewsiteId} className="nav-item">
+          <NavLink id={viewsiteId} className="nav-link" to={viewsiteHref}>
             {viewsiteName}
           </NavLink>
         </li>
@@ -49,14 +41,9 @@ function ViewsiteLinks(props) {
 function LoginOptions(props) {
   if(props.loggedIn) {
     return (
-      <ul
-      className="navbar-nav justify-content-end">
-        <li
-        className="nav-item">
-          <a
-          className="nav-link"
-          href="javascript:;"
-          onClick={props.onLogout}>
+      <ul className="navbar-nav justify-content-end">
+        <li className="nav-item">
+          <a className="nav-link" href="javascript:;" onClick={props.onLogout}>
             Logout
           </a>
         </li>
@@ -64,21 +51,14 @@ function LoginOptions(props) {
     );
   } else {
     return (
-      <ul
-      className="navbar-nav justify-content-end">
-        <li
-        className="nav-item">
-          <NavLink
-          className="nav-link"
-          to="/signup">
+      <ul className="navbar-nav justify-content-end">
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/signup">
             Sign-Up
           </NavLink>
         </li>
-        <li
-        className="nav-item">
-          <NavLink
-          className="nav-link"
-          to="/login">
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/login">
             Login
           </NavLink>
         </li>
@@ -89,15 +69,11 @@ function LoginOptions(props) {
 
 var HeaderJSX = function() {
   return (
-    <nav
-    className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <NavLink
-      className="navbar-brand"
-      to="/">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <NavLink className="navbar-brand" to="/">
         Cadre
       </NavLink>
-      <ul
-      className="navbar-nav mr-auto">
+      <ul className="navbar-nav mr-auto">
         <HeaderOptions
         user={this.props.user}
         loggedIn={this.props.loggedIn} />
@@ -109,14 +85,10 @@ var HeaderJSX = function() {
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
       aria-label="Toggle navigation">
-        <span
-        className="navbar-toggler-icon" />
+        <span className="navbar-toggler-icon" />
       </button>
-      <div
-      className="collapse navbar-collapse"
-      id="navbarSupportedContent">
-        <ul
-        className="navbar-nav mr-auto">
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
           <ViewsiteLinks
           viewsites={this.props.viewsites} />
         </ul>

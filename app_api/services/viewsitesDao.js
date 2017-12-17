@@ -25,7 +25,7 @@ function viewsitesReadAll(request) {
   return promise;
 }
 
-function viewsitesReadOne(request) {
+function viewsitesReadOneByName(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.params.viewsiteName) {
       reject('Viewsite name is required!');
@@ -201,7 +201,7 @@ function viewsitesExists(request) {
 
 // Export functions
 module.exports.viewsitesReadAll = viewsitesReadAll;
-module.exports.viewsitesReadOne = viewsitesReadOne;
+module.exports.viewsitesReadOneByName = viewsitesReadOneByName;
 module.exports.viewsitesReadOneById = viewsitesReadOneById;
 module.exports.viewsitesCreate = viewsitesCreate;
 module.exports.viewsitesUpdate = viewsitesUpdate;

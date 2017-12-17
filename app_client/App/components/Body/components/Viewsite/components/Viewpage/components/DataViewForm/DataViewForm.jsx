@@ -1,6 +1,5 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 var ErrorAlert = function(props) {
   if(props.dataViewError) {
@@ -21,7 +20,9 @@ function DataViewOptions(props) {
       const _id = form._id;
       const formTitle = form.formTitle;
       return (
-        <option key={_id} value={_id}>{formTitle}</option>
+        <option key={_id} value={_id}>
+          {formTitle}
+        </option>
       );
     });
   } else {
@@ -32,21 +33,48 @@ function DataViewOptions(props) {
 var DataViewFormJSX = function() {
   return (
     <div className="container-fluid">
-      <h4>{this.props.description}</h4>
-      <ErrorAlert dataViewError={this.props.dataViewError} />
+      <h4>
+        {this.props.description}
+      </h4>
+
+      <ErrorAlert
+      dataViewError={this.props.dataViewError} />
+
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="formId">
             Data-View:
-            <select id="formId" name="formId" className="form-control" value={this.props.dataView.formId} onChange={this.handleChange}>
-              <option value="" disabled hidden>Choose Data-View...</option>
+
+            <select
+            id="formId"
+            name="formId"
+            className="form-control"
+            value={this.props.dataView.formId}
+            onChange={this.handleChange}>
+              <option value="" disabled hidden>
+                Choose Data-View...
+              </option>
+
               <DataViewOptions forms={this.props.forms} />
             </select>
           </label>
         </div>
-        <input name="_id" type="hidden" id="_id" value={this.props.dataView._id} />
-        <input name="viewpageId" type="hidden" id="viewpageId" value={this.props.dataView.viewpageId} />
-        <button type="submit" className="btn btn-primary">{this.props.description}</button>
+
+        <input
+        name="_id"
+        type="hidden"
+        id="_id"
+        value={this.props.dataView._id} />
+
+        <input
+        name="viewpageId"
+        type="hidden"
+        id="viewpageId"
+        value={this.props.dataView.viewpageId} />
+
+        <button type="submit" className="btn btn-primary">
+          {this.props.description}
+        </button>
       </form>
     </div>
   );

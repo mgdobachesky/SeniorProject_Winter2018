@@ -1,6 +1,6 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 // Import required components
 import LoginJSX from './Login.jsx';

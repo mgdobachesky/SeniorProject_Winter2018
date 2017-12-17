@@ -1,6 +1,5 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 // Import requred components
 import ViewpageForm from './components/ViewpageForm';
@@ -34,28 +33,23 @@ function ViewpageList(props) {
       let editClick = {_id: _id, viewsiteId: viewsiteId, viewpageName: viewpageName, permissionLevel: permissionLevel};
       let deleteClick = {_id: _id};
       return (
-        <div
-        key={_id}
-        className="card border-primary mb-3">
-          <div
-          className="card-body">
-            <h4
-            className="card-title">
+        <div key={_id} className="card border-primary mb-3">
+          <div className="card-body">
+            <h4 className="card-title">
               Viewpage: {viewpageName}
             </h4>
-            <p
-            className="card-text">
+            <p className="card-text">
               Permission Level: {permissionLevelMessage}
             </p>
           </div>
-          <div
-          className="card-footer">
+          <div className="card-footer">
             <a
             className="card-link"
             href="javascript:;"
             onClick={() => props.onEditViewpage(editClick)}>
               Edit
             </a>
+
             <a
             className="card-link"
             href="javascript:;"
@@ -81,9 +75,7 @@ function ViewpageTabs(props) {
       const tabHref = "#" + _id;
       const tabControls = _id;
       return (
-        <li
-        key={tabId}
-        className="nav-item">
+        <li key={tabId} className="nav-item">
           <a
           className="nav-link"
           id={tabId}
@@ -153,27 +145,19 @@ var createViewpage = function() {
 
 var ViewsiteJSX = function() {
   return (
-    <div
-    className="container-fluid">
-      <div
-      className="row">
-        <div
-        className="col-2 offset-1">
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-2 offset-1">
           <h1>
             {this.state.viewsite.viewsiteName}
           </h1>
         </div>
       </div>
-      <div
-      className="row">
-        <div
-        className="col-10 offset-1">
-          <ul
-          className="nav nav-tabs"
-          id="viewsite-tabs"
-          role="tablist">
-            <li
-            className="nav-item">
+
+      <div className="row">
+        <div className="col-10 offset-1">
+          <ul className="nav nav-tabs" id="viewsite-tabs" role="tablist">
+            <li className="nav-item">
               <a
               className="nav-link active"
               id="manage-viewpages-tab"
@@ -185,32 +169,28 @@ var ViewsiteJSX = function() {
                 Manage Viewpages
               </a>
             </li>
+
             <ViewpageTabs
             viewpages={this.state.viewpages} />
           </ul>
         </div>
       </div>
+
       <br />
-      <div
-      className="row">
-        <div
-        className="col-12">
-          <div
-          className="tab-content"
-          id="manage-viewsites-tabContent">
+
+      <div className="row">
+        <div className="col-12">
+          <div className="tab-content" id="manage-viewsites-tabContent">
             <div
             className="tab-pane fade show active"
             id="manage-viewpages"
             role="tabpanel"
             aria-labelledby="manage-viewpages-tab">
-              <div
-              className="row">
-                <div
-                className="col-1 offset-1">
-                  <ul
-                  className="nav flex-column">
-                    <li
-                    className="nav-item">
+              <div className="row">
+                <div className="col-1"></div>
+                <div className="col-auto">
+                  <ul className="nav flex-column">
+                    <li className="nav-item">
                       <button
                       type="button"
                       className="btn btn-link nav-link"
@@ -220,11 +200,8 @@ var ViewsiteJSX = function() {
                     </li>
                   </ul>
                 </div>
-                <div
-                className="col-9">
-                  <div
-                  id="createViewpage"
-                  className="card mb-3">
+                <div className="col">
+                  <div id="createViewpage" className="card mb-3">
                     <div className="card-body">
                       <ViewpageForm
                       description="Create Viewpage"
@@ -234,9 +211,7 @@ var ViewsiteJSX = function() {
                       onSubmit={this.handleCreateViewpage} />
                     </div>
                   </div>
-                  <div
-                  id="updateViewpage"
-                  className="card mb-3">
+                  <div id="updateViewpage" className="card mb-3">
                     <div className="card-body">
                       <ViewpageForm
                       description="Update Viewpage"
@@ -251,8 +226,10 @@ var ViewsiteJSX = function() {
                   onEditViewpage={this.handleEditViewpage}
                   onDeleteViewpage={this.handleDeleteViewpage} />
                 </div>
+                <div className="col-1"></div>
               </div>
             </div>
+
             <ViewpageContent
             viewpages={this.state.viewpages} />
           </div>

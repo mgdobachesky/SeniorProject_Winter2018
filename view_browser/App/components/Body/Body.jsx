@@ -1,6 +1,6 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 // Import requred components
 import Viewpage from './components/Viewpage';
@@ -8,7 +8,7 @@ import Viewpage from './components/Viewpage';
 var BodyJSX = function() {
   return (
     <Switch>
-      <Route path='/:viewpageId' component={Viewpage} />
+      <Route path='/viewsites/:viewsiteName/:viewpageId' component={Viewpage} />
     </Switch>
   );
 }
