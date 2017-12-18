@@ -45,8 +45,8 @@ app.use(cors());
 app.set('json spaces', 2);
 
 // Add the application routes
-app.use('/', routesServer);
 app.use('/api/v1', routesApi);
+app.use('/', routesServer);
 
 // Catch 404 errors and forward to error handlers
 app.use(function(req, res, next) {

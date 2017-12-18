@@ -14,13 +14,21 @@ function ViewsiteList(props) {
       const viewsiteName = viewsite.viewsiteName;
       const loginEnabled = viewsite.loginEnabled;
       const loginEnabledMessage = loginEnabled ? "Yes" : "No";
-      let editClick = {_id: _id, userId: userId, viewsiteName: viewsiteName, loginEnabled: loginEnabled};
+      const viewsiteLink = "/viewsites/" + viewsite.viewsiteName;
+      let editClick = {
+        _id: _id,
+        userId: userId,
+        viewsiteName: viewsiteName,
+        loginEnabled: loginEnabled
+      };
       let deleteClick = {_id: _id};
       return (
         <div key={_id} className="card border-primary mb-3">
           <div className="card-body">
             <h4 className="card-title">
-              Viewsite: {viewsiteName}
+              Viewsite: <a href={viewsiteLink} className="card-link">
+                {viewsiteName}
+              </a>
             </h4>
             <p className="card-text">
               Login Enabled: {loginEnabledMessage}

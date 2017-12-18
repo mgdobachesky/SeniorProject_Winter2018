@@ -49,11 +49,15 @@ function DataViewList(props) {
 
 var ViewpageJSX = function() {
   return (
-    <div className="container">
-      <h1>{this.state.viewpage.viewpageName}</h1>
-      <TextList texts={this.state.texts} />
-      <FormList forms={this.state.forms} />
-      <DataViewList dataViews={this.state.dataViews} />
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-10 offset-1">
+          <h1>{this.state.viewpage.viewpageName}</h1>
+          <TextList texts={this.state.texts} />
+          <FormList forms={this.state.forms} />
+          <DataViewList dataViews={this.state.dataViews} />
+        </div>
+      </div>
     </div>
   );
 }
