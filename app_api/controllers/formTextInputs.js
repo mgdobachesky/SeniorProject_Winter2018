@@ -9,7 +9,8 @@ function sendJSONresponse(res, status, content) {
 
 // Read all
 function formTextInputsReadAll(request, response) {
-  formTextInputsDao.formTextInputsReadAll(request).then(function(results) {
+  formTextInputsDao.formTextInputsReadAll(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -18,7 +19,8 @@ function formTextInputsReadAll(request, response) {
 
 // Read one
 function formTextInputsReadOne(request, response) {
-  formTextInputsDao.formTextInputsReadOne(request).then(function(results) {
+  formTextInputsDao.formTextInputsReadOne(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -27,7 +29,8 @@ function formTextInputsReadOne(request, response) {
 
 // Create
 function formTextInputsCreate(request, response) {
-  formTextInputsDao.formTextInputsCreate(request).then(function(results) {
+  formTextInputsDao.formTextInputsCreate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -36,7 +39,8 @@ function formTextInputsCreate(request, response) {
 
 // Update
 function formTextInputsUpdate(request, response) {
-  formTextInputsDao.formTextInputsUpdate(request).then(function(results) {
+  formTextInputsDao.formTextInputsUpdate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -45,7 +49,8 @@ function formTextInputsUpdate(request, response) {
 
 // Delete
 function formTextInputsDelete(request, response) {
-  formTextInputsDao.formTextInputsDelete(request).then(function(results) {
+  formTextInputsDao.formTextInputsDelete(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);

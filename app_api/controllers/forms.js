@@ -9,7 +9,8 @@ function sendJSONresponse(res, status, content) {
 
 // Read all
 function formsReadAllByViewsite(request, response) {
-  formsDao.formsReadAllByViewsite(request).then(function(results) {
+  formsDao.formsReadAllByViewsite(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -17,7 +18,8 @@ function formsReadAllByViewsite(request, response) {
 }
 
 function formsReadAllByViewpage(request, response) {
-  formsDao.formsReadAllByViewpage(request).then(function(results) {
+  formsDao.formsReadAllByViewpage(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -26,7 +28,8 @@ function formsReadAllByViewpage(request, response) {
 
 // Read one
 function formsReadOne(request, response) {
-  formsDao.formsReadOne(request).then(function(results) {
+  formsDao.formsReadOne(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -35,7 +38,8 @@ function formsReadOne(request, response) {
 
 // Create
 function formsCreate(request, response) {
-  formsDao.formsCreate(request).then(function(results) {
+  formsDao.formsCreate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -44,7 +48,8 @@ function formsCreate(request, response) {
 
 // Update
 function formsUpdate(request, response) {
-  formsDao.formsUpdate(request).then(function(results) {
+  formsDao.formsUpdate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -53,7 +58,8 @@ function formsUpdate(request, response) {
 
 // Delete
 function formsDelete(request, response) {
-  formsDao.formsDelete(request).then(function(results) {
+  formsDao.formsDelete(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);

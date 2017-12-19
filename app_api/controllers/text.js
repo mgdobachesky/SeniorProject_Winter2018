@@ -9,7 +9,8 @@ function sendJSONresponse(res, status, content) {
 
 // Read all
 function textReadAll(request, response) {
-  textDao.textReadAll(request).then(function(results) {
+  textDao.textReadAll(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -18,7 +19,8 @@ function textReadAll(request, response) {
 
 // Read one
 function textReadOne(request, response) {
-  textDao.textReadOne(request).then(function(results) {
+  textDao.textReadOne(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -27,7 +29,8 @@ function textReadOne(request, response) {
 
 // Create
 function textCreate(request, response) {
-  textDao.textCreate(request).then(function(results) {
+  textDao.textCreate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -36,7 +39,8 @@ function textCreate(request, response) {
 
 // Update
 function textUpdate(request, response) {
-  textDao.textUpdate(request).then(function(results) {
+  textDao.textUpdate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -45,7 +49,8 @@ function textUpdate(request, response) {
 
 // Delete
 function textDelete(request, response) {
-  textDao.textDelete(request).then(function(results) {
+  textDao.textDelete(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);

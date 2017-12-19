@@ -11,7 +11,9 @@ function usersReadOne(request) {
     if(!request.session.userId) {
       reject(false);
     } else {
-      users.findOne({'_id': request.session.userId}).select('-_id -password').exec(function(error, results) {
+      users.findOne({'_id': request.session.userId})
+      .select('-_id -password')
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -30,7 +32,8 @@ function usersReadOne(request) {
 function usersCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     request.params.username = request.body.username;
-    usersExists(request).then(function(results) {
+    usersExists(request)
+    .then(function(results) {
       if(!request.body.username || !request.body.password) {
         reject('Username and Password are both required!');
       } else {
@@ -66,7 +69,8 @@ function usersUpdate(request) {
     if(!request.session.userId) {
       reject('User ID is required!');
     }
-    users.findById(request.session.userId).exec(function(error, userData) {
+    users.findById(request.session.userId)
+    .exec(function(error, userData) {
       if(!userData) {
         reject('User not found!');
       } else if (error) {
@@ -75,7 +79,8 @@ function usersUpdate(request) {
       } else {
         if(userData.username != request.body.username) {
           request.params.username = request.body.username;
-          usersExists(request).then(function(results) {
+          usersExists(request)
+          .then(function(results) {
             userData.username = request.body.username;
             if(request.body.password) {
               let hash = bcrypt.hashSync(request.body.password, 10);
@@ -119,7 +124,8 @@ function usersDelete(request) {
     if(!request.session.userId) {
       reject('User ID is required!');
     }
-    users.findByIdAndRemove(request.session.userId).exec(function(error, results) {
+    users.findByIdAndRemove(request.session.userId)
+    .exec(function(error, results) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
@@ -139,7 +145,8 @@ function usersExists(request) {
     if(!request.params.username) {
       reject('Username required!');
     } else {
-      users.findOne({'username': request.params.username}).exec(function(error, results) {
+      users.findOne({'username': request.params.username})
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -159,7 +166,8 @@ function usersLogIn(request) {
     if(!request.body.username) {
       reject('Username is required!');
     } else {
-      users.findOne({'username': request.body.username}).exec(function(error, results) {
+      users.findOne({'username': request.body.username})
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');

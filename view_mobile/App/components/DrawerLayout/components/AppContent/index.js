@@ -1,6 +1,5 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Link } from 'react-router-native';
+import React from 'react';
 
 // Import requred components
 import AppContentJSX from './AppContent.js';

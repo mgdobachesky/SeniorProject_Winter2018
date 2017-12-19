@@ -1,7 +1,17 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Content, Button, Text, Form, Item, Input, Label, H1, H2, H3 } from 'native-base';
-import { Link } from 'react-router-native';
+import React from 'react';
+import {
+  Content,
+  Button,
+  Text,
+  Form,
+  Item,
+  Input,
+  Label,
+  H1,
+  H2,
+  H3
+} from 'native-base';
 
 // Import requred components
 import styles from './styles.js';
@@ -12,9 +22,10 @@ var FormTextInputFormJSX = function() {
       <Label>
         {this.props.formTextInput.formTextInputLabel}
       </Label>
+
       <Input
-        value={this.props.formTextInputValue}
-        onChangeText={this.handleChange} />
+      value={this.props.formTextInputValue}
+      onChangeText={this.handleChange} />
     </Item>
   );
 }

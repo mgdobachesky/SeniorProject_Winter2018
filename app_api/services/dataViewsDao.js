@@ -11,7 +11,11 @@ function dataViewsReadOne(request) {
     if(!request.params.dataViewId) {
       reject('Data View ID is required!');
     } else {
-      dataView.findOne({'_id': request.params.dataViewId}).populate({path: 'form', select: '-userId'}).populate('userTable').select('-userId').exec(function(error, results) {
+      dataView.findOne({'_id': request.params.dataViewId})
+      .populate({path: 'form', select: '-userId'})
+      .populate('userTable')
+      .select('-userId')
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -31,7 +35,11 @@ function dataViewsReadAll(request) {
     if(!request.params.viewpageId) {
       reject('Viewpage ID is required!');
     } else {
-      dataView.find({'viewpageId': request.params.viewpageId}).populate({path: 'form', select: '-userId'}).populate('userTable').select('-userId').exec(function(error, results) {
+      dataView.find({'viewpageId': request.params.viewpageId})
+      .populate({path: 'form', select: '-userId'})
+      .populate('userTable')
+      .select('-userId')
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -49,7 +57,8 @@ function dataViewsReadAll(request) {
 // Create operations
 function dataViewsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    viewpages.findById(request.body.viewpageId).exec(function(error, viewpageData) {
+    viewpages.findById(request.body.viewpageId)
+    .exec(function(error, viewpageData) {
       if(viewpageData.userId != request.session.userId) {
         reject('You can only create Data Views for Viewpages you own!');
       } else if(!request.body.formId) {
@@ -81,7 +90,8 @@ function dataViewsUpdate(request) {
     if(!request.params.dataViewId) {
       reject('Data View ID is required!');
     } else {
-      dataView.findById(request.params.dataViewId).exec(function(error, dataViewData) {
+      dataView.findById(request.params.dataViewId)
+      .exec(function(error, dataViewData) {
         if(!dataViewData) {
           reject('Data View not found!');
         } else if(error) {
@@ -113,14 +123,16 @@ function dataViewsDelete(request) {
     if(!request.params.dataViewId) {
       reject('Data View ID is required!');
     }
-    dataView.findById(request.params.dataViewId).exec(function(error, dataViewData) {
+    dataView.findById(request.params.dataViewId)
+    .exec(function(error, dataViewData) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
       } else if(dataViewData.userId != request.session.userId) {
         reject('You can only delete Data Views you own!');
       } else {
-        dataView.findByIdAndRemove(request.params.dataViewId).exec(function(error, results) {
+        dataView.findByIdAndRemove(request.params.dataViewId)
+        .exec(function(error, results) {
           if(error) {
             console.log(error.message);
             reject('Something went wrong!');

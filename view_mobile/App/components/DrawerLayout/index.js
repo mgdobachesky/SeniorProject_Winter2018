@@ -1,5 +1,5 @@
 // Import required modules
-import React, { Component } from 'react';
+import React from 'react';
 
 // Import requred components
 import DrawerLayoutJSX from './DrawerLayout.js';
@@ -25,8 +25,11 @@ class DrawerLayout extends React.Component {
   handleReadAllViewpages() {
     let requestData = {};
     requestData.viewsiteId = this.state.viewsite._id;
-    this.manageViewpageService.readAllViewpages(requestData).then((results) => {
-      this.setState({viewpages: results.data});
+    this.manageViewpageService.readAllViewpages(requestData)
+    .then((results) => {
+      this.setState({
+        viewpages: results.data
+      });
     }, (error) => {
       console.log(error.response.data);
     });
@@ -42,8 +45,11 @@ class DrawerLayout extends React.Component {
     if(this.state.viewsiteName) {
       let requestData = {};
       requestData.viewsiteName = this.state.viewsiteName;
-      this.manageViewsiteService.readOneViewsiteByName(requestData).then((results) => {
-        this.setState({viewsite: results.data}, () => this.handleReadAllViewpages());
+      this.manageViewsiteService.readOneViewsiteByName(requestData)
+      .then((results) => {
+        this.setState({
+          viewsite: results.data
+        }, () => this.handleReadAllViewpages());
       }, (error) => {
         console.log(error.response.data);
       });

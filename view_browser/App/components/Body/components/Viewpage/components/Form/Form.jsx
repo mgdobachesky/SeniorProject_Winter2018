@@ -11,10 +11,10 @@ function FormTextInputList(props) {
       let formTextInputValue = props.record[formTextInput._id];
       return (
         <FormTextInput
-          key={formTextInput._id}
-          formTextInput={formTextInput}
-          formTextInputValue={formTextInputValue}
-          onChange={props.onChange} />
+        key={formTextInput._id}
+        formTextInput={formTextInput}
+        formTextInputValue={formTextInputValue}
+        onChange={props.onChange} />
       );
     });
   } else {
@@ -26,12 +26,16 @@ var FormJSX = function() {
   return(
     <div>
       <h2>{this.props.form.formTitle}</h2>
+
       <form onSubmit={this.handleSubmit}>
         <FormTextInputList
-          formTextInputs={this.state.formTextInputs}
-          record={this.state.record}
-          onChange={this.handleChange} />
-        <button type="submit" className="btn btn-primary">Submit</button>
+        formTextInputs={this.state.formTextInputs}
+        record={this.state.record}
+        onChange={this.handleChange} />
+
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
       </form>
     </div>
   );

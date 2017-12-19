@@ -14,7 +14,11 @@ function TextList(props) {
       const _id = text._id;
       const viewpageId = text.viewpageId;
       const textValue = text.textValue;
-      let editClick = {_id: _id, viewpageId: viewpageId, textValue: textValue};
+      let editClick = {
+        _id: _id,
+        viewpageId: viewpageId,
+        textValue: textValue
+      };
       let deleteClick = {_id: _id};
       return (
         <div key={_id} className="card border-primary mb-3">

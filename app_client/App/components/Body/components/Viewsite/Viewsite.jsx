@@ -30,7 +30,12 @@ function ViewpageList(props) {
           break;
       }
 
-      let editClick = {_id: _id, viewsiteId: viewsiteId, viewpageName: viewpageName, permissionLevel: permissionLevel};
+      let editClick = {
+        _id: _id,
+        viewsiteId: viewsiteId,
+        viewpageName: viewpageName,
+        permissionLevel: permissionLevel
+      };
       let deleteClick = {_id: _id};
       return (
         <div key={_id} className="card border-primary mb-3">

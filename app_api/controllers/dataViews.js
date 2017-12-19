@@ -9,7 +9,8 @@ function sendJSONresponse(res, status, content) {
 
 // Read all
 function dataViewsReadAll(request, response) {
-  dataViewsDao.dataViewsReadAll(request).then(function(results) {
+  dataViewsDao.dataViewsReadAll(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -18,7 +19,8 @@ function dataViewsReadAll(request, response) {
 
 // Read one
 function dataViewsReadOne(request, response) {
-  dataViewsDao.dataViewsReadOne(request).then(function(results) {
+  dataViewsDao.dataViewsReadOne(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -27,7 +29,8 @@ function dataViewsReadOne(request, response) {
 
 // Create
 function dataViewsCreate(request, response) {
-  dataViewsDao.dataViewsCreate(request).then(function(results) {
+  dataViewsDao.dataViewsCreate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -36,7 +39,8 @@ function dataViewsCreate(request, response) {
 
 // Update
 function dataViewsUpdate(request, response) {
-  dataViewsDao.dataViewsUpdate(request).then(function(results) {
+  dataViewsDao.dataViewsUpdate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -45,7 +49,8 @@ function dataViewsUpdate(request, response) {
 
 // Delete
 function dataViewsDelete(request, response) {
-  dataViewsDao.dataViewsDelete(request).then(function(results) {
+  dataViewsDao.dataViewsDelete(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);

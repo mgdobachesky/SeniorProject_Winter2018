@@ -32,8 +32,11 @@ class Viewpage extends React.Component {
   handleReadAllTexts() {
     let requestData = {};
     requestData.viewpageId = this.props.match.params.viewpageId;
-    this.manageTextService.readAllText(requestData).then((results) => {
-      this.setState({texts: results.data});
+    this.manageTextService.readAllText(requestData)
+    .then((results) => {
+      this.setState({
+        texts: results.data
+      });
     }, (error) => {
       console.log(error.response.data);
     });
@@ -42,8 +45,11 @@ class Viewpage extends React.Component {
   handleReadAllForms() {
     let requestData = {};
     requestData.viewpageId = this.props.match.params.viewpageId;
-    this.manageFormService.readAllFormsByViewpage(requestData).then((results) => {
-      this.setState({forms: results.data});
+    this.manageFormService.readAllFormsByViewpage(requestData)
+    .then((results) => {
+      this.setState({
+        forms: results.data
+      });
     }, (error) => {
       console.log(error.response.data);
     });
@@ -52,8 +58,11 @@ class Viewpage extends React.Component {
   handleReadAllDataViews() {
     let requestData = {};
     requestData.viewpageId = this.props.match.params.viewpageId;
-    this.manageDataViewService.readAllDataViews(requestData).then((results) => {
-      this.setState({dataViews: results.data});
+    this.manageDataViewService.readAllDataViews(requestData)
+    .then((results) => {
+      this.setState({
+        dataViews: results.data
+      });
     }, (error) => {
       console.log(error.response.data);
     });
@@ -69,8 +78,11 @@ class Viewpage extends React.Component {
     if(nextProps.match.params.viewpageId) {
       let requestData = {};
       requestData.viewpageId = nextProps.match.params.viewpageId;
-      this.manageViewpageService.readOneViewpage(requestData).then((results) => {
-        this.setState({viewpage: results.data}, () => this.handleReadAllComponents());
+      this.manageViewpageService.readOneViewpage(requestData)
+      .then((results) => {
+        this.setState({
+          viewpage: results.data
+        }, () => this.handleReadAllComponents());
       }, (error) => {
         console.log(error.response.data);
       });
@@ -80,8 +92,11 @@ class Viewpage extends React.Component {
   componentDidMount() {
     let requestData = {};
     requestData.viewpageId = this.props.match.params.viewpageId;
-    this.manageViewpageService.readOneViewpage(requestData).then((results) => {
-      this.setState({viewpage: results.data}, () => this.handleReadAllComponents());
+    this.manageViewpageService.readOneViewpage(requestData)
+    .then((results) => {
+      this.setState({
+        viewpage: results.data
+      }, () => this.handleReadAllComponents());
     }, (error) => {
       console.log(error.response.data);
     });

@@ -11,7 +11,9 @@ function formTextInputsReadAll(request) {
     if(!request.params.formId) {
       reject('Form ID is required!');
     } else {
-      formTextInputs.find({'formId': request.params.formId}).select('-userId').exec(function(error, results) {
+      formTextInputs.find({'formId': request.params.formId})
+      .select('-userId')
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -31,7 +33,9 @@ function formTextInputsReadOne(request) {
     if(!request.params.formTextInputId) {
       reject('Form Text Input ID is required!');
     } else {
-      formTextInputs.findOne({'_id': request.params.formTextInputId}).select('-userId').exec(function(error, results) {
+      formTextInputs.findOne({'_id': request.params.formTextInputId})
+      .select('-userId')
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -49,7 +53,8 @@ function formTextInputsReadOne(request) {
 // Create operations
 function formTextInputsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    forms.findById(request.body.formId).exec(function(error, formData) {
+    forms.findById(request.body.formId)
+    .exec(function(error, formData) {
       if(formData.userId != request.session.userId) {
         reject('You can only create Form Text Inputs for Forms you own!');
       } else if(!request.body.formTextInputLabel) {
@@ -80,7 +85,8 @@ function formTextInputsUpdate(request) {
     if(!request.params.formTextInputId) {
       reject('Form Text Input ID is required!');
     } else {
-      formTextInputs.findById(request.params.formTextInputId).exec(function(error, formTextInputData) {
+      formTextInputs.findById(request.params.formTextInputId)
+      .exec(function(error, formTextInputData) {
         if(!formTextInputData) {
           reject('Form Text Input not found!');
         } else if(error) {
@@ -111,14 +117,16 @@ function formTextInputsDelete(request) {
     if(!request.params.formTextInputId) {
       reject('Form Text Input ID is required!');
     }
-    formTextInputs.findById(request.params.formTextInputId).exec(function(error, formTextInputData) {
+    formTextInputs.findById(request.params.formTextInputId)
+    .exec(function(error, formTextInputData) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
       } else if(formTextInputData.userId != request.session.userId) {
         reject('You can only delete Form Text Inputs you own!');
       } else {
-        formTextInputs.findByIdAndRemove(request.params.formTextInputId).exec(function(error, results) {
+        formTextInputs.findByIdAndRemove(request.params.formTextInputId)
+        .exec(function(error, results) {
           if(error) {
             console.log(error.message);
             reject('Something went wrong!');

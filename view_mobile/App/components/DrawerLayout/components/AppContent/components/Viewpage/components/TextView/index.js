@@ -1,6 +1,5 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Link } from 'react-router-native';
+import React from 'react';
 
 // Import required components
 import TextViewJSX from './TextView.js';

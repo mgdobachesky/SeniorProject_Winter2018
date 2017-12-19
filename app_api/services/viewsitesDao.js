@@ -10,7 +10,9 @@ function viewsitesReadAll(request) {
     if(!request.session.userId) {
       reject('User ID required!');
     } else {
-      viewsites.find({'userId': request.session.userId}).select('-userId').exec(function(error, results) {
+      viewsites.find({'userId': request.session.userId})
+      .select('-userId')
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -30,7 +32,9 @@ function viewsitesReadOneByName(request) {
     if(!request.params.viewsiteName) {
       reject('Viewsite name is required!');
     } else {
-      viewsites.findOne({'viewsiteName': request.params.viewsiteName}).select('-userId').exec(function(error, results) {
+      viewsites.findOne({'viewsiteName': request.params.viewsiteName})
+      .select('-userId')
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -47,7 +51,8 @@ function viewsitesReadOneByName(request) {
 
 function viewsitesReadOneById(request) {
   var promise = new Promise(function(resolve, reject) {
-    viewsites.findOne({'_id': request.params.viewsiteId}).exec(function(error, viewsiteData) {
+    viewsites.findOne({'_id': request.params.viewsiteId})
+    .exec(function(error, viewsiteData) {
       if(error) {
         reject('Something went wrong!');
       } else if(!viewsiteData) {
@@ -55,7 +60,9 @@ function viewsitesReadOneById(request) {
       } else if(viewsiteData.userId != request.session.userId) {
         reject('You can only edit Viewsites you own!');
       } else {
-        viewsites.findOne({'_id': request.params.viewsiteId}).select('-userId').exec(function(error, results) {
+        viewsites.findOne({'_id': request.params.viewsiteId})
+        .select('-userId')
+        .exec(function(error, results) {
           if(!request.params.viewsiteId) {
             reject('Viewsite ID is required!');
           } else if(error) {
@@ -80,7 +87,8 @@ function viewsitesCreate(request) {
       reject('All fields required!');
     } else {
       request.params.viewsiteName = request.body.viewsiteName;
-      viewsitesExists(request).then(function(results) {
+      viewsitesExists(request)
+      .then(function(results) {
         viewsites.create({
           'userId': request.session.userId,
           'viewsiteName': request.body.viewsiteName,
@@ -107,7 +115,8 @@ function viewsitesUpdate(request) {
     if(!request.params.viewsiteId) {
       reject('Viewsite ID is required!');
     } else {
-      viewsites.findById(request.params.viewsiteId).exec(function(error, viewsiteData) {
+      viewsites.findById(request.params.viewsiteId)
+      .exec(function(error, viewsiteData) {
         if(!viewsiteData) {
           reject('Viewsite not found!');
         } else if(error) {
@@ -118,7 +127,8 @@ function viewsitesUpdate(request) {
         } else {
           if(viewsiteData.viewsiteName != request.body.viewsiteName) {
             request.params.viewsiteName = request.body.viewsiteName;
-            viewsitesExists(request).then(function(results) {
+            viewsitesExists(request)
+            .then(function(results) {
               viewsiteData.viewsiteName = request.body.viewsiteName;
               viewsiteData.loginEnabled = request.body.loginEnabled;
               viewsiteData.save(function(error, results) {
@@ -157,14 +167,16 @@ function viewsitesDelete(request) {
     if(!request.params.viewsiteId) {
       reject('Viewsite ID is required!');
     }
-    viewsites.findById(request.params.viewsiteId).exec(function(error, viewsiteData) {
+    viewsites.findById(request.params.viewsiteId)
+    .exec(function(error, viewsiteData) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
       } else if(viewsiteData.userId != request.session.userId) {
         reject('You can only delete Viewsites you own!');
       } else {
-        viewsites.findByIdAndRemove(request.params.viewsiteId).exec(function(error, results) {
+        viewsites.findByIdAndRemove(request.params.viewsiteId)
+        .exec(function(error, results) {
           if(error) {
             console.log(error.message);
             reject('Something went wrong!');
@@ -184,7 +196,8 @@ function viewsitesExists(request) {
     if(!request.params.viewsiteName) {
       reject('Viewsite name is required!');
     } else {
-      viewsites.findOne({'viewsiteName': request.params.viewsiteName}).exec(function(error, results) {
+      viewsites.findOne({'viewsiteName': request.params.viewsiteName})
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');

@@ -11,17 +11,10 @@ function ViewpageLinks(props) {
       const viewpageName = viewpage.viewpageName;
       const viewpageHref = '/viewsites/' + viewsiteName + "/" + viewpageId;
       return (
-        <li
-        key={viewpageId}
-        className="nav-item">
-
-          <NavLink
-          id={viewpageId}
-          className="nav-link"
-          to={viewpageHref}>
+        <li key={viewpageId} className="nav-item">
+          <NavLink id={viewpageId} className="nav-link" to={viewpageHref}>
             {viewpageName}
           </NavLink>
-
         </li>
       );
     });
@@ -32,9 +25,7 @@ function ViewpageLinks(props) {
 
 var HeaderJSX = function() {
   return (
-    <nav
-    className="navbar navbar-expand-lg navbar-dark bg-primary">
-
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <NavLink
       className="navbar-brand"
       to={"/viewsites/" + this.props.viewsite.viewsiteName}>
@@ -49,21 +40,14 @@ var HeaderJSX = function() {
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
       aria-label="Toggle navigation">
-        <span
-        className="navbar-toggler-icon" />
+        <span className="navbar-toggler-icon" />
       </button>
 
-      <div
-      className="collapse navbar-collapse"
-      id="navbarSupportedContent">
-
-        <ul
-        className="navbar-nav mr-auto">
-
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
           <ViewpageLinks
           viewpages={this.props.viewpages}
           viewsite={this.props.viewsite} />
-
         </ul>
       </div>
     </nav>

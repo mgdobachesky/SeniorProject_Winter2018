@@ -31,9 +31,11 @@ var DataViewJSX = function() {
   return (
     <div>
       <h2>{this.props.dataView.form.formTitle}</h2>
+
       <table className="table table-hover">
         <tbody>
-          <Records userTable={this.props.dataView.userTable} />
+          <Records
+          userTable={this.props.dataView.userTable} />
         </tbody>
       </table>
     </div>

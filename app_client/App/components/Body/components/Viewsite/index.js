@@ -42,13 +42,16 @@ class Viewsite extends React.Component {
     requestData.viewsiteId = forViewsite;
     requestData.viewpageName = newViewpage.viewpageName;
     requestData.permissionLevel = newViewpage.permissionLevel;
-    this.manageViewpageService.createViewpage(requestData).then((results) => {
+    this.manageViewpageService.createViewpage(requestData)
+    .then((results) => {
       this.handleReadAllViewpages();
       // Follow up by clearing viewpage state
       this.handleClearViewpage();
       $("#createViewpage").hide("medium");
     }, (error) => {
-      this.setState({viewpageError: error.response.data});
+      this.setState({
+        viewpageError: error.response.data
+      });
     });
   }
 
@@ -57,10 +60,16 @@ class Viewsite extends React.Component {
     if(viewsiteId) {
       let requestData = {};
       requestData.viewsiteId = viewsiteId;
-      this.manageViewpageService.readAllViewpages(requestData).then((results) => {
-        this.setState({viewpages: results.data, viewpageError: ""});
+      this.manageViewpageService.readAllViewpages(requestData)
+      .then((results) => {
+        this.setState({
+          viewpages: results.data,
+          viewpageError: ""
+        });
       }, (error) => {
-        this.setState({viewpageError: error.response.data});
+        this.setState({
+          viewpageError: error.response.data
+        });
       });
     }
   }
@@ -71,7 +80,9 @@ class Viewsite extends React.Component {
     editViewpage.viewsiteId = event.viewsiteId;
     editViewpage.viewpageName = event.viewpageName;
     editViewpage.permissionLevel = event.permissionLevel;
-    this.setState({viewpage: editViewpage});
+    this.setState({
+      viewpage: editViewpage
+    });
     $("#updateViewpage").toggle("medium");
     $("#createViewpage").hide(false);
   }
@@ -84,23 +95,29 @@ class Viewsite extends React.Component {
     requestData.viewsiteId = updateViewpage.viewsiteId;
     requestData.viewpageName = updateViewpage.viewpageName;
     requestData.permissionLevel = updateViewpage.permissionLevel;
-    this.manageViewpageService.updateViewpage(requestData).then((results) => {
+    this.manageViewpageService.updateViewpage(requestData)
+    .then((results) => {
       this.handleReadAllViewpages();
       // Follow up by clearing viewpage state
       this.handleClearViewpage();
       $("#updateViewpage").hide("medium");
     }, (error) => {
-      this.setState({viewpageError: error.response.data});
+      this.setState({
+        viewpageError: error.response.data
+      });
     });
   }
 
   handleDeleteViewpage(event) {
     let requestData = {};
     requestData.viewpageId = event._id;
-    this.manageViewpageService.deleteViewpage(requestData).then((results) => {
+    this.manageViewpageService.deleteViewpage(requestData)
+    .then((results) => {
       this.handleReadAllViewpages();
     }, (error) => {
-      this.setState({viewpageError: error.response.data});
+      this.setState({
+        viewpageError: error.response.data
+      });
     });
   }
 
@@ -110,7 +127,9 @@ class Viewsite extends React.Component {
     clearViewpage.viewsiteId = "";
     clearViewpage.viewpageName = "";
     clearViewpage.permissionLevel = 0;
-    this.setState({viewpage: clearViewpage});
+    this.setState({
+      viewpage: clearViewpage
+    });
   }
 
   handleChange(event, toChange) {
@@ -129,9 +148,12 @@ class Viewsite extends React.Component {
     let requestData = {};
     let currentViewsite = this.state.viewsite;
     requestData.viewsiteId = this.props.match.params.viewsiteId;
-    this.manageViewsiteService.readOneViewsiteById(requestData).then((results) => {
+    this.manageViewsiteService.readOneViewsiteById(requestData)
+    .then((results) => {
       currentViewsite = results.data;
-      this.setState({viewsite: currentViewsite}, () => this.handleReadAllViewpages());
+      this.setState({
+        viewsite: currentViewsite
+      }, () => this.handleReadAllViewpages());
     }, (error) => {
       console.log(error.response.data);
     });
@@ -143,9 +165,12 @@ class Viewsite extends React.Component {
     let requestData = {};
     let currentViewsite = this.state.viewsite;
     requestData.viewsiteId = nextProps.match.params.viewsiteId;
-    this.manageViewsiteService.readOneViewsiteById(requestData).then((results) => {
+    this.manageViewsiteService.readOneViewsiteById(requestData)
+    .then((results) => {
       currentViewsite = results.data;
-      this.setState({viewsite: currentViewsite}, () => this.handleReadAllViewpages());
+      this.setState({
+        viewsite: currentViewsite
+      }, () => this.handleReadAllViewpages());
     }, (error) => {
       console.log(error.response.data);
     });

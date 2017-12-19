@@ -24,8 +24,11 @@ class App extends React.Component {
   handleReadAllViewpages() {
     let requestData = {};
     requestData.viewsiteId = this.state.viewsite._id;
-    this.manageViewpageService.readAllViewpages(requestData).then((results) => {
-      this.setState({viewpages: results.data});
+    this.manageViewpageService.readAllViewpages(requestData)
+    .then((results) => {
+      this.setState({
+        viewpages: results.data
+      });
     }, (error) => {
       console.log(error.response.data);
     });
@@ -34,8 +37,11 @@ class App extends React.Component {
   componentWillMount() {
     let requestData = {};
     requestData.viewsiteName = this.props.viewsiteName;
-    this.manageViewsiteService.readOneViewsiteByName(requestData).then((results) => {
-      this.setState({viewsite: results.data}, () => this.handleReadAllViewpages());
+    this.manageViewsiteService.readOneViewsiteByName(requestData)
+    .then((results) => {
+      this.setState({
+        viewsite: results.data
+      }, () => this.handleReadAllViewpages());
     }, (error) => {
       console.log(error.response.data);
     });

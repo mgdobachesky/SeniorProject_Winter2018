@@ -1,7 +1,16 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Content, Button, Text, Form, Item, Input, H1, H2, H3 } from 'native-base';
-import { Link } from 'react-router-native';
+import React from 'react';
+import {
+  Content,
+  Button,
+  Text,
+  Form,
+  Item,
+  Input,
+  H1,
+  H2,
+  H3
+} from 'native-base';
 
 // Import requred components
 import FormTextInput from './components/FormTextInput';
@@ -14,10 +23,10 @@ function FormTextInputList(props) {
       let formTextInputValue = props.record[formTextInput._id];
       return (
         <FormTextInput
-          key={formTextInput._id}
-          formTextInput={formTextInput}
-          formTextInputValue={formTextInputValue}
-          onChange={props.onChange} />
+        key={formTextInput._id}
+        formTextInput={formTextInput}
+        formTextInputValue={formTextInputValue}
+        onChange={props.onChange} />
       );
     });
   } else {
@@ -28,15 +37,22 @@ function FormTextInputList(props) {
 var FormViewJSX = function() {
   return(
     <Content>
-      <H2>{this.props.form.formTitle}</H2>
+      <H2>
+        {this.props.form.formTitle}
+      </H2>
+
       <Form>
         <FormTextInputList
-          formTextInputs={this.state.formTextInputs}
-          record={this.state.record}
-          onChange={this.handleChange} />
-        <Button block
-           onPress={this.handleSubmit}>
-          <Text>Submit</Text>
+        formTextInputs={this.state.formTextInputs}
+        record={this.state.record}
+        onChange={this.handleChange} />
+
+        <Button
+        block
+        onPress={this.handleSubmit}>
+          <Text>
+            Submit
+          </Text>
         </Button>
       </Form>
     </Content>

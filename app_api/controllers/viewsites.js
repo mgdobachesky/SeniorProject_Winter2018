@@ -9,7 +9,8 @@ function sendJSONresponse(res, status, content) {
 
 // Read all
 function viewsitesReadAll(request, response) {
-  viewsitesDao.viewsitesReadAll(request).then(function(results) {
+  viewsitesDao.viewsitesReadAll(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -18,7 +19,8 @@ function viewsitesReadAll(request, response) {
 
 // Read one
 function viewsitesReadOneByName(request, response) {
-  viewsitesDao.viewsitesReadOneByName(request).then(function(results) {
+  viewsitesDao.viewsitesReadOneByName(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -26,7 +28,8 @@ function viewsitesReadOneByName(request, response) {
 }
 
 function viewsitesReadOneById(request, response) {
-  viewsitesDao.viewsitesReadOneById(request).then(function(results) {
+  viewsitesDao.viewsitesReadOneById(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -35,7 +38,8 @@ function viewsitesReadOneById(request, response) {
 
 // Create
 function viewsitesCreate(request, response) {
-  viewsitesDao.viewsitesCreate(request).then(function(results) {
+  viewsitesDao.viewsitesCreate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -44,7 +48,8 @@ function viewsitesCreate(request, response) {
 
 // Update
 function viewsitesUpdate(request, response) {
-  viewsitesDao.viewsitesUpdate(request).then(function(results) {
+  viewsitesDao.viewsitesUpdate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -53,7 +58,8 @@ function viewsitesUpdate(request, response) {
 
 // Delete
 function viewsitesDelete(request, response) {
-  viewsitesDao.viewsitesDelete(request).then(function(results) {
+  viewsitesDao.viewsitesDelete(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);

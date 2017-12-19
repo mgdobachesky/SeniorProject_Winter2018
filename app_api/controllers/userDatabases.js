@@ -9,7 +9,8 @@ function sendJSONresponse(res, status, content) {
 
 // Read one
 function userTablesReadOne(request, response) {
-  userDatabasesDao.userTablesReadOne(request).then(function(results) {
+  userDatabasesDao.userTablesReadOne(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -17,7 +18,8 @@ function userTablesReadOne(request, response) {
 }
 
 function userRecordsReadOne(request, response) {
-  userDatabasesDao.userRecordsReadOne(request).then(function(results) {
+  userDatabasesDao.userRecordsReadOne(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -26,7 +28,8 @@ function userRecordsReadOne(request, response) {
 
 // Create
 function userTablesCreate(request, response) {
-  userDatabasesDao.userTablesCreate(request).then(function(results) {
+  userDatabasesDao.userTablesCreate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -34,7 +37,8 @@ function userTablesCreate(request, response) {
 }
 
 function userRecordsCreate(request, response) {
-  userDatabasesDao.userRecordsCreate(request).then(function(results) {
+  userDatabasesDao.userRecordsCreate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -43,7 +47,8 @@ function userRecordsCreate(request, response) {
 
 // Update
 function userRecordsUpdate(request, response) {
-  userDatabasesDao.userRecordsUpdate(request).then(function(results) {
+  userDatabasesDao.userRecordsUpdate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -52,7 +57,8 @@ function userRecordsUpdate(request, response) {
 
 // Delete
 function userTablesDelete(request, response) {
-  userDatabasesDao.userTablesDelete(request).then(function(results) {
+  userDatabasesDao.userTablesDelete(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -60,7 +66,8 @@ function userTablesDelete(request, response) {
 }
 
 function userRecordsDelete(request, response) {
-  userDatabasesDao.userRecordsDelete(request).then(function(results) {
+  userDatabasesDao.userRecordsDelete(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);

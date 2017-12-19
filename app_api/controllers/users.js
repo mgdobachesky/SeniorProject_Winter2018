@@ -9,7 +9,8 @@ function sendJSONresponse(res, status, content) {
 
 // Get a user
 function usersReadOne(request, response) {
-  usersDao.usersReadOne(request).then(function(results) {
+  usersDao.usersReadOne(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -18,7 +19,8 @@ function usersReadOne(request, response) {
 
 // Create a user
 function usersCreate(request, response) {
-  usersDao.usersCreate(request).then(function(results) {
+  usersDao.usersCreate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -27,7 +29,8 @@ function usersCreate(request, response) {
 
 // Update a user
 function usersUpdate(request, response) {
-  usersDao.usersUpdate(request).then(function(results) {
+  usersDao.usersUpdate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -36,7 +39,8 @@ function usersUpdate(request, response) {
 
 // Delete a user
 function usersDelete(request, response) {
-  usersDao.usersDelete(request).then(function(results) {
+  usersDao.usersDelete(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -45,7 +49,8 @@ function usersDelete(request, response) {
 
 // Log in a user
 function usersLogIn(request, response) {
-  usersDao.usersLogIn(request).then(function(results) {
+  usersDao.usersLogIn(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -54,7 +59,8 @@ function usersLogIn(request, response) {
 
 // Log a user out
 function usersLogout(request, response) {
-  usersDao.usersLogout(request).then(function(results) {
+  usersDao.usersLogout(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);

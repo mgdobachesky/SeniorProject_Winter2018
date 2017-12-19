@@ -1,7 +1,29 @@
 // Import required modules
-import React, { Component } from 'react';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Form, Item, Input, H1, H2, H3, List, ListItem, Drawer } from 'native-base';
+import React from 'react';
 import { Link } from 'react-router-native';
+import {
+  Container,
+  Header,
+  Title,
+  Content,
+  Footer,
+  FooterTab,
+  Button,
+  Left,
+  Right,
+  Body,
+  Icon,
+  Text,
+  Form,
+  Item,
+  Input,
+  H1,
+  H2,
+  H3,
+  List,
+  ListItem,
+  Drawer
+} from 'native-base';
 
 // Import required components
 import AppContent from './components/AppContent';
@@ -35,7 +57,7 @@ function NavigationView(props) {
         </H1>
         <List>
           <ViewpageLinks
-            viewpages={props.viewpages} />
+          viewpages={props.viewpages} />
         </List>
       </Content>
     );
@@ -57,11 +79,13 @@ function NavigationContent(props) {
         <Form>
           <Item>
             <Input
-              placeholder="Enter Viewsite Name..."
-              onChangeText={(text) => props.onChange(text)} />
+            placeholder="Enter Viewsite Name..."
+            onChangeText={(text) => props.onChange(text)} />
           </Item>
-          <Button block
-            onPress={props.onSubmit}>
+
+          <Button
+          block
+          onPress={props.onSubmit}>
             <Text>Get Viewsite</Text>
           </Button>
         </Form>
@@ -73,33 +97,35 @@ function NavigationContent(props) {
 var DrawerLayoutJSX = function() {
   return (
     <Drawer
-        ref={(ref) => {this.drawer = ref;}}
-        content={<NavigationView
-          viewsite={this.state.viewsite}
-          viewpages={this.state.viewpages}
-          closeDrawer={this.closeDrawer.bind(this)} />}
-        onClose={() => this.closeDrawer()}>
-        <Header>
-          <Left>
-            <Button transparent onPress={() => this.openDrawer()}>
-              <Icon name='menu' />
-            </Button>
-          </Left>
-          <Body>
-            <Title>
-              {this.state.viewsiteName}
-            </Title>
-          </Body>
-          <Right />
-        </Header>
+    ref={(ref) => {this.drawer = ref;}}
+    content={<NavigationView
+      viewsite={this.state.viewsite}
+      viewpages={this.state.viewpages}
+      closeDrawer={this.closeDrawer.bind(this)} />}
+    onClose={() => this.closeDrawer()}>
+      <Header>
+        <Left>
+          <Button transparent onPress={() => this.openDrawer()}>
+            <Icon name='menu' />
+          </Button>
+        </Left>
+        <Body>
+          <Title>
+            {this.state.viewsiteName}
+          </Title>
+        </Body>
 
-        <NavigationContent
-          viewsiteName={this.state.viewsiteName}
-          viewsite={this.state.viewsite}
-          onChange={this.handleChange}
-          onSubmit={this.handleSubmit} />
-        <Footer></Footer>
-      </Drawer>
+        <Right />
+      </Header>
+
+      <NavigationContent
+      viewsiteName={this.state.viewsiteName}
+      viewsite={this.state.viewsite}
+      onChange={this.handleChange}
+      onSubmit={this.handleSubmit} />
+
+      <Footer></Footer>
+    </Drawer>
   );
 }
 

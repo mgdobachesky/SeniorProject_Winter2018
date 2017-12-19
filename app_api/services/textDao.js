@@ -11,7 +11,9 @@ function textReadOne(request) {
     if(!request.params.textId) {
       reject('Text ID is required!');
     } else {
-      text.findOne({'_id': request.params.textId}).select('-userId').exec(function(error, results) {
+      text.findOne({'_id': request.params.textId})
+      .select('-userId')
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -31,7 +33,9 @@ function textReadAll(request) {
     if(!request.params.viewpageId) {
       reject('Viewpage ID is required!');
     } else {
-      text.find({'viewpageId': request.params.viewpageId}).select('-userId').exec(function(error, results) {
+      text.find({'viewpageId': request.params.viewpageId})
+      .select('-userId')
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -49,7 +53,8 @@ function textReadAll(request) {
 // Create operations
 function textCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    viewpages.findById(request.body.viewpageId).exec(function(error, viewpageData) {
+    viewpages.findById(request.body.viewpageId)
+    .exec(function(error, viewpageData) {
       if(viewpageData.userId != request.session.userId) {
         reject('You can only create Text for Viewpages you own!');
       } else if(!request.body.textValue) {
@@ -79,7 +84,8 @@ function textUpdate(request) {
     if(!request.params.textId) {
       reject('Text ID is required!');
     } else {
-      text.findById(request.params.textId).exec(function(error, textData) {
+      text.findById(request.params.textId)
+      .exec(function(error, textData) {
         if(!textData) {
           reject('Text not found!');
         } else if(error) {
@@ -110,14 +116,16 @@ function textDelete(request) {
     if(!request.params.textId) {
       reject('Text ID is required!');
     }
-    text.findById(request.params.textId).exec(function(error, textData) {
+    text.findById(request.params.textId)
+    .exec(function(error, textData) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
       } else if(textData.userId != request.session.userId) {
         reject('You can only delete Text you own!');
       } else {
-        text.findByIdAndRemove(request.params.textId).exec(function(error, results) {
+        text.findByIdAndRemove(request.params.textId)
+        .exec(function(error, results) {
           if(error) {
             console.log(error.message);
             reject('Something went wrong!');

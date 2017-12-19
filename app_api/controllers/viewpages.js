@@ -9,7 +9,8 @@ function sendJSONresponse(res, status, content) {
 
 // Read all
 function viewpagesReadAll(request, response) {
-  viewpagesDao.viewpagesReadAll(request).then(function(results) {
+  viewpagesDao.viewpagesReadAll(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -18,7 +19,8 @@ function viewpagesReadAll(request, response) {
 
 // Read one
 function viewpagesReadOne(request, response) {
-  viewpagesDao.viewpagesReadOne(request).then(function(results) {
+  viewpagesDao.viewpagesReadOne(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -27,7 +29,8 @@ function viewpagesReadOne(request, response) {
 
 // Create
 function viewpagesCreate(request, response) {
-  viewpagesDao.viewpagesCreate(request).then(function(results) {
+  viewpagesDao.viewpagesCreate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -36,7 +39,8 @@ function viewpagesCreate(request, response) {
 
 // Update
 function viewpagesUpdate(request, response) {
-  viewpagesDao.viewpagesUpdate(request).then(function(results) {
+  viewpagesDao.viewpagesUpdate(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);
@@ -45,7 +49,8 @@ function viewpagesUpdate(request, response) {
 
 // Delete
 function viewpagesDelete(request, response) {
-  viewpagesDao.viewpagesDelete(request).then(function(results) {
+  viewpagesDao.viewpagesDelete(request)
+  .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
     sendJSONresponse(response, 404, error);

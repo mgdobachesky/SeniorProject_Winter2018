@@ -10,7 +10,8 @@ function userTablesReadOne(request) {
     if(!request.params.formId) {
       reject('Form ID is required!');
     } else {
-      userDatabases.findOne({'_id': request.params.formId}).exec(function(error, results) {
+      userDatabases.findOne({'_id': request.params.formId})
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -30,7 +31,8 @@ function userRecordsReadOne(request) {
     if(!request.params.recordId) {
       reject('Record ID is required!');
     } else {
-      userDatabases.findOne({'records._id': request.params.recordId}).exec(function(error, results) {
+      userDatabases.findOne({'records._id': request.params.recordId})
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -70,7 +72,8 @@ function userRecordsCreate(request) {
     if(!request.params.formId) {
       reject('Form ID is required!');
     } else {
-      userDatabases.findOne({'_id': request.params.formId}).exec(function(error, userTableData) {
+      userDatabases.findOne({'_id': request.params.formId})
+      .exec(function(error, userTableData) {
         if(!userTableData) {
           reject('User Table not found!');
         } else if(error) {
@@ -106,7 +109,8 @@ function userRecordsUpdate(request) {
     if(!request.params.recordId) {
       reject('Record ID is required!');
     }
-    userDatabases.findOne({'records._id': request.params.recordId}).exec(function(error, userTableData) {
+    userDatabases.findOne({'records._id': request.params.recordId})
+    .exec(function(error, userTableData) {
       if(!userTableData) {
         reject('User Record not found!');
       } else if(error) {
@@ -143,7 +147,8 @@ function userTablesDelete(request) {
     if(!request.params.formId) {
       reject('Form ID is required!');
     }
-    userDatabases.findByIdAndRemove(request.params.formId).exec(function(error, userTableData) {
+    userDatabases.findByIdAndRemove(request.params.formId)
+    .exec(function(error, userTableData) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
@@ -162,7 +167,8 @@ function userRecordsDelete(request) {
     if(!request.params.recordId) {
       reject('Record ID is required!');
     }
-    userDatabases.findOne({'records._id': request.params.recordId}).exec(function(error, userTableData) {
+    userDatabases.findOne({'records._id': request.params.recordId})
+    .exec(function(error, userTableData) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');

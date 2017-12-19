@@ -1,7 +1,6 @@
 // Import required modules
-import React, { Component } from 'react';
+import React from 'react';
 import { Content, Text } from 'native-base';
-import { Link } from 'react-router-native';
 
 // Import requred components
 import styles from './styles.js';

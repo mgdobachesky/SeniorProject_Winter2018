@@ -11,7 +11,9 @@ function viewpagesReadAll(request) {
     if(!request.params.viewsiteId) {
       reject('Viewsite ID is required!');
     } else {
-      viewpages.find({'viewsiteId': request.params.viewsiteId}).select('-userId').exec(function(error, results) {
+      viewpages.find({'viewsiteId': request.params.viewsiteId})
+      .select('-userId')
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -31,7 +33,9 @@ function viewpagesReadOne(request) {
     if(!request.params.viewpageId) {
       reject('Viewpage ID is required!');
     } else {
-      viewpages.findOne({'_id': request.params.viewpageId}).select('-userId').exec(function(error, results) {
+      viewpages.findOne({'_id': request.params.viewpageId})
+      .select('-userId')
+      .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
@@ -49,7 +53,8 @@ function viewpagesReadOne(request) {
 // Create operations
 function viewpagesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    viewsites.findById(request.body.viewsiteId).exec(function(error, viewsiteData) {
+    viewsites.findById(request.body.viewsiteId)
+    .exec(function(error, viewsiteData) {
       if(viewsiteData.userId != request.session.userId) {
         reject('You can only create Viewpages for Viewsites you own!');
       } else if(!request.body.viewpageName) {
@@ -80,7 +85,8 @@ function viewpagesUpdate(request) {
     if(!request.params.viewpageId) {
       reject('Viewpage ID is required!');
     } else {
-      viewpages.findById(request.params.viewpageId).exec(function(error, viewpageData) {
+      viewpages.findById(request.params.viewpageId)
+      .exec(function(error, viewpageData) {
         if(!viewpageData) {
           reject('Viewpage not found!');
         } else if(error) {
@@ -112,14 +118,16 @@ function viewpagesDelete(request) {
     if(!request.params.viewpageId) {
       reject('Viewpage ID is required!');
     }
-    viewpages.findById(request.params.viewpageId).exec(function(error, viewpageData) {
+    viewpages.findById(request.params.viewpageId)
+    .exec(function(error, viewpageData) {
       if(error) {
         console.log(error.message);
         reject('Something went wrong!');
       } else if(viewpageData.userId != request.session.userId) {
         reject('You can only delete Viewpages you own!');
       } else {
-        viewpages.findByIdAndRemove(request.params.viewpageId).exec(function(error, results) {
+        viewpages.findByIdAndRemove(request.params.viewpageId)
+        .exec(function(error, results) {
           if(error) {
             console.log(error.message);
             reject('Something went wrong!');

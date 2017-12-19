@@ -1,6 +1,6 @@
 // Import required modules
-import React, { Component } from 'react';
-import { NativeRouter, Route, Link, AndroidBackButton } from 'react-router-native';
+import React from 'react';
+import { NativeRouter, AndroidBackButton } from 'react-router-native';
 
 // Import requred components
 import DrawerLayout from './components/DrawerLayout';

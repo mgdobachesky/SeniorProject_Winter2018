@@ -1,5 +1,5 @@
 // Import required modules
-import React, { Component } from 'react';
+import React from 'react';
 
 // Import required components
 import AppJSX from './App.js';
