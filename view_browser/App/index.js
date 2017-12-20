@@ -13,12 +13,37 @@ import ViewpageService from './services/ViewpageService';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.handleRequestViewsite = this.handleRequestViewsite.bind(this);
     this.manageViewsiteService = new ViewsiteService();
     this.manageViewpageService = new ViewpageService();
     this.state = {
-      viewsite: {},
-      viewpages: []
+      viewsite: null,
+      viewpages: [],
+      viewsiteRequestError: ""
     };
+  }
+
+  handleRequestViewsite(viewsiteName) {
+    if(viewsiteName) {
+      let requestData = {};
+      requestData.viewsiteName = viewsiteName;
+      this.manageViewsiteService.readOneViewsiteByName(requestData)
+      .then((results) => {
+        this.setState({
+          viewsite: results.data,
+          viewsiteRequestError: ""
+        }, () => this.handleReadAllViewpages());
+      }, (error) => {
+        this.setState({
+          viewsite: null,
+          viewsiteRequestError: error.response.data
+        });
+      });
+    } else {
+      this.setState({
+        viewsite: null
+      });
+    }
   }
 
   handleReadAllViewpages() {
@@ -35,16 +60,26 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    let requestData = {};
-    requestData.viewsiteName = this.props.viewsiteName;
-    this.manageViewsiteService.readOneViewsiteByName(requestData)
-    .then((results) => {
+    if(this.props.viewsiteName) {
+      let requestData = {};
+      requestData.viewsiteName = this.props.viewsiteName;
+      this.manageViewsiteService.readOneViewsiteByName(requestData)
+      .then((results) => {
+        this.setState({
+          viewsite: results.data,
+          viewsiteRequestError: ""
+        }, () => this.handleReadAllViewpages());
+      }, (error) => {
+        this.setState({
+          viewsite: null,
+          viewsiteRequestError: error.response.data
+        });
+      });
+    } else {
       this.setState({
-        viewsite: results.data
-      }, () => this.handleReadAllViewpages());
-    }, (error) => {
-      console.log(error.response.data);
-    });
+        viewsite: null
+      });
+    }
   }
 
   render() {

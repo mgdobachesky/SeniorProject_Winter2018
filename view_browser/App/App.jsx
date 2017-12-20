@@ -14,7 +14,13 @@ var AppJSX = function() {
       viewsite={this.state.viewsite}
       viewpages={this.state.viewpages} />
 
-      <Body />
+      <Body
+      viewsiteRequestError={this.state.viewsiteRequestError}
+      viewsite={this.state.viewsite}
+      onRequestViewsite={this.handleRequestViewsite} />
+
+      <Footer
+      viewsite={this.state.viewsite} />
     </div>
   );
 }

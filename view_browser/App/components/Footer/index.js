@@ -11,7 +11,11 @@ class Footer extends React.Component {
   }
 
   render() {
-    return(FooterJSX.call(this));
+    if(this.props.viewsite) {
+      return(FooterJSX.call(this));
+    } else {
+      return null;
+    }
   }
 }
 

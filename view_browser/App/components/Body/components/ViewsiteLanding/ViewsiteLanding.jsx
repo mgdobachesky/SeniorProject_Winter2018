@@ -1,7 +1,7 @@
 // Import required modules
 import React from 'react';
 
-var ViewsiteLandingPageJSX = function() {
+var ViewsiteLandingJSX = function() {
   return (
     <div>
       <div className="jumbotron jumbotron-fluid">
@@ -10,7 +10,7 @@ var ViewsiteLandingPageJSX = function() {
             <h1 className="display-3">
               {this.props.match.params.viewsiteName}
             </h1>
-            
+
             <p className="lead">
               The landing page.
             </p>
@@ -21,4 +21,4 @@ var ViewsiteLandingPageJSX = function() {
   );
 }
 
-export default ViewsiteLandingPageJSX;
+export default ViewsiteLandingJSX;

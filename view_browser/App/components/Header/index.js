@@ -11,7 +11,11 @@ class Header extends React.Component {
   }
 
   render() {
-    return (HeaderJSX.call(this));
+    if(this.props.viewsite) {
+      return(HeaderJSX.call(this));
+    } else {
+      return null;
+    }
   }
 }
 
