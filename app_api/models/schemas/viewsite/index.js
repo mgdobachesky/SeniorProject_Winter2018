@@ -3,6 +3,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
+// Require child schemas
+var viewpageSchema = require('./schemas/viewpage');
+
 // Create viewsite schema
 var viewsiteSchema = new Schema({
   'userId': {
@@ -18,7 +21,8 @@ var viewsiteSchema = new Schema({
   'loginEnabled': {
     'type': Boolean,
     'default': false
-  }
+  },
+  'viewpages': [viewpageSchema]
 });
 
 // Create database models

@@ -1,7 +1,6 @@
 // Require mongoose to make a schemas with
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Create user schema
 var userSchema = new Schema({

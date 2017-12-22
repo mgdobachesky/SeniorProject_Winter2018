@@ -1,7 +1,6 @@
 // Required modules
 var mongoose = require('mongoose');
-var text = mongoose.model('text');
-var viewpages = mongoose.model('viewpage');
+var viewsites = mongoose.model('viewsite');
 
 // ** CRUD OPERATIONS **
 

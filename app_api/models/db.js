@@ -44,11 +44,6 @@ process.on('exit', function(code) {
 });
 
 // Bring in required schemas
-require('./userSchema');
-require('./viewsiteSchema');
-require('./viewpageSchema');
-require('./formSchema');
-require('./formTextInputSchema');
-require('./userDatabaseSchema');
-require('./textSchema');
-require('./dataViewSchema');
+require('./schemas/user');
+require('./schemas/viewsite');
+require('./schemas/userDatabase');

@@ -1,8 +1,6 @@
 // Required modules
 var mongoose = require('mongoose');
-var forms = mongoose.model('form');
-var userDatabasesDao = require('./userDatabasesDao');
-var viewpages = mongoose.model('viewpage');
+var viewsites = mongoose.model('viewsite');
 
 // ** CRUD OPERATIONS **
 

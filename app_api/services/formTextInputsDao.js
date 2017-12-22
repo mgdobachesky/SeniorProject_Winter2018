@@ -1,7 +1,6 @@
 // Required modules
 var mongoose = require('mongoose');
-var formTextInputs = mongoose.model('formTextInput');
-var forms = mongoose.model('form');
+var viewsites = mongoose.model('viewsite');
 
 // ** CRUD OPERATIONS **
 
