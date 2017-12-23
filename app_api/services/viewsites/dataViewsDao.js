@@ -30,7 +30,10 @@ function dataViewsCreate(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }
@@ -68,7 +71,10 @@ function dataViewsUpdate(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }
@@ -104,7 +110,10 @@ function dataViewsDelete(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }

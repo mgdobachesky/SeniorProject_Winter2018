@@ -35,7 +35,10 @@ function userRecordsCreate(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }
@@ -82,7 +85,10 @@ function userRecordsUpdate(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }
@@ -118,7 +124,10 @@ function userRecordsDelete(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }

@@ -11,7 +11,7 @@ function viewsitesReadAll(request) {
       reject('User ID required!');
     } else {
       viewsites.find({'userId': request.session.userId})
-      .select('-userId')
+      .select('-userId -__v')
       .exec(function(error, results) {
         if(error) {
           console.log(error.message);
@@ -33,7 +33,7 @@ function viewsitesReadOne(request) {
       reject('Viewsite name is required!');
     } else {
       viewsites.findOne({'viewsiteName': request.params.viewsiteName})
-      .select('-userId')
+      .select('-userId -__v')
       .exec(function(error, results) {
         if(error) {
           console.log(error.message);
@@ -70,7 +70,10 @@ function viewsitesCreate(request) {
             reject('Something went wrong!');
           }
         } else {
-          resolve(results);
+          var cleanResults = results.toObject();
+          delete cleanResults.userId;
+          delete cleanResults.__v;
+          resolve(cleanResults);
         }
       });
     }
@@ -107,7 +110,10 @@ function viewsitesUpdate(request) {
                 reject('Something went wrong!');
               }
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }
@@ -141,7 +147,10 @@ function viewsitesDelete(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }

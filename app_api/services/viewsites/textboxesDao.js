@@ -30,7 +30,10 @@ function textboxesCreate(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }
@@ -68,7 +71,10 @@ function textboxesUpdate(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }
@@ -104,7 +110,10 @@ function textboxesDelete(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }

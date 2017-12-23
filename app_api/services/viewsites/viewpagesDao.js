@@ -30,7 +30,10 @@ function viewpagesCreate(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }
@@ -69,7 +72,10 @@ function viewpagesUpdate(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }
@@ -105,7 +111,10 @@ function viewpagesDelete(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }

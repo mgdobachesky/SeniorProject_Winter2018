@@ -12,7 +12,7 @@ function usersReadOne(request) {
       reject(false);
     } else {
       users.findOne({'_id': request.session.userId})
-      .select('-_id -password')
+      .select('-_id -password -__v')
       .exec(function(error, results) {
         if(error) {
           console.log(error.message);

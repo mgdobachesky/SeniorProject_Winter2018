@@ -11,7 +11,7 @@ function userDatabasesReadAll(request) {
       reject('User ID required!');
     } else {
       userDatabases.find({'userId': request.session.userId})
-      .select('-userId')
+      .select('-userId -__v')
       .exec(function(error, results) {
         if(error) {
           console.log(error.message);
@@ -33,7 +33,7 @@ function userDatabasesReadOne(request) {
       reject('User Database ID is required!');
     } else {
       userDatabases.findOne({'_id': request.body.viewsiteId})
-      .select('-userId')
+      .select('-userId -__v')
       .exec(function(error, results) {
         if(error) {
           console.log(error.message);
@@ -65,7 +65,10 @@ function userDatabasesCreate(request) {
           console.log(error.message);
           reject('Something went wrong!');
         } else {
-          resolve(results);
+          var cleanResults = results.toObject();
+          delete cleanResults.userId;
+          delete cleanResults.__v;
+          resolve(cleanResults);
         }
       });
     }
@@ -97,7 +100,10 @@ function userDatabasesDelete(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve(results);
+              var cleanResults = results.toObject();
+              delete cleanResults.userId;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }
