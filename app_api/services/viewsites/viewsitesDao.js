@@ -55,7 +55,7 @@ function viewsitesCreate(request) {
     if(!request.body.viewsiteName) {
       reject('All fields required!');
     } else if(!request.session.userId) {
-      reject('You must be logged in to create a viewsite!');
+      reject('You must be logged in to create a Viewsite!');
     } else {
       viewsites.create({
         'userId': request.session.userId,

@@ -5,18 +5,19 @@ var userDatabases = mongoose.model('userDatabase');
 // ** CRUD OPERATIONS **
 
 // Read operations
-function userTablesReadOne(request) {
+function userDatabasesReadAll(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.formId) {
-      reject('Form ID is required!');
+    if(!request.session.userId) {
+      reject('User ID required!');
     } else {
-      userDatabases.findOne({'_id': request.params.formId})
+      userDatabases.find({'userId': request.session.userId})
+      .select('-userId')
       .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
         } else if(!results) {
-          reject('User Table not found!');
+          reject('No User Databases found!');
         } else {
           resolve(results);
         }
@@ -26,20 +27,21 @@ function userTablesReadOne(request) {
   return promise;
 }
 
-function userRecordsReadOne(request) {
+function userDatabasesReadOne(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.recordId) {
-      reject('Record ID is required!');
+    if(!request.body.viewsiteId) {
+      reject('User Database ID is required!');
     } else {
-      userDatabases.findOne({'records._id': request.params.recordId})
+      userDatabases.findOne({'_id': request.body.viewsiteId})
+      .select('-userId')
       .exec(function(error, results) {
         if(error) {
           console.log(error.message);
           reject('Something went wrong!');
         } else if(!results) {
-          reject('User Record not found!');
+          reject('User Database not found!');
         } else {
-          resolve(results.records.id(request.params.recordId));
+          resolve(results);
         }
       });
     }
@@ -48,52 +50,54 @@ function userRecordsReadOne(request) {
 }
 
 // Create operations
-function userTablesCreate(request) {
+function userDatabasesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.formId) {
-      reject('Form ID is required!');
+    if(!request.body.viewsiteId) {
+      reject('All fields required!');
+    } else if(!request.session.userId) {
+      reject('You must be logged in to create a User Database!');
+    } else {
+      userDatabases.create({
+        '_id': request.body.viewsiteId,
+        'userId': request.session.userId
+      }, function(error, results) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else {
+          resolve(results);
+        }
+      });
     }
-    userDatabases.create({
-      '_id': request.params.formId
-    }, function(error, results) {
-      if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        resolve('User Table created successfully!');
-      }
-    });
   });
   return promise;
 }
 
-function userRecordsCreate(request) {
+// Delete operations
+function userDatabasesDelete(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.params.formId) {
-      reject('Form ID is required!');
+    if(!request.body.viewsiteId) {
+      reject('User Database ID is required!');
+    } else if(!request.session.userId) {
+      reject('You must be logged in to delete a viewsite!');
     } else {
-      userDatabases.findOne({'_id': request.params.formId})
-      .exec(function(error, userTableData) {
-        if(!userTableData) {
-          reject('User Table not found!');
-        } else if(error) {
+      userDatabases.findById(request.body.viewsiteId)
+      .exec(function(error, userDatabaseData) {
+        if(error) {
           console.log(error.message);
           reject('Something went wrong!');
+        } else if(!userDatabaseData) {
+          reject('User Database doesn\'t exist!');
+        } else if(userDatabaseData.userId != request.session.userId) {
+          reject('You can only delete User Databases you own!');
         } else {
-          let newRecord = userTableData.records.create();
-          for(formFieldId in request.body) {
-            newRecord.data.push({
-              '_id': formFieldId,
-              'datum': request.body[formFieldId]
-            });
-          }
-          userTableData.records.push(newRecord);
-          userTableData.save(function(error, results) {
+          userDatabases.findByIdAndRemove(request.body.viewsiteId)
+          .exec(function(error, results) {
             if(error) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              resolve('User Record created successfully!');
+              resolve(results);
             }
           });
         }
@@ -103,98 +107,8 @@ function userRecordsCreate(request) {
   return promise;
 }
 
-// Update operations
-function userRecordsUpdate(request) {
-  var promise = new Promise(function(resolve, reject) {
-    if(!request.params.recordId) {
-      reject('Record ID is required!');
-    }
-    userDatabases.findOne({'records._id': request.params.recordId})
-    .exec(function(error, userTableData) {
-      if(!userTableData) {
-        reject('User Record not found!');
-      } else if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else {
-        let userRecord = userTableData.records.id(request.params.recordId);
-        let updatedRecord = userTableData.records.create();
-        updatedRecord._id = userRecord._id;
-        for(formFieldId in request.body) {
-          updatedRecord.data.push({
-            '_id': formFieldId,
-            'datum': request.body[formFieldId]
-          });
-        }
-        userRecord.set(updatedRecord);
-        userTableData.save(function(error, results) {
-          if(error) {
-            console.log(error.message);
-            reject('Something went wrong!');
-          } else {
-            resolve('User Record updated successfully!');
-          }
-        });
-      }
-    });
-  });
-  return promise;
-}
-
-// Delete operations
-function userTablesDelete(request) {
-  var promise = new Promise(function(resolve, reject) {
-    if(!request.params.formId) {
-      reject('Form ID is required!');
-    }
-    userDatabases.findByIdAndRemove(request.params.formId)
-    .exec(function(error, userTableData) {
-      if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else if(!userTableData) {
-        reject('User Table not found!');
-      } else {
-        resolve('User Table deleted successfully!');
-      }
-    });
-  });
-  return promise;
-}
-
-function userRecordsDelete(request) {
-  var promise = new Promise(function(resolve, reject) {
-    if(!request.params.recordId) {
-      reject('Record ID is required!');
-    }
-    userDatabases.findOne({'records._id': request.params.recordId})
-    .exec(function(error, userTableData) {
-      if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else if(!userTableData) {
-        reject('User Record not found!');
-      } else {
-        userTableData.records.id(request.params.recordId).remove();
-        userTableData.save(function(error, results) {
-          if(error) {
-            console.log(error.message);
-            reject('Something went wrong!');
-          } else {
-            resolve('User Record deleted successfully!');
-          }
-        });
-      }
-    });
-  });
-  return promise;
-}
-
 // Export functions
-module.exports.userTablesReadOne = userTablesReadOne;
-module.exports.userRecordsReadOne = userRecordsReadOne;
-module.exports.userTablesCreate = userTablesCreate;
-module.exports.userRecordsCreate = userRecordsCreate;
-module.exports.userRecordsUpdate = userRecordsUpdate;
-module.exports.userTablesDelete = userTablesDelete;
-module.exports.userRecordsDelete = userRecordsDelete;
+module.exports.userDatabasesReadAll = userDatabasesReadAll;
+module.exports.userDatabasesReadOne = userDatabasesReadOne;
+module.exports.userDatabasesCreate = userDatabasesCreate;
+module.exports.userDatabasesDelete = userDatabasesDelete;

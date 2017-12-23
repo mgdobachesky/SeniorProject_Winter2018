@@ -1,14 +1,26 @@
 // Required modules
 var express = require('express');
 var router = express.Router();
+
+// Import Users controllers
 var controllerUsers = require('../controllers/users/users');
+
+// Import Viewsites controllers
 var controllerViewsites = require('../controllers/viewsites/viewsites');
 var controllerViewpages = require('../controllers/viewsites/viewpages');
 var controllerText = require('../controllers/viewsites/text');
 var controllerForms = require('../controllers/viewsites/forms');
 var controllerTextboxes = require('../controllers/viewsites/textboxes');
 var controllerDataViews = require('../controllers/viewsites/dataViews');
+
+// Import User Databases controllers
 var controllerUserDatabases = require('../controllers/userDatabases/userDatabases');
+var controllerUserTables = require('../controllers/userDatabases/userTables');
+var controllerUserRecords = require('../controllers/userDatabases/userRecords');
+
+/*
+ * Users Routes
+ */
 
 // Create routes for users
 router.get('/read_one/users', controllerUsers.usersReadOne);
@@ -17,6 +29,10 @@ router.put('/update/users', controllerUsers.usersUpdate);
 router.delete('/delete/users', controllerUsers.usersDelete);
 router.post('/login/users', controllerUsers.usersLogIn);
 router.get('/logout/users', controllerUsers.usersLogout);
+
+/*
+ * Viewsites Routes
+ */
 
 // Create routes for viewsites
 router.get('/read_one/viewsites/:viewsiteName', controllerViewsites.viewsitesReadOne);
@@ -50,12 +66,25 @@ router.post('/create/data_views', controllerDataViews.dataViewsCreate);
 router.put('/update/data_views', controllerDataViews.dataViewsUpdate);
 router.delete('/delete/data_views', controllerDataViews.dataViewsDelete);
 
+/*
+ * User Databases Routes
+ */
+
 // Create routes for userDatabases
-router.get('/read_one/user_records/:recordId', controllerUserDatabases.userRecordsReadOne);
-router.get('/read_all/user_records/:formId', controllerUserDatabases.userTablesReadOne);
-router.post('/create/user_records/:formId', controllerUserDatabases.userRecordsCreate);
-router.put('/update/user_records/:recordId', controllerUserDatabases.userRecordsUpdate);
-router.delete('/delete/user_records/:recordId', controllerUserDatabases.userRecordsDelete);
+router.get('/read_all/user_databases', controllerUserDatabases.userDatabasesReadAll);
+router.post('/read_one/user_databases', controllerUserDatabases.userDatabasesReadOne);
+router.post('/create/user_databases', controllerUserDatabases.userDatabasesCreate);
+router.delete('/delete/user_databases', controllerUserDatabases.userDatabasesDelete);
+
+// Create routes for userTables
+router.post('/read_one/user_tables', controllerUserTables.userTablesReadOne);
+router.post('/create/user_tables', controllerUserTables.userTablesCreate);
+router.delete('/delete/user_tables', controllerUserTables.userTablesDelete);
+
+// Create routes for userRecords
+router.post('/create/user_records', controllerUserRecords.userRecordsCreate);
+router.put('/update/user_records', controllerUserRecords.userRecordsUpdate);
+router.delete('/delete/user_records', controllerUserRecords.userRecordsDelete);
 
 // Export the router
 module.exports = router;

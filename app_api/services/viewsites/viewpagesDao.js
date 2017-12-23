@@ -12,7 +12,7 @@ function viewpagesCreate(request) {
     } else if(!request.body.viewpageName) {
       reject('All fields required!');
     } else if(!request.session.userId) {
-      reject('You must be logged in to create a viewpage!');
+      reject('You must be logged in to create a Viewpage!');
     } else {
       viewsites.findById(request.body.viewsiteId)
       .exec(function(error, viewsiteData) {
