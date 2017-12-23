@@ -9,7 +9,7 @@ var dataViewSchema = require('./schemas/dataView');
 
 // Define element parent class schemas
 var elementSchema = new Schema({},
-  { discriminatorKey: 'kind', _id: false });
+  { discriminatorKey: 'kind' });
 
 // Create viewpage schema
 var viewpageSchema = new Schema({

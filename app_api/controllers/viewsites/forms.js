@@ -1,39 +1,10 @@
 // Required modules
-var formsDao = require('../services/formsDao');
+var formsDao = require('../../services/viewsites/formsDao');
 
 // Handle JSON responses
 function sendJSONresponse(res, status, content) {
   res.status(status);
   res.json(content);
-}
-
-// Read all
-function formsReadAllByViewsite(request, response) {
-  formsDao.formsReadAllByViewsite(request)
-  .then(function(results) {
-    sendJSONresponse(response, 200, results);
-  }, function(error) {
-    sendJSONresponse(response, 404, error);
-  });
-}
-
-function formsReadAllByViewpage(request, response) {
-  formsDao.formsReadAllByViewpage(request)
-  .then(function(results) {
-    sendJSONresponse(response, 200, results);
-  }, function(error) {
-    sendJSONresponse(response, 404, error);
-  });
-}
-
-// Read one
-function formsReadOne(request, response) {
-  formsDao.formsReadOne(request)
-  .then(function(results) {
-    sendJSONresponse(response, 200, results);
-  }, function(error) {
-    sendJSONresponse(response, 404, error);
-  });
 }
 
 // Create
@@ -67,9 +38,6 @@ function formsDelete(request, response) {
 }
 
 // Export functions
-module.exports.formsReadAllByViewsite = formsReadAllByViewsite;
-module.exports.formsReadAllByViewpage = formsReadAllByViewpage;
-module.exports.formsReadOne = formsReadOne;
 module.exports.formsCreate = formsCreate;
 module.exports.formsUpdate = formsUpdate;
 module.exports.formsDelete = formsDelete;

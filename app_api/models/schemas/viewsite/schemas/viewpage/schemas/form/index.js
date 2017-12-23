@@ -7,7 +7,7 @@ var textboxSchema = require('./schemas/textbox');
 
 // Define Form Input parent class schema
 var formInputSchema = new Schema({},
-  { discriminatorKey: 'kind', _id: false });
+  { discriminatorKey: 'kind' });
 
 // Define Form schema
 var formSchema = new Schema({

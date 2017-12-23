@@ -1,5 +1,5 @@
 // Required modules
-var usersDao = require('../services/usersDao');
+var usersDao = require('../../services/users/usersDao');
 
 // Handle JSON responses
 function sendJSONresponse(res, status, content) {

@@ -25,6 +25,24 @@ var viewsiteSchema = new Schema({
   'viewpages': [viewpageSchema]
 });
 
+// Catch duplicate viewsite errors on create
+viewsiteSchema.post('save', function(error, doc, next) {
+  if(error.name === 'MongoError' && error.code === 11000) {
+    next(new Error('There was a duplicate key error'));
+  } else {
+    next(error);
+  }
+});
+
+// Catch duplicate viewsite errors on update
+viewsiteSchema.post('update', function(error, res, next) {
+  if(error.name === 'MongoError' && error.code === 11000) {
+    next(new Error('There was a duplicate key error'));
+  } else {
+    next(error);
+  }
+});
+
 // Create database models
 var viewsite = mongoose.model('viewsite', viewsiteSchema);
 

@@ -1,5 +1,5 @@
 // Required modules
-var viewpagesDao = require('../services/viewpagesDao');
+var viewsitesDao = require('../../services/viewsites/viewsitesDao');
 
 // Handle JSON responses
 function sendJSONresponse(res, status, content) {
@@ -8,8 +8,8 @@ function sendJSONresponse(res, status, content) {
 }
 
 // Read all
-function viewpagesReadAll(request, response) {
-  viewpagesDao.viewpagesReadAll(request)
+function viewsitesReadAll(request, response) {
+  viewsitesDao.viewsitesReadAll(request)
   .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
@@ -18,8 +18,8 @@ function viewpagesReadAll(request, response) {
 }
 
 // Read one
-function viewpagesReadOne(request, response) {
-  viewpagesDao.viewpagesReadOne(request)
+function viewsitesReadOne(request, response) {
+  viewsitesDao.viewsitesReadOne(request)
   .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
@@ -28,8 +28,8 @@ function viewpagesReadOne(request, response) {
 }
 
 // Create
-function viewpagesCreate(request, response) {
-  viewpagesDao.viewpagesCreate(request)
+function viewsitesCreate(request, response) {
+  viewsitesDao.viewsitesCreate(request)
   .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
@@ -38,8 +38,8 @@ function viewpagesCreate(request, response) {
 }
 
 // Update
-function viewpagesUpdate(request, response) {
-  viewpagesDao.viewpagesUpdate(request)
+function viewsitesUpdate(request, response) {
+  viewsitesDao.viewsitesUpdate(request)
   .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
@@ -48,8 +48,8 @@ function viewpagesUpdate(request, response) {
 }
 
 // Delete
-function viewpagesDelete(request, response) {
-  viewpagesDao.viewpagesDelete(request)
+function viewsitesDelete(request, response) {
+  viewsitesDao.viewsitesDelete(request)
   .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
@@ -58,8 +58,8 @@ function viewpagesDelete(request, response) {
 }
 
 // Export functions
-module.exports.viewpagesReadAll = viewpagesReadAll;
-module.exports.viewpagesReadOne = viewpagesReadOne;
-module.exports.viewpagesCreate = viewpagesCreate;
-module.exports.viewpagesUpdate = viewpagesUpdate;
-module.exports.viewpagesDelete = viewpagesDelete;
+module.exports.viewsitesReadAll = viewsitesReadAll;
+module.exports.viewsitesReadOne = viewsitesReadOne;
+module.exports.viewsitesCreate = viewsitesCreate;
+module.exports.viewsitesUpdate = viewsitesUpdate;
+module.exports.viewsitesDelete = viewsitesDelete;
