@@ -157,7 +157,6 @@ function viewsitesDelete(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              request.body.viewsiteId = results._id;
               userDatabasesDao.userDatabasesDelete(request)
               .then(function() {
                 var cleanResults = results.toObject();
