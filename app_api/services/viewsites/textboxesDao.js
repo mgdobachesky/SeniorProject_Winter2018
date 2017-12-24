@@ -22,7 +22,7 @@ function textboxesCreate(request) {
           reject('Viewsite not found!');
         } else {
           viewsiteData.viewpages.id(request.body.viewpageId).elements.id(request.body.elementId).formInputs.push({
-            'kind': 'textbox',
+            'kind': request.body.kind,
             'textboxLabel': request.body.textboxLabel
           });
           viewsiteData.save(function(error, results) {

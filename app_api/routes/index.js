@@ -8,10 +8,8 @@ var controllerUsers = require('../controllers/users/users');
 // Import Viewsites controllers
 var controllerViewsites = require('../controllers/viewsites/viewsites');
 var controllerViewpages = require('../controllers/viewsites/viewpages');
-var controllerText = require('../controllers/viewsites/text');
-var controllerForms = require('../controllers/viewsites/forms');
-var controllerTextboxes = require('../controllers/viewsites/textboxes');
-var controllerDataViews = require('../controllers/viewsites/dataViews');
+var controllerElements = require('../controllers/viewsites/elements');
+var controllerFormInputs = require('../controllers/viewsites/formInputs');
 
 // Import User Databases controllers
 var controllerUserDatabases = require('../controllers/userDatabases/userDatabases');
@@ -47,31 +45,20 @@ router.put('/update/viewpages', controllerViewpages.viewpagesUpdate);
 router.delete('/delete/viewpages', controllerViewpages.viewpagesDelete);
 
 // Create routes for text
-router.post('/create/text', controllerText.textCreate);
-router.put('/update/text', controllerText.textUpdate);
-router.delete('/delete/text', controllerText.textDelete);
+router.post('/create/elements', controllerElements.elementsCreate);
+router.put('/update/elements', controllerElements.elementsUpdate);
+router.delete('/delete/elements', controllerElements.elementsDelete);
 
 // Create routes for forms
-router.post('/create/forms', controllerForms.formsCreate);
-router.put('/update/forms', controllerForms.formsUpdate);
-router.delete('/delete/forms', controllerForms.formsDelete);
-
-// Create routes for textboxes
-router.post('/create/textboxes', controllerTextboxes.textboxesCreate);
-router.put('/update/textboxes', controllerTextboxes.textboxesUpdate);
-router.delete('/delete/textboxes', controllerTextboxes.textboxesDelete);
-
-// Create routes for dataViews
-router.post('/create/data_views', controllerDataViews.dataViewsCreate);
-router.put('/update/data_views', controllerDataViews.dataViewsUpdate);
-router.delete('/delete/data_views', controllerDataViews.dataViewsDelete);
+router.post('/create/formInputs', controllerFormInputs.formInputsCreate);
+router.put('/update/formInputs', controllerFormInputs.formInputsUpdate);
+router.delete('/delete/formInputs', controllerFormInputs.formInputsDelete);
 
 /*
  * User Databases Routes
  */
 
 // Create routes for userDatabases
-router.get('/read_all/user_databases', controllerUserDatabases.userDatabasesReadAll);
 router.post('/read_one/user_databases', controllerUserDatabases.userDatabasesReadOne);
 
 // Create routes for userTables

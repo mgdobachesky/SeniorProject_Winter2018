@@ -5,7 +5,7 @@ var users = mongoose.model('user');
 
 // Required DAOs for cross collection operations
 var viewsitesDao = require('../viewsites/viewsitesDao');
-
+var userDatabasesDao = require('../userDatabases/userDatabasesDao');
 
 // ** CRUD OPERATIONS **
 
@@ -116,9 +116,15 @@ function usersDelete(request) {
         } else if(!results) {
           reject('User not found!');
         } else {
-          viewsitesDao.viewsitesDeleteMany(request)
+          viewsitesDao.viewsitesDeleteAll(request)
           .then(function(results) {
-            resolve('User deleted successfully!');
+            userDatabasesDao.userDatabasesDeleteAll(request)
+            .then(function(results) {
+              resolve('User deleted successfully!');
+            }, function(error) {
+              console.log(error.message);
+              reject('Something went wrong!');
+            });
           }, function(error) {
             console.log(error.message);
             reject('Something went wrong!');

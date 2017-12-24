@@ -22,7 +22,7 @@ function dataViewsCreate(request) {
           reject('Viewsite not found!');
         } else {
           viewsiteData.viewpages.id(request.body.viewpageId).elements.push({
-            'kind': 'dataView',
+            'kind': request.body.kind,
             'formId': request.body.formId
           });
           viewsiteData.save(function(error, results) {

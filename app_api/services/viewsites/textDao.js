@@ -22,7 +22,7 @@ function textCreate(request) {
           reject('Viewsite not found!');
         } else {
           viewsiteData.viewpages.id(request.body.viewpageId).elements.push({
-            'kind': 'text',
+            'kind': request.body.kind,
             'textValue': request.body.textValue
           });
           viewsiteData.save(function(error, results) {

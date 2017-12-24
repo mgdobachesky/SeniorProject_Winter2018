@@ -14,7 +14,7 @@ function viewsitesReadAll(request) {
       reject('User ID required!');
     } else {
       viewsites.find({'userId': request.session.userId})
-      .select('-userId -__v')
+      .select('-userId -__v -viewpages')
       .exec(function(error, results) {
         if(error) {
           console.log(error.message);
@@ -176,7 +176,7 @@ function viewsitesDelete(request) {
   return promise;
 }
 
-function viewsitesDeleteMany(request) {
+function viewsitesDeleteAll(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.session.userId) {
       reject('User ID is required!');
@@ -201,4 +201,4 @@ module.exports.viewsitesReadOne = viewsitesReadOne;
 module.exports.viewsitesCreate = viewsitesCreate;
 module.exports.viewsitesUpdate = viewsitesUpdate;
 module.exports.viewsitesDelete = viewsitesDelete;
-module.exports.viewsitesDeleteMany = viewsitesDeleteMany;
+module.exports.viewsitesDeleteAll = viewsitesDeleteAll;

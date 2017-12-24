@@ -25,7 +25,7 @@ function formsCreate(request) {
           reject('Viewsite not found!');
         } else {
           viewsiteData.viewpages.id(request.body.viewpageId).elements.push({
-            'kind': 'form',
+            'kind': request.body.kind,
             'formTitle': request.body.formTitle
           });
           viewsiteData.save(function(error, results) {

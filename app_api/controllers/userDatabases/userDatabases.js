@@ -7,16 +7,6 @@ function sendJSONresponse(res, status, content) {
   res.json(content);
 }
 
-// Read All
-function userDatabasesReadAll(request, response) {
-  userDatabasesDao.userDatabasesReadAll(request)
-  .then(function(results) {
-    sendJSONresponse(response, 200, results);
-  }, function(error) {
-    sendJSONresponse(response, 404, error);
-  });
-}
-
 // Read One
 function userDatabasesReadOne(request, response) {
   userDatabasesDao.userDatabasesReadOne(request)
@@ -48,7 +38,6 @@ function userDatabasesDelete(request, response) {
 }
 
 // Export functions
-module.exports.userDatabasesReadAll = userDatabasesReadAll;
 module.exports.userDatabasesReadOne = userDatabasesReadOne;
 module.exports.userDatabasesCreate = userDatabasesCreate;
 module.exports.userDatabasesDelete = userDatabasesDelete;
