@@ -2,6 +2,9 @@
 var mongoose = require('mongoose');
 var viewsites = mongoose.model('viewsite');
 
+// Required DAOs for cross collection operations
+var userDatabasesDao = require('../userDatabases/userDatabasesDao');
+
 // ** CRUD OPERATIONS **
 
 // Read operations
@@ -70,10 +73,17 @@ function viewsitesCreate(request) {
             reject('Something went wrong!');
           }
         } else {
-          var cleanResults = results.toObject();
-          delete cleanResults.userId;
-          delete cleanResults.__v;
-          resolve(cleanResults);
+          request.body.viewsiteId = results._id;
+          userDatabasesDao.userDatabasesCreate(request)
+          .then(function() {
+            var cleanResults = results.toObject();
+            delete cleanResults.userId;
+            delete cleanResults.__v;
+            resolve(cleanResults);
+          }, function(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          });
         }
       });
     }
@@ -147,12 +157,38 @@ function viewsitesDelete(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              var cleanResults = results.toObject();
-              delete cleanResults.userId;
-              delete cleanResults.__v;
-              resolve(cleanResults);
+              request.body.viewsiteId = results._id;
+              userDatabasesDao.userDatabasesDelete(request)
+              .then(function() {
+                var cleanResults = results.toObject();
+                delete cleanResults.userId;
+                delete cleanResults.__v;
+                resolve(cleanResults);
+              }, function(error) {
+                console.log(error.message);
+                reject('Something went wrong!');
+              });
             }
           });
+        }
+      });
+    }
+  });
+  return promise;
+}
+
+function viewsitesDeleteMany(request) {
+  var promise = new Promise(function(resolve, reject) {
+    if(!request.session.userId) {
+      reject('User ID is required!');
+    } else {
+      viewsites.remove({"userId": request.session.userId})
+      .exec(function(error, results) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else {
+          resolve('User\'s Viewsites successfully removed!');
         }
       });
     }
@@ -166,3 +202,4 @@ module.exports.viewsitesReadOne = viewsitesReadOne;
 module.exports.viewsitesCreate = viewsitesCreate;
 module.exports.viewsitesUpdate = viewsitesUpdate;
 module.exports.viewsitesDelete = viewsitesDelete;
+module.exports.viewsitesDeleteMany = viewsitesDeleteMany;

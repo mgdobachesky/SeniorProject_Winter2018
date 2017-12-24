@@ -2,6 +2,9 @@
 var mongoose = require('mongoose');
 var viewsites = mongoose.model('viewsite');
 
+// Required DAOs for cross collection operations
+var userTablesDao = require('../userDatabases/userTablesDao');
+
 // ** CRUD OPERATIONS **
 
 // Create operations
@@ -30,10 +33,18 @@ function formsCreate(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              var cleanResults = results.toObject();
-              delete cleanResults.userId;
-              delete cleanResults.__v;
-              resolve(cleanResults);
+              let elementsLength = results.viewpages.id(request.body.viewpageId).elements.length;
+              request.body.elementId = results.viewpages.id(request.body.viewpageId).elements[elementsLength - 1]._id;
+              userTablesDao.userTablesCreate(request)
+              .then(function() {
+                var cleanResults = results.toObject();
+                delete cleanResults.userId;
+                delete cleanResults.__v;
+                resolve(cleanResults);
+              }, function(error) {
+                console.log(error.message);
+                reject('Something went wrong!');
+              });
             }
           });
         }
@@ -110,10 +121,16 @@ function formsDelete(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              var cleanResults = results.toObject();
-              delete cleanResults.userId;
-              delete cleanResults.__v;
-              resolve(cleanResults);
+              userTablesDao.userTablesDelete(request)
+              .then(function() {
+                var cleanResults = results.toObject();
+                delete cleanResults.userId;
+                delete cleanResults.__v;
+                resolve(cleanResults);
+              }, function(error) {
+                console.log(error.message);
+                reject('Something went wrong!');
+              });
             }
           });
         }

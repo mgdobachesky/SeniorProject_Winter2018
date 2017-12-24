@@ -7,7 +7,7 @@ var userDatabases = mongoose.model('userDatabase');
 // Create operations
 function userRecordsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.body.viewsiteId || !request.body.formId) {
+    if(!request.body.viewsiteId || !request.body.elementId) {
       reject('User Database and Table IDs are both required!');
     } else if(!request.body.record) {
       reject('All fields required!');
@@ -19,17 +19,17 @@ function userRecordsCreate(request) {
           reject('Something went wrong!');
         } else if(!userDatabaseData) {
           reject('User Database not found!');
-        } else if(!userDatabaseData.tables.id(request.body.formId)) {
+        } else if(!userDatabaseData.tables.id(request.body.elementId)) {
           reject('User Table doesn\'t exist!');
         } else  {
-          let newRecord = userDatabaseData.tables.id(request.body.formId).records.create();
+          let newRecord = userDatabaseData.tables.id(request.body.elementId).records.create();
           for(formFieldId in request.body.record) {
             newRecord.data.push({
               '_id': formFieldId,
               'datum': request.body.record[formFieldId]
             });
           }
-          userDatabaseData.tables.id(request.body.formId).records.push(newRecord);
+          userDatabaseData.tables.id(request.body.elementId).records.push(newRecord);
           userDatabaseData.save(function(error, results) {
             if(error) {
               console.log(error.message);
@@ -51,7 +51,7 @@ function userRecordsCreate(request) {
 // Update operations
 function userRecordsUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.body.viewsiteId || !request.body.formId || !request.body.recordId) {
+    if(!request.body.viewsiteId || !request.body.elementId || !request.body.recordId) {
       reject('User Database, Table, and Record IDs are all required!');
     } else if(!request.body.record) {
       reject('All fields required!');
@@ -67,11 +67,11 @@ function userRecordsUpdate(request) {
           reject('User Database not found!');
         } else if(userDatabaseData.userId != request.session.userId) {
           reject('You can only update Records you own!');
-        } else if(!userDatabaseData.tables.id(request.body.formId).records.id(request.body.recordId)) {
+        } else if(!userDatabaseData.tables.id(request.body.elementId).records.id(request.body.recordId)) {
           reject('User Record doesn\'t exist!');
         } else {
-          let userRecord = userDatabaseData.tables.id(request.body.formId).records.id(request.body.recordId);
-          let updatedRecord = userDatabaseData.tables.id(request.body.formId).records.create();
+          let userRecord = userDatabaseData.tables.id(request.body.elementId).records.id(request.body.recordId);
+          let updatedRecord = userDatabaseData.tables.id(request.body.elementId).records.create();
           updatedRecord._id = userRecord._id;
           for(formFieldId in request.body.record) {
             updatedRecord.data.push({
@@ -101,7 +101,7 @@ function userRecordsUpdate(request) {
 // Delete operations
 function userRecordsDelete(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.body.viewsiteId || !request.body.formId || !request.body.recordId) {
+    if(!request.body.viewsiteId || !request.body.elementId || !request.body.recordId) {
       reject('User Database, Table, and Record IDs are all required!');
     } else if(!request.session.userId) {
       reject('You must be logged in to delete a Record!');
@@ -115,10 +115,10 @@ function userRecordsDelete(request) {
           reject('User Database not found!');
         } else if(userDatabaseData.userId != request.session.userId) {
           reject('You can only delete Records you own!');
-        } else if(!userDatabaseData.tables.id(request.body.formId).records.id(request.body.recordId)) {
+        } else if(!userDatabaseData.tables.id(request.body.elementId).records.id(request.body.recordId)) {
           reject('User Record doesn\'t exist!');
         } else {
-          userDatabaseData.tables.id(request.body.formId).records.id(request.body.recordId).remove();
+          userDatabaseData.tables.id(request.body.elementId).records.id(request.body.recordId).remove();
           userDatabaseData.save(function(error, results) {
             if(error) {
               console.log(error.message);

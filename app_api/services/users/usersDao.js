@@ -3,13 +3,17 @@ var bcrypt = require('bcrypt');
 var mongoose = require('mongoose');
 var users = mongoose.model('user');
 
+// Required DAOs for cross collection operations
+var viewsitesDao = require('../viewsites/viewsitesDao');
+
+
 // ** CRUD OPERATIONS **
 
 // Read operations
 function usersReadOne(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.session.userId) {
-      reject(false);
+      reject('User ID is required!');
     } else {
       users.findOne({'_id': request.session.userId})
       .select('-_id -password -__v')
@@ -103,18 +107,25 @@ function usersDelete(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.session.userId) {
       reject('User ID is required!');
+    } else {
+      users.findByIdAndRemove(request.session.userId)
+      .exec(function(error, results) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else if(!results) {
+          reject('User not found!');
+        } else {
+          viewsitesDao.viewsitesDeleteMany(request)
+          .then(function(results) {
+            resolve('User deleted successfully!');
+          }, function(error) {
+            console.log(error.message);
+            reject('Something went wrong!');
+          });
+        }
+      });
     }
-    users.findByIdAndRemove(request.session.userId)
-    .exec(function(error, results) {
-      if(error) {
-        console.log(error.message);
-        reject('Something went wrong!');
-      } else if(!results) {
-        reject('User not found!');
-      } else {
-        resolve('User deleted successfully!');
-      }
-    });
   });
   return promise;
 }

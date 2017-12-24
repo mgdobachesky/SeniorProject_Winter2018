@@ -73,13 +73,9 @@ router.delete('/delete/data_views', controllerDataViews.dataViewsDelete);
 // Create routes for userDatabases
 router.get('/read_all/user_databases', controllerUserDatabases.userDatabasesReadAll);
 router.post('/read_one/user_databases', controllerUserDatabases.userDatabasesReadOne);
-router.post('/create/user_databases', controllerUserDatabases.userDatabasesCreate);
-router.delete('/delete/user_databases', controllerUserDatabases.userDatabasesDelete);
 
 // Create routes for userTables
 router.post('/read_one/user_tables', controllerUserTables.userTablesReadOne);
-router.post('/create/user_tables', controllerUserTables.userTablesCreate);
-router.delete('/delete/user_tables', controllerUserTables.userTablesDelete);
 
 // Create routes for userRecords
 router.post('/create/user_records', controllerUserRecords.userRecordsCreate);

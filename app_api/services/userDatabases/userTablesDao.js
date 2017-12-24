@@ -7,7 +7,7 @@ var userDatabases = mongoose.model('userDatabase');
 // Read operations
 function userTablesReadOne(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.body.viewsiteId || !request.body.formId) {
+    if(!request.body.viewsiteId || !request.body.elementId) {
       reject('User Database and Table IDs are both required!');
     } else {
       userDatabases.findOne({'_id': request.body.viewsiteId})
@@ -17,10 +17,10 @@ function userTablesReadOne(request) {
           reject('Something went wrong!');
         } else if(!userDatabaseData) {
           reject('User Database not found!');
-        } else if(!userDatabaseData.tables.id(request.body.formId)) {
+        } else if(!userDatabaseData.tables.id(request.body.elementId)) {
           reject('User Table doesn\'t exist!');
         } else {
-          resolve(userDatabaseData.tables.id(request.body.formId));
+          resolve(userDatabaseData.tables.id(request.body.elementId));
         }
       });
     }
@@ -33,7 +33,7 @@ function userTablesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId) {
       reject('User Database ID is required!');
-    } else if(!request.body.formId) {
+    } else if(!request.body.elementId) {
       reject('All fields required!');
     } else if(!request.session.userId) {
       reject('You must be logged in to create a User Table!');
@@ -46,7 +46,7 @@ function userTablesCreate(request) {
           reject('User Database not found!');
         } else {
           userDatabaseData.tables.push({
-            '_id': request.body.formId
+            '_id': request.body.elementId
           });
           userDatabaseData.save(function(error, results) {
             if(error) {
@@ -69,7 +69,7 @@ function userTablesCreate(request) {
 // Delete operations
 function userTablesDelete(request) {
   var promise = new Promise(function(resolve, reject) {
-    if(!request.body.viewsiteId || !request.body.formId) {
+    if(!request.body.viewsiteId || !request.body.elementId) {
       reject('User Database and Table IDs are both required!');
     } else if(!request.session.userId) {
       reject('You must be logged in to delete a User Table!');
@@ -83,10 +83,10 @@ function userTablesDelete(request) {
           reject('User Database not found!');
         } else if(userDatabaseData.userId != request.session.userId) {
           reject('You can only delete User Tables you own!');
-        } else if(!userDatabaseData.tables.id(request.body.formId)) {
+        } else if(!userDatabaseData.tables.id(request.body.elementId)) {
           reject('User Table doesn\'t exist!');
         } else {
-          userDatabaseData.tables.id(request.body.formId).remove();
+          userDatabaseData.tables.id(request.body.elementId).remove();
           userDatabaseData.save(function(error, results) {
             if(error) {
               console.log(error.message);
