@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var CONSTANTS_DIR = path.resolve(__dirname, 'constants');
+var CONSTANTS_DIR = path.resolve(__dirname, 'app_client/Constants');
 var BUILD_DIR = path.resolve(__dirname, 'public');
 var APP_CLIENT_DIR = path.resolve(__dirname, 'app_client');
 var VIEW_BROWSER_DIR = path.resolve(__dirname, 'view_browser');

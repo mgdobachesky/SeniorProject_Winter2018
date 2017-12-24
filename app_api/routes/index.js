@@ -50,9 +50,9 @@ router.put('/update/elements', controllerElements.elementsUpdate);
 router.delete('/delete/elements', controllerElements.elementsDelete);
 
 // Create routes for forms
-router.post('/create/formInputs', controllerFormInputs.formInputsCreate);
-router.put('/update/formInputs', controllerFormInputs.formInputsUpdate);
-router.delete('/delete/formInputs', controllerFormInputs.formInputsDelete);
+router.post('/create/form_inputs', controllerFormInputs.formInputsCreate);
+router.put('/update/form_inputs', controllerFormInputs.formInputsUpdate);
+router.delete('/delete/form_inputs', controllerFormInputs.formInputsDelete);
 
 /*
  * User Databases Routes
@@ -60,9 +60,6 @@ router.delete('/delete/formInputs', controllerFormInputs.formInputsDelete);
 
 // Create routes for userDatabases
 router.post('/read_one/user_databases', controllerUserDatabases.userDatabasesReadOne);
-
-// Create routes for userTables
-router.post('/read_one/user_tables', controllerUserTables.userTablesReadOne);
 
 // Create routes for userRecords
 router.post('/create/user_records', controllerUserRecords.userRecordsCreate);

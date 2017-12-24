@@ -6,17 +6,9 @@ import { API_LOCATION } from 'Constants';
 
 class ViewsiteService {
   // Read one
-  readOneViewsiteByName(requestData) {
+  readOneViewsite(requestData) {
     return axios({
-      url: '/read_one/viewsites/viewsiteName' + requestData.viewsiteName,
-      method: 'get',
-      baseURL: API_LOCATION + '/api/v1/'
-    });
-  }
-
-  readOneViewsiteById(requestData) {
-    return axios({
-      url: '/read_one/viewsites/viewsiteId/' + requestData.viewsiteId,
+      url: '/read_one/viewsites' + requestData.viewsiteName,
       method: 'get',
       baseURL: API_LOCATION + '/api/v1/'
     });
@@ -50,13 +42,14 @@ class ViewsiteService {
   // Update
   updateViewsite(requestData) {
     return axios({
-      url: '/update/viewsites/' + requestData.viewsiteId,
+      url: '/update/viewsites',
       method: 'put',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
       data: {
+        'viewsiteId': requestData.viewsiteId,
         'viewsiteName': requestData.viewsiteName,
         'loginEnabled': requestData.loginEnabled
       }
@@ -66,9 +59,15 @@ class ViewsiteService {
   // Delete
   deleteViewsite(requestData) {
     return axios({
-      url: '/delete/viewsites/' + requestData.viewsiteId,
+      url: '/delete/viewsites',
       method: 'delete',
-      baseURL: API_LOCATION + '/api/v1/'
+      baseURL: API_LOCATION + '/api/v1/',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        'viewsiteId': requestData.viewsiteId
+      }
     });
   }
 }

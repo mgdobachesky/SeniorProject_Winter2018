@@ -4,28 +4,28 @@ import axios from 'axios';
 // Import the location of the API
 import { API_LOCATION } from 'Constants';
 
-class ViewpageService {
+class UserRecordService {
   // Create
-  createViewpage(requestData) {
+  createUserRecord(requestData) {
     return axios({
-      url: '/create/viewpages',
+      url: '/create/user_records',
       method: 'post',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
       data: {
-        'viewsiteId': requestData.viewsiteId,
-        'viewpageName': requestData.viewpageName,
-        'permissionLevel': requestData.permissionLevel
+        "viewsiteId": requestData.viewsiteId,
+        "elementId": requestData.elementId,
+        "record": requestData.record
       }
     });
   }
 
   // Update
-  updateViewpage(requestData) {
+  updateUserRecord(requestData) {
     return axios({
-      url: '/update/viewpages',
+      url: '/update/user_records',
       method: 'put',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
@@ -33,17 +33,17 @@ class ViewpageService {
       },
       data: {
         "viewsiteId": requestData.viewsiteId,
-        "viewpageId": requestData.viewpageId,
-        'viewpageName': requestData.viewpageName,
-        'permissionLevel': requestData.permissionLevel
+        "elementId": requestData.elementId,
+        "recordId": requestData.recordId,
+        "record": requestData.record
       }
     });
   }
 
   // Delete
-  deleteViewpage(requestData) {
+  deleteUserRecord(requestData) {
     return axios({
-      url: '/delete/viewpages',
+      url: '/delete/user_records',
       method: 'delete',
       baseURL: API_LOCATION + '/api/v1/',
       headers: {
@@ -51,10 +51,11 @@ class ViewpageService {
       },
       data: {
         "viewsiteId": requestData.viewsiteId,
-        "viewpageId": requestData.viewpageId
+        "elementId": requestData.elementId,
+        "recordId": requestData.recordId
       }
     });
   }
 }
 
-export default ViewpageService;
+export default UserRecordService;
