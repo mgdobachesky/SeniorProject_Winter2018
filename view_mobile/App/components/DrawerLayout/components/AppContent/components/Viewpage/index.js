@@ -4,19 +4,9 @@ import React from 'react';
 // Import requred components
 import ViewpageJSX from './Viewpage.js';
 
-// Import required services
-import TextService from './services/TextService';
-import FormService from './services/FormService';
-import DataViewService from './services/DataViewService';
-import ViewpageService from '../../../../services/ViewpageService';
-
 class Viewpage extends React.Component {
   constructor(props) {
     super(props);
-    this.manageViewpageService = new ViewpageService();
-    this.manageTextService = new TextService();
-    this.manageFormService = new FormService();
-    this.manageDataViewService = new DataViewService();
     this.handleReadAllTexts = this.handleReadAllTexts.bind(this);
     this.handleReadAllForms = this.handleReadAllForms.bind(this);
     this.handleReadAllDataViews = this.handleReadAllDataViews.bind(this);

@@ -6,13 +6,13 @@ import FormJSX from './Form.jsx';
 import './form.css';
 
 // Import required services
-import FormTextInputService from './services/FormTextInputService';
+import FormInputService from './services/FormInputService';
 
 class Form extends React.Component {
   constructor(props) {
     super(props);
     // Services
-    this.manageFormTextInputService = new FormTextInputService();
+    this.manageFormInputService = new FormInputService();
     // Form Text Input Methods
     this.handleCreateFormTextInput = this.handleCreateFormTextInput.bind(this);
     this.handleReadAllFormTextInputs = this.handleReadAllFormTextInputs.bind(this);

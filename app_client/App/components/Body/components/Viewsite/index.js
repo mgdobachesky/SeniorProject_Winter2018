@@ -8,13 +8,17 @@ import './viewsite.css';
 
 // Import required services
 import ViewsiteService from '../../../../services/ViewsiteService';
+import UserDatabaseService from './services/UserDatabaseService';
 import ViewpageService from './services/ViewpageService';
+import UserRecordService from './services/UserRecordService';
 
 class Viewsite extends React.Component {
   constructor(props) {
     super(props);
     this.manageViewsiteService = new ViewsiteService();
+    this.manageUserDatabaseService = new UserDatabaseService();
     this.manageViewpageService = new ViewpageService();
+    this.manageUserRecordService = new UserRecordService();
     this.handleChange = this.handleChange.bind(this);
     this.handleCreateViewpage = this.handleCreateViewpage.bind(this);
     this.handleReadAllViewpages = this.handleReadAllViewpages.bind(this);

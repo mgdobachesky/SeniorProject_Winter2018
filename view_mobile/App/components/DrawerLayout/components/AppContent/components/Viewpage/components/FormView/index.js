@@ -5,14 +5,12 @@ import React from 'react';
 import FormViewJSX from './FormView.js';
 
 // Import required services
-import FormTextInputService from './services/FormTextInputService';
-import UserDatabaseService from './services/UserDatabaseService';
+import UserRecordService from './services/UserRecordService';
 
 class FormView extends React.Component {
   constructor(props) {
     super(props);
-    this.manageFormTextInputService = new FormTextInputService();
-    this.manageUserDatabaseService = new UserDatabaseService();
+    this.manageUserRecordService = new UserRecordService();
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {

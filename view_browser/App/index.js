@@ -7,15 +7,15 @@ import './app.css';
 
 // Import required services
 import ViewsiteService from './services/ViewsiteService';
-import ViewpageService from './services/ViewpageService';
+import UserDatabaseService from './services/UserDatabaseService';
 
 // Create main App
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.handleRequestViewsite = this.handleRequestViewsite.bind(this);
     this.manageViewsiteService = new ViewsiteService();
-    this.manageViewpageService = new ViewpageService();
+    this.manageUserDatabaseService = new UserDatabaseService();
+    this.handleRequestViewsite = this.handleRequestViewsite.bind(this);
     this.state = {
       viewsite: null,
       viewpages: [],

@@ -6,15 +6,15 @@ import DrawerLayoutJSX from './DrawerLayout.js';
 
 // Import required services
 import ViewsiteService from './services/ViewsiteService';
-import ViewpageService from './services/ViewpageService';
+import UserDatabaseService from './services/UserDatabaseService';
 
 class DrawerLayout extends React.Component {
   constructor(props) {
     super(props);
+    this.manageViewsiteService = new ViewsiteService();
+    this.manageUserDatabaseService = new UserDatabaseService();
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.manageViewsiteService = new ViewsiteService();
-    this.manageViewpageService = new ViewpageService();
     this.state = {
       viewsiteName: "",
       viewsite: {},
