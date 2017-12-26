@@ -90,12 +90,10 @@ class App extends React.Component {
     let updatedUser = this.state.user;
     requestData.username = updatedUser.username;
     requestData.password = updatedUser.password;
-    // Clear password after setting it in the request data
-    updatedUser.password = "";
     this.manageUserService.updateUser(requestData)
     .then((results) => {
       this.setState({
-        user: updatedUser,
+        user: results.data,
         userSuccess: "User updated successfully!",
         userError: ""
       });
