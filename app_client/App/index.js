@@ -14,60 +14,58 @@ class App extends React.Component {
   constructor(props) {
     // Call superclass with same arguments
     super(props);
-    // Bind 'this' to class methods
+    // Service Class Definitions
     this.manageUserService = new UserService();
     this.manageViewsiteService = new ViewsiteService();
+    // User Methods
     this.handleCreateUser = this.handleCreateUser.bind(this);
     this.handleReadOneUser = this.handleReadOneUser.bind(this);
     this.handleUpdateUser = this.handleUpdateUser.bind(this);
     this.handleUserLogin = this.handleUserLogin.bind(this);
     this.handleUserLogout = this.handleUserLogout.bind(this);
+    // Viewsite Methods
     this.handleReadAllViewsites = this.handleReadAllViewsites.bind(this);
     this.handleCreateViewsite = this.handleCreateViewsite.bind(this);
     this.handleEditViewsite = this.handleEditViewsite.bind(this);
     this.handleUpdateViewsite = this.handleUpdateViewsite.bind(this);
     this.handleDeleteViewsite = this.handleDeleteViewsite.bind(this);
-    this.handleClearViewsite = this.handleClearViewsite.bind(this);
+    this.handleClearViewsiteState = this.handleClearViewsiteState.bind(this);
+    // Other Methods
     this.handleChange = this.handleChange.bind(this);
 
     // Set initial state
     this.state = {
-      user: {
-        username: "",
-        password: ""
-      },
-      viewsite: {
-        _id: "",
-        viewsiteName: "",
-        loginEnabled: false
-      },
-      viewsites: [],
-      loggedIn: false,
-      userError: "",
+      user: {},
       userSuccess: "",
+      userError: "",
+      loggedIn: false,
+      viewsite: {},
+      viewsites: [],
       viewsiteError: ""
     };
   }
 
-  handleCreateUser(event) {
+  handleCreateUser() {
     let requestData = {};
-    let loginUser = this.state.user;
-    requestData.username = loginUser.username;
-    requestData.password = loginUser.password;
+    let newUser = this.state.user;
+    requestData.username = newUser.username;
+    requestData.password = newUser.password;
     this.manageUserService.createUser(requestData)
     .then((results) => {
-      this.handleUserLogin(event);
       this.setState({
+        user: results.data,
+        loggedIn: true,
         userError: ""
-      });
-    }, (error) => {
+      }, () => this.handleUserLogin());
+    },
+    (error) => {
       this.setState({
         userError: error.response.data,
         userSuccess: ""});
     });
   }
 
-  handleReadOneUser(event) {
+  handleReadOneUser() {
     this.manageUserService.readOneUser()
     .then((results) => {
       if(results.data.username) {
@@ -77,28 +75,32 @@ class App extends React.Component {
           userError: ""
         }, () => this.handleReadAllViewsites());
       }
-    }, (error) => {
+    },
+    (error) => {
       this.setState({
-        userError: error.response.data,
+        user: {},
+        loggedIn: false,
         userSuccess: ""
       });
     });
   }
 
-  handleUpdateUser(event) {
+  handleUpdateUser() {
     let requestData = {};
-    let user = this.state.user;
-    requestData.username = user.username;
-    requestData.password = user.password;
-    user.password = "";
+    let updatedUser = this.state.user;
+    requestData.username = updatedUser.username;
+    requestData.password = updatedUser.password;
+    // Clear password after setting it in the request data
+    updatedUser.password = "";
     this.manageUserService.updateUser(requestData)
     .then((results) => {
       this.setState({
-        user: user,
-        userSuccess: results.data,
+        user: updatedUser,
+        userSuccess: "User updated successfully!",
         userError: ""
       });
-    }, (error) => {
+    },
+    (error) => {
       this.setState({
         userError: error.response.data,
         userSuccess: ""
@@ -106,23 +108,29 @@ class App extends React.Component {
     });
   }
 
-  handleUserLogin(event) {
+  handleUserLogin() {
     let requestData = {};
     let loginUser = this.state.user;
     requestData.username = loginUser.username;
     requestData.password = loginUser.password;
     this.manageUserService.loginUser(requestData)
     .then((results) => {
-      this.handleReadOneUser();
-      location.hash = "/";
-    }, (error) => {
       this.setState({
+        loggedIn: true,
+        userSuccess: "",
+        userError: ""
+      });
+    },
+    (error) => {
+      this.setState({
+        loggedIn: false,
+        userSuccess: "",
         userError: error.response.data
       });
     });
   }
 
-  handleUserLogout(event) {
+  handleUserLogout() {
     this.manageUserService.logoutUser()
     .then((results) => {
       let logoutUser = this.state.user;
@@ -139,8 +147,8 @@ class App extends React.Component {
         userError: "",
         viewsiteError: ""
       });
-      location.hash = "/";
-    }, (error) => {
+    },
+    (error) => {
       this.setState({
         userError: error.response.data
       });
@@ -154,25 +162,30 @@ class App extends React.Component {
         viewsites: results.data,
         viewsiteError: ""
       });
-    }, (error) => {
+    },
+    (error) => {
       this.setState({
         viewsiteError: error.response.data
       });
     });
   }
 
-  handleCreateViewsite(event) {
+  handleCreateViewsite() {
     let requestData = {};
     let newViewsite = this.state.viewsite;
     requestData.viewsiteName = newViewsite.viewsiteName;
     requestData.loginEnabled = newViewsite.loginEnabled;
     this.manageViewsiteService.createViewsite(requestData)
     .then((results) => {
-      this.handleReadAllViewsites();
+      this.setState({
+        viewsites: results.data,
+        viewsiteError: ""
+      });
       // Follow up by clearing viewsite state
-      this.handleClearViewsite();
+      this.handleClearViewsiteState();
       $("#createViewsite").hide("medium");
-    }, (error) => {
+    },
+    (error) => {
       this.setState({
         viewsiteError: error.response.data
       });
@@ -191,8 +204,7 @@ class App extends React.Component {
     $("#createViewsite").hide(false);
   }
 
-  handleUpdateViewsite(event) {
-    // Update Viewsite
+  handleUpdateViewsite() {
     let requestData = {};
     let updateViewsite = this.state.viewsite;
     requestData.viewsiteId = updateViewsite._id;
@@ -201,11 +213,15 @@ class App extends React.Component {
     requestData.loginEnabled = updateViewsite.loginEnabled;
     this.manageViewsiteService.updateViewsite(requestData)
     .then((results) => {
-      this.handleReadAllViewsites();
+      this.setState({
+        viewsites: results.data,
+        viewsiteError: ""
+      });
       // Follow up by clearing viewsite state
-      this.handleClearViewsite();
+      this.handleClearViewsiteState();
       $("#updateViewsite").hide("medium");
-    }, (error) => {
+    },
+    (error) => {
       this.setState({
         viewsiteError: error.response.data
       });
@@ -217,15 +233,19 @@ class App extends React.Component {
     requestData.viewsiteId = event._id;
     this.manageViewsiteService.deleteViewsite(requestData)
     .then((results) => {
-      this.handleReadAllViewsites();
-    }, (error) => {
+      this.setState({
+        viewsites: results.data,
+        viewsiteError: ""
+      });
+    },
+    (error) => {
       this.setState({
         viewsiteError: error.response.data
       });
     });
   }
 
-  handleClearViewsite() {
+  handleClearViewsiteState() {
     let clearViewsite = this.state.viewsite;
     clearViewsite._id = "";
     clearViewsite.userId = "";

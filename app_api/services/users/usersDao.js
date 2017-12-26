@@ -55,7 +55,11 @@ function usersCreate(request) {
                 reject('Something went wrong!');
               }
             } else {
-              resolve('User created successfully!');
+              var cleanResults = results.toObject();
+              delete cleanResults._id;
+              delete cleanResults.password;
+              delete cleanResults.__v;
+              resolve(cleanResults);
             }
           });
         }
@@ -93,7 +97,11 @@ function usersUpdate(request) {
               reject('Something went wrong!');
             }
           } else {
-            resolve('User updated successfully!');
+            var cleanResults = results.toObject();
+            delete cleanResults._id;
+            delete cleanResults.password;
+            delete cleanResults.__v;
+            resolve(cleanResults);
           }
         });
       }

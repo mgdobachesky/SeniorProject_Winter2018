@@ -33,7 +33,7 @@ var AppJSX = function() {
       onEditViewsite={this.handleEditViewsite}
       onUpdateViewsite={this.handleUpdateViewsite}
       onDeleteViewsite={this.handleDeleteViewsite}
-      onClearViewsite={this.handleClearViewsite} />
+      onClearViewsite={this.handleClearViewsiteState} />
 
       <Footer />
     </div>

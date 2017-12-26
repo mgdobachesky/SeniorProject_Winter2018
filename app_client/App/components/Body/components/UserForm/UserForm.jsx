@@ -27,7 +27,11 @@ var SuccessAlert = function(props) {
 
 var UserFormJSX = function() {
   return (
-    <div className="container-fluid">
+    <div
+      className={
+        this.props.description === "Sign Up" ? "container" : "container-fluid"
+      }>
+      
       <h2>
         {this.props.description}
       </h2>
