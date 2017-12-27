@@ -1,6 +1,18 @@
 // Import required modules
 import React from 'react';
 
+var SuccessAlert = function(props) {
+  if(props.viewsiteSuccess) {
+    return (
+      <div className="alert alert-success" role="alert">
+        {props.viewsiteSuccess}
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
 var ErrorAlert = function(props) {
   if(props.viewsiteError) {
     return (
@@ -17,11 +29,14 @@ var ViewsiteFormJSX = function() {
   return (
     <div className="container-fluid">
       <h2>
-        {this.props.description}
+        {this.props.action === "update" ? this.props.viewsiteName : this.props.description}
       </h2>
 
+      <SuccessAlert
+      viewsiteSuccess={this.state.viewsiteSuccess} />
+
       <ErrorAlert
-      viewsiteError={this.props.viewsiteError} />
+      viewsiteError={this.state.viewsiteError} />
 
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -34,7 +49,7 @@ var ViewsiteFormJSX = function() {
           className="form-control"
           id="viewsiteName"
           placeholder="Enter Viewsite Name"
-          value={this.props.viewsite.viewsiteName}
+          value={this.state.viewsite.viewsiteName}
           onChange={this.handleChange} />
         </div>
         <div className="form-check">
@@ -45,7 +60,7 @@ var ViewsiteFormJSX = function() {
             className="form-check-input"
             id="loginEnabled"
             value="loginEnabled"
-            checked={this.props.viewsite.loginEnabled}
+            checked={this.state.viewsite.loginEnabled}
             onChange={this.handleChange} />
 
             Login Enabled
@@ -56,7 +71,7 @@ var ViewsiteFormJSX = function() {
         name="_id"
         type="hidden"
         id="_id"
-        value={this.props.viewsite._id} />
+        value={this.state.viewsite._id} />
 
         <button type="submit" className="btn btn-primary">
           {this.props.description}

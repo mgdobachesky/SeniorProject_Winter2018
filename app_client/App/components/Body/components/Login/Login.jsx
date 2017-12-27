@@ -2,10 +2,10 @@
 import React from 'react';
 
 var ErrorAlert = function(props) {
-  if(props.userError) {
+  if(props.loginError) {
     return (
       <div className="alert alert-danger" role="alert">
-        {props.userError}
+        {props.loginError}
       </div>
     );
   } else {
@@ -21,7 +21,7 @@ var LoginJSX = function() {
       </h2>
 
       <ErrorAlert
-      userError={this.props.userError} />
+      loginError={this.props.loginError} />
 
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -35,7 +35,7 @@ var LoginJSX = function() {
           className="form-control"
           id="username"
           placeholder="Enter Username"
-          value={this.props.user.username}
+          value={this.state.loginCredentials.username}
           onChange={this.handleChange} />
         </div>
         <div className="form-group">
@@ -49,7 +49,7 @@ var LoginJSX = function() {
           className="form-control"
           id="password"
           placeholder="Enter Password"
-          value={this.props.user.password}
+          value={this.state.loginCredentials.password}
           onChange={this.handleChange} />
         </div>
         <button type="submit" className="btn btn-primary">

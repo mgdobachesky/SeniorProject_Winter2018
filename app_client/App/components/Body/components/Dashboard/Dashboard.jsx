@@ -7,47 +7,17 @@ import UserForm from '../UserForm';
 
 // Create list of Viewsites a user owns
 function ViewsiteList(props) {
-  if(props.viewsites) {
+  if(props.viewsites && props.viewsites.length >= 1) {
     return props.viewsites.map((viewsite, index) => {
-      const _id = viewsite._id;
-      const userId = viewsite.userId;
-      const viewsiteName = viewsite.viewsiteName;
-      const loginEnabled = viewsite.loginEnabled;
-      const loginEnabledMessage = loginEnabled ? "Yes" : "No";
-      const viewsiteLink = "/viewsites/" + viewsite.viewsiteName;
-      let editClick = {
-        _id: _id,
-        userId: userId,
-        viewsiteName: viewsiteName,
-        loginEnabled: loginEnabled
-      };
-      let deleteClick = {_id: _id};
       return (
-        <div key={_id} className="card border-primary mb-3">
+        <div key={viewsite._id} className="card border-primary mb-3">
           <div className="card-body">
-            <h4 className="card-title">
-              Viewsite: <a href={viewsiteLink} className="card-link">
-                {viewsiteName}
-              </a>
-            </h4>
-            <p className="card-text">
-              Login Enabled: {loginEnabledMessage}
-            </p>
-          </div>
-          <div className="card-footer">
-            <a
-            className="card-link"
-            href="javascript:;"
-            onClick={() => props.onEditViewsite(editClick)}>
-              Edit
-            </a>
-
-            <a
-            className="card-link"
-            href="javascript:;"
-            onClick={() => props.onDeleteViewsite(deleteClick)}>
-              Delete
-            </a>
+            <ViewsiteForm
+            description="Update Viewsite"
+            action={props.action}
+            viewsite={viewsite}
+            viewsiteName={viewsite.viewsiteName}
+            onSetGlobalState={props.onSetGlobalState} />
           </div>
         </div>
       );
@@ -55,12 +25,6 @@ function ViewsiteList(props) {
   } else {
     return null;
   }
-}
-
-var createViewsite = function() {
-  $( "#createViewsite" ).toggle("medium");
-  $( "#updateViewsite" ).hide(false);
-  this.handleClearViewsiteState();
 }
 
 var DashboardJSX = function() {
@@ -114,34 +78,22 @@ var DashboardJSX = function() {
               <button
               type="button"
               className="btn btn-link"
-              onClick={() => {createViewsite.call(this);}}>
+              onClick={() => $("#createViewsite").toggle("medium")}>
                 + New Viewsite
               </button>
               <div id="createViewsite" className="card mb-3">
                 <div className="card-body">
                   <ViewsiteForm
                   description="Create Viewsite"
-                  viewsite={this.props.viewsite}
-                  viewsiteError={this.props.viewsiteError}
-                  onChange={this.handleChange}
-                  onSubmit={this.handleCreateViewsite} />
-                </div>
-              </div>
-              <div id="updateViewsite" className="card mb-3">
-                <div className="card-body">
-                  <ViewsiteForm
-                  description="Update Viewsite"
-                  viewsite={this.props.viewsite}
-                  viewsiteError={this.props.viewsiteError}
-                  onChange={this.handleChange}
-                  onSubmit={this.handleUpdateViewsite} />
+                  action="create"
+                  onSetGlobalState={this.handleSetGlobalState} />
                 </div>
               </div>
 
               <ViewsiteList
               viewsites={this.props.viewsites}
-              onEditViewsite={this.handleEditViewsite}
-              onDeleteViewsite={this.handleDeleteViewsite} />
+              action="update"
+              onSetGlobalState={this.handleSetGlobalState} />
             </div>
             <div
             className="tab-pane fade"
@@ -152,11 +104,9 @@ var DashboardJSX = function() {
                 <div className="card-body">
                   <UserForm
                   description="Update User"
+                  action="update"
                   user={this.props.user}
-                  userSuccess={this.props.userSuccess}
-                  userError={this.props.userError}
-                  onChange={this.handleChange}
-                  onSubmit={this.handleUpdateUser} />
+                  onSetGlobalState={this.handleSetGlobalState} />
                 </div>
               </div>
             </div>

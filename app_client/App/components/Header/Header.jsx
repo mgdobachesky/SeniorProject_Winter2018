@@ -19,7 +19,7 @@ function HeaderOptions(props) {
 
 // Create links for each Viewsite a user owns
 function ViewsiteLinks(props) {
-  if(props.viewsites) {
+  if(props.viewsites && props.viewsites.length >= 1) {
     return props.viewsites.map((viewsite) => {
       const viewsiteId = viewsite._id;
       const viewsiteName = viewsite.viewsiteName;
@@ -43,7 +43,7 @@ function LoginOptions(props) {
     return (
       <ul className="navbar-nav justify-content-end">
         <li className="nav-item">
-          <a className="nav-link" href="javascript:;" onClick={props.onLogout}>
+          <a className="nav-link" href="javascript:;" onClick={props.onLogoutUser}>
             Logout
           </a>
         </li>
@@ -75,7 +75,6 @@ var HeaderJSX = function() {
       </NavLink>
       <ul className="navbar-nav mr-auto">
         <HeaderOptions
-        user={this.props.user}
         loggedIn={this.props.loggedIn} />
       </ul>
       <button
@@ -93,9 +92,8 @@ var HeaderJSX = function() {
           viewsites={this.props.viewsites} />
         </ul>
         <LoginOptions
-        user={this.props.user}
         loggedIn={this.props.loggedIn}
-        onLogout={this.handleLogoutUser} />
+        onLogoutUser={this.handleLogoutUser} />
       </div>
     </nav>
   );

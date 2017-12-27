@@ -29,18 +29,18 @@ var UserFormJSX = function() {
   return (
     <div
       className={
-        this.props.description === "Sign Up" ? "container" : "container-fluid"
+        this.props.action === "create" ? "container" : "container-fluid"
       }>
-      
+
       <h2>
         {this.props.description}
       </h2>
 
       <SuccessAlert
-      userSuccess={this.props.userSuccess} />
+      userSuccess={this.state.userSuccess} />
 
       <ErrorAlert
-      userError={this.props.userError} />
+      userError={this.state.userError} />
 
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -54,7 +54,7 @@ var UserFormJSX = function() {
           className="form-control"
           id="username"
           placeholder="Enter Username"
-          value={this.props.user.username}
+          value={this.state.user.username}
           onChange={this.handleChange} />
         </div>
         <div className="form-group">
@@ -68,7 +68,7 @@ var UserFormJSX = function() {
           className="form-control"
           id="password"
           placeholder="Enter Password"
-          value={this.props.user.password}
+          value={this.state.user.password}
           onChange={this.handleChange} />
         </div>
         <button type="submit" className="btn btn-primary">
