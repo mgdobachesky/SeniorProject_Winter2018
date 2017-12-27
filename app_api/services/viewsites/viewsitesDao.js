@@ -76,10 +76,13 @@ function viewsitesCreate(request) {
           request.body.viewsiteId = results._id;
           userDatabasesDao.userDatabasesCreate(request)
           .then(function() {
-            var cleanResults = results.toObject();
-            delete cleanResults.userId;
-            delete cleanResults.__v;
-            resolve(cleanResults);
+            viewsitesReadAll(request)
+            .then(function(results) {
+              resolve(results);
+            }, function(error) {
+              console.log(error.message);
+              reject('Something went wrong!');
+            });
           }, function(error) {
             console.log(error.message);
             reject('Something went wrong!');
@@ -120,10 +123,13 @@ function viewsitesUpdate(request) {
                 reject('Something went wrong!');
               }
             } else {
-              var cleanResults = results.toObject();
-              delete cleanResults.userId;
-              delete cleanResults.__v;
-              resolve(cleanResults);
+              viewsitesReadAll(request)
+              .then(function(results) {
+                resolve(results);
+              }, function(error) {
+                console.log(error.message);
+                reject('Something went wrong!');
+              });
             }
           });
         }
@@ -159,10 +165,13 @@ function viewsitesDelete(request) {
             } else {
               userDatabasesDao.userDatabasesDelete(request)
               .then(function() {
-                var cleanResults = results.toObject();
-                delete cleanResults.userId;
-                delete cleanResults.__v;
-                resolve(cleanResults);
+                viewsitesReadAll(request)
+                .then(function(results) {
+                  resolve(results);
+                }, function(error) {
+                  console.log(error.message);
+                  reject('Something went wrong!');
+                });
               }, function(error) {
                 console.log(error.message);
                 reject('Something went wrong!');

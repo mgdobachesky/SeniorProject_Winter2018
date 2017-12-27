@@ -20,10 +20,10 @@ var BodyJSX = function() {
       path='/login'
       render={routeProps => <Login {...routeProps}
         user={this.props.user}
-        loggedIn={this.props.loggedIn}
         userError={this.props.userError}
-        onChange={this.props.onChange}
-        onSubmit={this.props.onUserLogin} />} />
+        loggedIn={this.props.loggedIn}
+        onChange={this.handleChange}
+        onSubmit={this.handleLoginUser} />} />
 
       <Route
       path='/signup'
@@ -32,29 +32,29 @@ var BodyJSX = function() {
         user={this.props.user}
         loggedIn={this.props.loggedIn}
         userError={this.props.userError}
-        onChange={this.props.onChange}
-        onSubmit={this.props.onCreateUser} />} />
+        onChange={this.handleChange}
+        onSubmit={this.handleCreateUser} />} />
 
       <Route
       path='/dashboard'
       render={routeProps => <Dashboard {...routeProps}
         user={this.props.user}
-        viewsite={this.props.viewsite}
-        viewsites={this.props.viewsites}
-        loggedIn={this.props.loggedIn}
         userSuccess={this.props.userSuccess}
         userError={this.props.userError}
+        loggedIn={this.props.loggedIn}
+        viewsite={this.props.viewsite}
+        viewsites={this.props.viewsites}
         viewsiteError={this.props.viewsiteError}
-        onChange={this.props.onChange}
-        onUpdateUser={this.props.onUpdateUser}
-        onCreateViewsite={this.props.onCreateViewsite}
-        onEditViewsite={this.props.onEditViewsite}
-        onUpdateViewsite={this.props.onUpdateViewsite}
-        onDeleteViewsite={this.props.onDeleteViewsite}
-        onClearViewsite={this.props.onClearViewsite} />} />
+        onUpdateUser={this.handleUpdateUser}
+        onCreateViewsite={this.handleCreateViewsite}
+        onEditViewsite={this.handleEditViewsite}
+        onUpdateViewsite={this.handleUpdateViewsite}
+        onDeleteViewsite={this.handleDeleteViewsite}
+        onClearViewsiteState={this.handleClearViewsiteState}
+        onChange={this.handleChange} />} />
 
       <Route
-      path='/:viewsiteId'
+      path='/:viewsiteName'
       render={routeProps => <Viewsite {...routeProps}
         loggedIn={this.props.loggedIn} />} />
     </Switch>

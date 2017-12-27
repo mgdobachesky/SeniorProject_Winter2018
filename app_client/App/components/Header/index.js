@@ -8,12 +8,12 @@ import './header.css';
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.handleUserLogout = this.handleUserLogout.bind(this);
+    this.handleLogoutUser = this.handleLogoutUser.bind(this);
   }
 
-  handleUserLogout(event) {
+  handleLogoutUser(event) {
     event.preventDefault();
-    this.props.onUserLogout(event.target);
+    this.props.onLogoutUser(event.target);
   }
 
   render() {

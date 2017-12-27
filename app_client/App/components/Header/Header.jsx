@@ -23,7 +23,7 @@ function ViewsiteLinks(props) {
     return props.viewsites.map((viewsite) => {
       const viewsiteId = viewsite._id;
       const viewsiteName = viewsite.viewsiteName;
-      const viewsiteHref = '/' + viewsite._id;
+      const viewsiteHref = '/' + viewsite.viewsiteName;
       return (
         <li key={viewsiteId} className="nav-item">
           <NavLink id={viewsiteId} className="nav-link" to={viewsiteHref}>
@@ -94,8 +94,8 @@ var HeaderJSX = function() {
         </ul>
         <LoginOptions
         user={this.props.user}
-        onLogout={this.handleUserLogout}
-        loggedIn={this.props.loggedIn} />
+        loggedIn={this.props.loggedIn}
+        onLogout={this.handleLogoutUser} />
       </div>
     </nav>
   );

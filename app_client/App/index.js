@@ -21,8 +21,8 @@ class App extends React.Component {
     this.handleCreateUser = this.handleCreateUser.bind(this);
     this.handleReadOneUser = this.handleReadOneUser.bind(this);
     this.handleUpdateUser = this.handleUpdateUser.bind(this);
-    this.handleUserLogin = this.handleUserLogin.bind(this);
-    this.handleUserLogout = this.handleUserLogout.bind(this);
+    this.handleLoginUser = this.handleLoginUser.bind(this);
+    this.handleLogoutUser = this.handleLogoutUser.bind(this);
     // Viewsite Methods
     this.handleReadAllViewsites = this.handleReadAllViewsites.bind(this);
     this.handleCreateViewsite = this.handleCreateViewsite.bind(this);
@@ -55,13 +55,15 @@ class App extends React.Component {
       this.setState({
         user: results.data,
         loggedIn: true,
+        userSuccess: "",
         userError: ""
-      }, () => this.handleUserLogin());
+      });
     },
     (error) => {
       this.setState({
+        userSuccess: "",
         userError: error.response.data,
-        userSuccess: ""});
+        loggedIn: false});
     });
   }
 
@@ -106,7 +108,7 @@ class App extends React.Component {
     });
   }
 
-  handleUserLogin() {
+  handleLoginUser() {
     let requestData = {};
     let loginUser = this.state.user;
     requestData.username = loginUser.username;
@@ -117,7 +119,7 @@ class App extends React.Component {
         loggedIn: true,
         userSuccess: "",
         userError: ""
-      });
+      }, () => this.handleReadAllViewsites());
     },
     (error) => {
       this.setState({
@@ -128,20 +130,16 @@ class App extends React.Component {
     });
   }
 
-  handleUserLogout() {
+  handleLogoutUser() {
     this.manageUserService.logoutUser()
     .then((results) => {
-      let logoutUser = this.state.user;
-      let logoutViewsites = this.state.viewsites;
-      logoutUser = {
-        username: "",
-        password: ""
-      };
-      logoutViewsites = [];
+      let logoutUser = {};
+      let logoutViewsites = [];
       this.setState({
         user: logoutUser,
         viewsites: logoutViewsites,
         loggedIn: false,
+        userSuccess: "",
         userError: "",
         viewsiteError: ""
       });

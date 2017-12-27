@@ -24,6 +24,7 @@ function usersReadOne(request) {
         } else if(!results) {
           reject('User not found!');
         } else {
+          results.password = "";
           resolve(results);
         }
       });
@@ -55,10 +56,12 @@ function usersCreate(request) {
                 reject('Something went wrong!');
               }
             } else {
+              request.session.userId = results._id;
               var cleanResults = results.toObject();
               delete cleanResults._id;
               delete cleanResults.password;
               delete cleanResults.__v;
+              cleanResults.password = "";
               resolve(cleanResults);
             }
           });
@@ -101,6 +104,7 @@ function usersUpdate(request) {
             delete cleanResults._id;
             delete cleanResults.password;
             delete cleanResults.__v;
+            cleanResults.password = "";
             resolve(cleanResults);
           }
         });
@@ -128,7 +132,10 @@ function usersDelete(request) {
           .then(function(results) {
             userDatabasesDao.userDatabasesDeleteAll(request)
             .then(function(results) {
-              resolve('User deleted successfully!');
+              resolve({
+                'username': "",
+                'password': ""
+              });
             }, function(error) {
               console.log(error.message);
               reject('Something went wrong!');
@@ -162,7 +169,12 @@ function usersLogIn(request) {
               reject('Wrong username or password!');
             } else {
               request.session.userId = results._id;
-              resolve('User logged in successfully!');
+              var cleanResults = results.toObject();
+              delete cleanResults._id;
+              delete cleanResults.password;
+              delete cleanResults.__v;
+              cleanResults.password = "";
+              resolve(cleanResults);
             }
           });
         }
@@ -180,7 +192,10 @@ function usersLogout(request) {
           console.log(error.message);
           reject('Something went wrong!');
         } else {
-          resolve('Logged out successfully!');
+          resolve({
+            'username': "",
+            'password': ""
+          });
         }
       });
     }

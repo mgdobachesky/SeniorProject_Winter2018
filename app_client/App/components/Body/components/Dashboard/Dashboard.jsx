@@ -60,7 +60,7 @@ function ViewsiteList(props) {
 var createViewsite = function() {
   $( "#createViewsite" ).toggle("medium");
   $( "#updateViewsite" ).hide(false);
-  this.props.onClearViewsite();
+  this.handleClearViewsiteState();
 }
 
 var DashboardJSX = function() {
@@ -123,8 +123,8 @@ var DashboardJSX = function() {
                   description="Create Viewsite"
                   viewsite={this.props.viewsite}
                   viewsiteError={this.props.viewsiteError}
-                  onChange={this.props.onChange}
-                  onSubmit={this.props.onCreateViewsite} />
+                  onChange={this.handleChange}
+                  onSubmit={this.handleCreateViewsite} />
                 </div>
               </div>
               <div id="updateViewsite" className="card mb-3">
@@ -133,15 +133,15 @@ var DashboardJSX = function() {
                   description="Update Viewsite"
                   viewsite={this.props.viewsite}
                   viewsiteError={this.props.viewsiteError}
-                  onChange={this.props.onChange}
-                  onSubmit={this.props.onUpdateViewsite} />
+                  onChange={this.handleChange}
+                  onSubmit={this.handleUpdateViewsite} />
                 </div>
               </div>
 
               <ViewsiteList
               viewsites={this.props.viewsites}
-              onEditViewsite={this.props.onEditViewsite}
-              onDeleteViewsite={this.props.onDeleteViewsite} />
+              onEditViewsite={this.handleEditViewsite}
+              onDeleteViewsite={this.handleDeleteViewsite} />
             </div>
             <div
             className="tab-pane fade"
@@ -153,10 +153,10 @@ var DashboardJSX = function() {
                   <UserForm
                   description="Update User"
                   user={this.props.user}
-                  userError={this.props.userError}
                   userSuccess={this.props.userSuccess}
-                  onChange={this.props.onChange}
-                  onSubmit={this.props.onUpdateUser} />
+                  userError={this.props.userError}
+                  onChange={this.handleChange}
+                  onSubmit={this.handleUpdateUser} />
                 </div>
               </div>
             </div>

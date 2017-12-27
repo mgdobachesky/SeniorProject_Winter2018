@@ -12,28 +12,28 @@ var AppJSX = function() {
     <div>
       <Header
       user={this.state.user}
-      viewsites={this.state.viewsites}
       userError={this.state.userError}
-      onUserLogout={this.handleUserLogout}
-      loggedIn={this.state.loggedIn} />
+      loggedIn={this.state.loggedIn}
+      viewsites={this.state.viewsites}
+      onLogoutUser={this.handleLogoutUser} />
 
       <Body
       user={this.state.user}
+      userSuccess={this.state.userSuccess}
+      userError={this.state.userError}
+      loggedIn={this.state.loggedIn}
       viewsite={this.state.viewsite}
       viewsites={this.state.viewsites}
-      userError={this.state.userError}
-      userSuccess={this.state.userSuccess}
       viewsiteError={this.state.viewsiteError}
-      loggedIn={this.state.loggedIn}
-      onChange={this.handleChange}
-      onUserLogin={this.handleUserLogin}
       onCreateUser={this.handleCreateUser}
       onUpdateUser={this.handleUpdateUser}
+      onLoginUser={this.handleLoginUser}
       onCreateViewsite={this.handleCreateViewsite}
       onEditViewsite={this.handleEditViewsite}
       onUpdateViewsite={this.handleUpdateViewsite}
       onDeleteViewsite={this.handleDeleteViewsite}
-      onClearViewsite={this.handleClearViewsiteState} />
+      onClearViewsiteState={this.handleClearViewsiteState}
+      onChange={this.handleChange} />
 
       <Footer />
     </div>
