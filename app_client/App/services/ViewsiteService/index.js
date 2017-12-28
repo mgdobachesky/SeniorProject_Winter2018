@@ -8,7 +8,7 @@ class ViewsiteService {
   // Read one
   readOneViewsite(requestData) {
     return axios({
-      url: '/read_one/viewsites' + requestData.viewsiteName,
+      url: '/read_one/viewsites/' + requestData.viewsiteName,
       method: 'get',
       baseURL: API_LOCATION + '/api/v1/'
     });

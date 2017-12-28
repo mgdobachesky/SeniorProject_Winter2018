@@ -71,6 +71,7 @@ var UserFormJSX = function() {
           value={this.state.user.password}
           onChange={this.handleChange} />
         </div>
+        
         <button type="submit" className="btn btn-primary">
           {this.props.description}
         </button>

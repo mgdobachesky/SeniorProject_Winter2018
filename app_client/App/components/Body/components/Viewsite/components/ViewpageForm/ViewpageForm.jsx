@@ -1,6 +1,18 @@
 // Import required modules
 import React from 'react';
 
+var SuccessAlert = function(props) {
+  if(props.viewpageSuccess) {
+    return (
+      <div className="alert alert-success" role="alert">
+        {props.viewpageSuccess}
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
 var ErrorAlert = function(props) {
   if(props.viewpageError) {
     return (
@@ -17,11 +29,14 @@ var ViewpageFormJSX = function() {
   return (
     <div className="container-fluid">
       <h2>
-        {this.props.description}
+        {this.props.action === "update" ? this.props.viewpageName : this.props.description}
       </h2>
 
+      <SuccessAlert
+      viewpageSuccess={this.state.viewpageSuccess} />
+
       <ErrorAlert
-      viewpageError={this.props.viewpageError} />
+      viewpageError={this.state.viewpageError} />
 
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -35,7 +50,7 @@ var ViewpageFormJSX = function() {
           className="form-control"
           id="viewpageName"
           placeholder="Enter Viewpage Name"
-          value={this.props.viewpage.viewpageName}
+          value={this.state.viewpage.viewpageName}
           onChange={this.handleChange} />
         </div>
 
@@ -47,7 +62,7 @@ var ViewpageFormJSX = function() {
             id="permissionLevel"
             name="permissionLevel"
             className="form-control"
-            value={this.props.viewpage.permissionLevel}
+            value={this.state.viewpage.permissionLevel}
             onChange={this.handleChange}>
               <option value="0">Owner</option>
               <option value="1">Administrators</option>
@@ -56,18 +71,6 @@ var ViewpageFormJSX = function() {
             </select>
           </label>
         </div>
-
-        <input
-        name="_id"
-        type="hidden"
-        id="_id"
-        value={this.props.viewpage._id} />
-
-        <input
-        name="viewpageId"
-        type="hidden"
-        id="viewpageId"
-        value={this.props.viewpage.viewpageId} />
 
         <button type="submit" className="btn btn-primary">
           {this.props.description}

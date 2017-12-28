@@ -38,6 +38,7 @@ var LoginJSX = function() {
           value={this.state.loginCredentials.username}
           onChange={this.handleChange} />
         </div>
+        
         <div className="form-group">
           <label htmlFor="password">
             Password
@@ -52,6 +53,7 @@ var LoginJSX = function() {
           value={this.state.loginCredentials.password}
           onChange={this.handleChange} />
         </div>
+
         <button type="submit" className="btn btn-primary">
           Login
         </button>
