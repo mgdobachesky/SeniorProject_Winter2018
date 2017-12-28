@@ -5,19 +5,54 @@ import React from 'react';
 import ViewsiteForm from './components/ViewsiteForm';
 import UserForm from '../UserForm';
 
+function prepareCreateViewsite() {
+  $("#createViewsite").toggle("medium");
+  $("#updateViewsite").hide(false);
+  this.handleClearLocalState();
+}
+
 // Create list of Viewsites a user owns
 function ViewsiteList(props) {
   if(props.viewsites && props.viewsites.length >= 1) {
     return props.viewsites.map((viewsite, index) => {
+      const _id = viewsite._id;
+      const viewsiteName = viewsite.viewsiteName;
+      const loginEnabled = viewsite.loginEnabled;
+      const loginEnabledMessage = loginEnabled ? "Yes" : "No";
+      const viewsiteLink = "/viewsites/" + viewsite.viewsiteName;
+      let editClick = {
+        _id: _id,
+        viewsiteName: viewsiteName,
+        loginEnabled: loginEnabled
+      };
+      let deleteClick = {_id: _id};
       return (
-        <div key={viewsite._id} className="card border-primary mb-3">
+        <div key={_id} className="card border-primary mb-3">
           <div className="card-body">
-            <ViewsiteForm
-            description="Update Viewsite"
-            action={props.action}
-            viewsite={viewsite}
-            viewsiteName={viewsite.viewsiteName}
-            onSetGlobalState={props.onSetGlobalState} />
+            <h4 className="card-title">
+              Viewsite: <a href={viewsiteLink} className="card-link">
+              {viewsiteName}
+            </a>
+            </h4>
+            <p className="card-text">
+              Login Enabled: {loginEnabledMessage}
+            </p>
+          </div>
+
+          <div className="card-footer">
+            <a
+            className="card-link"
+            href="javascript:;"
+            onClick={() => props.onEditViewsite(editClick)}>
+              Edit
+            </a>
+
+            <a
+            className="card-link"
+            href="javascript:;"
+            onClick={() => props.onDeleteViewsite(deleteClick)}>
+              Delete
+            </a>
           </div>
         </div>
       );
@@ -78,7 +113,7 @@ var DashboardJSX = function() {
               <button
               type="button"
               className="btn btn-link"
-              onClick={() => $("#createViewsite").toggle("medium")}>
+              onClick={() => {prepareCreateViewsite.call(this);}}>
                 + New Viewsite
               </button>
               <div id="createViewsite" className="card mb-3">
@@ -86,14 +121,32 @@ var DashboardJSX = function() {
                   <ViewsiteForm
                   description="Create Viewsite"
                   action="create"
-                  onSetGlobalState={this.handleSetGlobalState} />
+                  viewsite={this.state.viewsite}
+                  viewsiteSuccess={this.state.viewsiteSuccess}
+                  viewsiteError={this.state.viewsiteError}
+                  onSetGlobalState={this.handleSetGlobalState}
+                  onChange={this.handleChange}
+                  onSubmit={this.handleCreateViewsite} />
+                </div>
+              </div>
+              
+              <div id="updateViewsite" className="card mb-3">
+                <div className="card-body">
+                  <ViewsiteForm
+                  description="Update Viewsite"
+                  action="update"
+                  viewsite={this.state.viewsite}
+                  viewsiteSuccess={this.state.viewsiteSuccess}
+                  viewsiteError={this.state.viewsiteError}
+                  onChange={this.handleChange}
+                  onSubmit={this.handleUpdateViewsite} />
                 </div>
               </div>
 
               <ViewsiteList
               viewsites={this.props.viewsites}
-              action="update"
-              onSetGlobalState={this.handleSetGlobalState} />
+              onEditViewsite={this.handleEditViewsite}
+              onDeleteViewsite={this.handleDeleteViewsite} />
             </div>
             <div
             className="tab-pane fade"

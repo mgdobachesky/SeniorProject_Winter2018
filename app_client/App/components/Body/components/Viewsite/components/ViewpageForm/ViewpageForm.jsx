@@ -29,14 +29,14 @@ var ViewpageFormJSX = function() {
   return (
     <div className="container-fluid">
       <h2>
-        {this.props.action === "update" ? this.props.viewpageName : this.props.description}
+        {this.props.description}
       </h2>
 
       <SuccessAlert
-      viewpageSuccess={this.state.viewpageSuccess} />
+      viewpageSuccess={this.props.viewpageSuccess} />
 
       <ErrorAlert
-      viewpageError={this.state.viewpageError} />
+      viewpageError={this.props.viewpageError} />
 
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -50,7 +50,7 @@ var ViewpageFormJSX = function() {
           className="form-control"
           id="viewpageName"
           placeholder="Enter Viewpage Name"
-          value={this.state.viewpage.viewpageName}
+          value={this.props.viewpage.viewpageName}
           onChange={this.handleChange} />
         </div>
 
@@ -62,7 +62,7 @@ var ViewpageFormJSX = function() {
             id="permissionLevel"
             name="permissionLevel"
             className="form-control"
-            value={this.state.viewpage.permissionLevel}
+            value={this.props.viewpage.permissionLevel}
             onChange={this.handleChange}>
               <option value="0">Owner</option>
               <option value="1">Administrators</option>

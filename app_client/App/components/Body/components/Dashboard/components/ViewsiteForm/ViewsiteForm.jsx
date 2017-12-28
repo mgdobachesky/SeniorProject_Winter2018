@@ -29,14 +29,14 @@ var ViewsiteFormJSX = function() {
   return (
     <div className="container-fluid">
       <h2>
-        {this.props.action === "update" ? this.props.viewsiteName : this.props.description}
+        {this.props.description}
       </h2>
 
       <SuccessAlert
-      viewsiteSuccess={this.state.viewsiteSuccess} />
+      viewsiteSuccess={this.props.viewsiteSuccess} />
 
       <ErrorAlert
-      viewsiteError={this.state.viewsiteError} />
+      viewsiteError={this.props.viewsiteError} />
 
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -49,7 +49,7 @@ var ViewsiteFormJSX = function() {
           className="form-control"
           id="viewsiteName"
           placeholder="Enter Viewsite Name"
-          value={this.state.viewsite.viewsiteName}
+          value={this.props.viewsite.viewsiteName}
           onChange={this.handleChange} />
         </div>
         <div className="form-check">
@@ -60,7 +60,7 @@ var ViewsiteFormJSX = function() {
             className="form-check-input"
             id="loginEnabled"
             value="loginEnabled"
-            checked={this.state.viewsite.loginEnabled}
+            checked={this.props.viewsite.loginEnabled}
             onChange={this.handleChange} />
 
             Login Enabled
