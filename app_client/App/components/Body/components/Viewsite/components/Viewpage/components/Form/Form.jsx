@@ -2,120 +2,161 @@
 import React from 'react';
 
 // Import requred components
-import FormTextInputForm from './components/FormTextInputForm';
+import TextboxForm from './components/TextboxForm';
 
-// Create list of FormTextInputs a Form owns
-function FormTextInputList(props) {
-  if(props.formTextInputs) {
-    return props.formTextInputs.map((formTextInput, index) => {
-      const _id = formTextInput._id;
-      const formId = formTextInput.formId;
-      const formTextInputLabel = formTextInput.formTextInputLabel;
-      let editClick = {
-        _id: _id,
-        formId: formId,
-        formTextInputLabel: formTextInputLabel
-      };
-      let deleteClick = {_id: _id};
-      return (
-        <li key={_id} className="list-group-item d-flex">
-          <div className="mr-auto p-2">
-            <p>{formTextInputLabel}</p>
-          </div>
+// Create list of Textboxs a Form owns
+function FormInputList(props) {
+  if(props.formInputs && props.formInputs.length >= 1) {
+    const viewsiteId = props.viewsiteId;
+    const viewpageId = props.viewpageId;
+    const elementId = props.elementId;
 
-          <div>
-            <a
-            className="p-2"
-            href="javascript:;"
-            onClick={() => props.onEditFormTextInput(editClick)}>
-              Edit
-            </a>
-          </div>
+    return props.formInputs.map((formInput, index) => {
+      const _id = formInput._id;
 
-          <div>
-            <a
-            className="p-2"
-            href="javascript:;"
-            onClick={() => props.onDeleteFormTextInput(deleteClick)}>
-              Delete
-            </a>
-          </div>
-        </li>
-      );
+      if(formInput.kind === "textbox") {
+        return (
+          <TextboxFormInput
+          key={_id}
+          viewsiteId={viewsiteId}
+          viewpageId={viewpageId}
+          elementId={elementId}
+          formInput={formInput}
+          onEditFormInput={props.onEditFormInput}
+          onDeleteFormInput={props.onDeleteFormInput} />
+        );
+      }
     });
   } else {
     return null;
   }
 }
 
-var createFormTextInput = function() {
-  $( ".createFormTextInput" ).toggle("medium");
-  $( ".updateFormTextInput" ).hide(false);
-  this.handleClearFormTextInput();
+function TextboxFormInput(props) {
+  let editClick = {
+    viewsiteId: props.viewsiteId,
+    viewpageId: props.viewpageId,
+    elementId: props.elementId,
+    _id: props.formInput._id,
+    kind: props.formInput.kind,
+    textboxLabel: props.formInput.textboxLabel
+  };
+  let deleteClick = {
+    viewsiteId: props.viewsiteId,
+    viewpageId: props.viewpageId,
+    elementId: props.elementId,
+    _id: props.formInput._id,
+    kind: props.formInput.kind
+  };
+
+  return (
+    <li key={props.formInput._id} className="list-group-item d-flex">
+      <div className="mr-auto p-2">
+        <p>{props.formInput.textboxLabel}</p>
+      </div>
+
+      <div>
+        <a
+        className="p-2"
+        href="javascript:;"
+        onClick={() => props.onEditFormInput(editClick)}>
+          Edit
+        </a>
+      </div>
+
+      <div>
+        <a
+        className="p-2"
+        href="javascript:;"
+        onClick={() => props.onDeleteFormInput(deleteClick)}>
+          Delete
+        </a>
+      </div>
+    </li>
+  );
+}
+
+var prepareCreateTextbox = function() {
+  $( ".createTextbox" ).toggle("medium");
+  $( ".updateTextbox" ).hide(false);
+  this.handleClearLocalState();
 }
 
 var FormJSX = function() {
   return(
-    <div key={this.props.form._id} className="card border-primary mb-3">
+    <div key={this.props.element._id} className="card border-primary mb-3">
       <div className="card-header">
         <button
         type="button"
         className="btn btn-link"
-        onClick={() => {createFormTextInput.call(this);}}>
+        onClick={() => {prepareCreateTextbox.call(this);}}>
           + Add Text Input
         </button>
       </div>
 
-      <div className="card-body createFormTextInput">
-        <FormTextInputForm
+      <div className="card-body createTextbox">
+        <TextboxForm
         description="Create Text Input"
-        formTextInput={this.state.formTextInput}
-        formTextInputError={this.state.formTextInputError}
+        action="create"
+        textbox={this.state.textbox}
+        formInputSuccess={this.state.formInputSuccess}
+        formInputError={this.state.formInputError}
         onChange={this.handleChange}
-        onSubmit={this.handleCreateFormTextInput} />
+        onSubmit={this.handleCreateFormInput} />
       </div>
 
-      <div className="card-body updateFormTextInput">
-        <FormTextInputForm
+      <div className="card-body updateTextbox">
+        <TextboxForm
         description="Update Text Input"
-        formTextInput={this.state.formTextInput}
-        formTextInputError={this.state.formTextInputError}
+        action="update"
+        textbox={this.state.textbox}
+        formInputSuccess={this.state.formInputSuccess}
+        formInputError={this.state.formInputError}
         onChange={this.handleChange}
-        onSubmit={this.handleUpdateFormTextInput} />
+        onSubmit={this.handleUpdateFormInput} />
       </div>
 
       <div className="card-body">
         <h4 className="card-title">
-          {this.props.form.formTitle}
+          {this.props.element.formTitle}
         </h4>
 
         <p className="card-text"></p>
       </div>
 
       <ul className="list-group list-group-flush">
-        <FormTextInputList
-        formTextInputs={this.state.formTextInputs}
-        onEditFormTextInput={this.handleEditFormTextInput}
-        onDeleteFormTextInput={this.handleDeleteFormTextInput} />
+        <FormInputList
+        viewsiteId={this.state.viewsiteId}
+        viewpageId={this.state.viewpageId}
+        elementId={this.state.element._id}
+        formInputs={this.state.element.formInputs}
+        onEditFormInput={this.handleEditFormInput}
+        onDeleteFormInput={this.handleDeleteFormInput} />
       </ul>
 
       <div className="card-footer">
         <a
         className="card-link"
         href="javascript:;"
-        onClick={() => this.props.onEditForm({
-          _id: this.props.form._id,
-          viewsiteId: this.props.form.viewsiteId,
-          viewpageId: this.props.form.viewpageId,
-          formTitle: this.props.form.formTitle})}>
-
+        onClick={() => this.props.onEditElement({
+          viewsiteId: this.props.viewsiteId,
+          viewpageId: this.props.viewpageId,
+          _id: this.props.element._id,
+          kind: "form",
+          formTitle: this.props.element.formTitle
+        })}>
           Edit
         </a>
 
         <a
         className="card-link"
         href="javascript:;"
-        onClick={() => this.props.onDeleteForm({_id: this.props.form._id})}>
+        onClick={() => this.props.onDeleteElement({
+          viewsiteId: this.props.viewsiteId,
+          viewpageId: this.props.viewpageId,
+          _id: this.props.element._id,
+          kind: "form"
+        })}>
           Delete
         </a>
       </div>

@@ -1,11 +1,23 @@
 // Import required modules
 import React from 'react';
 
+var SuccessAlert = function(props) {
+  if(props.elementSuccess) {
+    return (
+      <div className="alert alert-success" role="alert">
+        {props.elementSuccess}
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
 var ErrorAlert = function(props) {
-  if(props.formError) {
+  if(props.elementError) {
     return (
       <div className="alert alert-danger" role="alert">
-        {props.formError}
+        {props.elementError}
       </div>
     );
   } else {
@@ -20,8 +32,11 @@ var FormFormJSX = function() {
         {this.props.description}
       </h4>
 
+      <SuccessAlert
+      elementSuccess={this.props.elementSuccess} />
+
       <ErrorAlert
-      formError={this.props.formError} />
+      elementError={this.props.elementError} />
 
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -37,20 +52,7 @@ var FormFormJSX = function() {
             value={this.props.form.formTitle}
             onChange={this.handleChange} />
           </label>
-      </div>
-        <input name="_id" type="hidden" id="_id" value={this.props.form._id} />
-
-        <input
-        name="viewsiteId"
-        type="hidden"
-        id="viewsiteId"
-        value={this.props.form.viewsiteId} />
-
-        <input
-        name="viewpageId"
-        type="hidden"
-        id="viewpageId"
-        value={this.props.form.viewpageId} />
+        </div>
 
         <button type="submit" className="btn btn-primary">
           {this.props.description}

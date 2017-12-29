@@ -124,12 +124,11 @@ function ViewpageContent(props) {
         id={viewpage._id}
         role="tabpanel"
         aria-labelledby={viewpage._id + "-tab"}>
-        {/*
           <Viewpage
           viewsiteId={props.viewsiteId}
           viewpage={viewpage}
+          userTables={props.userTables}
           onSetGlobalState={props.onSetGlobalState} />
-          */}
         </div>
       );
     });
@@ -204,8 +203,6 @@ var ViewsiteJSX = function() {
                       viewpage={this.state.viewpage}
                       viewpageSuccess={this.state.viewpageSuccess}
                       viewpageError={this.state.viewpageError}
-                      viewsiteId={this.state.viewsite._id}
-                      onSetGlobalState={this.handleSetGlobalState}
                       onChange={this.handleChange}
                       onSubmit={this.handleCreateViewpage} />
                     </div>
@@ -219,7 +216,6 @@ var ViewsiteJSX = function() {
                       viewpage={this.state.viewpage}
                       viewpageSuccess={this.state.viewpageSuccess}
                       viewpageError={this.state.viewpageError}
-                      viewsiteId={this.state.viewsite._id}
                       onChange={this.handleChange}
                       onSubmit={this.handleUpdateViewpage} />
                     </div>
@@ -237,6 +233,7 @@ var ViewsiteJSX = function() {
             <ViewpageContent
             viewsiteId={this.state.viewsite._id}
             viewpages={this.state.viewsite.viewpages}
+            userTables={this.state.userTables}
             onSetGlobalState={this.handleSetGlobalState} />
           </div>
         </div>

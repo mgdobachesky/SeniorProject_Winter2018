@@ -2,10 +2,10 @@
 import React from 'react';
 
 var SuccessAlert = function(props) {
-  if(props.elementSuccess) {
+  if(props.formInputSuccess) {
     return (
       <div className="alert alert-success" role="alert">
-        {props.elementSuccess}
+        {props.formInputSuccess}
       </div>
     );
   } else {
@@ -14,10 +14,10 @@ var SuccessAlert = function(props) {
 }
 
 var ErrorAlert = function(props) {
-  if(props.elementError) {
+  if(props.formInputError) {
     return (
       <div className="alert alert-danger" role="alert">
-        {props.elementError}
+        {props.formInputError}
       </div>
     );
   } else {
@@ -25,28 +25,30 @@ var ErrorAlert = function(props) {
   }
 }
 
-var TextFormJSX = function() {
+var TextboxFormJSX = function() {
   return (
     <div className="container-fluid">
-      <h4>
-        {this.props.description}
-      </h4>
 
       <SuccessAlert
-      elementSuccess={this.props.elementSuccess} />
+      formInputSuccess={this.props.formInputSuccess} />
 
       <ErrorAlert
-      elementError={this.props.elementError} />
+      formInputError={this.props.formInputError} />
 
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
-          <textarea
-          name="textValue"
-          className="form-control"
-          id="textValue"
-          placeholder="Write some text..."
-          value={this.props.text.textValue}
-          onChange={this.handleChange} />
+          <label htmlFor="textboxLabel">
+            Textbox Label
+
+            <input
+            type="text"
+            name="textboxLabel"
+            className="form-control"
+            id="textboxLabel"
+            placeholder="Enter Textbox Label"
+            value={this.props.textbox.textboxLabel}
+            onChange={this.handleChange} />
+          </label>
         </div>
 
         <button type="submit" className="btn btn-primary">
@@ -57,4 +59,4 @@ var TextFormJSX = function() {
   );
 }
 
-export default TextFormJSX;
+export default TextboxFormJSX;

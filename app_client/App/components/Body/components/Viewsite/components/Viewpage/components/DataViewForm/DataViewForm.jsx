@@ -1,11 +1,23 @@
 // Import required modules
 import React from 'react';
 
+var SuccessAlert = function(props) {
+  if(props.elementSuccess) {
+    return (
+      <div className="alert alert-success" role="alert">
+        {props.elementSuccess}
+      </div>
+    );
+  } else {
+    return null;
+  }
+}
+
 var ErrorAlert = function(props) {
-  if(props.dataViewError) {
+  if(props.elementError) {
     return (
       <div className="alert alert-danger" role="alert">
-        {props.dataViewError}
+        {props.elementError}
       </div>
     );
   } else {
@@ -15,10 +27,10 @@ var ErrorAlert = function(props) {
 
 // Create list of Form Options for the Data View
 function DataViewOptions(props) {
-  if(props.forms) {
-    return props.forms.map((form, index) => {
-      const _id = form._id;
-      const formTitle = form.formTitle;
+  if(props.userTables && props.userTables.length >= 1) {
+    return props.userTables.map((userTable, index) => {
+      const _id = userTable._id;
+      const formTitle = userTable.formTitle;
       return (
         <option key={_id} value={_id}>
           {formTitle}
@@ -37,8 +49,11 @@ var DataViewFormJSX = function() {
         {this.props.description}
       </h4>
 
+      <SuccessAlert
+      elementSuccess={this.props.elementSuccess} />
+
       <ErrorAlert
-      dataViewError={this.props.dataViewError} />
+      elementError={this.props.elementError} />
 
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
@@ -55,22 +70,10 @@ var DataViewFormJSX = function() {
                 Choose Data-View...
               </option>
 
-              <DataViewOptions forms={this.props.forms} />
+              <DataViewOptions userTables={this.props.userTables} />
             </select>
           </label>
         </div>
-
-        <input
-        name="_id"
-        type="hidden"
-        id="_id"
-        value={this.props.dataView._id} />
-
-        <input
-        name="viewpageId"
-        type="hidden"
-        id="viewpageId"
-        value={this.props.dataView.viewpageId} />
 
         <button type="submit" className="btn btn-primary">
           {this.props.description}

@@ -7,7 +7,10 @@ import './formForm.css';
 
 class FormForm extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
+
+    // Other Methods
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -18,7 +21,7 @@ class FormForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onSubmit(event);
+    this.props.onSubmit("form");
   }
 
   render() {

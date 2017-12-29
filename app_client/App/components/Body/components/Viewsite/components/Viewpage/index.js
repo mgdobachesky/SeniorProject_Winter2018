@@ -10,351 +10,198 @@ import ElementService from './services/ElementService';
 
 class Viewpage extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
-    // Services
+
+    // Initialize service objects
     this.manageElementService = new ElementService();
-    // Text Methods
-    this.handleCreateText = this.handleCreateText.bind(this);
-    this.handleReadAllText = this.handleReadAllText.bind(this);
-    this.handleEditText = this.handleEditText.bind(this);
-    this.handleUpdateText = this.handleUpdateText.bind(this);
-    this.handleDeleteText = this.handleDeleteText.bind(this);
-    this.handleClearText = this.handleClearText.bind(this);
-    // Form Methods
-    this.handleCreateForm = this.handleCreateForm.bind(this);
-    this.handleReadAllForms = this.handleReadAllForms.bind(this);
-    this.handleReadAllFormsByViewsite = this.handleReadAllFormsByViewsite.bind(this);
-    this.handleEditForm = this.handleEditForm.bind(this);
-    this.handleUpdateForm = this.handleUpdateForm.bind(this);
-    this.handleDeleteForm = this.handleDeleteForm.bind(this);
-    this.handleClearForm = this.handleClearForm.bind(this);
-    // Data View Methods
-    this.handleCreateDataView = this.handleCreateDataView.bind(this);
-    this.handleReadAllDataViews = this.handleReadAllDataViews.bind(this);
-    this.handleEditDataView = this.handleEditDataView.bind(this);
-    this.handleUpdateDataView = this.handleUpdateDataView.bind(this);
-    this.handleDeleteDataView = this.handleDeleteDataView.bind(this);
-    this.handleClearDataView = this.handleClearDataView.bind(this);
+
+    // Element Methods
+    this.handleCreateElement = this.handleCreateElement.bind(this);
+    this.handleEditElement = this.handleEditElement.bind(this);
+    this.handleUpdateElement = this.handleUpdateElement.bind(this);
+    this.handleDeleteElement = this.handleDeleteElement.bind(this);
+
     // Other Methods
+    this.handleSetGlobalState = this.handleSetGlobalState.bind(this);
+    this.handleClearLocalState = this.handleClearLocalState.bind(this);
     this.handleChange = this.handleChange.bind(this);
+
+    // Set initial state
     this.state = {
+      viewsiteId: "",
+      viewpage: {},
       text: {
         _id: "",
-        viewpageId: "",
+        kind: "text",
         textValue: ""
       },
-      texts: [],
       form: {
         _id: "",
-        viewsiteId: "",
-        viewpageId: "",
+        kind: "form",
         formTitle: ""
       },
-      forms: [],
       dataView: {
         _id: "",
-        formId: "",
-        viewpageId: ""
+        kind: "dataView",
+        formId: ""
       },
-      dataViews: [],
-      formsByViewsite: [],
-      textError: "",
-      formError: "",
-      dataViewError: ""
+      elementSuccess: "",
+      elementError: "",
+      userTables: []
     };
   }
 
-  handleCreateText(event) {
-    const requestData = this.state.text;
-    this.manageTextService.createText(requestData)
-    .then((results) => {
-      this.handleReadAllText();
-      this.handleClearText();
+  handleCreateElement(kind) {
+    let requestData = {};
+    requestData.viewsiteId = this.state.viewsiteId;
+    requestData.viewpageId = this.state.viewpage._id;
+    requestData.kind = kind;
+    if(kind === "text") {
+      let createText = this.state.text;
+      requestData.textValue = createText.textValue;
       $(".createText").hide("medium");
-    }, (error) => {
-      this.setState({
-        textError: error.response.data
-      });
-    });
-  }
-
-  handleReadAllText() {
-    let currentViewpage = this.props.viewpage;
-    let viewpageTexts = [];
-    let requestData = this.state.text;
-    requestData.viewpageId = currentViewpage._id;
-    this.manageTextService.readAllText(requestData)
-    .then((results) => {
-      this.setState({
-        texts: results.data,
-        textError: ""
-      });
-    }, (error) => {
-      this.setState({
-        textError: error.response.data
-      });
-    });
-
-  }
-
-  handleEditText(event) {
-    let editText = this.state.text;
-    editText._id = event._id;
-    editText.textValue = event.textValue;
-    this.setState({
-      text: editText
-    });
-    $(".updateText").toggle("medium");
-    $(".createText").hide(false);
-
-    $( ".createForm" ).hide(false);
-    $( ".updateForm" ).hide(false);
-
-    $( ".createDataView" ).hide(false);
-    $( ".updateDataView" ).hide(false);
-  }
-
-  handleUpdateText(event) {
-    // Update Text
-    let requestData = {};
-    let updateText = this.state.text;
-    requestData.textId = updateText._id;
-    requestData.textValue = updateText.textValue;
-    this.manageTextService.updateText(requestData)
-    .then((results) => {
-      this.handleReadAllText();
-      // Follow up by clearing text state
-      this.handleClearText();
-      $(".updateText").hide("medium");
-    }, (error) => {
-      this.setState({
-        textError: error.response.data
-      });
-    });
-  }
-
-  handleDeleteText(event) {
-    let requestData = {};
-    requestData.textId = event._id;
-    this.manageTextService.deleteText(requestData)
-    .then((results) => {
-      this.handleReadAllText();
-    }, (error) => {
-      this.setState({
-        textError: error.response.data
-      });
-    });
-  }
-
-  handleClearText() {
-    let clearText = this.state.text;
-    clearText._id = "";
-    clearText.textValue = "";
-    this.setState({
-      text: clearText
-    });
-  }
-
-  handleCreateForm(event) {
-    const requestData = this.state.form;
-    this.manageFormService.createForm(requestData)
-    .then((results) => {
-      this.handleReadAllForms();
-      this.handleReadAllFormsByViewsite();
-      this.handleReadAllDataViews();
-      // Follow up by clearing form state
-      this.handleClearForm();
+    }
+    else if(kind === "form") {
+      let createForm = this.state.form;
+      requestData.formTitle = createForm.formTitle;
       $(".createForm").hide("medium");
-    }, (error) => {
-      this.setState({
-        formError: error.response.data
-      });
-    });
-  }
-
-  handleReadAllForms() {
-    let currentViewpage = this.props.viewpage;
-    let requestData = {};
-    requestData.viewpageId = currentViewpage._id;
-    this.manageFormService.readAllFormsByViewpage(requestData)
-    .then((results) => {
-      this.setState({
-        forms: results.data,
-        formError: ""
-      });
-    }, (error) => {
-      this.setState({formError: error.response.data});
-    });
-  }
-
-  handleReadAllFormsByViewsite() {
-    let currentViewpage = this.props.viewpage;
-    let requestData = {};
-    requestData.viewsiteId = currentViewpage.viewsiteId;
-    this.manageFormService.readAllFormsByViewsite(requestData)
-    .then((results) => {
-      this.setState({
-        formsByViewsite: results.data,
-        formError: ""
-      });
-    }, (error) => {
-      this.setState({
-        formError: error.response.data
-      });
-    });
-  }
-
-  handleEditForm(event) {
-    let editForm = this.state.form;
-    editForm._id = event._id;
-    editForm.formTitle = event.formTitle;
-    this.setState({
-      form: editForm
-    });
-    $(".updateForm").toggle("medium");
-    $(".createForm").hide(false);
-
-    $( ".createText" ).hide(false);
-    $( ".updateText" ).hide(false);
-
-    $( ".createDataView" ).hide(false);
-    $( ".updateDataView" ).hide(false);
-  }
-
-  handleUpdateForm(event) {
-    // Update Form
-    let requestData = {};
-    let updateForm = this.state.form;
-    requestData.formId = updateForm._id;
-    requestData.formTitle = updateForm.formTitle;
-    this.manageFormService.updateForm(requestData)
-    .then((results) => {
-      this.handleReadAllForms();
-      this.handleReadAllFormsByViewsite();
-      this.handleReadAllDataViews();
-      // Follow up by clearing form state
-      this.handleClearForm();
-      $(".updateForm").hide("medium");
-    }, (error) => {
-      this.setState({
-        formError: error.response.data
-      });
-    });
-  }
-
-  handleDeleteForm(event) {
-    let requestData = {};
-    requestData.formId = event._id;
-    this.manageFormService.deleteForm(requestData)
-    .then((results) => {
-      this.handleReadAllForms();
-      this.handleReadAllFormsByViewsite();
-      this.handleReadAllDataViews();
-    }, (error) => {
-      this.setState({
-        formError: error.response.data
-      });
-    });
-  }
-
-  handleClearForm() {
-    let clearForm = this.state.form;
-    clearForm._id = "";
-    clearForm.formTitle = "";
-    this.setState({
-      form: clearForm
-    });
-  }
-
-  handleCreateDataView(event) {
-    const requestData = this.state.dataView;
-    this.manageDataViewService.createDataView(requestData)
-    .then((results) => {
-      this.handleReadAllDataViews();
-      // Follow up by clearing data view state
-      this.handleClearDataView();
+    }
+    else if(kind === "dataView") {
+      let createDataView = this.state.dataView;
+      requestData.formId = createDataView.formId;
       $(".createDataView").hide("medium");
-    }, (error) => {
-      this.setState({
-        dataViewError: error.response.data
-      });
-    });
-  }
-
-  handleReadAllDataViews() {
-    let currentViewpage = this.props.viewpage;
-    let requestData = {};
-    requestData.viewpageId = currentViewpage._id;
-    this.manageDataViewService.readAllDataViews(requestData)
+    }
+    this.manageElementService.createElement(requestData)
     .then((results) => {
+      this.handleSetGlobalState(results.data, "viewsite");
+      // Follow up by clearing element state
+      this.handleClearLocalState();
+    },
+    (error) => {
       this.setState({
-        dataViews: results.data,
-        dataViewError: ""
-      });
-    }, (error) => {
-      this.setState({
-        dataViewError: error.response.data
+        elementSuccess: "",
+        elementError: error.response.data
       });
     });
-
   }
 
-  handleEditDataView(event) {
-    let editDataView = this.state.dataView;
-    editDataView._id = event._id;
-    editDataView.formId = event.formId;
-    this.setState({
-      dataView: editDataView
-    });
-    $(".updateDataView").toggle("medium");
-    $(".createDataView").hide(false);
-
-    $( ".createText" ).hide(false);
-    $( ".updateText" ).hide(false);
-
-    $( ".createForm" ).hide(false);
-    $( ".updateForm" ).hide(false);
+  handleEditElement(event) {
+    if(event.kind === "text") {
+      let editText = this.state.text;
+      editText._id = event._id;
+      editText.kind = event.kind;
+      editText.textValue = event.textValue;
+      this.setState({
+        text: editText
+      });
+      $(".updateText").toggle("medium");
+      $(".createText").hide(false);
+    }
+    else if(event.kind === "form") {
+      let editForm = this.state.form;
+      editForm._id = event._id;
+      editForm.kind = event.kind;
+      editForm.formTitle = event.formTitle;
+      this.setState({
+        form: editForm
+      });
+      $(".updateForm").toggle("medium");
+      $( ".createForm" ).hide(false);
+    }
+    else if(event.kind === "dataView") {
+      let editDataView = this.state.dataView;
+      editDataView._id = event._id;
+      editDataView.kind = event.kind;
+      editDataView.formId = event.formId;
+      this.setState({
+        dataView: editDataView
+      });
+      $(".updateDataView").toggle("medium");
+      $( ".createDataView" ).hide(false);
+    }
   }
 
-  handleUpdateDataView(event) {
-    // Update Form
+  handleUpdateElement(kind) {
     let requestData = {};
-    let updateDataView = this.state.dataView;
-    requestData.dataViewId = updateDataView._id;
-    requestData.formId = updateDataView.formId;
-    this.manageDataViewService.updateDataView(requestData)
-    .then((results) => {
-      this.handleReadAllDataViews();
-      // Follow up by clearing form state
-      this.handleClearDataView();
+    requestData.viewsiteId = this.state.viewsiteId;
+    requestData.viewpageId = this.state.viewpage._id;
+    requestData.kind = kind;
+    if(kind === "text") {
+      let updateText = this.state.text;
+      requestData.elementId = updateText._id;
+      requestData.textValue = updateText.textValue;
+      $(".updateText").hide("medium");
+    }
+    else if(kind === "form") {
+      let updateForm = this.state.form;
+      requestData.elementId = updateForm._id;
+      requestData.formTitle = updateForm.formTitle;
+      $(".updateForm").hide("medium");
+    }
+    else if(kind === "dataView") {
+      let updateDataView = this.state.dataView;
+      requestData.elementId = updateDataView._id;
+      requestData.formId = updateDataView.formId;
       $(".updateDataView").hide("medium");
-    }, (error) => {
-      this.setState({
-        dataViewError: error.response.data
-      });
-    });
-  }
-
-  handleDeleteDataView(event) {
-    let requestData = {};
-    requestData.dataViewId = event._id;
-    this.manageDataViewService.deleteDataView(requestData)
+    }
+    this.manageElementService.updateElement(requestData)
     .then((results) => {
-      this.handleReadAllDataViews();
-    }, (error) => {
+      this.handleSetGlobalState(results.data, "viewsite");
+      // Follow up by clearing element state
+      this.handleClearLocalState();
+    },
+    (error) => {
       this.setState({
-        dataViewError: error.response.data
+        elementSuccess: "",
+        elementError: error.response.data
       });
     });
   }
 
-  handleClearDataView() {
+  handleDeleteElement(event) {
+    let requestData = {};
+    requestData.elementId = event._id;
+    requestData.kind = event.kind;
+    requestData.viewsiteId = this.state.viewsiteId;
+    requestData.viewpageId = this.state.viewpage._id;
+
+    this.manageElementService.deleteElement(requestData)
+    .then((results) => {
+      this.handleSetGlobalState(results.data, "viewsite");
+    },
+    (error) => {
+      this.setState({
+        elementSuccess: "",
+        elementError: error.response.data
+      });
+    });
+  }
+
+  handleClearLocalState() {
+    let clearText = this.state.text;
+    let clearForm = this.state.form;
     let clearDataView = this.state.dataView;
+    clearText._id = "";
+    clearText.kind = "text";
+    clearText.textValue = "";
+    clearForm._id = "";
+    clearForm.kind = "form";
+    clearForm.formTitle = "";
     clearDataView._id = "";
+    clearDataView.kind = "dataView";
     clearDataView.formId = "";
     this.setState({
-      dataView: clearDataView
+      text: clearText,
+      form: clearForm,
+      dataView: clearDataView,
+      elementSuccess: "",
+      elementError: ""
     });
+  }
+
+  handleSetGlobalState(newStateData, toSet) {
+    this.props.onSetGlobalState(newStateData, toSet);
   }
 
   handleChange(event, toChange) {
@@ -368,26 +215,20 @@ class Viewpage extends React.Component {
     });
   }
 
-  componentDidMount(nextProps, nextState) {
-    let currentViewpage = this.props.viewpage;
-    let currentText = this.state.text;
-    let currentForm = this.state.form;
-    let currentDataView = this.state.dataView;
-    currentText.viewpageId = currentViewpage._id;
-    currentForm.viewsiteId = currentViewpage.viewsiteId;
-    currentForm.viewpageId = currentViewpage._id;
-    currentDataView.viewpageId = currentViewpage._id;
+  componentWillReceiveProps(nextProps) {
     this.setState({
-      text: currentText,
-      form: currentForm,
-      dataView: currentDataView
+      viewpage: nextProps.viewpage,
+      userTables: nextProps.userTables
+    });
+  }
+
+  componentDidMount() {
+    this.setState({
+      viewsiteId: this.props.viewsiteId,
+      viewpage: this.props.viewpage,
+      userTables: this.props.userTables
     });
 
-    // Prepare to render viewpage
-    this.handleReadAllText();
-    this.handleReadAllForms();
-    this.handleReadAllFormsByViewsite();
-    this.handleReadAllDataViews();
     $(".createText").hide(false);
     $(".updateText").hide(false);
     $(".createForm").hide(false);

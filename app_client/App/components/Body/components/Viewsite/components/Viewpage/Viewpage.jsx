@@ -7,115 +7,49 @@ import FormForm from './components/FormForm';
 import Form from './components/Form';
 import DataViewForm from './components/DataViewForm';
 
-// Create list of Text a Viewpage owns
-function TextList(props) {
-  if(props.texts) {
-    return props.texts.map((text, index) => {
-      const _id = text._id;
-      const viewpageId = text.viewpageId;
-      const textValue = text.textValue;
-      let editClick = {
-        _id: _id,
-        viewpageId: viewpageId,
-        textValue: textValue
-      };
-      let deleteClick = {_id: _id};
-      return (
-        <div key={_id} className="card border-primary mb-3">
-          <div className="card-body">
-            <h4 className="card-title">
-              Text
-            </h4>
-            <p className="card-text">
-              {textValue.split('\n').map(function(item, key) {
-                return (
-                  <span key={key}>
-                    {item}
-                    <br />
-                  </span>
-                )
-              })}
-            </p>
-          </div>
+// Create list of Elements a Viewpage owns
+function ElementList(props) {
+  if(props.elements && props.elements.length >= 1) {
+    const viewsiteId = props.viewsiteId;
+    const viewpageId = props.viewpageId;
+    const userTables = props.userTables;
 
-          <div className="card-footer">
-            <a
-            className="card-link"
-            href="javascript:;"
-            onClick={() => props.onEditText(editClick)}>
-              Edit
-            </a>
+    return props.elements.map((element, index) => {
+      const _id = element._id;
 
-            <a
-            className="card-link"
-            href="javascript:;"
-            onClick={() => props.onDeleteText(deleteClick)}>
-              Delete
-            </a>
-          </div>
-        </div>
-      );
-    });
-  } else {
-    return null;
-  }
-}
-
-// Create list of forms a Viewpage owns
-function FormList(props) {
-  if(props.forms) {
-    return props.forms.map((form, index) => {
-      return (
-        <Form
-        key={form._id}
-        form={form}
-        onEditForm={props.onEditForm}
-        onDeleteForm={props.onDeleteForm} />
-      );
-    });
-  } else {
-    return null;
-  }
-}
-
-// Create list of Data-Views a Viewpage owns
-function DataViewList(props) {
-  if(props.dataViews) {
-    return props.dataViews.map((dataView, index) => {
-      if(dataView.form) {
-        const _id = dataView._id;
-        const formId = dataView.form._id;
-        const formTitle = dataView.form.formTitle;
-        let editClick = {_id: _id, formId: formId};
-        let deleteClick = {_id: _id};
+      if(element.kind === "text") {
         return (
-          <div key={_id} className="card border-primary mb-3">
-            <div className="card-body">
-              <h4 className="card-title">
-                Data-View
-              </h4>
-
-              <p className="card-text">
-                Source: {formTitle}
-              </p>
-            </div>
-
-            <div className="card-footer">
-              <a
-              className="card-link"
-              href="javascript:;"
-              onClick={() => props.onEditDataView(editClick)}>
-                Edit
-              </a>
-
-              <a
-              className="card-link"
-              href="javascript:;"
-              onClick={() => props.onDeleteDataView(deleteClick)}>
-                Delete
-              </a>
-            </div>
-          </div>
+          <TextElement
+          key={_id}
+          viewsiteId={viewsiteId}
+          viewpageId={viewpageId}
+          element={element}
+          onEditElement={props.onEditElement}
+          onDeleteElement={props.onDeleteElement} />
+        );
+      }
+      else if(element.kind === "form") {
+        return (
+          <FormElement
+          key={_id}
+          viewsiteId={viewsiteId}
+          viewpageId={viewpageId}
+          element={element}
+          onEditElement={props.onEditElement}
+          onDeleteElement={props.onDeleteElement}
+          onSetGlobalState={props.onSetGlobalState} />
+        );
+      }
+      else if(element.kind === "dataView") {
+        return (
+          <DataViewElement
+          key={_id}
+          viewsiteId={viewsiteId}
+          viewpageId={viewpageId}
+          element={element}
+          userTables={userTables}
+          onEditElement={props.onEditElement}
+          onDeleteElement={props.onDeleteElement} />
         );
       }
     });
@@ -124,7 +58,124 @@ function DataViewList(props) {
   }
 }
 
-var createText = function() {
+function TextElement(props) {
+  const editClick = {
+    viewsiteId: props.viewsiteId,
+    viewpageId: props.viewpageId,
+    _id: props.element._id,
+    kind: props.element.kind,
+    textValue: props.element.textValue
+  };
+  const deleteClick = {
+    viewsiteId: props.viewsiteId,
+    viewpageId: props.viewpageId,
+    _id: props.element._id,
+    kind: props.element.kind
+  };
+
+  return (
+    <div className="card border-primary mb-3">
+      <div className="card-body">
+        <h4 className="card-title">
+          Text
+        </h4>
+        <p className="card-text">
+          {props.element.textValue.split('\n').map(function(item, key) {
+            return (
+              <span key={key}>
+                {item}
+                <br />
+              </span>
+            )
+          })}
+        </p>
+      </div>
+
+      <div className="card-footer">
+        <a
+        className="card-link"
+        href="javascript:;"
+        onClick={() => props.onEditElement(editClick)}>
+          Edit
+        </a>
+
+        <a
+        className="card-link"
+        href="javascript:;"
+        onClick={() => props.onDeleteElement(deleteClick)}>
+          Delete
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function FormElement(props) {
+  return (
+    <Form
+    viewsiteId={props.viewsiteId}
+    viewpageId={props.viewpageId}
+    element={props.element}
+    onEditElement={props.onEditElement}
+    onDeleteElement={props.onDeleteElement}
+    onSetGlobalState={props.onSetGlobalState} />
+  );
+}
+
+function DataViewElement(props) {
+  const editClick = {
+    viewsiteId: props.viewsiteId,
+    viewpageId: props.viewpageId,
+    _id: props.element._id,
+    kind: props.element.kind,
+    formId: props.element.formId
+  };
+  const deleteClick = {
+    viewsiteId: props.viewsiteId,
+    viewpageId: props.viewpageId,
+    _id: props.element._id,
+    kind: props.element.kind
+  };
+
+  let sourceName = "";
+  for(const userTable of props.userTables) {
+    if(props.element.formId == userTable._id) {
+      sourceName = userTable.formTitle;
+    }
+  }
+
+  return (
+    <div className="card border-primary mb-3">
+      <div className="card-body">
+        <h4 className="card-title">
+          Data-View
+        </h4>
+
+        <p className="card-text">
+          Source: {sourceName}
+        </p>
+      </div>
+
+      <div className="card-footer">
+        <a
+        className="card-link"
+        href="javascript:;"
+        onClick={() => props.onEditElement(editClick)}>
+          Edit
+        </a>
+
+        <a
+        className="card-link"
+        href="javascript:;"
+        onClick={() => props.onDeleteElement(deleteClick)}>
+          Delete
+        </a>
+      </div>
+    </div>
+  );
+}
+
+var prepareCreateText = function() {
   $( ".createText" ).toggle("medium");
   $( ".updateText" ).hide(false);
 
@@ -134,10 +185,10 @@ var createText = function() {
   $( ".createDataView" ).hide(false);
   $( ".updateDataView" ).hide(false);
 
-  this.handleClearText();
+  this.handleClearLocalState();
 };
 
-var createForm = function() {
+var prepareCreateForm = function() {
   $( ".createForm" ).toggle("medium");
   $( ".updateForm" ).hide(false);
 
@@ -147,10 +198,10 @@ var createForm = function() {
   $( ".createDataView" ).hide(false);
   $( ".updateDataView" ).hide(false);
 
-  this.handleClearForm();
+  this.handleClearLocalState();
 };
 
-var createDataView = function() {
+var prepareCreateDataView = function() {
   $( ".createDataView" ).toggle("medium");
   $( ".updateDataView" ).hide(false);
 
@@ -160,7 +211,7 @@ var createDataView = function() {
   $( ".createForm" ).hide(false);
   $( ".updateForm" ).hide(false);
 
-  this.handleClearDataView();
+  this.handleClearLocalState();
 };
 
 var ViewpageJSX = function() {
@@ -173,7 +224,7 @@ var ViewpageJSX = function() {
             <button
             type="button"
             className="btn btn-link"
-            onClick={() => {createText.call(this);}}>
+            onClick={() => {prepareCreateText.call(this);}}>
               + Add Text
             </button>
           </div>
@@ -182,7 +233,7 @@ var ViewpageJSX = function() {
             <button
             type="button"
             className="btn btn-link"
-            onClick={() => {createForm.call(this);}}>
+            onClick={() => {prepareCreateForm.call(this);}}>
               + Add Form
             </button>
           </div>
@@ -191,7 +242,7 @@ var ViewpageJSX = function() {
             <button
             type="button"
             className="btn btn-link"
-            onClick={() => {createDataView.call(this);}}>
+            onClick={() => {prepareCreateDataView.call(this);}}>
               + Add Data-View
             </button>
           </div>
@@ -202,10 +253,12 @@ var ViewpageJSX = function() {
             <div className="card-body">
               <TextForm
               description="Add Text"
+              action="create"
               text={this.state.text}
-              textError={this.state.textError}
+              elementSuccess={this.state.elementSuccess}
+              elementError={this.state.elementError}
               onChange={this.handleChange}
-              onSubmit={this.handleCreateText} />
+              onSubmit={this.handleCreateElement} />
             </div>
           </div>
 
@@ -213,10 +266,12 @@ var ViewpageJSX = function() {
             <div className="card-body">
               <TextForm
               description="Update Text"
+              action="update"
               text={this.state.text}
-              textError={this.state.textError}
+              elementSuccess={this.state.elementSuccess}
+              elementError={this.state.elementError}
               onChange={this.handleChange}
-              onSubmit={this.handleUpdateText} />
+              onSubmit={this.handleUpdateElement} />
             </div>
           </div>
 
@@ -224,10 +279,12 @@ var ViewpageJSX = function() {
             <div className="card-body">
               <FormForm
               description="Add Form"
+              action="create"
               form={this.state.form}
-              formError={this.state.formError}
+              elementSuccess={this.state.elementSuccess}
+              elementError={this.state.elementError}
               onChange={this.handleChange}
-              onSubmit={this.handleCreateForm} />
+              onSubmit={this.handleCreateElement} />
             </div>
           </div>
 
@@ -235,10 +292,12 @@ var ViewpageJSX = function() {
             <div className="card-body">
               <FormForm
               description="Update Form"
+              action="update"
               form={this.state.form}
-              formError={this.state.formError}
+              elementSuccess={this.state.elementSuccess}
+              elementError={this.state.elementError}
               onChange={this.handleChange}
-              onSubmit={this.handleUpdateForm} />
+              onSubmit={this.handleUpdateElement} />
             </div>
           </div>
 
@@ -246,11 +305,13 @@ var ViewpageJSX = function() {
             <div className="card-body">
               <DataViewForm
               description="Create Data-View"
+              action="create"
               dataView={this.state.dataView}
-              forms={this.state.formsByViewsite}
-              dataViewError={this.state.dataViewError}
+              userTables={this.state.userTables}
+              elementSuccess={this.state.elementSuccess}
+              elementError={this.state.elementError}
               onChange={this.handleChange}
-              onSubmit={this.handleCreateDataView} />
+              onSubmit={this.handleCreateElement} />
             </div>
           </div>
 
@@ -258,28 +319,24 @@ var ViewpageJSX = function() {
             <div className="card-body">
               <DataViewForm
               description="Update Data-View"
+              action="update"
               dataView={this.state.dataView}
-              forms={this.state.formsByViewsite}
-              dataViewError={this.state.dataViewError}
+              userTables={this.state.userTables}
+              elementSuccess={this.state.elementSuccess}
+              elementError={this.state.elementError}
               onChange={this.handleChange}
-              onSubmit={this.handleUpdateDataView} />
+              onSubmit={this.handleUpdateElement} />
             </div>
           </div>
 
-          <TextList
-          texts={this.state.texts}
-          onEditText={this.handleEditText}
-          onDeleteText={this.handleDeleteText} />
-
-          <FormList
-          forms={this.state.forms}
-          onEditForm={this.handleEditForm}
-          onDeleteForm={this.handleDeleteForm} />
-
-          <DataViewList
-          dataViews={this.state.dataViews}
-          onEditDataView={this.handleEditDataView}
-          onDeleteDataView={this.handleDeleteDataView} />
+          <ElementList
+          viewsiteId={this.state.viewsiteId}
+          viewpageId={this.state.viewpage._id}
+          elements={this.state.viewpage.elements}
+          userTables={this.state.userTables}
+          onEditElement={this.handleEditElement}
+          onDeleteElement={this.handleDeleteElement}
+          onSetGlobalState={this.handleSetGlobalState} />
         </div>
 
         <div className="col-1"></div>

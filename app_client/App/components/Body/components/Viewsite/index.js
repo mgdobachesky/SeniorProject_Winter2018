@@ -28,6 +28,7 @@ class Viewsite extends React.Component {
     this.handleDeleteViewpage = this.handleDeleteViewpage.bind(this);
 
     // Other Methods
+    this.handleGatherUserTables = this.handleGatherUserTables.bind(this);
     this.handleSetGlobalState = this.handleSetGlobalState.bind(this);
     this.handleClearLocalState = this.handleClearLocalState.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -36,19 +37,20 @@ class Viewsite extends React.Component {
     this.state = {
       viewsite: {},
       viewpage: {
-          _id: "",
-          viewpageName: "",
-          permissionLevel: 0
-        },
-        viewpageSuccess: "",
-        viewpageError: ""
+        _id: "",
+        viewpageName: "",
+        permissionLevel: 0
+      },
+      viewpageSuccess: "",
+      viewpageError: "",
+      userTables: []
     };
   }
 
   handleCreateViewpage(event) {
     let requestData = {};
     let createViewpage = this.state.viewpage;
-    requestData.viewsiteId = this.state.viewsite._id
+    requestData.viewsiteId = this.state.viewsite._id;
     requestData.viewpageName = createViewpage.viewpageName;
     requestData.permissionLevel = createViewpage.permissionLevel;
     this.manageViewpageService.createViewpage(requestData)
@@ -79,7 +81,6 @@ class Viewsite extends React.Component {
   }
 
   handleUpdateViewpage() {
-    // Update Viewpage
     let requestData = {};
     let updateViewpage = this.state.viewpage;
     requestData.viewsiteId = this.state.viewsite._id;
@@ -115,6 +116,18 @@ class Viewsite extends React.Component {
         viewpageError: error.response.data
       });
     });
+  }
+
+  handleGatherUserTables() {
+    let userTables = [];
+    for(const viewpage of this.state.viewsite.viewpages) {
+      for(const element of viewpage.elements) {
+        if(element.kind === "form") {
+          userTables.push(element);
+        }
+      }
+    }
+    this.handleSetGlobalState(userTables, "userTables");
   }
 
   handleClearLocalState() {
@@ -153,7 +166,7 @@ class Viewsite extends React.Component {
     .then((results) => {
       this.setState({
         viewsite: results.data
-      });
+      }, () => this.handleGatherUserTables());
     },
     (error) => {
       console.log(error.response.data);
@@ -168,7 +181,7 @@ class Viewsite extends React.Component {
     .then((results) => {
       this.setState({
         viewsite: results.data
-      });
+      }, () => this.handleGatherUserTables());
     },
     (error) => {
       console.log(error.response.data);
