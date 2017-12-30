@@ -12,13 +12,23 @@ import UserDatabaseService from './services/UserDatabaseService';
 // Create main App
 class App extends React.Component {
   constructor(props) {
+    // Call parent constructors
     super(props);
+
+    // Initialize service objects
     this.manageViewsiteService = new ViewsiteService();
     this.manageUserDatabaseService = new UserDatabaseService();
+
+    // Viewsite Methods
     this.handleRequestViewsite = this.handleRequestViewsite.bind(this);
+
+    // User Database Methods
+    this.handleRequestUserDatabase = this.handleRequestUserDatabase.bind(this);
+
+    // Set initial state
     this.state = {
-      viewsite: null,
-      viewpages: [],
+      viewsite: "",
+      userDatabase: "",
       viewsiteRequestError: ""
     };
   }
@@ -27,58 +37,57 @@ class App extends React.Component {
     if(viewsiteName) {
       let requestData = {};
       requestData.viewsiteName = viewsiteName;
-      this.manageViewsiteService.readOneViewsiteByName(requestData)
+      this.manageViewsiteService.readOneViewsite(requestData)
       .then((results) => {
         this.setState({
           viewsite: results.data,
           viewsiteRequestError: ""
-        }, () => this.handleReadAllViewpages());
-      }, (error) => {
+        }, () => this.handleRequestUserDatabase(results.data._id));
+      },
+      (error) => {
         this.setState({
-          viewsite: null,
+          viewsite: "",
+          userDatabase: "",
           viewsiteRequestError: error.response.data
         });
       });
     } else {
       this.setState({
-        viewsite: null
+        viewsite: "",
+        userDatabase: "",
+        viewsiteRequestError: "No viewsite specified!"
       });
     }
   }
 
-  handleReadAllViewpages() {
-    let requestData = {};
-    requestData.viewsiteId = this.state.viewsite._id;
-    this.manageViewpageService.readAllViewpages(requestData)
-    .then((results) => {
-      this.setState({
-        viewpages: results.data
-      });
-    }, (error) => {
-      console.log(error.response.data);
-    });
-  }
-
-  componentWillMount() {
-    if(this.props.viewsiteName) {
+  handleRequestUserDatabase(viewsiteId) {
+    if(viewsiteId) {
       let requestData = {};
-      requestData.viewsiteName = this.props.viewsiteName;
-      this.manageViewsiteService.readOneViewsiteByName(requestData)
+      requestData.viewsiteId = viewsiteId;
+      this.manageUserDatabaseService.readOneUserDatabase(requestData)
       .then((results) => {
         this.setState({
-          viewsite: results.data,
+          userDatabase: results.data,
           viewsiteRequestError: ""
-        }, () => this.handleReadAllViewpages());
-      }, (error) => {
+        });
+      },
+      (error) => {
         this.setState({
-          viewsite: null,
+          userDatabase: "",
           viewsiteRequestError: error.response.data
         });
       });
     } else {
       this.setState({
-        viewsite: null
+        userDatabase: "",
+        viewsiteRequestError: "No user database specified!"
       });
+    }
+  }
+
+  componentWillMount() {
+    if(this.props.viewsiteName) {
+      this.handleRequestViewsite(this.props.viewsiteName);
     }
   }
 

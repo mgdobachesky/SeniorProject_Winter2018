@@ -8,9 +8,14 @@ import './viewsiteChoose.css';
 
 class ViewsiteChoose extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
+    
+    //Other Methods
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    // Set initial state
     this.state = {
       viewsiteName: ""
     };

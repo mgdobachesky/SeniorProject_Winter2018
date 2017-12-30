@@ -2,12 +2,15 @@
 import React from 'react';
 
 // Import required components
-import FormTextInputJSX from './FormTextInput.jsx';
-import './formTextInput.css';
+import TextboxJSX from './Textbox.jsx';
+import './textbox.css';
 
-class FormTextInput extends React.Component {
+class Textbox extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
+
+    // Other Methods
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -16,8 +19,8 @@ class FormTextInput extends React.Component {
   }
 
   render() {
-    return(FormTextInputJSX.call(this));
+    return(TextboxJSX.call(this));
   }
 }
 
-export default FormTextInput;
+export default Textbox;

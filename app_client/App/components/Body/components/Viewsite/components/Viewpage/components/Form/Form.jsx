@@ -90,7 +90,7 @@ var FormJSX = function() {
         type="button"
         className="btn btn-link"
         onClick={() => {prepareCreateTextbox.call(this);}}>
-          + Add Text Input
+          + Add Textbox
         </button>
       </div>
 

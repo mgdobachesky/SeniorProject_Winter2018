@@ -7,6 +7,7 @@ import './dataView.css';
 
 class DataView extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
   }
 

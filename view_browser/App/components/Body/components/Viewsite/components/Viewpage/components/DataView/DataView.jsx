@@ -28,14 +28,23 @@ function Records(props) {
 }
 
 var DataViewJSX = function() {
+  let userTable = {};
+  if(this.props.userDatabase.tables) {
+    for(const databaseTable of this.props.userDatabase.tables) {
+      if(databaseTable._id === this.props.element.formId) {
+        userTable = databaseTable;
+      }
+    }
+  }
+
   return (
     <div>
-      <h2>{this.props.dataView.form.formTitle}</h2>
+      <h2>Data View</h2>
 
       <table className="table table-hover">
         <tbody>
           <Records
-          userTable={this.props.dataView.userTable} />
+          userTable={userTable} />
         </tbody>
       </table>
     </div>

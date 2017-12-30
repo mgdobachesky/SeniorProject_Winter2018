@@ -11,13 +11,14 @@ var AppJSX = function() {
   return(
     <div>
       <Header
-      viewsite={this.state.viewsite}
-      viewpages={this.state.viewpages} />
+      viewsite={this.state.viewsite} />
 
       <Body
-      viewsiteRequestError={this.state.viewsiteRequestError}
       viewsite={this.state.viewsite}
-      onRequestViewsite={this.handleRequestViewsite} />
+      userDatabase={this.state.userDatabase}
+      viewsiteRequestError={this.state.viewsiteRequestError}
+      onRequestViewsite={this.handleRequestViewsite}
+      onRequestUserDatabase={this.handleRequestUserDatabase} />
 
       <Footer
       viewsite={this.state.viewsite} />

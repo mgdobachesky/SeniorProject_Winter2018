@@ -3,21 +3,21 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 // Import requred components
-import ViewsiteLandingJSX from './ViewsiteLanding.jsx';
-import './viewsiteLanding.css';
+import LandingPageJSX from './LandingPage.jsx';
+import './landingPage.css';
 
-class ViewsiteLanding extends React.Component {
+class LandingPage extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     if(this.props.viewsite) {
-      return(ViewsiteLandingJSX.call(this));
+      return(LandingPageJSX.call(this));
     } else {
       return(<Redirect to="/viewsites" />);
     }
   }
 }
 
-export default ViewsiteLanding;
+export default LandingPage;

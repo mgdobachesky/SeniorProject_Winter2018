@@ -3,9 +3,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 // Import requred components
-import Viewpage from './components/Viewpage';
 import ViewsiteChoose from './components/ViewsiteChoose';
-import ViewsiteLanding from './components/ViewsiteLanding';
+import Viewsite from './components/Viewsite';
 
 var BodyJSX = function() {
   return (
@@ -15,16 +14,14 @@ var BodyJSX = function() {
       render={routeProps => <ViewsiteChoose {...routeProps}
         viewsite={this.props.viewsite}
         viewsiteRequestError={this.props.viewsiteRequestError}
-        onRequestViewsite={this.props.onRequestViewsite} />} />
+        onRequestViewsite={this.handleRequestViewsite} />} />
 
       <Route
       exact path='/viewsites/:viewsiteName'
-      render={routeProps => <ViewsiteLanding {...routeProps}
-        viewsite={this.props.viewsite} />} />
-
-      <Route
-      path='/viewsites/:viewsiteName/:viewpageId'
-      component={Viewpage} />
+      render={routeProps => <Viewsite {...routeProps}
+        viewsite={this.props.viewsite}
+        userDatabase={this.props.userDatabase}
+        onRequestUserDatabase={this.handleRequestUserDatabase} />} />
     </Switch>
   );
 }

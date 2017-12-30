@@ -2,23 +2,16 @@
 import React from 'react';
 
 // Import requred components
-import BodyJSX from './Body.jsx';
-import './body.css';
+import ViewsiteJSX from './Viewsite.jsx';
+import './viewsite.css';
 
-class Body extends React.Component {
+class Viewsite extends React.Component {
   constructor(props) {
     // Call parent constructor
     super(props);
 
-    // Viewsite Methods
-    this.handleRequestViewsite = this.handleRequestViewsite.bind(this);
-
     // User Database Methods
     this.handleRequestUserDatabase = this.handleRequestUserDatabase.bind(this);
-  }
-
-  handleRequestViewsite(viewsiteName) {
-    this.props.onRequestViewsite(viewsiteName);
   }
 
   handleRequestUserDatabase(viewsiteId) {
@@ -26,8 +19,8 @@ class Body extends React.Component {
   }
 
   render() {
-    return(BodyJSX.call(this));
+    return(ViewsiteJSX.call(this));
   }
 }
 
-export default Body;
+export default Viewsite;
