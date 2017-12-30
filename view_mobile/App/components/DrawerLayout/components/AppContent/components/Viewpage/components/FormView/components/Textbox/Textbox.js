@@ -16,18 +16,18 @@ import {
 // Import requred components
 import styles from './styles.js';
 
-var FormTextInputFormJSX = function() {
+var TextboxJSX = function() {
   return (
     <Item>
       <Label>
-        {this.props.formTextInput.formTextInputLabel}
+        {this.props.formInput.textboxLabel}
       </Label>
 
       <Input
-      value={this.props.formTextInputValue}
+      value={this.props.formInputValue}
       onChangeText={this.handleChange} />
     </Item>
   );
 }
 
-export default FormTextInputFormJSX;
+export default TextboxJSX;

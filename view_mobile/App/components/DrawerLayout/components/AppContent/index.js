@@ -6,7 +6,15 @@ import AppContentJSX from './AppContent.js';
 
 class AppContent extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
+
+    // User Database Methods
+    this.handleRequestUserDatabase = this.handleRequestUserDatabase.bind(this);
+  }
+
+  handleRequestUserDatabase(viewsiteId) {
+    this.props.onRequestUserDatabase(viewsiteId);
   }
 
   render() {

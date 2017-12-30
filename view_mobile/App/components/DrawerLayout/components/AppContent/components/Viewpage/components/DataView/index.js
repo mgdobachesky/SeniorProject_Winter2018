@@ -6,6 +6,7 @@ import DataViewJSX from './DataView.js';
 
 class DataView extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
   }
 

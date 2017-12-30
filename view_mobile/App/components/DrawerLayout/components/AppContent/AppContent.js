@@ -11,7 +11,10 @@ var AppContentJSX = function() {
     <Switch>
       <Route
       path='/:viewpageId'
-      component={Viewpage} />
+      render={routeProps => <Viewpage {...routeProps}
+        viewpages={this.props.viewpages}
+        userDatabase={this.props.userDatabase}
+        onRequestUserDatabase={this.handleRequestUserDatabase} />} />
     </Switch>
   );
 }

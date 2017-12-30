@@ -35,7 +35,8 @@ function DisplayList(props) {
   if(props.userTable.records) {
     return(
       <List>
-        <DataList records={props.userTable.records} />
+        <DataList
+        records={props.userTable.records} />
       </List>
     );
   } else {
@@ -44,13 +45,20 @@ function DisplayList(props) {
 }
 
 var DataViewJSX = function() {
+  let userTable = {};
+  for(let table of this.props.userTables) {
+    if(table._id == this.props.element.formId) {
+      userTable = table;
+    }
+  }
   return (
     <Content>
       <H2>
-        {this.props.dataView.form.formTitle}
+        Data View
       </H2>
-      
-      <DisplayList userTable={this.props.dataView.userTable} />
+
+      <DisplayList
+      userTable={userTable} />
     </Content>
   );
 }

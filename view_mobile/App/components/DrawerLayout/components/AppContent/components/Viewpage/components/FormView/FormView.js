@@ -13,21 +13,23 @@ import {
 } from 'native-base';
 
 // Import requred components
-import FormTextInput from './components/FormTextInput';
+import Textbox from './components/Textbox';
 import styles from './styles.js';
 
-// Create list of FormTextInputs a Form owns
-function FormTextInputList(props) {
-  if(props.formTextInputs) {
-    return props.formTextInputs.map((formTextInput, index) => {
-      let formTextInputValue = props.record[formTextInput._id];
-      return (
-        <FormTextInput
-        key={formTextInput._id}
-        formTextInput={formTextInput}
-        formTextInputValue={formTextInputValue}
-        onChange={props.onChange} />
-      );
+// Create list of FormInputs a Form owns
+function FormInputList(props) {
+  if(props.formInputs) {
+    return props.formInputs.map((formInput, index) => {
+      let formInputValue = props.record[formInput._id];
+      if(formInput.kind === "textbox") {
+        return (
+          <Textbox
+          key={formInput._id}
+          formInput={formInput}
+          formInputValue={formInputValue}
+          onChange={props.onChange} />
+        );
+      }
     });
   } else {
     return null;
@@ -38,12 +40,12 @@ var FormViewJSX = function() {
   return(
     <Content>
       <H2>
-        {this.props.form.formTitle}
+        {this.props.element.formTitle}
       </H2>
 
       <Form>
-        <FormTextInputList
-        formTextInputs={this.state.formTextInputs}
+        <FormInputList
+        formInputs={this.state.formInputs}
         record={this.state.record}
         onChange={this.handleChange} />
 

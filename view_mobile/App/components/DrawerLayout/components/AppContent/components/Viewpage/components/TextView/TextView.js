@@ -8,7 +8,7 @@ import styles from './styles.js';
 var TextViewJSX = function() {
   return (
     <Content>
-      {this.props.text.textValue.split('\n').map(function(item, key) {
+      {this.props.element.textValue.split('\n').map(function(item, key) {
         return (
           <Text key={key}>
             {item}

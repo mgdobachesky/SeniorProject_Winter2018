@@ -8,39 +8,29 @@ import FormView from './components/FormView';
 import DataView from './components/DataView';
 import styles from './styles.js';
 
-// Create list of Text a Viewpage owns
-function TextList(props) {
-  if(props.texts) {
-    return props.texts.map((text, index) => {
-      return (
-        <TextView key={text._id} text={text} />
-      );
-    });
-  } else {
-    return null;
-  }
-}
-
-// Create list of forms a Viewpage owns
-function FormList(props) {
-  if(props.forms) {
-    return props.forms.map((form, index) => {
-      return (
-        <FormView key={form._id} form={form} />
-      );
-    });
-  } else {
-    return null;
-  }
-}
-
-// Create list of Data-Views a Viewpage owns
-function DataViewList(props) {
-  if(props.dataViews) {
-    return props.dataViews.map((dataView, index) => {
-      if(dataView.form) {
+function ElementList(props) {
+  if(props.elements) {
+    return props.elements.map((element, index) => {
+      if(element.kind === "text") {
         return (
-          <DataView key={dataView._id} dataView={dataView} />
+          <TextView
+          key={element._id}
+          element={element} />
+        );
+      } else if(element.kind === "form") {
+        return (
+          <FormView
+          key={element._id}
+          element={element}
+          viewsiteId={props.userDatabase._id}
+          onRequestUserDatabase={props.onRequestUserDatabase} />
+        );
+      } else if(element.kind === "dataView") {
+        return (
+          <DataView
+          key={element._id}
+          element={element}
+          userTables={props.userDatabase.tables} />
         );
       }
     });
@@ -56,9 +46,10 @@ var ViewpageJSX = function() {
         {this.state.viewpage.viewpageName}
       </H1>
 
-      <TextList texts={this.state.texts} />
-      <FormList forms={this.state.forms} />
-      <DataViewList dataViews={this.state.dataViews} />
+      <ElementList
+      elements={this.state.viewpage.elements}
+      userDatabase={this.props.userDatabase}
+      onRequestUserDatabase={this.handleRequestUserDatabase} />
     </Content>
   );
 }

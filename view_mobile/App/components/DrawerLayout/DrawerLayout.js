@@ -70,7 +70,11 @@ function NavigationContent(props) {
   if(props.viewsite._id) {
     return (
       <Content>
-        <AppContent />
+        <AppContent
+        viewpages={props.viewpages}
+        userDatabase={props.userDatabase}
+        onRequestUserDatabase={props.onRequestUserDatabase}
+         />
       </Content>
     );
   } else {
@@ -80,7 +84,7 @@ function NavigationContent(props) {
           <Item>
             <Input
             placeholder="Enter Viewsite Name..."
-            onChangeText={(text) => props.onChange(text)} />
+            onChangeText={(viewsiteName) => props.onChange(viewsiteName)} />
           </Item>
 
           <Button
@@ -100,7 +104,7 @@ var DrawerLayoutJSX = function() {
     ref={(ref) => {this.drawer = ref;}}
     content={<NavigationView
       viewsite={this.state.viewsite}
-      viewpages={this.state.viewpages}
+      viewpages={this.state.viewsite.viewpages}
       closeDrawer={this.closeDrawer.bind(this)} />}
     onClose={() => this.closeDrawer()}>
       <Header>
@@ -121,6 +125,9 @@ var DrawerLayoutJSX = function() {
       <NavigationContent
       viewsiteName={this.state.viewsiteName}
       viewsite={this.state.viewsite}
+      viewpages={this.state.viewsite.viewpages}
+      userDatabase={this.state.userDatabase}
+      onRequestUserDatabase={this.handleRequestUserDatabase}
       onChange={this.handleChange}
       onSubmit={this.handleSubmit} />
 

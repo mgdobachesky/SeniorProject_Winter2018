@@ -6,6 +6,7 @@ import TextViewJSX from './TextView.js';
 
 class TextView extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
   }
 

@@ -9,19 +9,33 @@ import UserRecordService from './services/UserRecordService';
 
 class FormView extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
+
+    // Initialize service objects
     this.manageUserRecordService = new UserRecordService();
+
+    // User Database Methods
+    this.handleRequestUserDatabase = this.handleRequestUserDatabase.bind(this);
+
+    // Other Methods
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    // Set initial state
     this.state = {
-      formTextInputs: [],
+      formInputs: [],
       record: {}
     }
   }
 
-  handleChange(text, formTextInputId) {
+  handleRequestUserDatabase(viewsiteId) {
+    this.props.onRequestUserDatabase(viewsiteId);
+  }
+
+  handleChange(formInputValue, formInputId) {
     let record = this.state.record;
-    record[formTextInputId] = text;
+    record[formInputId] = formInputValue;
     this.setState({
       record: record
     });
@@ -30,9 +44,10 @@ class FormView extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     let requestData = {};
-    requestData.formId = this.props.form._id;
+    requestData.viewsiteId = this.props.viewsiteId;
+    requestData.elementId = this.props.element._id;
     requestData.record = this.state.record;
-    this.manageUserDatabaseService.createUserRecord(requestData)
+    this.manageUserRecordService.createUserRecord(requestData)
     .then((results) => {
       for(let key in requestData.record) {
         requestData.record[key] = "";
@@ -40,23 +55,18 @@ class FormView extends React.Component {
       this.setState({
         record: requestData.record
       });
-      console.log(results.data);
+      this.handleRequestUserDatabase(this.props.viewsiteId);
     }, (error) => {
       console.log(error.response.data);
     });
   }
 
-  componentDidMount(nextProps) {
-    let requestData = {};
-    requestData.formId = this.props.form._id;
-    this.manageFormTextInputService.readAllFormTextInputs(requestData)
-    .then((results) => {
+  componentDidMount() {
+    if(this.props.element.formInputs && this.props.element.formInputs.length >= 1) {
       this.setState({
-        formTextInputs: results.data
+        formInputs: this.props.element.formInputs
       });
-    }, (error) => {
-      console.log(error.response.data);
-    });
+    }
   }
 
   render() {
