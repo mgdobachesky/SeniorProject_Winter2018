@@ -28,6 +28,7 @@ function ElementsView(props) {
           <DataView
           key={element._id}
           element={element}
+          userTables={props.userTables}
           userDatabase={props.userDatabase} />
         );
       }
@@ -46,6 +47,7 @@ var ViewpageJSX = function() {
           <ElementsView
           elements={this.props.viewpage.elements}
           userDatabase={this.props.userDatabase}
+          userTables={this.props.userTables}
           onRequestUserDatabase={this.handleRequestUserDatabase} />
         </div>
       </div>

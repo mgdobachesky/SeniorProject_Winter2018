@@ -30,7 +30,8 @@ function ElementList(props) {
           <DataView
           key={element._id}
           element={element}
-          userTables={props.userDatabase.tables} />
+          userDatabase={props.userDatabase}
+          userTables={props.userTables} />
         );
       }
     });
@@ -49,6 +50,7 @@ var ViewpageJSX = function() {
       <ElementList
       elements={this.state.viewpage.elements}
       userDatabase={this.props.userDatabase}
+      userTables={this.props.userTables}
       onRequestUserDatabase={this.handleRequestUserDatabase} />
     </Content>
   );

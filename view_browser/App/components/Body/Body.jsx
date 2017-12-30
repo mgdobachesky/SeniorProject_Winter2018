@@ -17,10 +17,11 @@ var BodyJSX = function() {
         onRequestViewsite={this.handleRequestViewsite} />} />
 
       <Route
-      exact path='/viewsites/:viewsiteName'
+      path='/viewsites/:viewsiteName'
       render={routeProps => <Viewsite {...routeProps}
         viewsite={this.props.viewsite}
         userDatabase={this.props.userDatabase}
+        userTables={this.props.userTables}
         onRequestUserDatabase={this.handleRequestUserDatabase} />} />
     </Switch>
   );

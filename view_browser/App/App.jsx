@@ -17,6 +17,7 @@ var AppJSX = function() {
       viewsite={this.state.viewsite}
       userDatabase={this.state.userDatabase}
       viewsiteRequestError={this.state.viewsiteRequestError}
+      userTables={this.state.userTables}
       onRequestViewsite={this.handleRequestViewsite}
       onRequestUserDatabase={this.handleRequestUserDatabase} />
 

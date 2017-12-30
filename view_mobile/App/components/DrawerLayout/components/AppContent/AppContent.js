@@ -14,6 +14,7 @@ var AppContentJSX = function() {
       render={routeProps => <Viewpage {...routeProps}
         viewpages={this.props.viewpages}
         userDatabase={this.props.userDatabase}
+        userTables={this.props.userTables}
         onRequestUserDatabase={this.handleRequestUserDatabase} />} />
     </Switch>
   );

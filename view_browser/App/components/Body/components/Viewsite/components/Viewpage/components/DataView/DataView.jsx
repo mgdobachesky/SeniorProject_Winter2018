@@ -36,10 +36,18 @@ var DataViewJSX = function() {
       }
     }
   }
+  let formTitle = "";
+  if(this.props.userTables) {
+    for(const userTable of this.props.userTables) {
+      if(userTable._id == this.props.element.formId) {
+        formTitle = userTable.formTitle;
+      }
+    }
+  }
 
   return (
     <div>
-      <h2>Data View</h2>
+      <h2>{formTitle}</h2>
 
       <table className="table table-hover">
         <tbody>

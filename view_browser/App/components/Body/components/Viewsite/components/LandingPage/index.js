@@ -12,11 +12,7 @@ class LandingPage extends React.Component {
   }
 
   render() {
-    if(this.props.viewsite) {
-      return(LandingPageJSX.call(this));
-    } else {
-      return(<Redirect to="/viewsites" />);
-    }
+    return(LandingPageJSX.call(this));
   }
 }
 

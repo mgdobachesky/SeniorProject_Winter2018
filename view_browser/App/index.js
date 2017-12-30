@@ -29,7 +29,8 @@ class App extends React.Component {
     this.state = {
       viewsite: "",
       userDatabase: "",
-      viewsiteRequestError: ""
+      viewsiteRequestError: "",
+      userTables: []
     };
   }
 
@@ -39,8 +40,21 @@ class App extends React.Component {
       requestData.viewsiteName = viewsiteName;
       this.manageViewsiteService.readOneViewsite(requestData)
       .then((results) => {
+        let userTables = [];
+        if(results.data.viewpages) {
+          for(const viewpage of results.data.viewpages) {
+            if(viewpage.elements) {
+              for(const element of viewpage.elements) {
+                if(element.kind === "form") {
+                  userTables.push(element);
+                }
+              }
+            }
+          }
+        }
         this.setState({
           viewsite: results.data,
+          userTables: userTables,
           viewsiteRequestError: ""
         }, () => this.handleRequestUserDatabase(results.data._id));
       },

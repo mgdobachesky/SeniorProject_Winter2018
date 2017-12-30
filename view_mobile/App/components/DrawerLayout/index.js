@@ -32,7 +32,8 @@ class DrawerLayout extends React.Component {
       viewsiteName: "",
       viewsite: {},
       userDatabase: {},
-      viewsiteRequestError: ""
+      viewsiteRequestError: "",
+      userTables: []
     };
   }
 
@@ -42,9 +43,22 @@ class DrawerLayout extends React.Component {
       requestData.viewsiteName = viewsiteName;
       this.manageViewsiteService.readOneViewsite(requestData)
       .then((results) => {
+        let userTables = [];
+        if(results.data.viewpages) {
+          for(const viewpage of results.data.viewpages) {
+            if(viewpage.elements) {
+              for(const element of viewpage.elements) {
+                if(element.kind === "form") {
+                  userTables.push(element);
+                }
+              }
+            }
+          }
+        }
         this.setState({
           viewsite: results.data,
-          viewsiteRequestError: ""
+          viewsiteRequestError: "",
+          userTables: userTables
         }, () => this.handleRequestUserDatabase(results.data._id));
       },
       (error) => {

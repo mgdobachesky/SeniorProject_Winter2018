@@ -46,15 +46,23 @@ function DisplayList(props) {
 
 var DataViewJSX = function() {
   let userTable = {};
-  for(let table of this.props.userTables) {
+  for(const table of this.props.userDatabase.tables) {
     if(table._id == this.props.element.formId) {
       userTable = table;
+    }
+  }
+  let formTitle = "";
+  if(this.props.userTables) {
+    for(const table of this.props.userTables) {
+      if(table._id == this.props.element.formId) {
+        formTitle = table.formTitle;
+      }
     }
   }
   return (
     <Content>
       <H2>
-        Data View
+        {formTitle}
       </H2>
 
       <DisplayList

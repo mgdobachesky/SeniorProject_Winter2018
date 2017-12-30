@@ -19,6 +19,7 @@ function ViewpageContent(props) {
             <Viewpage
             viewpage={viewpage}
             userDatabase={props.userDatabase}
+            userTables={props.userTables}
             onRequestUserDatabase={props.onRequestUserDatabase} />
           </div>
         </div>
@@ -45,6 +46,7 @@ var ViewsiteJSX = function() {
       viewsite={this.props.viewsite}
       viewpages={this.props.viewsite.viewpages}
       userDatabase={this.props.userDatabase}
+      userTables={this.props.userTables}
       onRequestUserDatabase={this.handleRequestUserDatabase} />
     </div>
   );
