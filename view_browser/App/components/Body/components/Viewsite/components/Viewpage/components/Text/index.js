@@ -7,12 +7,17 @@ import './text.css';
 
 class Text extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
   }
 
+  /*
+   * Render Text Element JSX view
+   */
   render() {
     return(TextJSX.call(this));
   }
 }
 
+// Export Text Element
 export default Text;

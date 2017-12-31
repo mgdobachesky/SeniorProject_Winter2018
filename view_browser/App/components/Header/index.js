@@ -7,9 +7,14 @@ import './header.css';
 
 class Header extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
   }
 
+  /*
+   * Render the Header JSX viewsite
+   * Only if a selected Viewsite exists
+   */
   render() {
     if(this.props.viewsite) {
       return(HeaderJSX.call(this));
@@ -19,4 +24,5 @@ class Header extends React.Component {
   }
 }
 
+// Export the Header
 export default Header;

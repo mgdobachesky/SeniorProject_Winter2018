@@ -2,7 +2,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-// Create links for each Viewpage a viewsite owns
+/*
+ * Create links for each Viewpage a viewsite owns
+ * Used in HeaderJSX
+ */
 function ViewpageLinks(props) {
   if(props.viewsite && props.viewpages) {
     const viewsiteName = props.viewsite.viewsiteName;
@@ -29,6 +32,9 @@ function ViewpageLinks(props) {
   }
 }
 
+/*
+ * Header JSX view
+ */
 var HeaderJSX = function() {
   return (
     <nav className="nav navbar navbar-expand-lg navbar-dark bg-primary">
@@ -65,4 +71,5 @@ var HeaderJSX = function() {
   );
 }
 
+// Export the Header JSX view
 export default HeaderJSX;

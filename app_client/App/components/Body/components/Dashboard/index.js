@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
     // Call parent constructor
     super(props);
 
-    // Service Class Definitions\
+    // Service Class Definitions
     this.manageViewsiteService = new ViewsiteService();
 
     // Viewsite Methods
@@ -39,6 +39,9 @@ class Dashboard extends React.Component {
     }
   }
 
+  /*
+   * Method used to create a new Viewsite
+   */
   handleCreateViewsite() {
     let requestData = {};
     let createViewsite = this.state.viewsite;
@@ -59,6 +62,9 @@ class Dashboard extends React.Component {
     });
   }
 
+  /*
+   * Method used to prepare the update form
+   */
   handleEditViewsite(event) {
     let editViewsite = this.state.viewsite;
     editViewsite._id = event._id;
@@ -71,6 +77,9 @@ class Dashboard extends React.Component {
     $("#createViewsite").hide(false);
   }
 
+  /*
+   * Method used to update an existing Viewsite
+   */
   handleUpdateViewsite() {
     let requestData = {};
     let updateViewsite = this.state.viewsite;
@@ -92,6 +101,9 @@ class Dashboard extends React.Component {
     });
   }
 
+  /*
+   * Method used to delete an existing Viewsite
+   */
   handleDeleteViewsite(event) {
     let requestData = {};
     requestData.viewsiteId = event._id;
@@ -106,6 +118,9 @@ class Dashboard extends React.Component {
     });
   }
 
+  /*
+   * Method used to clear the local Viewsite state
+   */
   handleClearLocalState() {
     let clearViewsite = this.state.viewsite;
     clearViewsite._id = "";
@@ -118,10 +133,17 @@ class Dashboard extends React.Component {
     });
   }
 
+  /*
+   * Method used to set the main Application state
+   * Passed down from the main Application
+   */
   handleSetGlobalState(newStateData, toSet) {
     this.props.onSetGlobalState(newStateData, toSet);
   }
 
+  /*
+   * Method used to change local state according to what the user is typing
+   */
   handleChange(event, toChange) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -133,11 +155,19 @@ class Dashboard extends React.Component {
     });
   }
 
+  /*
+   * React component lifecycle method the runs whenever the Dashboard mounts
+   * Used to hide the Viewsite forms
+   */
   componentDidMount() {
     $("#createViewsite").hide(false);
     $("#updateViewsite").hide(false);
   }
 
+  /*
+   * Render the JSX for the Dashboard
+   * Only if the user is logged in
+   */
   render() {
     if(this.props.loggedIn) {
       return(DashboardJSX.call(this));
@@ -147,4 +177,5 @@ class Dashboard extends React.Component {
   }
 }
 
+// Export the Dashboard
 export default Dashboard;

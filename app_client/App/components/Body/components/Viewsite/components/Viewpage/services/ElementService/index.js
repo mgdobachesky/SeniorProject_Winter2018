@@ -1,11 +1,13 @@
-// Service for interacting with API
+// Include required modules
 import axios from 'axios';
 
-// Import the location of the API
+// Import the API location
 import { API_LOCATION } from 'Constants';
 
 class ElementService {
-  // Create
+  /*
+   * HTTP call used to create Elements
+   */
   createElement(requestData) {
     // Prepare data for API call
     var prepareData = {};
@@ -20,7 +22,6 @@ class ElementService {
     } else if(requestData.kind === "dataView") {
       prepareData.formId = requestData.formId;
     }
-
     // Make API call
     return axios({
       url: '/create/elements',
@@ -33,7 +34,9 @@ class ElementService {
     });
   }
 
-  // Update
+  /*
+   * HTTP call used to update Elements
+   */
   updateElement(requestData) {
     // Prepare data for API call
     var prepareData = {};
@@ -49,7 +52,6 @@ class ElementService {
     } else if(requestData.kind === "dataView") {
       prepareData.formId = requestData.formId;
     }
-
     // Make API call
     return axios({
       url: '/update/elements',
@@ -62,7 +64,9 @@ class ElementService {
     });
   }
 
-  // Delete
+  /*
+   * HTTP call used to delete Elements
+   */
   deleteElement(requestData) {
     return axios({
       url: '/delete/elements',
@@ -81,4 +85,5 @@ class ElementService {
   }
 }
 
+// Export the HTTP service
 export default ElementService;

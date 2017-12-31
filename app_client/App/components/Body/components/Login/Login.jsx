@@ -1,6 +1,10 @@
 // Import required modules
 import React from 'react';
 
+/*
+ * Alert that notifies the User of any unsuccessful operations
+ * Used by LoginJSX
+ */
 var ErrorAlert = function(props) {
   if(props.loginError) {
     return (
@@ -13,6 +17,9 @@ var ErrorAlert = function(props) {
   }
 }
 
+/*
+ * View for the Login form
+ */
 var LoginJSX = function() {
   return (
     <div className="container">
@@ -38,7 +45,7 @@ var LoginJSX = function() {
           value={this.state.loginCredentials.username}
           onChange={this.handleChange} />
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="password">
             Password
@@ -62,4 +69,5 @@ var LoginJSX = function() {
   );
 }
 
+// Export the Login form view
 export default LoginJSX;

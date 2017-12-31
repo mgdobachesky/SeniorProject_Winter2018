@@ -1,7 +1,10 @@
 // Import required modules
 import React from 'react';
 
-var TextFormJSX = function() {
+/*
+ * Text Element JSX view
+ */
+var TextJSX = function() {
   return (
     <p>
       {this.props.element.textValue.split('\n').map(function(item, key) {
@@ -16,4 +19,5 @@ var TextFormJSX = function() {
   );
 }
 
-export default TextFormJSX;
+// Export Text Element JSX view
+export default TextJSX;

@@ -1,4 +1,4 @@
-// Required modules
+// Include required modules
 var userRecordsDao = require('../../services/userDatabases/userRecordsDao');
 
 // Handle JSON responses
@@ -7,7 +7,9 @@ function sendJSONresponse(res, status, content) {
   res.json(content);
 }
 
-// Create
+/*
+ * Controller used to create Records
+ */
 function userRecordsCreate(request, response) {
   userRecordsDao.userRecordsCreate(request)
   .then(function(results) {
@@ -17,7 +19,9 @@ function userRecordsCreate(request, response) {
   });
 }
 
-// Update
+/*
+ * Controller used to update existing Records
+ */
 function userRecordsUpdate(request, response) {
   userRecordsDao.userRecordsUpdate(request)
   .then(function(results) {
@@ -27,7 +31,9 @@ function userRecordsUpdate(request, response) {
   });
 }
 
-// Delete
+/*
+ * Controller used to delete existing Records
+ */
 function userRecordsDelete(request, response) {
   userRecordsDao.userRecordsDelete(request)
   .then(function(results) {
@@ -37,7 +43,7 @@ function userRecordsDelete(request, response) {
   });
 }
 
-// Export functions
+// Export controller methods
 module.exports.userRecordsCreate = userRecordsCreate;
 module.exports.userRecordsUpdate = userRecordsUpdate;
 module.exports.userRecordsDelete = userRecordsDelete;

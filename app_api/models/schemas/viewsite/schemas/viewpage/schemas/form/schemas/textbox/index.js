@@ -1,8 +1,10 @@
-// Require mongoose to make a schemas with
+// Include required modules
 var mongoose = require('mongoose');
+
+// Simplify Mongoose properties
 var Schema = mongoose.Schema;
 
-// Create child schema
+// Create Textbox Form Input schema
 var textboxSchema = new Schema({
   'textboxLabel': {
     'type': String,
@@ -10,5 +12,5 @@ var textboxSchema = new Schema({
   }
 });
 
-// Export child schema
+// Export Textbox Form Input schema
 module.exports = textboxSchema;

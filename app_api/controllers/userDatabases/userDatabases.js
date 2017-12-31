@@ -1,4 +1,4 @@
-// Required modules
+// Include required modules
 var userDatabasesDao = require('../../services/userDatabases/userDatabasesDao');
 
 // Handle JSON responses
@@ -7,7 +7,9 @@ function sendJSONresponse(res, status, content) {
   res.json(content);
 }
 
-// Read One
+/*
+ * Controller used to read a User Database
+ */
 function userDatabasesReadOne(request, response) {
   userDatabasesDao.userDatabasesReadOne(request)
   .then(function(results) {
@@ -17,7 +19,10 @@ function userDatabasesReadOne(request, response) {
   });
 }
 
-// Create
+/*
+ * Controller used to create User Databases
+ * Invoked after creating a Viewsite
+ */
 function userDatabasesCreate(request, response) {
   userDatabasesDao.userDatabasesCreate(request)
   .then(function(results) {
@@ -27,7 +32,10 @@ function userDatabasesCreate(request, response) {
   });
 }
 
-// Delete
+/*
+ * Controller used to delete User Databases
+ * Invoked after deleting a Viewsite
+ */
 function userDatabasesDelete(request, response) {
   userDatabasesDao.userDatabasesDelete(request)
   .then(function(results) {
@@ -37,7 +45,7 @@ function userDatabasesDelete(request, response) {
   });
 }
 
-// Export functions
+// Export controller methods
 module.exports.userDatabasesReadOne = userDatabasesReadOne;
 module.exports.userDatabasesCreate = userDatabasesCreate;
 module.exports.userDatabasesDelete = userDatabasesDelete;

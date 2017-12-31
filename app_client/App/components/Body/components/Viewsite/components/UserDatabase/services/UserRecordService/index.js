@@ -1,11 +1,13 @@
-// Service for interacting with API
+// Include required modules
 import axios from 'axios';
 
-// Import the location of the API
+// Include required modules
 import { API_LOCATION } from 'Constants';
 
 class UserRecordService {
-  // Create
+  /*
+   * HTTP call used to create User Records
+   */
   createUserRecord(requestData) {
     return axios({
       url: '/create/user_records',
@@ -22,7 +24,9 @@ class UserRecordService {
     });
   }
 
-  // Update
+  /*
+   * HTTP call used to update User Records
+   */
   updateUserRecord(requestData) {
     return axios({
       url: '/update/user_records',
@@ -40,7 +44,9 @@ class UserRecordService {
     });
   }
 
-  // Delete
+  /*
+   * HTTP call used to delete User Records
+   */
   deleteUserRecord(requestData) {
     return axios({
       url: '/delete/user_records',
@@ -58,4 +64,5 @@ class UserRecordService {
   }
 }
 
+// Export the HTTP service
 export default UserRecordService;

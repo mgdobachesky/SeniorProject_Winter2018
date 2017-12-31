@@ -10,9 +10,13 @@ class TextView extends React.Component {
     super(props);
   }
 
+  /*
+   * Render Text View JSX view
+   */
   render() {
     return(TextViewJSX.call(this));
   }
 }
 
+// Export Text View
 export default TextView;

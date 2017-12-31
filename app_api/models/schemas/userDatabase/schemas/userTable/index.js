@@ -1,8 +1,10 @@
-// Require mongoose to make a schemas with
+// Include required modules
 var mongoose = require('mongoose');
+
+// Simplify Mongoose properties
 var Schema = mongoose.Schema;
 
-// Require child schemas
+// Require dependent schemas
 var userRecordSchema = require('./schemas/userRecord');
 
 // Create user table sub-schema for the user database schema

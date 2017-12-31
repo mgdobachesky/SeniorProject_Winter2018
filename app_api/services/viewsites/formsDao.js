@@ -1,13 +1,13 @@
-// Required modules
+// Include required modules
 var mongoose = require('mongoose');
 var viewsites = mongoose.model('viewsite');
 
-// Required DAOs for cross collection operations
+// Include DAOs required for cross-collection modification
 var userTablesDao = require('../userDatabases/userTablesDao');
 
-// ** CRUD OPERATIONS **
-
-// Create operations
+/*
+ * Method that allows Users to create Form Elements
+ */
 function formsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId) {
@@ -54,7 +54,9 @@ function formsCreate(request) {
   return promise;
 }
 
-// Update operations
+/*
+ * Method that allows Users to update Form Elements
+ */
 function formsUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId || !request.body.elementId) {
@@ -95,7 +97,9 @@ function formsUpdate(request) {
   return promise;
 }
 
-// Delete operations
+/*
+ * Method that allows Users to delete Form Elements
+ */
 function formsDelete(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId || !request.body.elementId) {
@@ -140,7 +144,7 @@ function formsDelete(request) {
   return promise;
 }
 
-// Export functions
+// Export public methods
 module.exports.formsCreate = formsCreate;
 module.exports.formsUpdate = formsUpdate;
 module.exports.formsDelete = formsDelete;

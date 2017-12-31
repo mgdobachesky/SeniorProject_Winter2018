@@ -8,12 +8,17 @@ import './landingPage.css';
 
 class LandingPage extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
   }
 
+  /*
+   * Render Landing Page JSX view
+   */
   render() {
     return(LandingPageJSX.call(this));
   }
 }
 
+// Export Landing Page
 export default LandingPage;

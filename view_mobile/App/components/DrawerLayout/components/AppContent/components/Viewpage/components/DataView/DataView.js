@@ -5,6 +5,10 @@ import { Text, Content, List, ListItem, H2} from 'native-base';
 // Import requred components
 import styles from './styles.js';
 
+/*
+ * Define each record of the User Table
+ * Used by DisplayList
+ */
 function DataList(props) {
   if(props.records) {
     return props.records.map((record, index) => {
@@ -31,6 +35,10 @@ function DataList(props) {
   }
 }
 
+/*
+ * Display a list of Data View Records
+ * Used by DataViewJSX
+ */
 function DisplayList(props) {
   if(props.userTable.records) {
     return(
@@ -44,13 +52,18 @@ function DisplayList(props) {
   }
 }
 
+/*
+ * Data View JSX view
+ */
 var DataViewJSX = function() {
+  // Determine what User Table this DataView represents
   let userTable = {};
   for(const table of this.props.userDatabase.tables) {
     if(table._id == this.props.element.formId) {
       userTable = table;
     }
   }
+  // Determine the title of the Form represented by the User Table this Data View displays
   let formTitle = "";
   if(this.props.userTables) {
     for(const table of this.props.userTables) {
@@ -59,6 +72,7 @@ var DataViewJSX = function() {
       }
     }
   }
+
   return (
     <Content>
       <H2>
@@ -71,4 +85,5 @@ var DataViewJSX = function() {
   );
 }
 
+// Export Data View JSX view
 export default DataViewJSX;

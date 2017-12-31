@@ -1,5 +1,7 @@
-// Require mongoose to make a schemas with
+// Include required modules
 var mongoose = require('mongoose');
+
+// Simplify Mongoose properties
 var Schema = mongoose.Schema;
 
 // Require child schemas
@@ -7,11 +9,11 @@ var textSchema = require('./schemas/text');
 var formSchema = require('./schemas/form');
 var dataViewSchema = require('./schemas/dataView');
 
-// Define element parent class schemas
+// Define element parent class schema
 var elementSchema = new Schema({},
   { discriminatorKey: 'kind' });
 
-// Create viewpage schema
+// Create main Viewpage schema
 var viewpageSchema = new Schema({
   'viewpageName': {
     'type': String,
@@ -24,7 +26,7 @@ var viewpageSchema = new Schema({
   'elements': [elementSchema]
 });
 
-// Get the array of elements in the viewpage
+// Get the parent array of Elements in the Viewpage
 var elementArray = viewpageSchema.path('elements');
 
 // Create Element child class discriminators

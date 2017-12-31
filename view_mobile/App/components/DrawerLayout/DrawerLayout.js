@@ -29,6 +29,10 @@ import {
 import AppContent from './components/AppContent';
 import styles from './styles.js';
 
+/*
+ * Display of each individual link in the Navigation Drawer
+ * Used By NavigationView
+ */
 function ViewpageLinks(props) {
   if(props.viewpages) {
     return props.viewpages.map((viewpage, index) => {
@@ -48,6 +52,11 @@ function ViewpageLinks(props) {
   }
 }
 
+/*
+ * Display of inside the Navigation Drawer, and contains links to
+ * each Viewpage
+ * Used by DrawerLayoutJSX
+ */
 function NavigationView(props) {
   if(props.viewsite._id) {
     return(
@@ -66,6 +75,11 @@ function NavigationView(props) {
   }
 }
 
+/*
+ * Content that is populated when a user clicks the associated link
+ * in the Navigation Drawer
+ * Used by DrawerLayoutJSX
+ */
 function NavigationContent(props) {
   if(props.viewsite._id) {
     return (
@@ -99,6 +113,9 @@ function NavigationContent(props) {
   }
 }
 
+/*
+ * Drawer Layout JSX view
+ */
 var DrawerLayoutJSX = function() {
   return (
     <Drawer
@@ -138,4 +155,5 @@ var DrawerLayoutJSX = function() {
   );
 }
 
+// Export the Drawer Layout JSX view
 export default DrawerLayoutJSX;

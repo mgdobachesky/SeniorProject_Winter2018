@@ -5,12 +5,21 @@ import React from 'react';
 import ViewpageForm from './components/ViewpageForm';
 import Viewpage from './components/Viewpage';
 
+/*
+ * Method used to prepare the create Viewpage forms for
+ * creating a Viewpage
+ * Used in ViewsiteJSX
+ */
 function prepareCreateViewpage() {
   $("#createViewpage").toggle("medium");
   $("#updateViewpage").hide(false);
   this.handleClearLocalState();
 }
 
+/*
+ * Method used to hide every form
+ * Used when switching Viewpage tabs for a smoother UI experience
+ */
 function clearAllForms() {
   $(".createText").hide(false);
   $(".updateText").hide(false);
@@ -20,7 +29,10 @@ function clearAllForms() {
   $(".updateDataView").hide(false);
 }
 
-// Create list of Viewpages a Viewsite owns
+/*
+ * Create list of Viewpages a Viewsite owns
+ * Used by ViewsiteJSX in the 'Manage Viewpages' tab
+ */
 function ViewpageList(props) {
   if(props.viewpages && props.viewpages.length >= 1) {
     return props.viewpages.map((viewpage, index) => {
@@ -44,7 +56,7 @@ function ViewpageList(props) {
           permissionLevelMessage = "Public";
           break;
       }
-
+      
       let editClick = {
         _id: _id,
         viewsiteId: viewsiteId,
@@ -88,7 +100,10 @@ function ViewpageList(props) {
   }
 }
 
-// Create list of tabs for Viewpages a Viewsite owns
+/*
+ * Create list of tabs for Viewpages a Viewsite owns
+ * Used by ViewsiteJSX
+ */
 function ViewpageTabs(props) {
   if(props.viewpages && props.viewpages.length >= 1) {
     return props.viewpages.map((viewpage, index) => {
@@ -113,7 +128,10 @@ function ViewpageTabs(props) {
   }
 }
 
-// Create list of Viewpages content a Viewsite owns
+/*
+ * Create content for each Viewpage owned by the Viewsite
+ * Used by the ViewsiteJSX
+ */
 function ViewpageContent(props) {
   if(props.viewpages && props.viewpages.length >= 1) {
     return props.viewpages.map((viewpage, index) => {
@@ -137,6 +155,9 @@ function ViewpageContent(props) {
   }
 }
 
+/*
+ * Viewsite JSX view
+ */
 var ViewsiteJSX = function() {
   return (
     <div className="container-fluid">
@@ -242,4 +263,5 @@ var ViewsiteJSX = function() {
   );
 }
 
+// Export the Viewsite JSX view
 export default ViewsiteJSX;

@@ -1,6 +1,9 @@
 // Import required modules
 import React from 'react';
 
+/*
+ * Alert that notifies users of any unsuccessful operations
+ */
 var ErrorAlert = function(props) {
   if(props.viewsiteRequestError) {
     return (
@@ -13,6 +16,9 @@ var ErrorAlert = function(props) {
   }
 }
 
+/*
+ * ViewsiteChoose JSX view
+ */
 var ViewsiteChooseJSX = function() {
   return (
     <div className="container">
@@ -52,4 +58,5 @@ var ViewsiteChooseJSX = function() {
   );
 }
 
+// Export Viewsite Choose JSX view
 export default ViewsiteChooseJSX;

@@ -1,6 +1,10 @@
 // Import required modules
 import React from 'react';
 
+/*
+ * Create a cell for each datum in the record set
+ * Used by Records
+ */
 function Data(props) {
   if(props.record.data) {
     return props.record.data.map((datum, index) => {
@@ -13,6 +17,10 @@ function Data(props) {
   }
 }
 
+/*
+ * Create a table row for each record in the User Table
+ * Used by DataViewJSX
+ */
 function Records(props) {
   if(props.userTable.records) {
     return props.userTable.records.map((record, index) => {
@@ -27,7 +35,11 @@ function Records(props) {
   }
 }
 
+/*
+ * Data View JSX view
+ */
 var DataViewJSX = function() {
+  // Find the User Table associated with the selected Form Element Data View
   let userTable = {};
   if(this.props.userDatabase.tables) {
     for(const databaseTable of this.props.userDatabase.tables) {
@@ -36,6 +48,7 @@ var DataViewJSX = function() {
       }
     }
   }
+  // Find the appropriate Form Title for the Form Element Data View
   let formTitle = "";
   if(this.props.userTables) {
     for(const userTable of this.props.userTables) {
@@ -59,4 +72,5 @@ var DataViewJSX = function() {
   );
 }
 
+// Export Data View JSX view
 export default DataViewJSX;

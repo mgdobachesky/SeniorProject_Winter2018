@@ -1,11 +1,13 @@
-// Service for interacting with API
+// Import required modules
 import axios from 'axios';
 
-// Import the location of the API
+// Import the API location
 import { API_LOCATION } from 'Constants';
 
 class FormInputService {
-  // Create
+  /*
+   * HTTP call used to create Form Inputs
+   */
   createFormInput(requestData) {
     // Prepare data for API call
     var prepareData = {};
@@ -17,7 +19,6 @@ class FormInputService {
     if(requestData.kind === "textbox") {
       prepareData.textboxLabel = requestData.textboxLabel;
     }
-
     // Make API call
     return axios({
       url: '/create/form_inputs',
@@ -30,7 +31,9 @@ class FormInputService {
     });
   }
 
-  // Update
+  /*
+   * HTTP call used to update Form Inputs
+   */
   updateFormInput(requestData) {
     // Prepare data for API call
     var prepareData = {};
@@ -43,7 +46,6 @@ class FormInputService {
     if(requestData.kind === "textbox") {
       prepareData.textboxLabel = requestData.textboxLabel;
     }
-
     // Make API call
     return axios({
       url: '/update/form_inputs',
@@ -56,7 +58,9 @@ class FormInputService {
     });
   }
 
-  // Delete
+  /*
+   * HTTP call used to delete Form Inputs
+   */
   deleteFormInput(requestData) {
     return axios({
       url: '/delete/form_inputs',
@@ -76,4 +80,5 @@ class FormInputService {
   }
 }
 
+// Export the HTTP service
 export default FormInputService;

@@ -1,4 +1,4 @@
-// Required modules
+// Include required modules
 var express = require('express');
 var router = express.Router();
 
@@ -17,10 +17,8 @@ var controllerUserTables = require('../controllers/userDatabases/userTables');
 var controllerUserRecords = require('../controllers/userDatabases/userRecords');
 
 /*
- * Users Routes
+ * Routes for public User methods
  */
-
-// Create routes for users
 router.get('/read_one/users', controllerUsers.usersReadOne);
 router.post('/create/users', controllerUsers.usersCreate);
 router.put('/update/users', controllerUsers.usersUpdate);
@@ -29,39 +27,43 @@ router.post('/login/users', controllerUsers.usersLogIn);
 router.get('/logout/users', controllerUsers.usersLogout);
 
 /*
- * Viewsites Routes
+ * Routes for public Viewsite methods
  */
-
-// Create routes for viewsites
 router.get('/read_one/viewsites/:viewsiteName', controllerViewsites.viewsitesReadOne);
 router.get('/read_all/viewsites', controllerViewsites.viewsitesReadAll);
 router.post('/create/viewsites', controllerViewsites.viewsitesCreate);
 router.put('/update/viewsites', controllerViewsites.viewsitesUpdate);
 router.delete('/delete/viewsites', controllerViewsites.viewsitesDelete);
 
-// Create routes for viewpages
+/*
+ * Routes for public Viewpage methods
+ */
 router.post('/create/viewpages', controllerViewpages.viewpagesCreate);
 router.put('/update/viewpages', controllerViewpages.viewpagesUpdate);
 router.delete('/delete/viewpages', controllerViewpages.viewpagesDelete);
 
-// Create routes for text
+/*
+ * Routes for public Element methods
+ */
 router.post('/create/elements', controllerElements.elementsCreate);
 router.put('/update/elements', controllerElements.elementsUpdate);
 router.delete('/delete/elements', controllerElements.elementsDelete);
 
-// Create routes for forms
+/*
+ * Routes for public Form Input methods
+ */
 router.post('/create/form_inputs', controllerFormInputs.formInputsCreate);
 router.put('/update/form_inputs', controllerFormInputs.formInputsUpdate);
 router.delete('/delete/form_inputs', controllerFormInputs.formInputsDelete);
 
 /*
- * User Databases Routes
+ * Routes for public User Database methods
  */
-
-// Create routes for userDatabases
 router.post('/read_one/user_databases', controllerUserDatabases.userDatabasesReadOne);
 
-// Create routes for userRecords
+/*
+ * Routes for public User Record methods
+ */
 router.post('/create/user_records', controllerUserRecords.userRecordsCreate);
 router.put('/update/user_records', controllerUserRecords.userRecordsUpdate);
 router.delete('/delete/user_records', controllerUserRecords.userRecordsDelete);

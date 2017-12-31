@@ -15,18 +15,29 @@ class FormForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  /*
+   * Method to change state based on what a user types
+   * Passed down from Viewpage
+   */
   handleChange(event) {
     this.props.onChange(event, "form");
   }
 
+  /*
+   * Method that constrols what happens after the form has been submitted
+   */
   handleSubmit(event) {
     event.preventDefault();
     this.props.onSubmit("form");
   }
 
+  /*
+   * Render that Form Form JSX view
+   */
   render() {
     return(FormFormJSX.call(this));
   }
 }
 
+// Export the Form Form
 export default FormForm;

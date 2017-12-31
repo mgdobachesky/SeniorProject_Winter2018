@@ -1,6 +1,9 @@
 // Import required modules
 import React from 'react';
 
+/*
+ * Home view
+ */
 var HomeJSX = function() {
   return (
     <div>
@@ -20,4 +23,5 @@ var HomeJSX = function() {
   );
 }
 
+// Export the Home view
 export default HomeJSX;

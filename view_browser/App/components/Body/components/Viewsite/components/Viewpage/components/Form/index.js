@@ -29,10 +29,17 @@ class Form extends React.Component {
     }
   }
 
+  /*
+   * Method that allows components to request a Viewsite's associated User Database
+   * Passed down from the main Application
+   */
   handleRequestUserDatabase(viewsiteId) {
     this.props.onRequestUserDatabase(viewsiteId);
   }
 
+  /*
+   * Method that update local state based on what a use types
+   */
   handleChange(event, toChange) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -44,6 +51,9 @@ class Form extends React.Component {
     });
   }
 
+  /*
+   * Method that controls what happens after a form has been submitted
+   */
   handleSubmit(event) {
     event.preventDefault();
     let requestData = {};
@@ -65,6 +75,10 @@ class Form extends React.Component {
     });
   }
 
+  /*
+   * React component lifecycle method that is run after this component mounts
+   * Used for loading Form's associated Form Inputs
+   */
   componentDidMount(nextProps) {
     if(this.props.element.formInputs && this.props.element.formInputs.length >= 1) {
       this.setState({
@@ -73,9 +87,13 @@ class Form extends React.Component {
     }
   }
 
+  /*
+   * Render Form JSX view
+   */
   render() {
     return(FormJSX.call(this));
   }
 }
 
+// Export Form
 export default Form;

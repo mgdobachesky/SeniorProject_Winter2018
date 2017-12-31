@@ -1,10 +1,10 @@
-// Required modules
+// Include required modules
 var mongoose = require('mongoose');
 var viewsites = mongoose.model('viewsite');
 
-// ** CRUD OPERATIONS **
-
-// Create operations
+/*
+ * Method that allows Users to create Data View Elements
+ */
 function dataViewsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId) {
@@ -43,7 +43,9 @@ function dataViewsCreate(request) {
   return promise;
 }
 
-// Update operations
+/*
+ * Method that allows Users to update Data View Elements
+ */
 function dataViewsUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId || !request.body.elementId) {
@@ -84,7 +86,9 @@ function dataViewsUpdate(request) {
   return promise;
 }
 
-// Delete operations
+/*
+ * Method that allows Users to delete Data View Elements
+ */
 function dataViewsDelete(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId || !request.body.elementId) {
@@ -123,7 +127,7 @@ function dataViewsDelete(request) {
   return promise;
 }
 
-// Export functions
+// Export public methods
 module.exports.dataViewsCreate = dataViewsCreate;
 module.exports.dataViewsUpdate = dataViewsUpdate;
 module.exports.dataViewsDelete = dataViewsDelete;

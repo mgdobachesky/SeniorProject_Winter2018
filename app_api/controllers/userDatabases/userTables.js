@@ -1,4 +1,4 @@
-// Required modules
+// Include required modules
 var userTablesDao = require('../../services/userDatabases/userTablesDao');
 
 // Handle JSON responses
@@ -7,7 +7,10 @@ function sendJSONresponse(res, status, content) {
   res.json(content);
 }
 
-// Create
+/*
+ * Controller used to create User Tables
+ * Invoked after creating a Form Element
+ */
 function userTablesCreate(request, response) {
   userTablesDao.userTablesCreate(request)
   .then(function(results) {
@@ -17,7 +20,10 @@ function userTablesCreate(request, response) {
   });
 }
 
-// Delete
+/*
+ * Controller used to delete User Tables
+ * Invoked after deleting a Form Element
+ */
 function userTablesDelete(request, response) {
   userTablesDao.userTablesDelete(request)
   .then(function(results) {
@@ -27,6 +33,6 @@ function userTablesDelete(request, response) {
   });
 }
 
-// Export functions
+// Export controller methods
 module.exports.userTablesCreate = userTablesCreate;
 module.exports.userTablesDelete = userTablesDelete;

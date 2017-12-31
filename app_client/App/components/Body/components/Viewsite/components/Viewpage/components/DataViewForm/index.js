@@ -15,18 +15,29 @@ class DataViewForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  /*
+   * Method to change state based on what a user types
+   * Passed down from Viewpage
+   */
   handleChange(event) {
     this.props.onChange(event, "dataView");
   }
 
+  /*
+   * Method that constrols what happens after the form has been submitted
+   */
   handleSubmit(event) {
     event.preventDefault();
     this.props.onSubmit("dataView");
   }
 
+  /*
+   * Render that Data View Form JSX view
+   */
   render() {
     return(DataViewFormJSX.call(this));
   }
 }
 
+// Export the Data View Form
 export default DataViewForm;

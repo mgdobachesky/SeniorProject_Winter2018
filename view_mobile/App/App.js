@@ -6,7 +6,10 @@ import { NativeRouter, AndroidBackButton } from 'react-router-native';
 import DrawerLayout from './components/DrawerLayout';
 import styles from './styles.js';
 
-// Create main App
+/*
+ * Create main Application
+ * Nest it inside a Native Router to allow for React Native navigation
+ */
 var AppJSX = function() {
   return(
     <NativeRouter>
@@ -16,4 +19,6 @@ var AppJSX = function() {
     </NativeRouter>
   );
 }
+
+// Export main Application
 export default AppJSX;

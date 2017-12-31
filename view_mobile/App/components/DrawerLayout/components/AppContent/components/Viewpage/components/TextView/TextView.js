@@ -5,6 +5,9 @@ import { Content, Text } from 'native-base';
 // Import requred components
 import styles from './styles.js';
 
+/*
+ * Text View JSX view
+ */
 var TextViewJSX = function() {
   return (
     <Content>
@@ -19,4 +22,5 @@ var TextViewJSX = function() {
   );
 }
 
+// Export TextView JSX view
 export default TextViewJSX;

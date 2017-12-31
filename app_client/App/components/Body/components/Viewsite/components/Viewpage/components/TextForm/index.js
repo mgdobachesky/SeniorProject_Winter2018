@@ -15,18 +15,29 @@ class TextForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  /*
+   * Method to change state based on what a user types
+   * Passed down from Viewpage
+   */
   handleChange(event) {
     this.props.onChange(event, "text");
   }
 
+  /*
+   * Method that constrols what happens after the form has been submitted
+   */
   handleSubmit(event) {
     event.preventDefault();
     this.props.onSubmit("text");
   }
 
+  /*
+   * Render that Text Form JSX view
+   */
   render() {
     return(TextFormJSX.call(this));
   }
 }
 
+// Export the Text Form
 export default TextForm;

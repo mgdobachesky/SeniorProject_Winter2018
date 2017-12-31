@@ -1,10 +1,12 @@
-// Required modules
+// Include required modules
 var mongoose = require('mongoose');
 var userDatabases = mongoose.model('userDatabase');
 
-// ** CRUD OPERATIONS **
 
-// Create operations
+/*
+ * Method that allows Form Elements to create a User Table
+ * Invoked after creating a Form Element
+ */
 function userTablesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId) {
@@ -42,7 +44,10 @@ function userTablesCreate(request) {
   return promise;
 }
 
-// Delete operations
+/*
+ * Method that allows Form Elements to delete a User Table
+ * Invoked after deleting a Form Element
+ */
 function userTablesDelete(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.elementId) {
@@ -81,6 +86,6 @@ function userTablesDelete(request) {
   return promise;
 }
 
-// Export functions
+// Export all public methods
 module.exports.userTablesCreate = userTablesCreate;
 module.exports.userTablesDelete = userTablesDelete;

@@ -1,6 +1,10 @@
 // Import required modules
 import React from 'react';
 
+/*
+ * Alert that notifies users of any successful operation
+ * Used by ViewsiteFormJSX
+ */
 var SuccessAlert = function(props) {
   if(props.viewsiteSuccess) {
     return (
@@ -13,6 +17,10 @@ var SuccessAlert = function(props) {
   }
 }
 
+/*
+ * Alert that notifies users of any unsuccessful operation
+ * Used by ViewsiteFormJSX
+ */
 var ErrorAlert = function(props) {
   if(props.viewsiteError) {
     return (
@@ -25,6 +33,9 @@ var ErrorAlert = function(props) {
   }
 }
 
+/*
+ * Viewsite Form view
+ */
 var ViewsiteFormJSX = function() {
   return (
     <div className="container-fluid">
@@ -75,4 +86,5 @@ var ViewsiteFormJSX = function() {
   );
 }
 
+// Export the Viewsite Form JSX
 export default ViewsiteFormJSX;

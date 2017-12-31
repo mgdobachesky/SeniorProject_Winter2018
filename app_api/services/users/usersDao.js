@@ -1,15 +1,15 @@
-// Require required modules
+// Include required modules
 var bcrypt = require('bcrypt');
 var mongoose = require('mongoose');
 var users = mongoose.model('user');
 
-// Required DAOs for cross collection operations
+// Include DAOs required for cross-collection modification
 var viewsitesDao = require('../viewsites/viewsitesDao');
 var userDatabasesDao = require('../userDatabases/userDatabasesDao');
 
-// ** CRUD OPERATIONS **
-
-// Read operations
+/*
+ * Method that allows a User to look up what account is active in their session
+ */
 function usersReadOne(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.session.userId) {
@@ -33,7 +33,9 @@ function usersReadOne(request) {
   return promise;
 }
 
-// Create operations
+/*
+ * Method that allows Users sign-up
+ */
 function usersCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.username || !request.body.password) {
@@ -72,7 +74,9 @@ function usersCreate(request) {
   return promise;
 }
 
-// Update operations
+/*
+ * Method that allows Users to modify their account details
+ */
 function usersUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.session.userId) {
@@ -114,7 +118,10 @@ function usersUpdate(request) {
   return promise;
 }
 
-// Delete operations
+/*
+ * Method that allows Users to delete their account
+ * This also deletes a User's Viewsites & Databases
+ */
 function usersDelete(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.session.userId) {
@@ -151,6 +158,9 @@ function usersDelete(request) {
   return promise;
 }
 
+/*
+ * Method that allows Users to begin an active session
+ */
 function usersLogIn(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.username || !request.body.password) {
@@ -184,6 +194,9 @@ function usersLogIn(request) {
   return promise;
 }
 
+/*
+ * Method that destroys a User's active session
+ */
 function usersLogout(request) {
   var promise = new Promise(function(resolve, reject) {
     if(request.session) {
@@ -203,7 +216,7 @@ function usersLogout(request) {
   return promise;
 }
 
-// Export functions
+// Export public methods
 module.exports.usersReadOne = usersReadOne;
 module.exports.usersCreate = usersCreate;
 module.exports.usersUpdate = usersUpdate;

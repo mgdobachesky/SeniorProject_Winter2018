@@ -21,6 +21,9 @@ class ViewsiteChoose extends React.Component {
     };
   }
 
+  /*
+   * Method that sets local state based on what a user types
+   */
   handleChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -30,11 +33,18 @@ class ViewsiteChoose extends React.Component {
     });
   }
 
+  /*
+   * Method that controls what happens after the ViewsiteChoose form has been submitted
+   */
   handleSubmit(event) {
     event.preventDefault();
     this.props.onRequestViewsite(this.state.viewsiteName);
   }
 
+  /*
+   * Render ViewsiteChoose
+   * Only if no Viewsite is currently selected
+   */
   render() {
     if(this.props.viewsite) {
       return(<Redirect to={'/viewsites/' + this.props.viewsite.viewsiteName} />);
@@ -44,4 +54,5 @@ class ViewsiteChoose extends React.Component {
   }
 }
 
+// Export ViewsiteChoose
 export default ViewsiteChoose;

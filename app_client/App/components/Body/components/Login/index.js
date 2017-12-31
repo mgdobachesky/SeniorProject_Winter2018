@@ -24,6 +24,9 @@ class Login extends React.Component {
     }
   }
 
+  /*
+   * Method that allows local state to reflect what a User types
+   */
   handleChange(event) {
     const target = event.target;
     const value = target.value;
@@ -35,12 +38,19 @@ class Login extends React.Component {
     });
   }
 
+  /*
+   * Method that controls what happens after a form has been submited
+   */
   handleSubmit(event) {
     event.preventDefault();
     let loginCredentials = this.state.loginCredentials;
     this.props.onLoginUser(loginCredentials);
   }
 
+  /*
+   * Render the Login form view
+   * Only if a user is not logged in
+   */
   render() {
     if(this.props.loggedIn) {
       return(<Redirect to="/" />);
@@ -50,4 +60,5 @@ class Login extends React.Component {
   }
 }
 
+// Export the Login form
 export default Login;

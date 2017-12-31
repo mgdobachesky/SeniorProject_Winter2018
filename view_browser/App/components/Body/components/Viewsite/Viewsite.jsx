@@ -5,6 +5,10 @@ import React from 'react';
 import Viewpage from './components/Viewpage';
 import LandingPage from './components/LandingPage';
 
+/*
+ * Displays the content of each individual Viewpage
+ * Used by ViewsiteJSX
+ */
 function ViewpageContent(props) {
   if(props.viewpages && props.viewpages.length >= 1) {
     return props.viewpages.map((viewpage) => {
@@ -30,6 +34,9 @@ function ViewpageContent(props) {
   }
 }
 
+/*
+ * Viewsite JSX view
+ */
 var ViewsiteJSX = function() {
   return (
     <div className="tab-content" id="nav-tabContent">
@@ -52,4 +59,5 @@ var ViewsiteJSX = function() {
   );
 }
 
+// Export Viewsite JSX view
 export default ViewsiteJSX;

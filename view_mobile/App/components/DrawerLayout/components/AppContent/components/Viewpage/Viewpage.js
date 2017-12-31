@@ -8,6 +8,10 @@ import FormView from './components/FormView';
 import DataView from './components/DataView';
 import styles from './styles.js';
 
+/*
+ * List of Elements owned by selected Viewpage, sorted by kind
+ * Used by ViewpageJSX
+ */
 function ElementList(props) {
   if(props.elements) {
     return props.elements.map((element, index) => {
@@ -40,6 +44,9 @@ function ElementList(props) {
   }
 }
 
+/*
+ * Viewpage JSX view
+ */
 var ViewpageJSX = function() {
   return (
     <Content>
@@ -56,4 +63,5 @@ var ViewpageJSX = function() {
   );
 }
 
+// Export Viewpage JSX view
 export default ViewpageJSX;

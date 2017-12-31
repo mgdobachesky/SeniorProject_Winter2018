@@ -1,11 +1,13 @@
-// Service for interacting with API
+// Import required modules
 import axios from 'axios';
 
-// Import the location of the API
+// Import the API location
 import { API_LOCATION } from 'Constants';
 
 class ViewpageService {
-  // Create
+  /*
+   * HTTP call used to create Viewpages
+   */
   createViewpage(requestData) {
     return axios({
       url: '/create/viewpages',
@@ -22,7 +24,9 @@ class ViewpageService {
     });
   }
 
-  // Update
+  /*
+   * HTTP call used to update Viewpages
+   */
   updateViewpage(requestData) {
     return axios({
       url: '/update/viewpages',
@@ -40,7 +44,9 @@ class ViewpageService {
     });
   }
 
-  // Delete
+  /*
+   * HTTP call used to delete Viewpages
+   */
   deleteViewpage(requestData) {
     return axios({
       url: '/delete/viewpages',
@@ -57,4 +63,5 @@ class ViewpageService {
   }
 }
 
+// Export the HTTP service
 export default ViewpageService;

@@ -4,7 +4,20 @@ import React from 'react';
 // Import requred components
 import TextboxForm from './components/TextboxForm';
 
-// Create list of Textboxs a Form owns
+/*
+ * Method used to prepare the create form for use
+ * Used in FormJSX
+ */
+var prepareCreateTextbox = function() {
+  $( ".createTextbox" ).toggle("medium");
+  $( ".updateTextbox" ).hide(false);
+  this.handleClearLocalState();
+}
+
+/*
+ * Create list of Textboxs a Form owns
+ * Used by FormJSX
+ */
 function FormInputList(props) {
   if(props.formInputs && props.formInputs.length >= 1) {
     const viewsiteId = props.viewsiteId;
@@ -32,6 +45,10 @@ function FormInputList(props) {
   }
 }
 
+/*
+ * Method used to display individual Form Inputs
+ * Used by FormInputList
+ */
 function TextboxFormInput(props) {
   let editClick = {
     viewsiteId: props.viewsiteId,
@@ -76,12 +93,9 @@ function TextboxFormInput(props) {
   );
 }
 
-var prepareCreateTextbox = function() {
-  $( ".createTextbox" ).toggle("medium");
-  $( ".updateTextbox" ).hide(false);
-  this.handleClearLocalState();
-}
-
+/*
+ * Form JSX view
+ */
 var FormJSX = function() {
   return(
     <div key={this.props.element._id} className="card border-primary mb-3">
@@ -164,4 +178,5 @@ var FormJSX = function() {
   );
 }
 
+// Export the Form JSX view
 export default FormJSX;

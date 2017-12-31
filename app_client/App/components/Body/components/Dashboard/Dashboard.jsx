@@ -5,13 +5,21 @@ import React from 'react';
 import ViewsiteForm from './components/ViewsiteForm';
 import UserForm from '../UserForm';
 
+/*
+ * Function used to hide Viewsite forms & clear local Viewsite state
+ * in preparation for a fresh create Viewsite form
+ * Used in the Dashboard view
+ */
 function prepareCreateViewsite() {
   $("#createViewsite").toggle("medium");
   $("#updateViewsite").hide(false);
   this.handleClearLocalState();
 }
 
-// Create list of Viewsites a user owns
+/*
+ * Create list of Viewsites a user owns
+ * Used by the Dashboard view
+ */
 function ViewsiteList(props) {
   if(props.viewsites && props.viewsites.length >= 1) {
     return props.viewsites.map((viewsite, index) => {
@@ -62,6 +70,9 @@ function ViewsiteList(props) {
   }
 }
 
+/*
+ * Create the Dashboard JSX view
+ */
 var DashboardJSX = function() {
   return (
     <div className="container-fluid">
@@ -129,7 +140,7 @@ var DashboardJSX = function() {
                   onSubmit={this.handleCreateViewsite} />
                 </div>
               </div>
-              
+
               <div id="updateViewsite" className="card mb-3">
                 <div className="card-body">
                   <ViewsiteForm
@@ -171,4 +182,5 @@ var DashboardJSX = function() {
   );
 }
 
+// Export the Dashboard JSX view
 export default DashboardJSX;

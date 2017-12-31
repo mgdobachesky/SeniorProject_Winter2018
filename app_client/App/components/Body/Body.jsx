@@ -9,6 +9,10 @@ import UserForm from './components/UserForm';
 import Viewsite from './components/Viewsite';
 import Home from './components/Home';
 
+/*
+ * Create the Body view
+ * Used as a router to determine what content to display
+ */
 var BodyJSX = function() {
   return (
     <Switch>
@@ -48,4 +52,5 @@ var BodyJSX = function() {
   );
 }
 
+// Export the view for the Body
 export default BodyJSX;

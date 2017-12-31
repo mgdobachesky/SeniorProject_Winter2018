@@ -1,10 +1,10 @@
-// Required modules
+// Include required modules
 var mongoose = require('mongoose');
 var viewsites = mongoose.model('viewsite');
 
-// ** CRUD OPERATIONS **
-
-// Create operations
+/*
+ * Method that allows Users to create Text Elements
+ */
 function textCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId) {
@@ -43,7 +43,9 @@ function textCreate(request) {
   return promise;
 }
 
-// Update operations
+/*
+ * Method that allows Users to update Text Elements
+ */
 function textUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId || !request.body.elementId) {
@@ -84,7 +86,9 @@ function textUpdate(request) {
   return promise;
 }
 
-// Delete operations
+/*
+ * Method that allows Users to delete Text Elements
+ */
 function textDelete(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId || !request.body.elementId) {
@@ -123,7 +127,7 @@ function textDelete(request) {
   return promise;
 }
 
-// Export functions
+// Export public methods
 module.exports.textCreate = textCreate;
 module.exports.textUpdate = textUpdate;
 module.exports.textDelete = textDelete;

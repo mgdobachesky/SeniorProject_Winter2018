@@ -1,6 +1,9 @@
 // Import required modules
 import React  from 'react';
 
+/*
+ * Textbox Form Input JSX view
+ */
 var TextboxJSX = function() {
   return (
     <div className="form-group">
@@ -19,4 +22,5 @@ var TextboxJSX = function() {
   );
 }
 
+// Export Textbox Form Input JSX view
 export default TextboxJSX;

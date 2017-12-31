@@ -16,6 +16,9 @@ import {
 // Import requred components
 import styles from './styles.js';
 
+/*
+ * Textbox JSX view
+ */
 var TextboxJSX = function() {
   return (
     <Item>
@@ -30,4 +33,5 @@ var TextboxJSX = function() {
   );
 }
 
+// Export Textbox JSX view
 export default TextboxJSX;

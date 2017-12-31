@@ -2,7 +2,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-// Choose navbar options based on user state
+/*
+ * Choose navbar options based on user state
+ * Used by the main Header view
+ */
 function HeaderOptions(props) {
   if(props.loggedIn) {
     return (
@@ -17,7 +20,10 @@ function HeaderOptions(props) {
   }
 }
 
-// Create links for each Viewsite a user owns
+/*
+ * Create links for each Viewsite a user owns
+ * Used by the main Header view
+ */
 function ViewsiteLinks(props) {
   if(props.viewsites && props.viewsites.length >= 1) {
     return props.viewsites.map((viewsite) => {
@@ -37,7 +43,10 @@ function ViewsiteLinks(props) {
   }
 }
 
-// Choose login options based on user state
+/*
+ * Choose login options based on user state
+ * Used by the main Header view
+ */
 function LoginOptions(props) {
   if(props.loggedIn) {
     return (
@@ -67,6 +76,9 @@ function LoginOptions(props) {
   }
 }
 
+/*
+ * The main Header view
+ */
 var HeaderJSX = function() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -99,4 +111,5 @@ var HeaderJSX = function() {
   );
 }
 
+// Export the main Header view
 export default HeaderJSX;

@@ -6,6 +6,10 @@ import { Switch, Route } from 'react-router-dom';
 import ViewsiteChoose from './components/ViewsiteChoose';
 import Viewsite from './components/Viewsite';
 
+/*
+ * Body JSX view
+ * Used as a React SPA router
+ */
 var BodyJSX = function() {
   return (
     <Switch>
@@ -27,4 +31,5 @@ var BodyJSX = function() {
   );
 }
 
+// Export the Body JSX view
 export default BodyJSX;

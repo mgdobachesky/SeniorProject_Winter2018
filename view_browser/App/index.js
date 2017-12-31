@@ -34,12 +34,16 @@ class App extends React.Component {
     };
   }
 
+  /*
+   * Method that loads the requested Viewsite
+   */
   handleRequestViewsite(viewsiteName) {
     if(viewsiteName) {
       let requestData = {};
       requestData.viewsiteName = viewsiteName;
       this.manageViewsiteService.readOneViewsite(requestData)
       .then((results) => {
+        // Collect an array of Forms to enrich associated User Tables
         let userTables = [];
         if(results.data.viewpages) {
           for(const viewpage of results.data.viewpages) {
@@ -74,6 +78,9 @@ class App extends React.Component {
     }
   }
 
+  /*
+   * Method that loads the requested Viewsite's associated User Database
+   */
   handleRequestUserDatabase(viewsiteId) {
     if(viewsiteId) {
       let requestData = {};
@@ -99,14 +106,23 @@ class App extends React.Component {
     }
   }
 
+  /*
+   * React component lifecycle method that is run before this component mounts
+   * Used for loading a requested Viewsite automatically
+   */
   componentWillMount() {
     if(this.props.viewsiteName) {
       this.handleRequestViewsite(this.props.viewsiteName);
     }
   }
 
+  /*
+   * Render the main Application
+   */
   render() {
     return(AppJSX.call(this));
   }
 }
+
+// Export the main Application
 export default App;

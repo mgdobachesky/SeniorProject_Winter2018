@@ -7,12 +7,17 @@ import './footer.css';
 
 class Footer extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
   }
 
+  /*
+   * Render the JSX for the Footer view
+   */
   render() {
     return(FooterJSX.call(this));
   }
 }
 
+// Export the Footer
 export default Footer;

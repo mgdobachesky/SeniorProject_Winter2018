@@ -1,5 +1,7 @@
-// Require mongoose to make a schemas with
+// Include required modules
 var mongoose = require('mongoose');
+
+// Simplify Mongoose properties
 var Schema = mongoose.Schema;
 
 // Create user schema

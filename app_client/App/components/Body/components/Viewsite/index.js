@@ -47,6 +47,9 @@ class Viewsite extends React.Component {
     };
   }
 
+  /*
+   * Method that allows a User to create a Viewpage
+   */
   handleCreateViewpage(event) {
     let requestData = {};
     let createViewpage = this.state.viewpage;
@@ -68,6 +71,9 @@ class Viewsite extends React.Component {
     });
   }
 
+  /*
+   * Method that prepares the Viewpage update form with Viewpage information
+   */
   handleEditViewpage(event) {
     let editViewpage = this.state.viewpage;
     editViewpage._id = event._id;
@@ -80,6 +86,9 @@ class Viewsite extends React.Component {
     $("#createViewpage").hide(false);
   }
 
+  /*
+   * Method that allows a User to update a Viewpage
+   */
   handleUpdateViewpage() {
     let requestData = {};
     let updateViewpage = this.state.viewpage;
@@ -102,6 +111,9 @@ class Viewsite extends React.Component {
     });
   }
 
+  /*
+   * Method that allows a user to delete a Viewpage
+   */
   handleDeleteViewpage(event) {
     let requestData = {};
     requestData.viewpageId = event._id;
@@ -118,6 +130,12 @@ class Viewsite extends React.Component {
     });
   }
 
+  /*
+   * Method that collects an array of Form Elements
+   * Used to get more detailed information on user tables
+   *
+   * NOTE: User Tables and Form Elements share an _id
+   */
   handleGatherUserTables() {
     let userTables = [];
     for(const viewpage of this.state.viewsite.viewpages) {
@@ -130,6 +148,10 @@ class Viewsite extends React.Component {
     this.handleSetGlobalState(userTables, "userTables");
   }
 
+  /*
+   * Method that clears local Viewpage state
+   * Used to prepare forms with a clean slate
+   */
   handleClearLocalState() {
     let clearViewpage = this.state.viewpage;
     clearViewpage._id = "";
@@ -142,12 +164,19 @@ class Viewsite extends React.Component {
     });
   }
 
+  /*
+   * Method that is passed down to child components to update Viewsie state
+   * Used after CUD operations to update the main Viewsite being displayed
+   */
   handleSetGlobalState(newStateData, toSet) {
     this.setState({
       [toSet]: newStateData
     });
   }
 
+  /*
+   * Method that updates local state based on what a user types
+   */
   handleChange(event, toChange) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -159,6 +188,11 @@ class Viewsite extends React.Component {
     });
   }
 
+  /*
+   * React component lifecycle method used to control what happens before this
+   * component receives props
+   * Used to update state based on what Viewsite is selected
+   */
   componentWillReceiveProps(nextProps) {
     let requestData = {};
     requestData.viewsiteName = nextProps.match.params.viewsiteName;
@@ -173,6 +207,11 @@ class Viewsite extends React.Component {
     });
   }
 
+  /*
+   * React component lifecycle method used to control what happens before this
+   * component mounts
+   * Used to set inital state based on the first Viewsite selected
+   */
   componentDidMount() {
     // Load initial Viewsite
     let requestData = {};
@@ -190,6 +229,10 @@ class Viewsite extends React.Component {
     $("#updateViewpage").hide(false);
   }
 
+  /*
+   * Render the Viewsite view
+   * Only if the User is logged in
+   */
   render() {
     if(this.props.loggedIn) {
       return(ViewsiteJSX.call(this));
@@ -199,4 +242,5 @@ class Viewsite extends React.Component {
   }
 }
 
+// Export the Viewsite
 export default Viewsite;

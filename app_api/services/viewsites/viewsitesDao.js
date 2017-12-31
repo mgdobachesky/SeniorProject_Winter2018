@@ -1,13 +1,13 @@
-// Required modules
+// Include required modules
 var mongoose = require('mongoose');
 var viewsites = mongoose.model('viewsite');
 
-// Required DAOs for cross collection operations
+// Include DAOs required for cross-collection modification
 var userDatabasesDao = require('../userDatabases/userDatabasesDao');
 
-// ** CRUD OPERATIONS **
-
-// Read operations
+/*
+ * Method that allows Users to read top-level information for all owned Viewsites
+ */
 function viewsitesReadAll(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.session.userId) {
@@ -30,6 +30,9 @@ function viewsitesReadAll(request) {
   return promise;
 }
 
+/*
+ * Method that allows Users to read a Viewsite
+ */
 function viewsitesReadOne(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.params.viewsiteName) {
@@ -52,7 +55,9 @@ function viewsitesReadOne(request) {
   return promise;
 }
 
-// Create operations
+/*
+ * Method that allows Users to create Viewsites
+ */
 function viewsitesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteName) {
@@ -94,7 +99,9 @@ function viewsitesCreate(request) {
   return promise;
 }
 
-// Update operations
+/*
+ * Method that allows Users to update Viewsites
+ */
 function viewsitesUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId) {
@@ -139,7 +146,9 @@ function viewsitesUpdate(request) {
   return promise;
 }
 
-// Delete operations
+/*
+ * Method that allows Users to delete Viewsites
+ */
 function viewsitesDelete(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId) {
@@ -185,6 +194,10 @@ function viewsitesDelete(request) {
   return promise;
 }
 
+/*
+ * Method that allows the deletion of every Viewsite owned by a specific User
+ * Invoked after deleting a User
+ */
 function viewsitesDeleteAll(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.session.userId) {
@@ -204,7 +217,7 @@ function viewsitesDeleteAll(request) {
   return promise;
 }
 
-// Export functions
+// Export public methods
 module.exports.viewsitesReadAll = viewsitesReadAll;
 module.exports.viewsitesReadOne = viewsitesReadOne;
 module.exports.viewsitesCreate = viewsitesCreate;

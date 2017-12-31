@@ -7,7 +7,10 @@ import FormForm from './components/FormForm';
 import Form from './components/Form';
 import DataViewForm from './components/DataViewForm';
 
-// Create list of Elements a Viewpage owns
+/*
+ * Create list of Elements a Viewpage owns
+ * Used by ViewpageJSX
+ */
 function ElementList(props) {
   if(props.elements && props.elements.length >= 1) {
     const viewsiteId = props.viewsiteId;
@@ -58,6 +61,10 @@ function ElementList(props) {
   }
 }
 
+/*
+ * Display a Text Element
+ * Used by the ElementList in ViewpageJSX
+ */
 function TextElement(props) {
   const editClick = {
     viewsiteId: props.viewsiteId,
@@ -110,6 +117,10 @@ function TextElement(props) {
   );
 }
 
+/*
+ * Display a Form Element
+ * Used by the ElementList in ViewpageJSX
+ */
 function FormElement(props) {
   return (
     <Form
@@ -122,6 +133,10 @@ function FormElement(props) {
   );
 }
 
+/*
+ * Display a Data View Element
+ * Used by the ElementList in ViewpageJSX
+ */
 function DataViewElement(props) {
   const editClick = {
     viewsiteId: props.viewsiteId,
@@ -143,7 +158,7 @@ function DataViewElement(props) {
       sourceName = userTable.formTitle;
     }
   }
-
+  
   return (
     <div className="card border-primary mb-3">
       <div className="card-body">
@@ -175,6 +190,10 @@ function DataViewElement(props) {
   );
 }
 
+/*
+ * Method for preparing the forms for a Text creation
+ * It hides every form other than the create Text form
+ */
 var prepareCreateText = function() {
   $( ".createText" ).toggle("medium");
   $( ".updateText" ).hide(false);
@@ -188,6 +207,10 @@ var prepareCreateText = function() {
   this.handleClearLocalState();
 };
 
+/*
+ * Method for preparing the forms for a Form creation
+ * It hides every form other than the create Form form
+ */
 var prepareCreateForm = function() {
   $( ".createForm" ).toggle("medium");
   $( ".updateForm" ).hide(false);
@@ -201,6 +224,10 @@ var prepareCreateForm = function() {
   this.handleClearLocalState();
 };
 
+/*
+ * Method for preparing the forms for a Data View creation
+ * It hides every form other than the create Data View form
+ */
 var prepareCreateDataView = function() {
   $( ".createDataView" ).toggle("medium");
   $( ".updateDataView" ).hide(false);
@@ -214,6 +241,9 @@ var prepareCreateDataView = function() {
   this.handleClearLocalState();
 };
 
+/*
+ * Viewpage JSX view
+ */
 var ViewpageJSX = function() {
   return (
     <div className="container-fluid">
@@ -345,4 +375,5 @@ var ViewpageJSX = function() {
   );
 }
 
+// Export the ViewpageJSX view
 export default ViewpageJSX;

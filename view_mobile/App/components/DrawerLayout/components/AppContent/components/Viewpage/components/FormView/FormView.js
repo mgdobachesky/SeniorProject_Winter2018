@@ -16,7 +16,10 @@ import {
 import Textbox from './components/Textbox';
 import styles from './styles.js';
 
-// Create list of FormInputs a Form owns
+/*
+ * Create list of FormInputs a Form owns
+ * Used by FormViewJSX
+ */
 function FormInputList(props) {
   if(props.formInputs) {
     return props.formInputs.map((formInput, index) => {
@@ -36,6 +39,9 @@ function FormInputList(props) {
   }
 }
 
+/*
+ * Form View JSX view
+ */
 var FormViewJSX = function() {
   return(
     <Content>
@@ -61,4 +67,5 @@ var FormViewJSX = function() {
   );
 }
 
+// Export Form View JSX view
 export default FormViewJSX;

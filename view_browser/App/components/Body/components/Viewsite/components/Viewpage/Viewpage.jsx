@@ -6,6 +6,10 @@ import Text from './components/Text';
 import Form from './components/Form';
 import DataView from './components/DataView';
 
+/*
+ * Display each element based on Element kind
+ * Used by ViewpageJSX
+ */
 function ElementsView(props) {
   if(props.elements) {
     return props.elements.map((element, index) => {
@@ -38,6 +42,9 @@ function ElementsView(props) {
   }
 }
 
+/*
+ * Viewpage JSX view
+ */
 var ViewpageJSX = function() {
   return (
     <div className="container-fluid">
@@ -55,4 +62,5 @@ var ViewpageJSX = function() {
   );
 }
 
+// Export the Viewpage JSX view
 export default ViewpageJSX;

@@ -7,9 +7,14 @@ import './footer.css';
 
 class Footer extends React.Component {
   constructor(props) {
+    // Call parent constructor
     super(props);
   }
 
+  /*
+   * Render the Footer JSX view
+   * Only if a selected Viewsite exists
+   */
   render() {
     if(this.props.viewsite) {
       return(FooterJSX.call(this));
@@ -19,4 +24,5 @@ class Footer extends React.Component {
   }
 }
 
+// Export Footer
 export default Footer;

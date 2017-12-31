@@ -1,11 +1,13 @@
-// Service for interacting with API
+// Include required modules
 import axios from 'axios';
 
-// Import the location of the API
+// Import the API location
 import { API_LOCATION } from 'Constants';
 
 class UserDatabaseService {
-  // Read one
+  /*
+   * HTTP call used to read a User Database
+   */
   readOneUserDatabase(requestData) {
     return axios({
       url: '/read_one/user_databases',
@@ -21,4 +23,5 @@ class UserDatabaseService {
   }
 }
 
+// Export the HTTP service
 export default UserDatabaseService;

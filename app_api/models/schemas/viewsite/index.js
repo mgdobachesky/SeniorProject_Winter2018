@@ -1,12 +1,14 @@
-// Require mongoose to make a schemas with
+// Include required modules
 var mongoose = require('mongoose');
+
+// Simplify Mongoose properties
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
-// Require child schemas
+// Require dependent schemas
 var viewpageSchema = require('./schemas/viewpage');
 
-// Create viewsite schema
+// Create Viewsite schema
 var viewsiteSchema = new Schema({
   'userId': {
     'type': ObjectId,

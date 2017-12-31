@@ -1,4 +1,4 @@
-// Required modules
+// Include required modules
 var viewpagesDao = require('../../services/viewsites/viewpagesDao');
 
 // Handle JSON responses
@@ -7,7 +7,9 @@ function sendJSONresponse(res, status, content) {
   res.json(content);
 }
 
-// Create
+/*
+ * Controller used to create a Viewpage
+ */
 function viewpagesCreate(request, response) {
   viewpagesDao.viewpagesCreate(request)
   .then(function(results) {
@@ -17,7 +19,9 @@ function viewpagesCreate(request, response) {
   });
 }
 
-// Update
+/*
+ * Controller used to update an existing Viewpage
+ */
 function viewpagesUpdate(request, response) {
   viewpagesDao.viewpagesUpdate(request)
   .then(function(results) {
@@ -27,7 +31,9 @@ function viewpagesUpdate(request, response) {
   });
 }
 
-// Delete
+/*
+ * Controller used to delete an existing Viewpage
+ */
 function viewpagesDelete(request, response) {
   viewpagesDao.viewpagesDelete(request)
   .then(function(results) {
@@ -37,7 +43,7 @@ function viewpagesDelete(request, response) {
   });
 }
 
-// Export functions
+// Export controller methods
 module.exports.viewpagesCreate = viewpagesCreate;
 module.exports.viewpagesUpdate = viewpagesUpdate;
 module.exports.viewpagesDelete = viewpagesDelete;

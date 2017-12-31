@@ -14,13 +14,21 @@ class Header extends React.Component {
     this.handleLogoutUser = this.handleLogoutUser.bind(this);
   }
 
+  /*
+   * Method that destroys the current active session
+   * Passed down from the main Application
+   */
   handleLogoutUser() {
     this.props.onLogoutUser();
   }
 
+  /*
+   * Render the JSX for the Header view
+   */
   render() {
     return (HeaderJSX.call(this));
   }
 }
 
+// Export the Header
 export default Header;

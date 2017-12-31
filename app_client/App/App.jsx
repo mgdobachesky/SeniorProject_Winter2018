@@ -6,7 +6,9 @@ import Header from './components/Header';
 import Body from './components/Body';
 import Footer from './components/Footer';
 
-// Create main App
+/*
+ * Create main Application view
+ */
 var AppJSX = function() {
   return(
     <div>
@@ -28,4 +30,6 @@ var AppJSX = function() {
     </div>
   );
 }
+
+// Export the view for the main Application
 export default AppJSX;

@@ -1,6 +1,10 @@
 // Import required modules
 import React from 'react';
 
+/*
+ * Alert that notifies the User of any successful operations
+ * Used by ViewpageFormJSX
+ */
 var SuccessAlert = function(props) {
   if(props.viewpageSuccess) {
     return (
@@ -13,6 +17,10 @@ var SuccessAlert = function(props) {
   }
 }
 
+/*
+ * Alert that notifies the User of any unsuccessful operations
+ * Used by ViewpageFormJSX
+ */
 var ErrorAlert = function(props) {
   if(props.viewpageError) {
     return (
@@ -25,6 +33,9 @@ var ErrorAlert = function(props) {
   }
 }
 
+/*
+ * Viewpage Form JSX view
+ */
 var ViewpageFormJSX = function() {
   return (
     <div className="container-fluid">
@@ -80,4 +91,5 @@ var ViewpageFormJSX = function() {
   );
 }
 
+// Export the Viewpage Form view
 export default ViewpageFormJSX;

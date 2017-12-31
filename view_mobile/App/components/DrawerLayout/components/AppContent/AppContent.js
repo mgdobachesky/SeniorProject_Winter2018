@@ -6,6 +6,10 @@ import { Switch, Route } from 'react-router-native';
 import Viewpage from './components/Viewpage';
 import styles from './styles.js';
 
+/*
+ * Application Content JSX
+ * Used as a router for React Native navigation
+ */
 var AppContentJSX = function() {
   return (
     <Switch>
@@ -20,4 +24,5 @@ var AppContentJSX = function() {
   );
 }
 
+// Export the Application Content JSX
 export default AppContentJSX;

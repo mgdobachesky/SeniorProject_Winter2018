@@ -1,4 +1,4 @@
-// Required modules
+// Include required modules
 var textDao = require('../../services/viewsites/textDao');
 var formsDao = require('../../services/viewsites/formsDao');
 var dataViewsDao = require('../../services/viewsites/dataViewsDao');
@@ -10,7 +10,9 @@ function sendJSONresponse(res, status, content) {
   res.json(content);
 }
 
-// Create
+/*
+ * Controller used to create Elements
+ */
 function elementsCreate(request, response) {
   if(request.body.kind === "text") {
     textDao.textCreate(request)
@@ -36,7 +38,9 @@ function elementsCreate(request, response) {
   }
 }
 
-// Update
+/*
+ * Controller used to update Elements
+ */
 function elementsUpdate(request, response) {
   if(request.body.kind === "text") {
     textDao.textUpdate(request)
@@ -62,7 +66,9 @@ function elementsUpdate(request, response) {
   }
 }
 
-// Delete
+/*
+ * Controller used to delete Elements
+ */
 function elementsDelete(request, response) {
   if(request.body.kind === "text") {
     textDao.textDelete(request)
@@ -88,7 +94,7 @@ function elementsDelete(request, response) {
   }
 }
 
-// Export functions
+// Export controller methods
 module.exports.elementsCreate = elementsCreate;
 module.exports.elementsUpdate = elementsUpdate;
 module.exports.elementsDelete = elementsDelete;

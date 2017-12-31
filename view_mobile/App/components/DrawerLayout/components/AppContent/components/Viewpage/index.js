@@ -18,10 +18,20 @@ class Viewpage extends React.Component {
     };
   }
 
+  /*
+   * Method that allows components to request a Viewsite's associated User Database
+   * Passed down from the main Application
+   */
   handleRequestUserDatabase(viewsiteId) {
     this.props.onRequestUserDatabase(viewsiteId);
   }
 
+  /*
+   * React component lifecycle method that controls what happens before this
+   * component receives props
+   * Used to determine what subsequent Viewpages have been selected
+   * during React Native navigation
+   */
   componentWillReceiveProps(nextProps) {
     if(nextProps.match.params.viewpageId
       && this.props.viewpages
@@ -38,6 +48,12 @@ class Viewpage extends React.Component {
     }
   }
 
+  /*
+   * React component lifecycle method that controls what happens after this
+   * component mounts
+   * Used to determine what initial Viewpage was selected
+   * during React Native navigation
+   */
   componentDidMount() {
     if(this.props.match.params.viewpageId
       && this.props.viewpages
@@ -54,9 +70,13 @@ class Viewpage extends React.Component {
     }
   }
 
+  /*
+   * Render Viewpage JSX view
+   */
   render() {
     return(ViewpageJSX.call(this));
   }
 }
 
+// Export Viewpage
 export default Viewpage;

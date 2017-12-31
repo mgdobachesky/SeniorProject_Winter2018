@@ -13,35 +13,51 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 
-// Add required modules that exist within the project
+// Bring in the database connection and all its models
 require('./app_api/models/db');
-var routesServer = require('./app_server/routes/index');
-var routesApi = require('./app_api/routes/index');
 var db = mongoose.connection;
 
-// Create Express application
+// Include the API routes
+var routesServer = require('./app_server/routes/index');
+var routesApi = require('./app_api/routes/index');
+
+// Create the main Express application
 var app = express();
 
 // Set the application view engine
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'pug');
+
+// Set the Application local directories
 app.locals.basedir = path.join(__dirname, 'public');
 
 // Set the application icon
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 
-// Configure the application middleware
+// Configure the Express session middleware
 app.use(session({
   secret: '3Y8tQ9TUo9uJd6f',
   store: new mongoStore({mongooseConnection: db})
 }));
+
+// Configure the logger middleware
 app.use(logger('dev'));
+
+// Configure the Body Parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Configure the Cookie Parser middleware
 app.use(cookieParser());
+
+// Configure the Static Application directories
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_client')));
+
+// Configure the Cross-Origin-Request middleware
 app.use(cors());
+
+// Configure json output to look nice
 app.set('json spaces', 2);
 
 // Add the application routes
@@ -55,7 +71,9 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// ** Error Handlers **
+/*
+ * Error handlers
+ */
 
 // Development error handler
 if(app.get('env') === 'development') {
@@ -81,5 +99,5 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// Export application
+// Export the Application
 module.exports = app;

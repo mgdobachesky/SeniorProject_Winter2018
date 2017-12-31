@@ -41,6 +41,9 @@ class Form extends React.Component {
     };
   }
 
+  /*
+   * Method that allows users to create Form Inputs
+   */
   handleCreateFormInput(kind) {
     let requestData = {};
     requestData.viewsiteId = this.state.viewsiteId;
@@ -66,6 +69,9 @@ class Form extends React.Component {
     });
   }
 
+  /*
+   * Method that sets local state to prepare a Form Input to be edited
+   */
   handleEditFormInput(event) {
     if(event.kind === "textbox") {
       let editTextbox = this.state.textbox;
@@ -80,6 +86,9 @@ class Form extends React.Component {
     }
   }
 
+  /*
+   * Method that allows users to update existing Form Inputs
+   */
   handleUpdateFormInput(kind) {
     let requestData = {};
     requestData.viewsiteId = this.state.viewsiteId;
@@ -106,6 +115,9 @@ class Form extends React.Component {
     });
   }
 
+  /*
+   * Method that allows users to delete existing Form Inputs
+   */
   handleDeleteFormInput(event) {
     let requestData = {};
     requestData.formInputId = event._id;
@@ -126,6 +138,9 @@ class Form extends React.Component {
     });
   }
 
+  /*
+   * Method that clears local state so that new forms will not display old information
+   */
   handleClearLocalState() {
     let clearTextbox = this.state.textbox;
     clearTextbox._id = "";
@@ -138,10 +153,17 @@ class Form extends React.Component {
     });
   }
 
+  /*
+   * Method that sets the Global state to reflect viewsite modifications
+   * Passed down from Viewsite
+   */
   handleSetGlobalState(newStateData, toSet) {
     this.props.onSetGlobalState(newStateData, toSet);
   }
 
+  /*
+   * Method to change state based on what a user types
+   */
   handleChange(event, toChange) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -153,26 +175,39 @@ class Form extends React.Component {
     });
   }
 
+  /*
+   * React component lifecycle method that controls what happens before this
+   * component receives props
+   * Used to update Form appearance after a global state change
+   */
   componentWillReceiveProps(nextProps) {
     this.setState({
       element: nextProps.element
     });
   }
 
+  /*
+   * React component lifecycle method that controls what happens before this
+   * component mounts
+   * Used to set Form fields based on Global state & hide create / update forms
+   */
   componentDidMount() {
     this.setState({
       viewsiteId: this.props.viewsiteId,
       viewpageId: this.props.viewpageId,
       element: this.props.element
     });
-
     $( ".createTextbox" ).hide(false);
     $( ".updateTextbox" ).hide(false);
   }
 
+  /*
+   * Render the Form JSX view
+   */
   render() {
     return(FormJSX.call(this));
   }
 }
 
+// Export the Form
 export default Form;

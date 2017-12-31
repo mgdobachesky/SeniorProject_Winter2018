@@ -37,12 +37,16 @@ class DrawerLayout extends React.Component {
     };
   }
 
+  /*
+   * Method that loads the requested Viewsite
+   */
   handleRequestViewsite(viewsiteName) {
     if(viewsiteName) {
       let requestData = {};
       requestData.viewsiteName = viewsiteName;
       this.manageViewsiteService.readOneViewsite(requestData)
       .then((results) => {
+        // Collect an array of Forms to enrich associated User Tables
         let userTables = [];
         if(results.data.viewpages) {
           for(const viewpage of results.data.viewpages) {
@@ -77,6 +81,9 @@ class DrawerLayout extends React.Component {
     }
   }
 
+  /*
+   * Method that loads the requested Viewsite's associated User Database
+   */
   handleRequestUserDatabase(viewsiteId) {
     if(viewsiteId) {
       let requestData = {};
@@ -102,29 +109,45 @@ class DrawerLayout extends React.Component {
     }
   }
 
+  /*
+   * Update state to reflect what a user types
+   */
   handleChange(viewsiteName) {
     this.setState({
       viewsiteName: viewsiteName
     });
   }
 
+  /*
+   * Method used to control what happens when a form is submitted
+   */
   handleSubmit() {
     if(this.state.viewsiteName) {
       this.handleRequestViewsite(this.state.viewsiteName);
     }
   }
 
+  /*
+   * Method used to control how the Drawer is closed
+   */
   closeDrawer = () => {
     this.drawer._root.close()
   };
 
+  /*
+   * Method used to control how the Drawer is opened
+   */
   openDrawer = () => {
     this.drawer._root.open()
   };
 
+  /*
+   * Render the Drawer Layout containing the main Application content
+   */
   render() {
     return (DrawerLayoutJSX.call(this));
   }
 }
 
+// Export the DrawerLayout
 export default DrawerLayout;

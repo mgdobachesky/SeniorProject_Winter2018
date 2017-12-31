@@ -1,11 +1,13 @@
-// Service for interacting with API
+// Import required modules
 import axios from 'axios';
 
-// Import the location of the API
+// Import the API location
 import { API_LOCATION } from 'Constants';
 
 class ViewsiteService {
-  // Read one
+  /*
+   * HTTP call used to read a Viewsite
+   */
   readOneViewsite(requestData) {
     return axios({
       url: '/read_one/viewsites/' + requestData.viewsiteName,
@@ -14,7 +16,9 @@ class ViewsiteService {
     });
   }
 
-  // Read all
+  /*
+   * HTTP call used to read top-level informatin on all Viewsite a User owns
+   */
   readAllViewsites(requestData) {
     return axios({
       url: '/read_all/viewsites',
@@ -23,7 +27,9 @@ class ViewsiteService {
     });
   }
 
-  // Create
+  /*
+   * HTTP call used to create a Viewsite
+   */
   createViewsite(requestData) {
     return axios({
       url: '/create/viewsites',
@@ -39,7 +45,9 @@ class ViewsiteService {
     });
   }
 
-  // Update
+  /*
+   * HTTP call used to update a Viewsite
+   */
   updateViewsite(requestData) {
     return axios({
       url: '/update/viewsites',
@@ -56,7 +64,9 @@ class ViewsiteService {
     });
   }
 
-  // Delete
+  /*
+   * HTTP call used to delete a Viewsite
+   */
   deleteViewsite(requestData) {
     return axios({
       url: '/delete/viewsites',
@@ -72,4 +82,5 @@ class ViewsiteService {
   }
 }
 
+// Export the HTTP service
 export default ViewsiteService;

@@ -1,10 +1,10 @@
-// Required modules
+// Include required modules
 var mongoose = require('mongoose');
 var viewsites = mongoose.model('viewsite');
 
-// ** CRUD OPERATIONS **
-
-// Create operations
+/*
+ * Method that allows Users to create Viewpages
+ */
 function viewpagesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId) {
@@ -43,7 +43,9 @@ function viewpagesCreate(request) {
   return promise;
 }
 
-// Update operations
+/*
+ * Method that allows Users to update Viewpages
+ */
 function viewpagesUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId) {
@@ -85,7 +87,9 @@ function viewpagesUpdate(request) {
   return promise;
 }
 
-// Delete operations
+/*
+ * Method that allows Users to delete Viewpages
+ */
 function viewpagesDelete(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId) {
@@ -124,7 +128,7 @@ function viewpagesDelete(request) {
   return promise;
 }
 
-// Export functions
+// Export public methods
 module.exports.viewpagesCreate = viewpagesCreate;
 module.exports.viewpagesUpdate = viewpagesUpdate;
 module.exports.viewpagesDelete = viewpagesDelete;

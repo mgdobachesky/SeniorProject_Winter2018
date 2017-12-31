@@ -1,4 +1,4 @@
-// Required modules
+// Include required modules
 var viewsitesDao = require('../../services/viewsites/viewsitesDao');
 
 // Handle JSON responses
@@ -7,7 +7,9 @@ function sendJSONresponse(res, status, content) {
   res.json(content);
 }
 
-// Read all
+/*
+ * Controller used to get top-level information on a User's Viewsites
+ */
 function viewsitesReadAll(request, response) {
   viewsitesDao.viewsitesReadAll(request)
   .then(function(results) {
@@ -17,7 +19,9 @@ function viewsitesReadAll(request, response) {
   });
 }
 
-// Read one
+/*
+ * Controller used to read a Viewsite
+ */
 function viewsitesReadOne(request, response) {
   viewsitesDao.viewsitesReadOne(request)
   .then(function(results) {
@@ -27,7 +31,9 @@ function viewsitesReadOne(request, response) {
   });
 }
 
-// Create
+/*
+ * Controller used to create a Viewsite
+ */
 function viewsitesCreate(request, response) {
   viewsitesDao.viewsitesCreate(request)
   .then(function(results) {
@@ -37,7 +43,9 @@ function viewsitesCreate(request, response) {
   });
 }
 
-// Update
+/*
+ * Controller used to update a Viewsite
+ */
 function viewsitesUpdate(request, response) {
   viewsitesDao.viewsitesUpdate(request)
   .then(function(results) {
@@ -47,7 +55,9 @@ function viewsitesUpdate(request, response) {
   });
 }
 
-// Delete
+/*
+ * Controller used to delete a Viewsite
+ */
 function viewsitesDelete(request, response) {
   viewsitesDao.viewsitesDelete(request)
   .then(function(results) {
@@ -57,7 +67,7 @@ function viewsitesDelete(request, response) {
   });
 }
 
-// Export functions
+// Export controller methods
 module.exports.viewsitesReadAll = viewsitesReadAll;
 module.exports.viewsitesReadOne = viewsitesReadOne;
 module.exports.viewsitesCreate = viewsitesCreate;

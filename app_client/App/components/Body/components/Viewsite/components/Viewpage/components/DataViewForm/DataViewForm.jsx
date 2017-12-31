@@ -1,6 +1,10 @@
 // Import required modules
 import React from 'react';
 
+/*
+ * Alert to notify users of any successful operations
+ * Used by DataViewFormJSX
+ */
 var SuccessAlert = function(props) {
   if(props.elementSuccess) {
     return (
@@ -13,6 +17,10 @@ var SuccessAlert = function(props) {
   }
 }
 
+/*
+ * Alert to notify users of any unsuccessful operations
+ * Used by DataViewFormJSX
+ */
 var ErrorAlert = function(props) {
   if(props.elementError) {
     return (
@@ -25,7 +33,10 @@ var ErrorAlert = function(props) {
   }
 }
 
-// Create list of Form Options for the Data View
+/*
+ * Create list of Form Options for the Data View
+ * Used by DataViewFormJSX
+ */
 function DataViewOptions(props) {
   if(props.userTables && props.userTables.length >= 1) {
     return props.userTables.map((userTable, index) => {
@@ -42,6 +53,9 @@ function DataViewOptions(props) {
   }
 }
 
+/*
+ * Data View Form JSX view
+ */
 var DataViewFormJSX = function() {
   return (
     <div className="container-fluid">
@@ -83,4 +97,5 @@ var DataViewFormJSX = function() {
   );
 }
 
+// Export the Data View Form JSX view
 export default DataViewFormJSX;

@@ -1,10 +1,10 @@
-// Required modules
+// Include required modules
 var mongoose = require('mongoose');
 var userDatabases = mongoose.model('userDatabase');
 
-// ** CRUD OPERATIONS **
-
-// Create operations
+/*
+ * Method that allows Users to add a new Record
+ */
 function userRecordsCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.elementId) {
@@ -48,7 +48,9 @@ function userRecordsCreate(request) {
   return promise;
 }
 
-// Update operations
+/*
+ * Method that allows Users to modify an existing Record
+ */
 function userRecordsUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.elementId || !request.body.recordId) {
@@ -98,7 +100,9 @@ function userRecordsUpdate(request) {
   return promise;
 }
 
-// Delete operations
+/*
+ * Method that allows Users to delete an existing Record
+ */
 function userRecordsDelete(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.elementId || !request.body.recordId) {
@@ -137,7 +141,7 @@ function userRecordsDelete(request) {
   return promise;
 }
 
-// Export functions
+// Export all public methods
 module.exports.userRecordsCreate = userRecordsCreate;
 module.exports.userRecordsUpdate = userRecordsUpdate;
 module.exports.userRecordsDelete = userRecordsDelete;

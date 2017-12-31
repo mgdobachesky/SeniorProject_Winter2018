@@ -15,18 +15,29 @@ class ViewsiteForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  /*
+   * Method used to change local state according to what the user is typing
+   * Passed down from the Dashboard
+   */
   handleChange(event) {
     this.props.onChange(event, "viewsite");
   }
 
+  /*
+   * Method used to control what happens after a form has been submitted
+   */
   handleSubmit(event) {
     event.preventDefault();
     this.props.onSubmit();
   }
 
+  /*
+   * Render the Viewsite Form JSX
+   */
   render() {
     return(ViewsiteFormJSX.call(this));
   }
 }
 
+// Export the Viewsite Form
 export default ViewsiteForm;

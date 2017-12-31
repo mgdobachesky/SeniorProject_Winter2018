@@ -1,6 +1,10 @@
 // Import required modules
 import React from 'react';
 
+/*
+ * Alert that notifies the User of any unsuccessful operations
+ * Used by UserFormJSX
+ */
 var ErrorAlert = function(props) {
   if(props.userError) {
     return (
@@ -13,6 +17,10 @@ var ErrorAlert = function(props) {
   }
 }
 
+/*
+ * Alert that notifies the User of any successful operations
+ * Used by UserFormJSX
+ */
 var SuccessAlert = function(props) {
   if(props.userSuccess) {
     return (
@@ -25,6 +33,9 @@ var SuccessAlert = function(props) {
   }
 }
 
+/*
+ * User Form JSX view
+ */
 var UserFormJSX = function() {
   return (
     <div
@@ -71,7 +82,7 @@ var UserFormJSX = function() {
           value={this.state.user.password}
           onChange={this.handleChange} />
         </div>
-        
+
         <button type="submit" className="btn btn-primary">
           {this.props.description}
         </button>
@@ -80,4 +91,5 @@ var UserFormJSX = function() {
   );
 }
 
+// Export the User Form view
 export default UserFormJSX;

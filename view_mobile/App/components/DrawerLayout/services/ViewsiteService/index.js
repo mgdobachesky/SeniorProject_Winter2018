@@ -1,8 +1,10 @@
-// Service for interacting with API
+// Import required modules
 import axios from 'axios';
 
 class ViewsiteService {
-  // Read one
+  /*
+   * HTTP call used to read a Viewsite
+   */
   readOneViewsite(requestData) {
     return axios({
       url: '/read_one/viewsites/' + requestData.viewsiteName,
@@ -12,4 +14,5 @@ class ViewsiteService {
   }
 }
 
+// Export the HTTP service
 export default ViewsiteService;

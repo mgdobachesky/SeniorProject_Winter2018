@@ -9,7 +9,6 @@ import './app.css';
 import UserService from './services/UserService';
 import ViewsiteService from './services/ViewsiteService';
 
-// Create main App
 class App extends React.Component {
   constructor(props) {
     // Call superclass with same arguments
@@ -18,6 +17,7 @@ class App extends React.Component {
     // Service Class Definitions
     this.manageUserService = new UserService();
     this.manageViewsiteService = new ViewsiteService();
+
     // User Methods
     this.handleReadOneUser = this.handleReadOneUser.bind(this);
     this.handleLoginUser = this.handleLoginUser.bind(this);
@@ -37,6 +37,9 @@ class App extends React.Component {
     };
   }
 
+  /*
+   * Method that checks the server for an active session
+   */
   handleReadOneUser() {
     this.manageUserService.readOneUser()
     .then((results) => {
@@ -55,6 +58,9 @@ class App extends React.Component {
     });
   }
 
+  /*
+   * Method that creates a new active session
+   */
   handleLoginUser(loginCredentials) {
     let requestData = {};
     requestData.username = loginCredentials.username;
@@ -78,6 +84,9 @@ class App extends React.Component {
     });
   }
 
+  /*
+   * Method that destroys the current active session
+   */
   handleLogoutUser() {
     this.manageUserService.logoutUser()
     .then((results) => {
@@ -97,6 +106,9 @@ class App extends React.Component {
     });
   }
 
+  /*
+   * Method that retrieves top-level information on all of a User's Viewsites
+   */
   handleReadAllViewsites() {
     this.manageViewsiteService.readAllViewsites()
     .then((results) => {
@@ -111,18 +123,31 @@ class App extends React.Component {
     });
   }
 
+  /*
+   * Method that is passed down to all child components
+   * It is used to set the main Application state which is used all other components
+   */
   handleSetGlobalState(newStateData, toSet) {
     this.setState({
       [toSet]: newStateData
     });
   }
 
+  /*
+   * React component lifecycle method that runs every time this component mounts
+   * Used to check if any User session is active
+   */
   componentDidMount() {
     this.handleReadOneUser();
   }
 
+  /*
+   * Render the JSX for the main application view
+   */
   render() {
     return(AppJSX.call(this));
   }
 }
+
+// Export the main Application
 export default App;

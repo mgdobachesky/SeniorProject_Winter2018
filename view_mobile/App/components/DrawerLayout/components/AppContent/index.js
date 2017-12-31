@@ -13,13 +13,21 @@ class AppContent extends React.Component {
     this.handleRequestUserDatabase = this.handleRequestUserDatabase.bind(this);
   }
 
+  /*
+   * Method that allows components to request a Viewsite's associated User Database
+   * Passed down from the main Application
+   */
   handleRequestUserDatabase(viewsiteId) {
     this.props.onRequestUserDatabase(viewsiteId);
   }
 
+  /*
+   * Render the Application Content JSX view
+    */
   render() {
     return(AppContentJSX.call(this));
   }
 }
 
+// Export the Application Content
 export default AppContent;

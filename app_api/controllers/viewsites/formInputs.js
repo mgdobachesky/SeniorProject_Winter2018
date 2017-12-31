@@ -1,4 +1,4 @@
-// Required modules
+// Include required modules
 var textboxesDao = require('../../services/viewsites/textboxesDao');
 
 // Handle JSON responses
@@ -7,7 +7,9 @@ function sendJSONresponse(res, status, content) {
   res.json(content);
 }
 
-// Create
+/*
+ * Controller used to create Form Inputs
+ */
 function formInputsCreate(request, response) {
   if(request.body.kind === "textbox") {
     textboxesDao.textboxesCreate(request)
@@ -19,7 +21,9 @@ function formInputsCreate(request, response) {
   }
 }
 
-// Update
+/*
+ * Controller used to update Form Inputs
+ */
 function formInputsUpdate(request, response) {
   if(request.body.kind === "textbox") {
     textboxesDao.textboxesUpdate(request)
@@ -31,7 +35,9 @@ function formInputsUpdate(request, response) {
   }
 }
 
-// Delete
+/*
+ * Controller used to delete Form Inputs
+ */
 function formInputsDelete(request, response) {
   if(request.body.kind === "textbox") {
     textboxesDao.textboxesDelete(request)
@@ -43,7 +49,7 @@ function formInputsDelete(request, response) {
   }
 }
 
-// Export functions
+// Export controller methods
 module.exports.formInputsCreate = formInputsCreate;
 module.exports.formInputsUpdate = formInputsUpdate;
 module.exports.formInputsDelete = formInputsDelete;

@@ -1,5 +1,7 @@
-// Require mongoose to make a schemas with
+// Include required modules
 var mongoose = require('mongoose');
+
+// Simplify Mongoose properties
 var Schema = mongoose.Schema;
 
 // Require child schemas
@@ -9,7 +11,7 @@ var textboxSchema = require('./schemas/textbox');
 var formInputSchema = new Schema({},
   { discriminatorKey: 'kind' });
 
-// Define Form schema
+// Define main Form schema
 var formSchema = new Schema({
   'formTitle': {
     'type': String,
@@ -18,10 +20,10 @@ var formSchema = new Schema({
   'formInputs': [formInputSchema]
 });
 
-// Get the array of Form Inputs in the Form
+// Get the parent array of Form Inputs in the Form
 var formInputArray = formSchema.path('formInputs');
 
-// Create Form Input Child class discriminators
+// Create Form Input child class discriminators
 var textbox = formInputArray.discriminator('textbox', textboxSchema);
 
 // Export Form schema

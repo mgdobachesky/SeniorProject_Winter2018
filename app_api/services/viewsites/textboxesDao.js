@@ -1,10 +1,10 @@
-// Required modules
+// Include required modules
 var mongoose = require('mongoose');
 var viewsites = mongoose.model('viewsite');
 
-// ** CRUD OPERATIONS **
-
-// Create operations
+/*
+ * Method that allows Users to create Textbox Form Inputs
+ */
 function textboxesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId || !request.body.elementId) {
@@ -43,7 +43,9 @@ function textboxesCreate(request) {
   return promise;
 }
 
-// Update operations
+/*
+ * Method that allows Users to update Textbox Form Inputs
+ */
 function textboxesUpdate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId || !request.body.elementId || !request.body.formInputId) {
@@ -84,7 +86,9 @@ function textboxesUpdate(request) {
   return promise;
 }
 
-// Delete operations
+/*
+ * Method that allows Users to delete Textbox Form Inputs
+ */
 function textboxesDelete(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId || !request.body.viewpageId || !request.body.elementId || !request.body.formInputId) {
@@ -123,7 +127,7 @@ function textboxesDelete(request) {
   return promise;
 }
 
-// Export functions
+// Export public methods
 module.exports.textboxesCreate = textboxesCreate;
 module.exports.textboxesUpdate = textboxesUpdate;
 module.exports.textboxesDelete = textboxesDelete;

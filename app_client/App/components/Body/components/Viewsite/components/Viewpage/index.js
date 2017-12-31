@@ -52,6 +52,9 @@ class Viewpage extends React.Component {
     };
   }
 
+  /*
+   * Method that allows Users to create new Elements
+   */
   handleCreateElement(kind) {
     let requestData = {};
     requestData.viewsiteId = this.state.viewsiteId;
@@ -86,6 +89,9 @@ class Viewpage extends React.Component {
     });
   }
 
+  /*
+   * Method that prepares an Element to be updated
+   */
   handleEditElement(event) {
     if(event.kind === "text") {
       let editText = this.state.text;
@@ -122,6 +128,9 @@ class Viewpage extends React.Component {
     }
   }
 
+  /*
+   * Method that allows Users to update existing Elements
+   */
   handleUpdateElement(kind) {
     let requestData = {};
     requestData.viewsiteId = this.state.viewsiteId;
@@ -159,6 +168,9 @@ class Viewpage extends React.Component {
     });
   }
 
+  /*
+   * Method that allows Users to delete existing Elements
+   */
   handleDeleteElement(event) {
     let requestData = {};
     requestData.elementId = event._id;
@@ -178,6 +190,10 @@ class Viewpage extends React.Component {
     });
   }
 
+  /*
+   * Method that clears local Element state
+   * Used to provide a clean state for new create forms
+   */
   handleClearLocalState() {
     let clearText = this.state.text;
     let clearForm = this.state.form;
@@ -200,10 +216,17 @@ class Viewpage extends React.Component {
     });
   }
 
+  /*
+   * Method that updates the Global state to reflect Viewsite modifications
+   * Passed down from the Viewsite component
+   */
   handleSetGlobalState(newStateData, toSet) {
     this.props.onSetGlobalState(newStateData, toSet);
   }
 
+  /*
+   * Method that changes state based on what a user types
+   */
   handleChange(event, toChange) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -215,6 +238,11 @@ class Viewpage extends React.Component {
     });
   }
 
+  /*
+   * React component lifecycle method that controls what happens before
+   * a component receives props
+   * Used to set Viewpage state based on props passed from the Viewsite component
+   */
   componentWillReceiveProps(nextProps) {
     this.setState({
       viewpage: nextProps.viewpage,
@@ -222,13 +250,18 @@ class Viewpage extends React.Component {
     });
   }
 
+  /*
+   * React component lifecycle method that controls what happens after
+   * a component mounts
+   * Used to set Viewpage state based on props passed from the Viewsite
+   * component, as well as to hide all create / update forms
+   */
   componentDidMount() {
     this.setState({
       viewsiteId: this.props.viewsiteId,
       viewpage: this.props.viewpage,
       userTables: this.props.userTables
     });
-
     $(".createText").hide(false);
     $(".updateText").hide(false);
     $(".createForm").hide(false);
@@ -237,6 +270,9 @@ class Viewpage extends React.Component {
     $(".updateDataView").hide(false);
   }
 
+  /*
+   * Method used to render the Viewpage JSX view
+   */
   render() {
     return(ViewpageJSX.call(this));
   }

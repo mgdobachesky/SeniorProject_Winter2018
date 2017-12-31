@@ -1,6 +1,10 @@
 // Import required modules
 import React from 'react';
 
+/*
+ * Alert to notify users of any successful operations
+ * Used by FormFormJSX
+ */
 var SuccessAlert = function(props) {
   if(props.elementSuccess) {
     return (
@@ -13,6 +17,10 @@ var SuccessAlert = function(props) {
   }
 }
 
+/*
+ * Alert to notify users of any unsuccessful operations
+ * Used by FormFormJSX
+ */
 var ErrorAlert = function(props) {
   if(props.elementError) {
     return (
@@ -25,6 +33,9 @@ var ErrorAlert = function(props) {
   }
 }
 
+/*
+ * Form Form JSX view
+ */
 var FormFormJSX = function() {
   return (
     <div className="container-fluid">
@@ -62,4 +73,5 @@ var FormFormJSX = function() {
   );
 }
 
+// Export the Form Form JSX view
 export default FormFormJSX;

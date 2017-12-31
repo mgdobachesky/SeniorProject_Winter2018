@@ -14,7 +14,7 @@ class UserForm extends React.Component {
     // Call parent constructor
     super(props);
 
-    // Service Class Definitions\
+    // Service Class Definitions
     this.manageUserService = new UserService();
 
     // User Methods
@@ -36,6 +36,9 @@ class UserForm extends React.Component {
     }
   }
 
+  /*
+   * Method that allows new Users to sign-up
+   */
   handleCreateUser() {
     let requestData = {};
     let newUser = this.state.user;
@@ -54,6 +57,9 @@ class UserForm extends React.Component {
     });
   }
 
+  /*
+   * Method that updates an existing User
+   */
   handleUpdateUser() {
     let requestData = {};
     let updatedUser = this.state.user;
@@ -75,10 +81,17 @@ class UserForm extends React.Component {
     });
   }
 
+  /*
+   * Method that sets the main Applications state
+   * Passed down from the main Application
+   */
   handleSetGlobalState(newStateData, toSet) {
     this.props.onSetGlobalState(newStateData, toSet);
   }
 
+  /*
+   * Method that keeps local state consistent with what the user types
+   */
   handleChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -90,6 +103,9 @@ class UserForm extends React.Component {
     });
   }
 
+  /*
+   * Method that controls what happens after the User form has been submitted
+   */
   handleSubmit(event) {
     event.preventDefault();
     if(this.props.action === "create") {
@@ -99,6 +115,12 @@ class UserForm extends React.Component {
     }
   }
 
+  /*
+   * React component lifecycle method that controls what happens before this
+   * component receives any props
+   * Used to receive user information so that the form can be filled out
+   * when updating an existing user
+   */
   componentWillReceiveProps(nextProps) {
     if(nextProps.user) {
       this.setState({
@@ -109,6 +131,12 @@ class UserForm extends React.Component {
     }
   }
 
+  /*
+   * React component lifecycle method that controls what happend before
+   * the component mounts
+   * Used to receive initial user information so that the form can be filled out
+   * when updating an existing user
+   */
   componentDidMount() {
     if(this.props.user) {
       this.setState({
@@ -119,6 +147,10 @@ class UserForm extends React.Component {
     }
   }
 
+  /*
+   * Render the User Form
+   * Only if the user is not logged in
+   */
   render() {
     if(this.props.loggedIn) {
       return(<Redirect to="/" />);
@@ -128,4 +160,5 @@ class UserForm extends React.Component {
   }
 }
 
+// Export the User Form
 export default UserForm;

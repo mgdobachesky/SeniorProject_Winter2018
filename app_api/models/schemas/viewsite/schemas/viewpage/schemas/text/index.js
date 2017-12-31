@@ -1,7 +1,10 @@
-// Require mongoose to make a schemas with
+// Include required modules
 var mongoose = require('mongoose');
+
+// Simplify Mongoose properties
 var Schema = mongoose.Schema;
 
+// Create Text Element schema
 var textSchema = new Schema({
   'textValue': {
     'type': String,
@@ -9,4 +12,5 @@ var textSchema = new Schema({
   }
 });
 
+// Export Text schema
 module.exports = textSchema;

@@ -1,10 +1,10 @@
-// Required modules
+// Include required modules
 var mongoose = require('mongoose');
 var userDatabases = mongoose.model('userDatabase');
 
-// ** CRUD OPERATIONS **
-
-// Read operations
+/*
+ * Method that allows Users to read a User Database
+ */
 function userDatabasesReadOne(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId) {
@@ -27,7 +27,10 @@ function userDatabasesReadOne(request) {
   return promise;
 }
 
-// Create operations
+/*
+ * Method that allows Viewsites to create a User Database
+ * Invoked after creating a Viewsite
+ */
 function userDatabasesCreate(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId) {
@@ -54,7 +57,10 @@ function userDatabasesCreate(request) {
   return promise;
 }
 
-// Delete operations
+/*
+ * Method that allows Viewsites to delete a User Database
+ * Invoked after deleting a Viewsite
+ */
 function userDatabasesDelete(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId) {
@@ -91,6 +97,10 @@ function userDatabasesDelete(request) {
   return promise;
 }
 
+/*
+ * Method that allows the deletion of every Database owned by a specific User
+ * Invoked after deleting a User
+ */
 function userDatabasesDeleteAll(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.session.userId) {
@@ -110,7 +120,7 @@ function userDatabasesDeleteAll(request) {
   return promise;
 }
 
-// Export functions
+// Export all public methods
 module.exports.userDatabasesReadOne = userDatabasesReadOne;
 module.exports.userDatabasesCreate = userDatabasesCreate;
 module.exports.userDatabasesDelete = userDatabasesDelete;

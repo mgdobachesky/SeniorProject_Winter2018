@@ -1,6 +1,9 @@
 // Import required modules
 import React from 'react';
 
+/*
+ * Landing Page JSX view
+ */
 var LandingPageJSX = function() {
   return (
     <div>
@@ -21,4 +24,5 @@ var LandingPageJSX = function() {
   );
 }
 
+// Export the Landing Page JSX view
 export default LandingPageJSX;

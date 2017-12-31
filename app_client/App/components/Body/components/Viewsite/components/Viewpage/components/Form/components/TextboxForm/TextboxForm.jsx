@@ -1,6 +1,10 @@
 // Import required modules
 import React from 'react';
 
+/*
+ * Alert to notify users of any successful operations
+ * Used by TextboxFormJSX
+ */
 var SuccessAlert = function(props) {
   if(props.formInputSuccess) {
     return (
@@ -13,6 +17,10 @@ var SuccessAlert = function(props) {
   }
 }
 
+/*
+ * Alert to notify users of any unsuccessful operations
+ * Used by TextboxFormJSX
+ */
 var ErrorAlert = function(props) {
   if(props.formInputError) {
     return (
@@ -25,6 +33,9 @@ var ErrorAlert = function(props) {
   }
 }
 
+/*
+ * Textbox Form JSX view
+ */
 var TextboxFormJSX = function() {
   return (
     <div className="container-fluid">
@@ -59,4 +70,5 @@ var TextboxFormJSX = function() {
   );
 }
 
+// Export the Textbox Form JSX view
 export default TextboxFormJSX;

@@ -1,8 +1,11 @@
-// Require mongoose to make a schemas with
+// Include required modules
 var mongoose = require('mongoose');
+
+// Simplify Mongoose properties
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
+// Create Data View schema
 var dataViewSchema = new Schema({
   'formId': {
     'type': ObjectId,
@@ -10,5 +13,5 @@ var dataViewSchema = new Schema({
   }
 });
 
-// Export database models
+// Export Data View schema
 module.exports = dataViewSchema;

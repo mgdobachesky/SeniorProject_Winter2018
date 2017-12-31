@@ -11,9 +11,13 @@ class DataView extends React.Component {
     super(props);
   }
 
+  /*
+   * Render Data View JSX view
+   */
   render() {
     return(DataViewJSX.call(this));
   }
 }
 
+// Export Data View
 export default DataView;

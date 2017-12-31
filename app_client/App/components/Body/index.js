@@ -16,17 +16,29 @@ class Body extends React.Component {
     this.handleSetGlobalState = this.handleSetGlobalState.bind(this);
   }
 
+  /*
+   * Method that creates a new active session
+   * Passed down from the main Application
+   */
   handleLoginUser(loginCredentials) {
     this.props.onLoginUser(loginCredentials);
   }
 
+  /*
+   * Method that sets the state of the main application
+   * Passed down from the main Application
+   */
   handleSetGlobalState(newStateData, toSet) {
     this.props.onSetGlobalState(newStateData, toSet);
   }
 
+  /*
+   * Render the JSX for the Body view
+   */
   render() {
     return(BodyJSX.call(this));
   }
 }
 
+// Export the Body
 export default Body;

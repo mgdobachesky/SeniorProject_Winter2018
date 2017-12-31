@@ -29,10 +29,17 @@ class FormView extends React.Component {
     }
   }
 
+  /*
+   * Method that allows components to request a Viewsite's associated User Database
+   * Passed down from the main Application
+   */
   handleRequestUserDatabase(viewsiteId) {
     this.props.onRequestUserDatabase(viewsiteId);
   }
 
+  /*
+   * Update state to reflect what a user types
+   */
   handleChange(formInputValue, formInputId) {
     let record = this.state.record;
     record[formInputId] = formInputValue;
@@ -41,6 +48,9 @@ class FormView extends React.Component {
     });
   }
 
+  /*
+   * Method used to control what happens when a form is submitted
+   */
   handleSubmit(event) {
     event.preventDefault();
     let requestData = {};
@@ -61,6 +71,11 @@ class FormView extends React.Component {
     });
   }
 
+  /*
+   * React component lifecycle method that controls what happens after this
+   * component mounts
+   * Used to define Form Inputs owned by this Form
+   */
   componentDidMount() {
     if(this.props.element.formInputs && this.props.element.formInputs.length >= 1) {
       this.setState({
@@ -69,9 +84,13 @@ class FormView extends React.Component {
     }
   }
 
+  /*
+   * Render Form View JSX view
+   */
   render() {
     return(FormViewJSX.call(this));
   }
 }
 
+// Export Form View JSX view
 export default FormView;
