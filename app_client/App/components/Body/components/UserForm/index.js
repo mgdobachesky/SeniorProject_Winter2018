@@ -40,16 +40,21 @@ class UserForm extends React.Component {
    * Method that allows new Users to sign-up
    */
   handleCreateUser() {
+    // Prepare HTTP API request data
     let requestData = {};
     let newUser = this.state.user;
     requestData.username = newUser.username;
     requestData.password = newUser.password;
+    // Send request to create User
     this.manageUserService.createUser(requestData)
     .then((results) => {
+      // Afterwards, update Global User state
       this.handleSetGlobalState(results.data, "user");
+      // then update Global Logged In boolean
       this.handleSetGlobalState(true, "loggedIn");
     },
     (error) => {
+      // Handle errors
       this.setState({
         userSuccess: "",
         userError: error.response.data
@@ -61,19 +66,24 @@ class UserForm extends React.Component {
    * Method that updates an existing User
    */
   handleUpdateUser() {
+    // Set HTTP API request data
     let requestData = {};
     let updatedUser = this.state.user;
     requestData.username = updatedUser.username;
     requestData.password = updatedUser.password;
+    // Send request out to API to update User
     this.manageUserService.updateUser(requestData)
     .then((results) => {
+      // Afterwards, update global User state to reflect changes
       this.handleSetGlobalState(results.data, "user");
+      // Then set local state to give feedback
       this.setState({
         userError: "",
         userSuccess: "User updated successfully!"
       });
     },
     (error) => {
+      // Handle errors
       this.setState({
         userError: error.response.data,
         userSuccess: ""
@@ -109,8 +119,10 @@ class UserForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if(this.props.action === "create") {
+      // Create if currently creating a User
       this.handleCreateUser();
     } else if(this.props.action === "update") {
+      // Update if currently updating a User
       this.handleUpdateUser();
     }
   }

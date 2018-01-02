@@ -55,22 +55,29 @@ class Form extends React.Component {
    * Method that controls what happens after a form has been submitted
    */
   handleSubmit(event) {
+    // Prevent default form onSubmit behavior
     event.preventDefault();
+    // Set HTTP call request data
     let requestData = {};
     requestData.viewsiteId = this.props.userDatabase._id;
     requestData.elementId = this.props.element._id;
     requestData.record = this.state.record;
+    // Send out an API call to request that a User Record be created
     this.manageUserRecordService.createUserRecord(requestData)
     .then((results) => {
+      // Afterwards, clear every form field
       for(let key in requestData.record) {
         requestData.record[key] = "";
       }
+      // Set state to the blank fields so that the form is now empty again
       this.setState({
         record: requestData.record
       });
+      // Request the User Database again to display newly added User Record
       this.handleRequestUserDatabase(this.props.userDatabase._id);
     },
     (error) => {
+      // Handle errors
       console.log(error.response.data);
     });
   }

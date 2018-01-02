@@ -40,7 +40,7 @@ function ViewpageList(props) {
       const viewsiteId = props.viewsiteId;
       const viewpageName = viewpage.viewpageName;
       const permissionLevel = viewpage.permissionLevel;
-
+      // Set up a nice message representing Viewpage permission level
       let permissionLevelMessage = "";
       switch(permissionLevel) {
         case 0:
@@ -56,13 +56,14 @@ function ViewpageList(props) {
           permissionLevelMessage = "Public";
           break;
       }
-      
+      // Data needed to edit Viewpage
       let editClick = {
         _id: _id,
         viewsiteId: viewsiteId,
         viewpageName: viewpageName,
         permissionLevel: permissionLevel
       };
+      // Data needed up delete Viewpage
       let deleteClick = {
         _id: _id,
         viewsiteId: viewsiteId

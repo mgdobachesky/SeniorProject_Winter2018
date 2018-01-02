@@ -41,9 +41,12 @@ class App extends React.Component {
    * Method that checks the server for an active session
    */
   handleReadOneUser() {
+    // Read User in active session
     this.manageUserService.readOneUser()
     .then((results) => {
       if(results.data.username) {
+        // If a User session is active on the server, set it in state
+        // Afterwards, read all of that User's Viewsites
         this.setState({
           user: results.data,
           loggedIn: true
@@ -51,6 +54,7 @@ class App extends React.Component {
       }
     },
     (error) => {
+      // Handle errors
       this.setState({
         user: {},
         loggedIn: false,
@@ -62,11 +66,15 @@ class App extends React.Component {
    * Method that creates a new active session
    */
   handleLoginUser(loginCredentials) {
+    // Set request data used in HTTP API call
     let requestData = {};
     requestData.username = loginCredentials.username;
     requestData.password = loginCredentials.password;
+    // Send login request to server
     this.manageUserService.loginUser(requestData)
     .then((results) => {
+      // If successful, set state with results
+      // Afterwards, read all of the logged-in User's Viewsites
       this.setState({
         user: results.data,
         loggedIn: true,
@@ -75,6 +83,7 @@ class App extends React.Component {
       }, () => this.handleReadAllViewsites());
     },
     (error) => {
+      // Handle errors
       this.setState({
         user: {},
         loggedIn: false,
@@ -88,8 +97,10 @@ class App extends React.Component {
    * Method that destroys the current active session
    */
   handleLogoutUser() {
+    // Send HTTP request to API to destroy currently active session
     this.manageUserService.logoutUser()
     .then((results) => {
+      // Clear state if successful
       this.setState({
         user: results.data,
         viewsites: [],
@@ -99,6 +110,7 @@ class App extends React.Component {
       });
     },
     (error) => {
+      // Handle errors
       this.setState({
         loginSuccess: "",
         loginError: error.response.data
@@ -110,13 +122,16 @@ class App extends React.Component {
    * Method that retrieves top-level information on all of a User's Viewsites
    */
   handleReadAllViewsites() {
+    // Send API request to read all of a Users Viewsites
     this.manageViewsiteService.readAllViewsites()
     .then((results) => {
+      // Set Viewsites in state if successful
       this.setState({
         viewsites: results.data
       });
     },
     (error) => {
+      // Handle errors
       this.setState({
         viewsites: []
       });

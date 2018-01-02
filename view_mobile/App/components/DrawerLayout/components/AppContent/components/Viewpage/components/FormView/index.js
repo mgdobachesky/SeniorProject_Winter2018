@@ -52,21 +52,28 @@ class FormView extends React.Component {
    * Method used to control what happens when a form is submitted
    */
   handleSubmit(event) {
+    // Prevent Default form onSubmit behavior
     event.preventDefault();
+    // Set HTTP call request data
     let requestData = {};
     requestData.viewsiteId = this.props.viewsiteId;
     requestData.elementId = this.props.element._id;
     requestData.record = this.state.record;
+    // Make a call to create a new User Record
     this.manageUserRecordService.createUserRecord(requestData)
     .then((results) => {
+      // Afterwards, clear every field in the form
       for(let key in requestData.record) {
         requestData.record[key] = "";
       }
+      // Set state to clear the form
       this.setState({
         record: requestData.record
       });
+      // Request an updated User Database to display the new User Record
       this.handleRequestUserDatabase(this.props.viewsiteId);
     }, (error) => {
+      // Handle errors
       console.log(error.response.data);
     });
   }

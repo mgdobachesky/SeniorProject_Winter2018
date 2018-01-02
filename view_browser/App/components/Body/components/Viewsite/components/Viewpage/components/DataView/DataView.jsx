@@ -39,7 +39,8 @@ function Records(props) {
  * Data View JSX view
  */
 var DataViewJSX = function() {
-  // Find the User Table associated with the selected Form Element Data View
+  // Determine what User Table this DataView represents
+  // NOTE: Form Elements and User Tables share an ID
   let userTable = {};
   if(this.props.userDatabase.tables) {
     for(const databaseTable of this.props.userDatabase.tables) {
@@ -48,7 +49,7 @@ var DataViewJSX = function() {
       }
     }
   }
-  // Find the appropriate Form Title for the Form Element Data View
+  // Determine the title of the Form represented by the User Table this Data View displays
   let formTitle = "";
   if(this.props.userTables) {
     for(const userTable of this.props.userTables) {

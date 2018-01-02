@@ -36,10 +36,13 @@ class Viewpage extends React.Component {
     if(nextProps.match.params.viewpageId
       && this.props.viewpages
       && this.props.viewpages.length >= 1) {
+      // Initialize variables for the selected Viewpage and an array of existing Viewpages
       let viewpageId = nextProps.match.params.viewpageId;
       let viewpages = this.props.viewpages;
+      // Search the array of Viewpages for the selected Viewpage
       for(let viewpage of viewpages) {
         if(viewpageId == viewpage._id) {
+          // Set state to reflect the currently selected Viewpage
           this.setState({
             viewpage: viewpage
           });
@@ -58,10 +61,13 @@ class Viewpage extends React.Component {
     if(this.props.match.params.viewpageId
       && this.props.viewpages
       && this.props.viewpages.length >= 1) {
+      // Initialize variables for the selected Viewpage and an array of existing Viewpages
       let viewpageId = this.props.match.params.viewpageId;
       let viewpages = this.props.viewpages;
+      // Search the array of Viewpages for the selected Viewpage
       for(let viewpage of viewpages) {
         if(viewpageId == viewpage._id) {
+          // Set state to reflect the currently selected Viewpage
           this.setState({
             viewpage: viewpage
           });

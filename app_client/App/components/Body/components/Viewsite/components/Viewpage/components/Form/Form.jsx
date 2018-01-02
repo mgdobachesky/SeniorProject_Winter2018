@@ -26,8 +26,9 @@ function FormInputList(props) {
 
     return props.formInputs.map((formInput, index) => {
       const _id = formInput._id;
-
+      // Display Form Input based on 'kind'
       if(formInput.kind === "textbox") {
+        // Display Textbox Form Input
         return (
           <TextboxFormInput
           key={_id}
@@ -50,6 +51,7 @@ function FormInputList(props) {
  * Used by FormInputList
  */
 function TextboxFormInput(props) {
+  // Data needed to edit a Textbox Form Input
   let editClick = {
     viewsiteId: props.viewsiteId,
     viewpageId: props.viewpageId,
@@ -58,6 +60,7 @@ function TextboxFormInput(props) {
     kind: props.formInput.kind,
     textboxLabel: props.formInput.textboxLabel
   };
+  // Data needed to delete a Textbox Form Input
   let deleteClick = {
     viewsiteId: props.viewsiteId,
     viewpageId: props.viewpageId,

@@ -57,6 +57,7 @@ function DisplayList(props) {
  */
 var DataViewJSX = function() {
   // Determine what User Table this DataView represents
+  // NOTE: Form Elements and User Tables share an ID
   let userTable = {};
   for(const table of this.props.userDatabase.tables) {
     if(table._id == this.props.element.formId) {

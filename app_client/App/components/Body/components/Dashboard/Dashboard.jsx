@@ -28,11 +28,13 @@ function ViewsiteList(props) {
       const loginEnabled = viewsite.loginEnabled;
       const loginEnabledMessage = loginEnabled ? "Yes" : "No";
       const viewsiteLink = "/viewsites/" + viewsite.viewsiteName;
+      // Information needed to edit Viewsite
       let editClick = {
         _id: _id,
         viewsiteName: viewsiteName,
         loginEnabled: loginEnabled
       };
+      // Information needed to delete Viewsite
       let deleteClick = {_id: _id};
       return (
         <div key={_id} className="card border-primary mb-3">

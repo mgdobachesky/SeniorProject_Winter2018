@@ -51,19 +51,23 @@ class Viewsite extends React.Component {
    * Method that allows a User to create a Viewpage
    */
   handleCreateViewpage(event) {
+    // Prepare HTTP API request data
     let requestData = {};
     let createViewpage = this.state.viewpage;
     requestData.viewsiteId = this.state.viewsite._id;
     requestData.viewpageName = createViewpage.viewpageName;
     requestData.permissionLevel = createViewpage.permissionLevel;
+    // Send out API call to request that a Viewpage is created
     this.manageViewpageService.createViewpage(requestData)
     .then((results) => {
+      // Afterwards, set Global state to reflect changes
       this.handleSetGlobalState(results.data, "viewsite");
-      // Follow up by clearing viewpage state
+      // Follow up by clearing viewpage state & hiding the form
       this.handleClearLocalState();
       $("#createViewpage").hide("medium");
     },
     (error) => {
+      // Handle errors
       this.setState({
         viewpageSuccess: "",
         viewpageError: error.response.data
@@ -75,6 +79,7 @@ class Viewsite extends React.Component {
    * Method that prepares the Viewpage update form with Viewpage information
    */
   handleEditViewpage(event) {
+    // Set local state to be the Viewpage to edit
     let editViewpage = this.state.viewpage;
     editViewpage._id = event._id;
     editViewpage.viewpageName = event.viewpageName;
@@ -82,6 +87,7 @@ class Viewsite extends React.Component {
     this.setState({
       viewpage: editViewpage
     });
+    // Show the update form, allowing the User to update the set Viewpage
     $("#updateViewpage").toggle("medium");
     $("#createViewpage").hide(false);
   }
@@ -90,20 +96,24 @@ class Viewsite extends React.Component {
    * Method that allows a User to update a Viewpage
    */
   handleUpdateViewpage() {
+    // Prepare HTTP API request data
     let requestData = {};
     let updateViewpage = this.state.viewpage;
     requestData.viewsiteId = this.state.viewsite._id;
     requestData.viewpageId = updateViewpage._id;
     requestData.viewpageName = updateViewpage.viewpageName;
     requestData.permissionLevel = updateViewpage.permissionLevel;
+    // Send call out to API to update the selected Viewpage
     this.manageViewpageService.updateViewpage(requestData)
     .then((results) => {
+      // Afterwards, set Global Viewsite state to reflect changes
       this.handleSetGlobalState(results.data, "viewsite");
-      // Follow up by clearing viewsite state
+      // Follow up by clearing viewsite state & hiding the form
       this.handleClearLocalState();
       $("#updateViewpage").hide("medium");
     },
     (error) => {
+      // Handle errors
       this.setState({
         viewpageSuccess: "",
         viewpageError: error.response.data
@@ -115,14 +125,18 @@ class Viewsite extends React.Component {
    * Method that allows a user to delete a Viewpage
    */
   handleDeleteViewpage(event) {
+    // Prepare HTTP API request data
     let requestData = {};
     requestData.viewpageId = event._id;
     requestData.viewsiteId = event.viewsiteId;
+    // Make a call to the API requesting the deletion of selected Viewpage
     this.manageViewpageService.deleteViewpage(requestData)
     .then((results) => {
+      // Afterwards, update Global Viewsite state to reflect changes
       this.handleSetGlobalState(results.data, "viewsite");
     },
     (error) => {
+      // Handle errors
       this.setState({
         viewpageSuccess: "",
         viewpageError: error.response.data
@@ -138,6 +152,7 @@ class Viewsite extends React.Component {
    */
   handleGatherUserTables() {
     let userTables = [];
+    // For each viewpage, add to array if it is of kind 'form'
     for(const viewpage of this.state.viewsite.viewpages) {
       for(const element of viewpage.elements) {
         if(element.kind === "form") {
@@ -145,6 +160,7 @@ class Viewsite extends React.Component {
         }
       }
     }
+    // Follow up by setting Global User Table state to reflect changes
     this.handleSetGlobalState(userTables, "userTables");
   }
 
@@ -194,15 +210,18 @@ class Viewsite extends React.Component {
    * Used to update state based on what Viewsite is selected
    */
   componentWillReceiveProps(nextProps) {
+    // Set request data for HTTP API call
     let requestData = {};
     requestData.viewsiteName = nextProps.match.params.viewsiteName;
     this.manageViewsiteService.readOneViewsite(requestData)
     .then((results) => {
+      // Afterwards, set Viewsite state to the results and get it's User Tables
       this.setState({
         viewsite: results.data
       }, () => this.handleGatherUserTables());
     },
     (error) => {
+      // Handle errors
       console.log(error.response.data);
     });
   }
@@ -213,18 +232,21 @@ class Viewsite extends React.Component {
    * Used to set inital state based on the first Viewsite selected
    */
   componentDidMount() {
-    // Load initial Viewsite
+    // Set request data for HTTP API call
     let requestData = {};
     requestData.viewsiteName = this.props.match.params.viewsiteName;
     this.manageViewsiteService.readOneViewsite(requestData)
     .then((results) => {
+      // Afterwards, set Viewsite state to the results and get it's User Tables
       this.setState({
         viewsite: results.data
       }, () => this.handleGatherUserTables());
     },
     (error) => {
+      // Handle errors
       console.log(error.response.data);
     });
+    // Hide forms when component first mounts
     $("#createViewpage").hide(false);
     $("#updateViewpage").hide(false);
   }

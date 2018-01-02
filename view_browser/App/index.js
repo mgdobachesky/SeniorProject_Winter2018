@@ -38,12 +38,14 @@ class App extends React.Component {
    * Method that loads the requested Viewsite
    */
   handleRequestViewsite(viewsiteName) {
+    // Continue if a Viewsite Name exists
     if(viewsiteName) {
+      // Set HTTP call request data
       let requestData = {};
       requestData.viewsiteName = viewsiteName;
       this.manageViewsiteService.readOneViewsite(requestData)
       .then((results) => {
-        // Collect an array of Forms to enrich associated User Tables
+        // Collect an array of Forms whose data will be used to enrich associated User Tables
         let userTables = [];
         if(results.data.viewpages) {
           for(const viewpage of results.data.viewpages) {
@@ -56,6 +58,7 @@ class App extends React.Component {
             }
           }
         }
+        // Set state to reflect API call results
         this.setState({
           viewsite: results.data,
           userTables: userTables,
@@ -63,6 +66,7 @@ class App extends React.Component {
         }, () => this.handleRequestUserDatabase(results.data._id));
       },
       (error) => {
+        // Handle errors
         this.setState({
           viewsite: "",
           userDatabase: "",
@@ -70,6 +74,7 @@ class App extends React.Component {
         });
       });
     } else {
+      // Set state to be blank if no Viewsite Name exists
       this.setState({
         viewsite: "",
         userDatabase: "",
@@ -80,25 +85,32 @@ class App extends React.Component {
 
   /*
    * Method that loads the requested Viewsite's associated User Database
+   *
+   * NOTE: User Databases share an ID with Viewsites
    */
   handleRequestUserDatabase(viewsiteId) {
+    // Only continue if a Viewsite ID exists
     if(viewsiteId) {
+      // Set HTTP call request data
       let requestData = {};
       requestData.viewsiteId = viewsiteId;
       this.manageUserDatabaseService.readOneUserDatabase(requestData)
       .then((results) => {
+        // Set state to reflect the API call results
         this.setState({
           userDatabase: results.data,
           viewsiteRequestError: ""
         });
       },
       (error) => {
+        // Handle errors
         this.setState({
           userDatabase: "",
           viewsiteRequestError: error.response.data
         });
       });
     } else {
+      // If no Viewsite ID exists, set state to be blank
       this.setState({
         userDatabase: "",
         viewsiteRequestError: "No user database specified!"

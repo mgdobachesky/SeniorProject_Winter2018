@@ -21,6 +21,7 @@ function ElementList(props) {
       const _id = element._id;
 
       if(element.kind === "text") {
+        // For Text Elements
         return (
           <TextElement
           key={_id}
@@ -32,6 +33,7 @@ function ElementList(props) {
         );
       }
       else if(element.kind === "form") {
+        // For Form Elements
         return (
           <FormElement
           key={_id}
@@ -44,6 +46,7 @@ function ElementList(props) {
         );
       }
       else if(element.kind === "dataView") {
+        // For Data View Elements
         return (
           <DataViewElement
           key={_id}
@@ -66,6 +69,7 @@ function ElementList(props) {
  * Used by the ElementList in ViewpageJSX
  */
 function TextElement(props) {
+  // Data needed to edit a Text Element
   const editClick = {
     viewsiteId: props.viewsiteId,
     viewpageId: props.viewpageId,
@@ -73,6 +77,7 @@ function TextElement(props) {
     kind: props.element.kind,
     textValue: props.element.textValue
   };
+  // Data needed to delete a Text Element
   const deleteClick = {
     viewsiteId: props.viewsiteId,
     viewpageId: props.viewpageId,
@@ -138,6 +143,7 @@ function FormElement(props) {
  * Used by the ElementList in ViewpageJSX
  */
 function DataViewElement(props) {
+  // Data needed to edit a Data View
   const editClick = {
     viewsiteId: props.viewsiteId,
     viewpageId: props.viewpageId,
@@ -145,20 +151,21 @@ function DataViewElement(props) {
     kind: props.element.kind,
     formId: props.element.formId
   };
+  // Data needed to delete a Data View
   const deleteClick = {
     viewsiteId: props.viewsiteId,
     viewpageId: props.viewpageId,
     _id: props.element._id,
     kind: props.element.kind
   };
-
+  // Determine the title of the Form the Data View's User Table represents
   let sourceName = "";
   for(const userTable of props.userTables) {
     if(props.element.formId == userTable._id) {
       sourceName = userTable.formTitle;
     }
   }
-  
+
   return (
     <div className="card border-primary mb-3">
       <div className="card-body">

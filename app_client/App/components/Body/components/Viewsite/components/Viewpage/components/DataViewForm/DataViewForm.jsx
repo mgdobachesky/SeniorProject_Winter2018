@@ -36,9 +36,12 @@ var ErrorAlert = function(props) {
 /*
  * Create list of Form Options for the Data View
  * Used by DataViewFormJSX
+ *
+ * NOTE: Forms and User Tables share an ID
  */
 function DataViewOptions(props) {
   if(props.userTables && props.userTables.length >= 1) {
+    // Create list of User Tables for the Viewsite
     return props.userTables.map((userTable, index) => {
       const _id = userTable._id;
       const formTitle = userTable.formTitle;

@@ -8,6 +8,7 @@ import { NavLink } from 'react-router-dom';
  */
 function HeaderOptions(props) {
   if(props.loggedIn) {
+    // Return the Dashboard link
     return (
       <li className="nav-item">
         <NavLink className="nav-link" to="/dashboard">
@@ -26,6 +27,7 @@ function HeaderOptions(props) {
  */
 function ViewsiteLinks(props) {
   if(props.viewsites && props.viewsites.length >= 1) {
+    // Return links to a Users Viewsite if the User has any
     return props.viewsites.map((viewsite) => {
       const viewsiteId = viewsite._id;
       const viewsiteName = viewsite.viewsiteName;
@@ -49,6 +51,7 @@ function ViewsiteLinks(props) {
  */
 function LoginOptions(props) {
   if(props.loggedIn) {
+    // If a User is logged in return a logout button
     return (
       <ul className="navbar-nav justify-content-end">
         <li className="nav-item">
@@ -59,6 +62,7 @@ function LoginOptions(props) {
       </ul>
     );
   } else {
+    // If no User is logged in return a sign-up & login button
     return (
       <ul className="navbar-nav justify-content-end">
         <li className="nav-item">

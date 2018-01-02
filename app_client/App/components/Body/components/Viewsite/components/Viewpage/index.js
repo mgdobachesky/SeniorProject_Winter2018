@@ -56,10 +56,13 @@ class Viewpage extends React.Component {
    * Method that allows Users to create new Elements
    */
   handleCreateElement(kind) {
+    // Prepare HTTP API request data
     let requestData = {};
     requestData.viewsiteId = this.state.viewsiteId;
     requestData.viewpageId = this.state.viewpage._id;
     requestData.kind = kind;
+    // Continue HTTP API request data preparation based on Element kind
+    // and hide create form when done
     if(kind === "text") {
       let createText = this.state.text;
       requestData.textValue = createText.textValue;
@@ -75,13 +78,16 @@ class Viewpage extends React.Component {
       requestData.formId = createDataView.formId;
       $(".createDataView").hide("medium");
     }
+    // Send out API request to create a new Element
     this.manageElementService.createElement(requestData)
     .then((results) => {
+      // Afterwards, set Global Viewsite state to reflect changes
       this.handleSetGlobalState(results.data, "viewsite");
       // Follow up by clearing element state
       this.handleClearLocalState();
     },
     (error) => {
+      // Handle errors
       this.setState({
         elementSuccess: "",
         elementError: error.response.data
@@ -94,6 +100,7 @@ class Viewpage extends React.Component {
    */
   handleEditElement(event) {
     if(event.kind === "text") {
+      // Set Text Element state to Element to be updated
       let editText = this.state.text;
       editText._id = event._id;
       editText.kind = event.kind;
@@ -101,10 +108,12 @@ class Viewpage extends React.Component {
       this.setState({
         text: editText
       });
+      // Show only the update Text form
       $(".updateText").toggle("medium");
       $(".createText").hide(false);
     }
     else if(event.kind === "form") {
+      // Set Form Element state to Element to be updated
       let editForm = this.state.form;
       editForm._id = event._id;
       editForm.kind = event.kind;
@@ -112,10 +121,12 @@ class Viewpage extends React.Component {
       this.setState({
         form: editForm
       });
+      // Show only the update Form form
       $(".updateForm").toggle("medium");
       $( ".createForm" ).hide(false);
     }
     else if(event.kind === "dataView") {
+      // Set Data View Element state to Element to be updated
       let editDataView = this.state.dataView;
       editDataView._id = event._id;
       editDataView.kind = event.kind;
@@ -123,6 +134,7 @@ class Viewpage extends React.Component {
       this.setState({
         dataView: editDataView
       });
+      // Show only the update Data View form
       $(".updateDataView").toggle("medium");
       $( ".createDataView" ).hide(false);
     }
@@ -132,10 +144,13 @@ class Viewpage extends React.Component {
    * Method that allows Users to update existing Elements
    */
   handleUpdateElement(kind) {
+    // Prepare HTTP API request data
     let requestData = {};
     requestData.viewsiteId = this.state.viewsiteId;
     requestData.viewpageId = this.state.viewpage._id;
     requestData.kind = kind;
+    // Continue preparing HTTP API request data based on Element kind
+    // and hide update form when done
     if(kind === "text") {
       let updateText = this.state.text;
       requestData.elementId = updateText._id;
@@ -154,13 +169,16 @@ class Viewpage extends React.Component {
       requestData.formId = updateDataView.formId;
       $(".updateDataView").hide("medium");
     }
+    // Send out API request to update selected Element
     this.manageElementService.updateElement(requestData)
     .then((results) => {
+      // Afterwards, set Global Viewsite state to reflect changes
       this.handleSetGlobalState(results.data, "viewsite");
       // Follow up by clearing element state
       this.handleClearLocalState();
     },
     (error) => {
+      // Handle errors
       this.setState({
         elementSuccess: "",
         elementError: error.response.data
@@ -172,17 +190,20 @@ class Viewpage extends React.Component {
    * Method that allows Users to delete existing Elements
    */
   handleDeleteElement(event) {
+    // Prepare HTTP API request data
     let requestData = {};
     requestData.elementId = event._id;
     requestData.kind = event.kind;
     requestData.viewsiteId = this.state.viewsiteId;
     requestData.viewpageId = this.state.viewpage._id;
-
+    // Send request to delete selected Element
     this.manageElementService.deleteElement(requestData)
     .then((results) => {
+      // Afterwards, update Global Viewsite state to reflect changes
       this.handleSetGlobalState(results.data, "viewsite");
     },
     (error) => {
+      // Handle errors
       this.setState({
         elementSuccess: "",
         elementError: error.response.data
@@ -195,6 +216,7 @@ class Viewpage extends React.Component {
    * Used to provide a clean state for new create forms
    */
   handleClearLocalState() {
+    // Set local state to default values
     let clearText = this.state.text;
     let clearForm = this.state.form;
     let clearDataView = this.state.dataView;
@@ -244,6 +266,7 @@ class Viewpage extends React.Component {
    * Used to set Viewpage state based on props passed from the Viewsite component
    */
   componentWillReceiveProps(nextProps) {
+    // Set later state when component receives props
     this.setState({
       viewpage: nextProps.viewpage,
       userTables: nextProps.userTables
@@ -257,11 +280,13 @@ class Viewpage extends React.Component {
    * component, as well as to hide all create / update forms
    */
   componentDidMount() {
+    // Set initial state on mount
     this.setState({
       viewsiteId: this.props.viewsiteId,
       viewpage: this.props.viewpage,
       userTables: this.props.userTables
     });
+    // Hide all forms when component first mounts
     $(".createText").hide(false);
     $(".updateText").hide(false);
     $(".createForm").hide(false);

@@ -45,23 +45,28 @@ class Form extends React.Component {
    * Method that allows users to create Form Inputs
    */
   handleCreateFormInput(kind) {
+    // Prepare HTTP API request data
     let requestData = {};
     requestData.viewsiteId = this.state.viewsiteId;
     requestData.viewpageId = this.state.viewpageId;
     requestData.elementId = this.state.element._id;
     requestData.kind = kind;
+    // Continue preparing HTTP API request data based on Form Input kind
     if(kind === "textbox") {
       let createTextbox = this.state.textbox;
       requestData.textboxLabel = createTextbox.textboxLabel;
       $(".createTextbox").hide("medium");
     }
+    // Send request to create a new Form Input
     this.manageFormInputService.createFormInput(requestData)
     .then((results) => {
+      // Afterwards, update Global Viewsite state to reflect changes
       this.handleSetGlobalState(results.data, "viewsite");
       // Follow up by clearing form state
       this.handleClearLocalState();
     },
     (error) => {
+      // Handle errors
       this.setState({
         formInputSuccess: "",
         formInputError: error.response.data
@@ -73,7 +78,9 @@ class Form extends React.Component {
    * Method that sets local state to prepare a Form Input to be edited
    */
   handleEditFormInput(event) {
+    // Prepare form for update based on Form Input kind
     if(event.kind === "textbox") {
+      // Set state of the Textbox form to selected Textbox
       let editTextbox = this.state.textbox;
       editTextbox._id = event._id;
       editTextbox.kind = event.kind;
@@ -81,6 +88,7 @@ class Form extends React.Component {
       this.setState({
         textbox: editTextbox
       });
+      // Show the update Textbox form with populated local state information
       $(".updateTextbox").toggle("medium");
       $(".createTextbox").hide(false);
     }
@@ -90,24 +98,30 @@ class Form extends React.Component {
    * Method that allows users to update existing Form Inputs
    */
   handleUpdateFormInput(kind) {
+    // Prepare HTTP API request data
     let requestData = {};
     requestData.viewsiteId = this.state.viewsiteId;
     requestData.viewpageId = this.state.viewpageId;
     requestData.elementId = this.state.element._id;
     requestData.kind = kind;
+    // Continue preparing HTTP API request data based on Form Input kind
+    // and hide update form after the update
     if(kind === "textbox") {
       let updateTextbox = this.state.textbox;
       requestData.formInputId = updateTextbox._id;
       requestData.textboxLabel = updateTextbox.textboxLabel;
       $(".updateTextbox").hide("medium");
     }
+    // Call out to the API with a Form Input update request
     this.manageFormInputService.updateFormInput(requestData)
     .then((results) => {
+      // Set global Viewsite state to reflect changes
       this.handleSetGlobalState(results.data, "viewsite");
       // Follow up by clearing form state
       this.handleClearLocalState();
     },
     (error) => {
+      // Handle errors
       this.setState({
         formInputSuccess: "",
         formInputError: error.response.data
@@ -119,18 +133,21 @@ class Form extends React.Component {
    * Method that allows users to delete existing Form Inputs
    */
   handleDeleteFormInput(event) {
+    // Prepare HTTP API request data
     let requestData = {};
     requestData.formInputId = event._id;
     requestData.kind = event.kind;
     requestData.viewsiteId = this.state.viewsiteId;
     requestData.viewpageId = this.state.viewpageId;
     requestData.elementId = this.state.element._id;
-
+    // Call out to API to request a Form Input to be deleted
     this.manageFormInputService.deleteFormInput(requestData)
     .then((results) => {
+      // Afterwards, update Global Viewsite state to reflect changes
       this.handleSetGlobalState(results.data, "viewsite");
     },
     (error) => {
+      // Hande errors
       this.setState({
         formInputSuccess: "",
         formInputError: error.response.data
@@ -142,6 +159,7 @@ class Form extends React.Component {
    * Method that clears local state so that new forms will not display old information
    */
   handleClearLocalState() {
+    // Set state to default values
     let clearTextbox = this.state.textbox;
     clearTextbox._id = "";
     clearTextbox.kind = "textbox";
@@ -181,6 +199,7 @@ class Form extends React.Component {
    * Used to update Form appearance after a global state change
    */
   componentWillReceiveProps(nextProps) {
+    // Set subsequent state values when component receives props
     this.setState({
       element: nextProps.element
     });
@@ -192,11 +211,13 @@ class Form extends React.Component {
    * Used to set Form fields based on Global state & hide create / update forms
    */
   componentDidMount() {
+    // Set inital state values when component first mounts
     this.setState({
       viewsiteId: this.props.viewsiteId,
       viewpageId: this.props.viewpageId,
       element: this.props.element
     });
+    // Hide forms when component first mounts
     $( ".createTextbox" ).hide(false);
     $( ".updateTextbox" ).hide(false);
   }

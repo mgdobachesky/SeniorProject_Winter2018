@@ -43,18 +43,22 @@ class Dashboard extends React.Component {
    * Method used to create a new Viewsite
    */
   handleCreateViewsite() {
+    // Prepare HTTP API request data
     let requestData = {};
     let createViewsite = this.state.viewsite;
     requestData.viewsiteName = createViewsite.viewsiteName;
     requestData.loginEnabled = createViewsite.loginEnabled;
+    // Send request to API to create Viewsite
     this.manageViewsiteService.createViewsite(requestData)
     .then((results) => {
+      // Update the Global Viewsite
       this.handleSetGlobalState(results.data, "viewsites");
-      // Follow up by clearing viewsite state
+      // Follow up by clearing Viewsite state & hiding the form
       this.handleClearLocalState();
       $("#createViewsite").hide("medium");
     },
     (error) => {
+      // Handle errors
       this.setState({
         viewsiteSuccess: "",
         viewsiteError: error.response.data
@@ -66,6 +70,7 @@ class Dashboard extends React.Component {
    * Method used to prepare the update form
    */
   handleEditViewsite(event) {
+    // Set local state to be the Viewsite to edit
     let editViewsite = this.state.viewsite;
     editViewsite._id = event._id;
     editViewsite.viewsiteName = event.viewsiteName;
@@ -73,6 +78,7 @@ class Dashboard extends React.Component {
     this.setState({
       viewsite: editViewsite
     });
+    // Display the update form, allowing the User to edit the chosen Viewsite
     $("#updateViewsite").toggle("medium");
     $("#createViewsite").hide(false);
   }
@@ -81,19 +87,22 @@ class Dashboard extends React.Component {
    * Method used to update an existing Viewsite
    */
   handleUpdateViewsite() {
+    // Prepare the HTTP API request data
     let requestData = {};
     let updateViewsite = this.state.viewsite;
     requestData.viewsiteId = updateViewsite._id;
     requestData.viewsiteName = updateViewsite.viewsiteName;
     requestData.loginEnabled = updateViewsite.loginEnabled;
+    // Send call out to API to update the Viewsite
     this.manageViewsiteService.updateViewsite(requestData)
     .then((results) => {
       this.handleSetGlobalState(results.data, "viewsites");
-      // Follow up by clearing viewsite state
+      // Follow up by clearing viewsite state & hiding the update form
       this.handleClearLocalState();
--      $("#updateViewsite").hide("medium");
+      $("#updateViewsite").hide("medium");
     },
     (error) => {
+      // Handle errors
       this.setState({
         viewsiteSuccess: "",
         viewsiteError: error.response.data
@@ -105,13 +114,17 @@ class Dashboard extends React.Component {
    * Method used to delete an existing Viewsite
    */
   handleDeleteViewsite(event) {
+    // Prepare HTTP API request data
     let requestData = {};
     requestData.viewsiteId = event._id;
+    // Send request to delete Viewsite
     this.manageViewsiteService.deleteViewsite(requestData)
     .then((results) => {
+      // Afterwards, update Global Viewsite state to reflect changes
       this.handleSetGlobalState(results.data, "viewsites");
     },
     (error) => {
+      // Handle errors
       this.setState({
         viewsiteError: error.response.data
       });
