@@ -54,7 +54,7 @@ function ViewsiteList(props) {
             className="card-link"
             href="javascript:;"
             onClick={() => props.onEditViewsite(editClick)}>
-              Edit Title
+              Edit Details
             </a>
 
             <a
