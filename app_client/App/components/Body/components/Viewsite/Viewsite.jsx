@@ -4,6 +4,7 @@ import React from 'react';
 // Import requred components
 import ViewpageForm from './components/ViewpageForm';
 import Viewpage from './components/Viewpage';
+import UserTable from './components/UserTable';
 
 /*
  * Method used to prepare the create Viewpage forms for
@@ -109,19 +110,18 @@ function ViewpageTabs(props) {
   if(props.viewpages && props.viewpages.length >= 1) {
     return props.viewpages.map((viewpage, index) => {
       return (
-        <li key={viewpage._id + "-tab"} className="nav-item">
-          <a
-          className="nav-link"
-          id={viewpage._id + "-tab"}
-          data-toggle="tab"
-          href={"#" + viewpage._id}
-          role="tab"
-          aria-controls={viewpage._id}
-          aria-selected="false"
-          onClick={() => {clearAllForms.call(this);}}>
-            {viewpage.viewpageName}
-          </a>
-        </li>
+        <a
+        key={viewpage._id}
+        className="nav-link dropdown-item"
+        id={viewpage._id + "-tab"}
+        data-toggle="tab"
+        href={"#" + viewpage._id}
+        role="tab"
+        aria-controls={viewpage._id}
+        aria-selected="false"
+        onClick={() => {clearAllForms.call(this);}}>
+          {viewpage.viewpageName}
+        </a>
       );
     });
   } else {
@@ -157,6 +157,124 @@ function ViewpageContent(props) {
 }
 
 /*
+ * Create content for managing viewpages
+ * Used by the ViewsiteJSX
+ */
+function ManageViewpagesContent() {
+  return (
+    <div
+    className="tab-pane fade show active"
+    id="manage-viewpages"
+    role="tabpanel"
+    aria-labelledby="manage-viewpages-tab">
+      <div className="row">
+        <div className="col-1"></div>
+        <div className="col-auto">
+          <ul className="nav flex-column">
+            <li className="nav-item">
+              <button
+              type="button"
+              className="btn btn-link nav-link"
+              onClick={() => {prepareCreateViewpage.call(this);}}>
+                + New Viewpage
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div className="col">
+          <div id="createViewpage" className="card mb-3">
+            <div className="card-body">
+              <ViewpageForm
+              description="Create Viewpage"
+              action="create"
+              viewpage={this.state.viewpage}
+              viewpageSuccess={this.state.viewpageSuccess}
+              viewpageError={this.state.viewpageError}
+              onChange={this.handleChange}
+              onSubmit={this.handleCreateViewpage} />
+            </div>
+          </div>
+
+          <div id="updateViewpage" className="card mb-3">
+            <div className="card-body">
+              <ViewpageForm
+              description="Update Viewpage"
+              action="update"
+              viewpage={this.state.viewpage}
+              viewpageSuccess={this.state.viewpageSuccess}
+              viewpageError={this.state.viewpageError}
+              onChange={this.handleChange}
+              onSubmit={this.handleUpdateViewpage} />
+            </div>
+          </div>
+          <ViewpageList
+          viewsiteId={this.state.viewsite._id}
+          viewpages={this.state.viewsite.viewpages}
+          onEditViewpage={this.handleEditViewpage}
+          onDeleteViewpage={this.handleDeleteViewpage} />
+        </div>
+        <div className="col-1"></div>
+      </div>
+    </div>
+  );
+}
+
+/*
+ * Create list of tabs for each table in a User's Database
+ * Used by ManageDatabaseContent
+ */
+function UserDatabaseTabs() {
+  if(this.state.userTables && this.state.userTables.length >= 1) {
+    return this.state.userTables.map((userTable, index) => {
+      return (
+        <li key={userTable._id} className="nav-item">
+          <button
+          type="button"
+          className="btn btn-link nav-link"
+          onClick={() => {this.handlePopulateUserTable(userTable)}}>
+            {userTable.formTitle}
+          </button>
+        </li>
+      );
+    });
+  } else {
+    return null;
+  }
+}
+
+/*
+ * Create content for managing User Database
+ * Used by the ViewsiteJSX
+ */
+function ManageDatabaseContent() {
+  return (
+    <div
+    className="tab-pane fade"
+    id="manage-database"
+    role="tabpanel"
+    aria-labelledby="manage-database-tab">
+      <div className="row">
+        <div className="col-1"></div>
+
+        <div className="col-auto">
+          <ul className="nav flex-column">
+            {UserDatabaseTabs.call(this)}
+          </ul>
+        </div>
+
+        <div className="col">
+          <UserTable
+          userTable={this.state.selectedUserTable}
+          userTableHeaders={this.state.selectedUserTableHeaders} />
+        </div>
+
+        <div className="col-1"></div>
+      </div>
+    </div>
+  );
+}
+
+/*
  * Viewsite JSX view
  */
 var ViewsiteJSX = function() {
@@ -186,8 +304,35 @@ var ViewsiteJSX = function() {
               </a>
             </li>
 
-            <ViewpageTabs
-            viewpages={this.state.viewsite.viewpages} />
+            <li className="nav-item">
+              <a
+              className="nav-link"
+              id="manage-database-tab"
+              data-toggle="tab"
+              href="#manage-database"
+              role="tab"
+              aria-controls="manage-database"
+              aria-selected="true">
+                Manage Database
+              </a>
+            </li>
+
+            <li className="nav-item dropdown">
+              <a
+              className="nav-link dropdown-toggle"
+              data-toggle="dropdown"
+              href="#"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false">
+                Viewpages
+              </a>
+
+              <div className="dropdown-menu">
+                <ViewpageTabs
+                viewpages={this.state.viewsite.viewpages} />
+              </div>
+            </li>
           </ul>
         </div>
       </div>
@@ -197,60 +342,9 @@ var ViewsiteJSX = function() {
       <div className="row">
         <div className="col-12">
           <div className="tab-content" id="manage-viewsites-tabContent">
-            <div
-            className="tab-pane fade show active"
-            id="manage-viewpages"
-            role="tabpanel"
-            aria-labelledby="manage-viewpages-tab">
-              <div className="row">
-                <div className="col-1"></div>
-                <div className="col-auto">
-                  <ul className="nav flex-column">
-                    <li className="nav-item">
-                      <button
-                      type="button"
-                      className="btn btn-link nav-link"
-                      onClick={() => {prepareCreateViewpage.call(this);}}>
-                        + New Viewpage
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                <div className="col">
-                  <div id="createViewpage" className="card mb-3">
-                    <div className="card-body">
-                      <ViewpageForm
-                      description="Create Viewpage"
-                      action="create"
-                      viewpage={this.state.viewpage}
-                      viewpageSuccess={this.state.viewpageSuccess}
-                      viewpageError={this.state.viewpageError}
-                      onChange={this.handleChange}
-                      onSubmit={this.handleCreateViewpage} />
-                    </div>
-                  </div>
+            {ManageDatabaseContent.call(this)}
 
-                  <div id="updateViewpage" className="card mb-3">
-                    <div className="card-body">
-                      <ViewpageForm
-                      description="Update Viewpage"
-                      action="update"
-                      viewpage={this.state.viewpage}
-                      viewpageSuccess={this.state.viewpageSuccess}
-                      viewpageError={this.state.viewpageError}
-                      onChange={this.handleChange}
-                      onSubmit={this.handleUpdateViewpage} />
-                    </div>
-                  </div>
-                  <ViewpageList
-                  viewsiteId={this.state.viewsite._id}
-                  viewpages={this.state.viewsite.viewpages}
-                  onEditViewpage={this.handleEditViewpage}
-                  onDeleteViewpage={this.handleDeleteViewpage} />
-                </div>
-                <div className="col-1"></div>
-              </div>
-            </div>
+            {ManageViewpagesContent.call(this)}
 
             <ViewpageContent
             viewsiteId={this.state.viewsite._id}

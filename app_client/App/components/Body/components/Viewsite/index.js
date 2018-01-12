@@ -8,7 +8,7 @@ import './viewsite.css';
 
 // Import required services
 import ViewsiteService from '../../../../services/ViewsiteService';
-import UserDatabaseService from './services/UserDatabaseService';
+import UserTableService from './services/UserTableService';
 import ViewpageService from './services/ViewpageService';
 
 class Viewsite extends React.Component {
@@ -18,7 +18,7 @@ class Viewsite extends React.Component {
 
     // Initialize service objects
     this.manageViewsiteService = new ViewsiteService();
-    this.manageUserDatabaseService = new UserDatabaseService();
+    this.manageUserTableService = new UserTableService();
     this.manageViewpageService = new ViewpageService();
 
     // Viewpage Methods
@@ -26,6 +26,9 @@ class Viewsite extends React.Component {
     this.handleEditViewpage = this.handleEditViewpage.bind(this);
     this.handleUpdateViewpage = this.handleUpdateViewpage.bind(this);
     this.handleDeleteViewpage = this.handleDeleteViewpage.bind(this);
+
+    // User Table Methods
+    this.handlePopulateUserTable = this.handlePopulateUserTable.bind(this);
 
     // Other Methods
     this.handleGatherUserTables = this.handleGatherUserTables.bind(this);
@@ -43,7 +46,10 @@ class Viewsite extends React.Component {
       },
       viewpageSuccess: "",
       viewpageError: "",
-      userTables: []
+      userTables: [],
+      selectedUserTable: {},
+      selectedUserTableHeaders: {},
+      userTableError: ""
     };
   }
 
@@ -145,6 +151,37 @@ class Viewsite extends React.Component {
   }
 
   /*
+   * Method that prepares a User Table to be managed
+   * Used to get more detailed information on user table
+   *
+   * Only make an API call if the table is not already in state
+   */
+  handlePopulateUserTable(userTable) {
+    if(userTable && userTable._id != this.state.selectedUserTableHeaders._id) {
+      // Prepare HTTP API request data
+      let requestData = {};
+      requestData.viewsiteId = this.state.viewsite._id;
+      requestData.elementId = userTable._id;
+      // Send out API call to request that a Viewpage is created
+      this.manageUserTableService.readOneUserTable(requestData)
+      .then((results) => {
+        // Afterwards, set state to reflect changes
+        this.setState({
+          selectedUserTable: results.data,
+          selectedUserTableHeaders: userTable,
+          userTableError: ""
+        });
+      },
+      (error) => {
+        // Handle errors
+        this.setState({
+          userTableError: error.response.data
+        });
+      });
+    }
+  }
+
+  /*
    * Method that collects an array of Form Elements
    * Used to get more detailed information on user tables
    *
@@ -161,7 +198,9 @@ class Viewsite extends React.Component {
       }
     }
     // Follow up by setting Global User Table state to reflect changes
-    this.handleSetGlobalState(userTables, "userTables");
+    this.setState({
+      userTables: userTables
+    }, () => this.handlePopulateUserTable(userTables[0]));
   }
 
   /*
@@ -187,7 +226,7 @@ class Viewsite extends React.Component {
   handleSetGlobalState(newStateData, toSet) {
     this.setState({
       [toSet]: newStateData
-    });
+    }, () => this.handleGatherUserTables());
   }
 
   /*
@@ -216,8 +255,11 @@ class Viewsite extends React.Component {
     this.manageViewsiteService.readOneViewsite(requestData)
     .then((results) => {
       // Afterwards, set Viewsite state to the results and get it's User Tables
+      // Also set User Tables to blank so old User Tables don't leak over
       this.setState({
-        viewsite: results.data
+        viewsite: results.data,
+        selectedUserTable: {},
+        selectedUserTableHeaders: {}
       }, () => this.handleGatherUserTables());
     },
     (error) => {
@@ -238,8 +280,11 @@ class Viewsite extends React.Component {
     this.manageViewsiteService.readOneViewsite(requestData)
     .then((results) => {
       // Afterwards, set Viewsite state to the results and get it's User Tables
+      // Also set User Tables to blank so old User Tables don't leak over
       this.setState({
-        viewsite: results.data
+        viewsite: results.data,
+        selectedUserTable: {},
+        selectedUserTableHeaders: {}
       }, () => this.handleGatherUserTables());
     },
     (error) => {

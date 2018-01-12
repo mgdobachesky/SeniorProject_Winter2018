@@ -62,11 +62,23 @@ router.delete('/delete/form_inputs', controllerFormInputs.formInputsDelete);
 router.post('/read_one/user_databases', controllerUserDatabases.userDatabasesReadOne);
 
 /*
+ * Routes for public User Table methods
+ */
+router.post('/read_one/user_tables', controllerUserTables.userTablesReadOne);
+
+/*
  * Routes for public User Record methods
  */
 router.post('/create/user_records', controllerUserRecords.userRecordsCreate);
 router.put('/update/user_records', controllerUserRecords.userRecordsUpdate);
 router.delete('/delete/user_records', controllerUserRecords.userRecordsDelete);
+
+/*
+ * Handle unmatched requests
+ */
+router.all('*', function(request, response) {
+  console.log("Invalid API route!");
+});
 
 // Export the router
 module.exports = router;

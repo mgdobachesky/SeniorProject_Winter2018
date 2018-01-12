@@ -2,6 +2,31 @@
 var mongoose = require('mongoose');
 var userDatabases = mongoose.model('userDatabase');
 
+/*
+ * Method that allows User Tables to be read individually
+ */
+function userTablesReadOne(request) {
+  var promise = new Promise(function(resolve, reject) {
+    if(!request.body.viewsiteId || !request.body.elementId) {
+      reject('User Database and Table IDs are both required!');
+    } else {
+      userDatabases.findOne({'_id': request.body.viewsiteId})
+      .exec(function(error, userDatabaseData) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else if(!userDatabaseData) {
+          reject('User Database not found!');
+        } else if(!userDatabaseData.tables.id(request.body.elementId)) {
+          reject('User Table doesn\'t exist!');
+        } else {
+          resolve(userDatabaseData.tables.id(request.body.elementId));
+        }
+      });
+    }
+  });
+  return promise;
+}
 
 /*
  * Method that allows Form Elements to create a User Table
@@ -115,5 +140,6 @@ function userTablesDelete(request) {
 }
 
 // Export all public methods
+module.exports.userTablesReadOne = userTablesReadOne;
 module.exports.userTablesCreate = userTablesCreate;
 module.exports.userTablesDelete = userTablesDelete;
