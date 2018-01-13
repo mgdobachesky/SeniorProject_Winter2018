@@ -43,6 +43,8 @@ var UserFormJSX = function() {
         this.props.action === "create" ? "container" : "container-fluid"
       }>
 
+      {this.props.action === "create" ? <br /> : null}
+
       <h2>
         {this.props.description}
       </h2>
@@ -57,30 +59,30 @@ var UserFormJSX = function() {
         <div className="form-group">
           <label htmlFor="username">
             Username
-          </label>
 
-          <input
-          name="username"
-          type="text"
-          className="form-control"
-          id="username"
-          placeholder="Enter Username"
-          value={this.state.user.username}
-          onChange={this.handleChange} />
+            <input
+            name="username"
+            type="text"
+            className="form-control"
+            id="username"
+            placeholder="Enter Username"
+            value={this.state.user.username}
+            onChange={this.handleChange} />
+          </label>
         </div>
         <div className="form-group">
           <label htmlFor="password">
             Password
-          </label>
 
-          <input
-          name="password"
-          type="password"
-          className="form-control"
-          id="password"
-          placeholder="Enter Password"
-          value={this.state.user.password}
-          onChange={this.handleChange} />
+            <input
+            name="password"
+            type="password"
+            className="form-control"
+            id="password"
+            placeholder="Enter Password"
+            value={this.state.user.password}
+            onChange={this.handleChange} />
+          </label>
         </div>
 
         <button type="submit" className="btn btn-primary">

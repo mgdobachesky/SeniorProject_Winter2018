@@ -25,10 +25,20 @@ function Data(props) {
  */
 function Records(props) {
   if(props.userTable.records && props.userTable.records.length >= 1) {
+    let deleteClick = {};
+    deleteClick.viewsiteId = props.viewsiteId;
+    deleteClick.elementId = props.userTable._id;
     return props.userTable.records.map((record, index) => {
       return(
         <tr key={record._id}>
           <Data record={record} />
+          <td>
+            <a
+            href="javascript:;"
+            onClick={() => props.onDeleteRecord(deleteClick, record._id)}>
+              <i className="fa fa-times" aria-hidden="true"></i>
+            </a>
+          </td>
         </tr>
       );
     });
@@ -43,12 +53,14 @@ function Records(props) {
 var UserTableJSX = function() {
   return (
     <div>
-      <h2>{this.props.userTableHeaders.formTitle}</h2>
+      <h4>{this.props.userTableHeaders.formTitle}</h4>
 
         <table className="table table-hover">
           <tbody>
             <Records
-            userTable={this.props.userTable} />
+            userTable={this.props.userTable}
+            viewsiteId={this.props.viewsiteId}
+            onDeleteRecord={this.handleDeleteRecord} />
           </tbody>
         </table>
     </div>

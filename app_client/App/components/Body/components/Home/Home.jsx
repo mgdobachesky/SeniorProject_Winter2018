@@ -19,6 +19,8 @@ var HomeJSX = function() {
           </div>
         </div>
       </div>
+
+      <br />
     </div>
   );
 }

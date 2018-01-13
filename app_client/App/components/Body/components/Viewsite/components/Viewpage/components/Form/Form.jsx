@@ -111,7 +111,7 @@ var FormJSX = function() {
         type="button"
         className="btn btn-link"
         onClick={() => {prepareCreateTextbox.call(this);}}>
-          + Add Textbox
+        <i className="fa fa-plus" aria-hidden="true"></i> Add Textbox
         </button>
       </div>
 

@@ -53,15 +53,16 @@ var ViewsiteFormJSX = function() {
         <div className="form-group">
           <label htmlFor="viewsiteName">
             Viewsite Name
+
+            <input
+            type="text"
+            name="viewsiteName"
+            className="form-control"
+            id="viewsiteName"
+            placeholder="Enter Viewsite Name"
+            value={this.props.viewsite.viewsiteName}
+            onChange={this.handleChange} />
           </label>
-          <input
-          type="text"
-          name="viewsiteName"
-          className="form-control"
-          id="viewsiteName"
-          placeholder="Enter Viewsite Name"
-          value={this.props.viewsite.viewsiteName}
-          onChange={this.handleChange} />
         </div>
 
         <div className="form-group">

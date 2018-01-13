@@ -270,7 +270,7 @@ var ViewpageJSX = function() {
             type="button"
             className="btn btn-link"
             onClick={() => {prepareCreateText.call(this);}}>
-              + Add Text
+            <i className="fa fa-plus" aria-hidden="true"></i> Add Text
             </button>
           </div>
 
@@ -279,7 +279,7 @@ var ViewpageJSX = function() {
             type="button"
             className="btn btn-link"
             onClick={() => {prepareCreateForm.call(this);}}>
-              + Add Form
+            <i className="fa fa-plus" aria-hidden="true"></i> Add Form
             </button>
           </div>
 
@@ -288,7 +288,7 @@ var ViewpageJSX = function() {
             type="button"
             className="btn btn-link"
             onClick={() => {prepareCreateDataView.call(this);}}>
-              + Add Data-View
+            <i className="fa fa-plus" aria-hidden="true"></i> Add Data-View
             </button>
           </div>
         </div>

@@ -15,7 +15,43 @@ class UserTable extends React.Component {
 
     // Initialize service objects
     this.manageUserRecordService = new UserRecordService();
+
+    // User Table Methods
+    this.handleUpdateUserTable = this.handleUpdateUserTable.bind(this);
+
+    // User Record Methods
+    this.handleDeleteRecord = this.handleDeleteRecord.bind(this);
   }
+
+  /*
+   * Method that updates a User Table after being edited
+   *
+   * Passed down from the Viewsite component
+   */
+  handleUpdateUserTable(updatedTable) {
+    this.props.onUpdateUserTable(updatedTable);
+  }
+
+  /*
+   * Method used to delete a User Record from a User Database
+   */
+   handleDeleteRecord(deleteClick, recordId) {
+     let requestData = {};
+     requestData.viewsiteId = deleteClick.viewsiteId;
+     requestData.elementId = deleteClick.elementId;
+     requestData.recordId = recordId;
+     // Make a call to the API requesting the deletion of selected Viewpage
+     this.manageUserRecordService.deleteUserRecord(requestData)
+     .then((results) => {
+       // Afterwards, update Global Viewsite state to reflect changes
+       this.handleUpdateUserTable(results.data);
+     },
+     (error) => {
+       // Handle errors
+       console.log(error.response.data);
+     });
+   }
+
 
   /*
    * Render the UserTable view

@@ -45,6 +45,8 @@ var FormJSX = function() {
           Submit
         </button>
       </form>
+
+      <br />
     </div>
   );
 }

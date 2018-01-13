@@ -69,6 +69,8 @@ var DataViewJSX = function() {
           userTable={userTable} />
         </tbody>
       </table>
+
+      <br />
     </div>
   );
 }

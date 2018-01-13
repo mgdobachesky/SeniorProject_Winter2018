@@ -180,7 +180,7 @@ function ManageViewpagesContent() {
               type="button"
               className="btn btn-link nav-link"
               onClick={() => {prepareCreateViewpage.call(this);}}>
-                + New Viewpage
+              <i className="fa fa-plus" aria-hidden="true"></i> New Viewpage
               </button>
             </li>
           </ul>
@@ -273,8 +273,10 @@ function ManageDatabaseContent() {
 
         <div className="col">
           <UserTable
+          viewsiteId={this.state.viewsite._id}
           userTable={this.state.selectedUserTable}
-          userTableHeaders={this.state.selectedUserTableHeaders} />
+          userTableHeaders={this.state.selectedUserTableHeaders}
+          onUpdateUserTable={this.handleUpdateUserTable} />
         </div>
 
         <div className="col-1"></div>
@@ -289,6 +291,8 @@ function ManageDatabaseContent() {
 var ViewsiteJSX = function() {
   return (
     <div className="container-fluid">
+      <br />
+
       <div className="row">
         <div className="col-2 offset-1">
           <h1>

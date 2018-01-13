@@ -53,7 +53,7 @@ function ViewsiteList(props) {
             <p>
               <b>Preview: </b>
               <a href={viewsiteLink} className="card-link">
-                {viewsiteLink}
+                {"cadre.me" + viewsiteLink}
               </a>
             </p>
 
@@ -100,6 +100,7 @@ function ViewsiteList(props) {
 var DashboardJSX = function() {
   return (
     <div className="container-fluid">
+      <br />
       <div className="row">
         <div className="col-1 offset-1">
           <h1>
@@ -149,7 +150,7 @@ var DashboardJSX = function() {
               type="button"
               className="btn btn-link"
               onClick={() => {prepareCreateViewsite.call(this);}}>
-                + New Viewsite
+              <i className="fa fa-plus" aria-hidden="true"></i> New Viewsite
               </button>
               <div id="createViewsite" className="card mb-3">
                 <div className="card-body">

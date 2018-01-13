@@ -53,16 +53,16 @@ var ViewpageFormJSX = function() {
         <div className="form-group">
           <label htmlFor="viewpageName">
             Viewpage Name
-          </label>
 
-          <input
-          type="text"
-          name="viewpageName"
-          className="form-control"
-          id="viewpageName"
-          placeholder="Enter Viewpage Name"
-          value={this.props.viewpage.viewpageName}
-          onChange={this.handleChange} />
+            <input
+            type="text"
+            name="viewpageName"
+            className="form-control"
+            id="viewpageName"
+            placeholder="Enter Viewpage Name"
+            value={this.props.viewpage.viewpageName}
+            onChange={this.handleChange} />
+          </label>
         </div>
 
         <div className="form-group">

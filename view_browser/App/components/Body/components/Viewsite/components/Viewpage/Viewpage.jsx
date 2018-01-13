@@ -49,6 +49,8 @@ function ElementsView(props) {
 var ViewpageJSX = function() {
   return (
     <div className="container-fluid">
+      <br />
+      
       <div className="row">
         <div className="col-10 offset-1">
           <h1>{this.props.viewpage.viewpageName}</h1>

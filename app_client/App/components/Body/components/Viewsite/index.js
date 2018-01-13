@@ -29,6 +29,7 @@ class Viewsite extends React.Component {
 
     // User Table Methods
     this.handlePopulateUserTable = this.handlePopulateUserTable.bind(this);
+    this.handleUpdateUserTable = this.handleUpdateUserTable.bind(this);
 
     // Other Methods
     this.handleGatherUserTables = this.handleGatherUserTables.bind(this);
@@ -151,13 +152,28 @@ class Viewsite extends React.Component {
   }
 
   /*
+   * Method that reloads a User Table that has changed
+   *
+   * NOTE: User Tables share an ID with Forms
+   */
+  handleUpdateUserTable(updatedTable) {
+    // Only continue if a User Table exists
+    if(updatedTable._id) {
+      // Afterwards, set state to reflect changes
+      this.setState({
+        selectedUserTable: updatedTable,
+        userTableError: ""
+      });
+    }
+  }
+
+  /*
    * Method that prepares a User Table to be managed
    * Used to get more detailed information on user table
    *
-   * Only make an API call if the table is not already in state
    */
   handlePopulateUserTable(userTable) {
-    if(userTable && userTable._id != this.state.selectedUserTableHeaders._id) {
+    if(userTable._id) {
       // Prepare HTTP API request data
       let requestData = {};
       requestData.viewsiteId = this.state.viewsite._id;

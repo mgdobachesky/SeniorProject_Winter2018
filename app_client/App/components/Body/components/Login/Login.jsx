@@ -23,6 +23,8 @@ var ErrorAlert = function(props) {
 var LoginJSX = function() {
   return (
     <div className="container">
+      <br />
+
       <h2>
         Login
       </h2>
@@ -34,31 +36,31 @@ var LoginJSX = function() {
         <div className="form-group">
           <label htmlFor="username">
             Username
-          </label>
 
-          <input
-          name="username"
-          type="text"
-          className="form-control"
-          id="username"
-          placeholder="Enter Username"
-          value={this.state.loginCredentials.username}
-          onChange={this.handleChange} />
+            <input
+            name="username"
+            type="text"
+            className="form-control"
+            id="username"
+            placeholder="Enter Username"
+            value={this.state.loginCredentials.username}
+            onChange={this.handleChange} />
+          </label>
         </div>
 
         <div className="form-group">
           <label htmlFor="password">
             Password
-          </label>
 
-          <input
-          name="password"
-          type="password"
-          className="form-control"
-          id="password"
-          placeholder="Enter Password"
-          value={this.state.loginCredentials.password}
-          onChange={this.handleChange} />
+            <input
+            name="password"
+            type="password"
+            className="form-control"
+            id="password"
+            placeholder="Enter Password"
+            value={this.state.loginCredentials.password}
+            onChange={this.handleChange} />
+          </label>
         </div>
 
         <button type="submit" className="btn btn-primary">
