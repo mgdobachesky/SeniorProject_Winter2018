@@ -63,6 +63,43 @@ var ViewsiteFormJSX = function() {
           value={this.props.viewsite.viewsiteName}
           onChange={this.handleChange} />
         </div>
+
+        <div className="form-group">
+          <label htmlFor="viewsiteTheme">
+            Viewsite Theme:
+
+            <select
+            id="viewsiteTheme"
+            name="viewsiteTheme"
+            className="form-control"
+            value={this.props.viewsite.viewsiteTheme}
+            onChange={this.handleChange}>
+              <option value="default">Default</option>
+              <option value="cerulean">Cerulean</option>
+              <option value="darkly">Darkly</option>
+              <option value="litera">Litera</option>
+              <option value="materia">Materia</option>
+              <option value="sandstone">Sandstone</option>
+              <option value="slate">Slate</option>
+              <option value="superhero">Superhero</option>
+              <option value="cosmo">Cosmo</option>
+              <option value="flatly">Flatly</option>
+              <option value="lumen">Lumen</option>
+              <option value="minty">Minty</option>
+              <option value="simplex">Simplex</option>
+              <option value="solar">Solar</option>
+              <option value="united">United</option>
+              <option value="cyborg">Cyborg</option>
+              <option value="journal">Journal</option>
+              <option value="lux">Lux</option>
+              <option value="pulse">Pulse</option>
+              <option value="sketchy">Sketchy</option>
+              <option value="spacelab">Spacelab</option>
+              <option value="yeti">Yeti</option>
+            </select>
+          </label>
+        </div>
+
         <div className="form-check">
           <label className="form-check-label">
             <input
@@ -77,6 +114,8 @@ var ViewsiteFormJSX = function() {
             Login Enabled
           </label>
         </div>
+
+        <br />
 
         <button type="submit" className="btn btn-primary">
           {this.props.description}

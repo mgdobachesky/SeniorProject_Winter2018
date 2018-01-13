@@ -38,6 +38,15 @@ function ViewpageLinks(props) {
 var HeaderJSX = function() {
   return (
     <nav className="nav navbar navbar-expand-lg navbar-dark bg-primary">
+      <a
+      className="navbar-brand nav-item nav-link active"
+      id="landingPage"
+      href={this.props.viewsite.viewsiteName}
+      aria-controls="landingPage"
+      aria-selected="true">
+        {this.props.viewsite.viewsiteName}
+      </a>
+
       <button
       className="navbar-toggler ml-auto p-2"
       type="button"
@@ -48,20 +57,8 @@ var HeaderJSX = function() {
       aria-label="Toggle navigation">
         <span className="navbar-toggler-icon" />
       </button>
-
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <div className="nav navbar-nav" id="nav-tab" role="tablist">
-          <NavLink
-          className="navbar-brand nav-item nav-link active"
-          id="landingPage-tab"
-          data-toggle="tab"
-          to="#landingPage"
-          role="tab"
-          aria-controls="landingPage"
-          aria-selected="true">
-            {this.props.viewsite.viewsiteName}
-          </NavLink>
-
           <ViewpageLinks
           viewsite={this.props.viewsite}
           viewpages={this.props.viewsite.viewpages} />

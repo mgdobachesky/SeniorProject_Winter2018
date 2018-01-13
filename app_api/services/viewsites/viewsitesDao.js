@@ -83,6 +83,7 @@ function viewsitesCreate(request) {
       viewsites.create({
         'userId': request.session.userId,
         'viewsiteName': request.body.viewsiteName,
+        'viewsiteTheme': request.body.viewsiteTheme,
         'loginEnabled': request.body.loginEnabled
       }, function(error, results) {
         if(error) {
@@ -152,6 +153,7 @@ function viewsitesUpdate(request) {
         } else {
           // Set new fields
           viewsiteData.viewsiteName = request.body.viewsiteName;
+          viewsiteData.viewsiteTheme = request.body.viewsiteTheme;
           viewsiteData.loginEnabled = request.body.loginEnabled;
           // Save updated Viewsite
           viewsiteData.save(function(error, results) {

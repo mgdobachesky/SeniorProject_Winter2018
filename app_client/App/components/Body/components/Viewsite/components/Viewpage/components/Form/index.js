@@ -22,6 +22,7 @@ class Form extends React.Component {
     this.handleUpdateFormInput = this.handleUpdateFormInput.bind(this);
     this.handleDeleteFormInput = this.handleDeleteFormInput.bind(this);
     // Other Methods
+    this.handleHideAllForms = this.handleHideAllForms.bind(this);
     this.handleSetGlobalState = this.handleSetGlobalState.bind(this);
     this.handleClearLocalState = this.handleClearLocalState.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -89,8 +90,9 @@ class Form extends React.Component {
         textbox: editTextbox
       });
       // Show the update Textbox form with populated local state information
-      $(".updateTextbox").toggle("medium");
-      $(".createTextbox").hide(false);
+      let isVisible = $(".updateTextbox").is(':visible');
+      this.handleHideAllForms(".updateTextbox", isVisible);
+      //$(".updateTextbox").toggle("medium");
     }
   }
 
@@ -156,6 +158,26 @@ class Form extends React.Component {
   }
 
   /*
+   * Method used to hide all forms before showing another
+   */
+  handleHideAllForms(selector, isVisible) {
+    // Sharply hide all create forms
+    $(".createTextbox").hide(false);
+
+    // Only hide update forms sharply if they are not the selector
+    if(".updateTextbox" != selector) {
+      $(".updateTextbox").hide(false);
+    }
+
+    // Smooth animation on the targeted selector
+    if(isVisible) {
+      $(selector).hide("medium");
+    } else {
+      $(selector).show("medium");
+    }
+  }
+
+  /*
    * Method that clears local state so that new forms will not display old information
    */
   handleClearLocalState() {
@@ -218,8 +240,7 @@ class Form extends React.Component {
       element: this.props.element
     });
     // Hide forms when component first mounts
-    $( ".createTextbox" ).hide(false);
-    $( ".updateTextbox" ).hide(false);
+    this.handleHideAllForms();
   }
 
   /*

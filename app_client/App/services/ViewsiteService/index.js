@@ -40,6 +40,7 @@ class ViewsiteService {
       },
       data: {
         'viewsiteName': requestData.viewsiteName,
+        'viewsiteTheme': requestData.viewsiteTheme,
         'loginEnabled': requestData.loginEnabled
       }
     });
@@ -59,6 +60,7 @@ class ViewsiteService {
       data: {
         'viewsiteId': requestData.viewsiteId,
         'viewsiteName': requestData.viewsiteName,
+        'viewsiteTheme': requestData.viewsiteTheme,
         'loginEnabled': requestData.loginEnabled
       }
     });

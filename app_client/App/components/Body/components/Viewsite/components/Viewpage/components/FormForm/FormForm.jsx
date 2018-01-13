@@ -39,9 +39,9 @@ var ErrorAlert = function(props) {
 var FormFormJSX = function() {
   return (
     <div className="container-fluid">
-      <h4>
+      <h2>
         {this.props.description}
-      </h4>
+      </h2>
 
       <SuccessAlert
       elementSuccess={this.props.elementSuccess} />

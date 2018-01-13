@@ -40,6 +40,10 @@ var TextboxFormJSX = function() {
   return (
     <div className="container-fluid">
 
+      <h2>
+        {this.props.description}
+      </h2>
+
       <SuccessAlert
       formInputSuccess={this.props.formInputSuccess} />
 

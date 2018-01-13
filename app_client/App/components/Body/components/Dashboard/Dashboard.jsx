@@ -1,5 +1,6 @@
 // Import required modules
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 // Import requred components
 import ViewsiteForm from './components/ViewsiteForm';
@@ -25,6 +26,8 @@ function ViewsiteList(props) {
     return props.viewsites.map((viewsite, index) => {
       const _id = viewsite._id;
       const viewsiteName = viewsite.viewsiteName;
+      const viewsiteTheme = viewsite.viewsiteTheme;
+      const viewsiteThemeMessage = viewsiteTheme.charAt(0).toUpperCase() + viewsiteTheme.slice(1);
       const loginEnabled = viewsite.loginEnabled;
       const loginEnabledMessage = loginEnabled ? "Yes" : "No";
       const viewsiteLink = "/viewsites/" + viewsite.viewsiteName;
@@ -32,6 +35,7 @@ function ViewsiteList(props) {
       let editClick = {
         _id: _id,
         viewsiteName: viewsiteName,
+        viewsiteTheme: viewsiteTheme,
         loginEnabled: loginEnabled
       };
       // Information needed to delete Viewsite
@@ -40,12 +44,25 @@ function ViewsiteList(props) {
         <div key={_id} className="card border-primary mb-3">
           <div className="card-body">
             <h4 className="card-title">
-              Viewsite: <a href={viewsiteLink} className="card-link">
-              {viewsiteName}
-            </a>
+              <b>Viewsite: </b>
+              <NavLink to={"/" + viewsiteName} className="card-link">
+                {viewsiteName}
+              </NavLink>
             </h4>
+
+            <p>
+              <b>Preview: </b>
+              <a href={viewsiteLink} className="card-link">
+                {viewsiteLink}
+              </a>
+            </p>
+
             <p className="card-text">
-              Login Enabled: {loginEnabledMessage}
+              <b>Viewsite Theme: </b> {viewsiteThemeMessage}
+            </p>
+
+            <p className="card-text">
+              <b>Login Enabled: </b> {loginEnabledMessage}
             </p>
           </div>
 
@@ -54,15 +71,20 @@ function ViewsiteList(props) {
             className="card-link"
             href="javascript:;"
             onClick={() => props.onEditViewsite(editClick)}>
-              Edit Details
+              <button type="button" className="btn btn-link">
+                Edit Viewsite
+              </button>
             </a>
 
             <a
-            className="card-link"
+            className="card-link float-right"
             href="javascript:;"
             onClick={() => props.onDeleteViewsite(deleteClick)}>
-              Delete
+              <button type="button" className="btn btn-danger">
+                Delete Viewsite
+              </button>
             </a>
+
           </div>
         </div>
       );
@@ -101,7 +123,7 @@ var DashboardJSX = function() {
             role="tab"
             aria-controls="v-pills-viewsites"
             aria-selected="true">
-              Viewsites
+              Viewsite Details
             </a>
 
             <a
@@ -112,7 +134,7 @@ var DashboardJSX = function() {
             role="tab"
             aria-controls="v-pills-account"
             aria-selected="false">
-              Account
+              Account Settings
             </a>
           </div>
         </div>

@@ -23,6 +23,7 @@ class Viewpage extends React.Component {
     this.handleDeleteElement = this.handleDeleteElement.bind(this);
 
     // Other Methods
+    this.handleHideAllForms = this.handleHideAllForms.bind(this);
     this.handleSetGlobalState = this.handleSetGlobalState.bind(this);
     this.handleClearLocalState = this.handleClearLocalState.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -109,8 +110,8 @@ class Viewpage extends React.Component {
         text: editText
       });
       // Show only the update Text form
-      $(".updateText").toggle("medium");
-      $(".createText").hide(false);
+      let isVisible = $(".updateText").is(':visible');
+      this.handleHideAllForms(".updateText", isVisible);
     }
     else if(event.kind === "form") {
       // Set Form Element state to Element to be updated
@@ -122,8 +123,8 @@ class Viewpage extends React.Component {
         form: editForm
       });
       // Show only the update Form form
-      $(".updateForm").toggle("medium");
-      $( ".createForm" ).hide(false);
+      let isVisible = $(".updateForm").is(':visible');
+      this.handleHideAllForms(".updateForm", isVisible);
     }
     else if(event.kind === "dataView") {
       // Set Data View Element state to Element to be updated
@@ -135,8 +136,8 @@ class Viewpage extends React.Component {
         dataView: editDataView
       });
       // Show only the update Data View form
-      $(".updateDataView").toggle("medium");
-      $( ".createDataView" ).hide(false);
+      let isVisible = $(".updateDataView").is(':visible');
+      this.handleHideAllForms(".updateDataView", isVisible);
     }
   }
 
@@ -209,6 +210,32 @@ class Viewpage extends React.Component {
         elementError: error.response.data
       });
     });
+  }
+
+  /*
+   * Method used to hide all forms before showing another
+   */
+  handleHideAllForms(selector, isVisible) {
+    // Sharply hide all create forms
+    $(".createText").hide(false);
+    $(".createForm").hide(false);
+    $(".createDataView").hide(false);
+
+    // Only hide update forms sharply if they are not the selector
+    if(".updateText" != selector) {
+      $(".updateText").hide(false);
+    } else if(".updateForm" != selector) {
+      $(".updateForm").hide(false);
+    } else if(".updateDataView" != selector) {
+      $( ".updateDataView" ).hide(false);
+    }
+
+    // Smooth animation on the targeted selector
+    if(isVisible) {
+      $(selector).hide("medium");
+    } else {
+      $(selector).show("medium");
+    }
   }
 
   /*
@@ -287,12 +314,7 @@ class Viewpage extends React.Component {
       userTables: this.props.userTables
     });
     // Hide all forms when component first mounts
-    $(".createText").hide(false);
-    $(".updateText").hide(false);
-    $(".createForm").hide(false);
-    $(".updateForm").hide(false);
-    $(".createDataView").hide(false);
-    $(".updateDataView").hide(false);
+    this.handleHideAllForms();
   }
 
   /*

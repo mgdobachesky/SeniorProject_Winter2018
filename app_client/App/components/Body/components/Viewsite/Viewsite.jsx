@@ -73,10 +73,10 @@ function ViewpageList(props) {
         <div key={viewpage._id} className="card border-primary mb-3">
           <div className="card-body">
             <h4 className="card-title">
-              Viewpage: {viewpageName}
+              <b>Viewpage: </b>{viewpageName}
             </h4>
             <p className="card-text">
-              Permission Level: {permissionLevelMessage}
+              <b>Permission Level: </b>: {permissionLevelMessage}
             </p>
           </div>
           <div className="card-footer">
@@ -84,14 +84,18 @@ function ViewpageList(props) {
             className="card-link"
             href="javascript:;"
             onClick={() => props.onEditViewpage(editClick)}>
-              Edit
+              <button type="button" className="btn btn-link">
+                Edit Viewpage
+              </button>
             </a>
 
             <a
-            className="card-link"
+            className="card-link float-right"
             href="javascript:;"
             onClick={() => props.onDeleteViewpage(deleteClick)}>
-              Delete
+              <button type="button" className="btn btn-danger">
+                Delete Viewpage
+              </button>
             </a>
           </div>
         </div>
@@ -223,18 +227,20 @@ function ManageViewpagesContent() {
  * Create list of tabs for each table in a User's Database
  * Used by ManageDatabaseContent
  */
-function UserDatabaseTabs() {
+function UserDatabasePills() {
   if(this.state.userTables && this.state.userTables.length >= 1) {
     return this.state.userTables.map((userTable, index) => {
       return (
-        <li key={userTable._id} className="nav-item">
-          <button
+          <a
+          key={userTable._id}
           type="button"
-          className="btn btn-link nav-link"
+          className={index == 0 ? "nav-link active" : "nav-link"}
+          href="javascript:;"
+          data-toggle="pill"
+          role="tab"
           onClick={() => {this.handlePopulateUserTable(userTable)}}>
             {userTable.formTitle}
-          </button>
-        </li>
+          </a>
       );
     });
   } else {
@@ -257,9 +263,12 @@ function ManageDatabaseContent() {
         <div className="col-1"></div>
 
         <div className="col-auto">
-          <ul className="nav flex-column">
-            {UserDatabaseTabs.call(this)}
-          </ul>
+          <div
+          className="nav flex-column nav-pills"
+          role="tablist"
+          aria-orientation="vertical">
+            {UserDatabasePills.call(this)}
+          </div>
         </div>
 
         <div className="col">
@@ -300,8 +309,25 @@ var ViewsiteJSX = function() {
               role="tab"
               aria-controls="manage-viewpages"
               aria-selected="true">
-                Manage Viewpages
+                Viewpage Details
               </a>
+            </li>
+
+            <li className="nav-item dropdown mr-auto">
+              <a
+              className="nav-link dropdown-toggle"
+              data-toggle="dropdown"
+              href="#"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded="false">
+                Viewpage Contents
+              </a>
+
+              <div className="dropdown-menu">
+                <ViewpageTabs
+                viewpages={this.state.viewsite.viewpages} />
+              </div>
             </li>
 
             <li className="nav-item">
@@ -317,22 +343,6 @@ var ViewsiteJSX = function() {
               </a>
             </li>
 
-            <li className="nav-item dropdown">
-              <a
-              className="nav-link dropdown-toggle"
-              data-toggle="dropdown"
-              href="#"
-              role="button"
-              aria-haspopup="true"
-              aria-expanded="false">
-                Viewpages
-              </a>
-
-              <div className="dropdown-menu">
-                <ViewpageTabs
-                viewpages={this.state.viewsite.viewpages} />
-              </div>
-            </li>
           </ul>
         </div>
       </div>

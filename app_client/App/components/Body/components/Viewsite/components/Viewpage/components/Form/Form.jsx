@@ -72,7 +72,7 @@ function TextboxFormInput(props) {
   return (
     <li key={props.formInput._id} className="list-group-item d-flex">
       <div className="mr-auto p-2">
-        <p>{props.formInput.textboxLabel}</p>
+        <p><b>Textbox Label: </b>{props.formInput.textboxLabel}</p>
       </div>
 
       <div>
@@ -80,7 +80,9 @@ function TextboxFormInput(props) {
         className="p-2"
         href="javascript:;"
         onClick={() => props.onEditFormInput(editClick)}>
-          Edit
+        <button type="button" className="btn btn-link">
+          Edit Textbox
+        </button>
         </a>
       </div>
 
@@ -89,7 +91,9 @@ function TextboxFormInput(props) {
         className="p-2"
         href="javascript:;"
         onClick={() => props.onDeleteFormInput(deleteClick)}>
-          Delete
+          <button type="button" className="btn btn-danger">
+            Delete Textbox
+          </button>
         </a>
       </div>
     </li>
@@ -135,7 +139,7 @@ var FormJSX = function() {
 
       <div className="card-body">
         <h4 className="card-title">
-          {this.props.element.formTitle}
+          <b>Form Title: </b>{this.props.element.formTitle}
         </h4>
 
         <p className="card-text"></p>
@@ -162,11 +166,13 @@ var FormJSX = function() {
           kind: "form",
           formTitle: this.props.element.formTitle
         })}>
-          Edit
+          <button type="button" className="btn btn-link">
+            Edit Form
+          </button>
         </a>
 
         <a
-        className="card-link"
+        className="card-link float-right"
         href="javascript:;"
         onClick={() => this.props.onDeleteElement({
           viewsiteId: this.props.viewsiteId,
@@ -174,7 +180,9 @@ var FormJSX = function() {
           _id: this.props.element._id,
           kind: "form"
         })}>
-          Delete
+        <button type="button" className="btn btn-danger">
+          Delete Form
+        </button>
         </a>
       </div>
     </div>

@@ -32,6 +32,7 @@ class Dashboard extends React.Component {
       viewsite: {
         _id: "",
         viewsiteName: "",
+        viewsiteTheme: "default",
         loginEnabled: false
       },
       viewsiteSuccess: "",
@@ -47,6 +48,7 @@ class Dashboard extends React.Component {
     let requestData = {};
     let createViewsite = this.state.viewsite;
     requestData.viewsiteName = createViewsite.viewsiteName;
+    requestData.viewsiteTheme = createViewsite.viewsiteTheme;
     requestData.loginEnabled = createViewsite.loginEnabled;
     // Send request to API to create Viewsite
     this.manageViewsiteService.createViewsite(requestData)
@@ -74,6 +76,7 @@ class Dashboard extends React.Component {
     let editViewsite = this.state.viewsite;
     editViewsite._id = event._id;
     editViewsite.viewsiteName = event.viewsiteName;
+    editViewsite.viewsiteTheme = event.viewsiteTheme;
     editViewsite.loginEnabled = event.loginEnabled;
     this.setState({
       viewsite: editViewsite
@@ -92,6 +95,7 @@ class Dashboard extends React.Component {
     let updateViewsite = this.state.viewsite;
     requestData.viewsiteId = updateViewsite._id;
     requestData.viewsiteName = updateViewsite.viewsiteName;
+    requestData.viewsiteTheme = updateViewsite.viewsiteTheme;
     requestData.loginEnabled = updateViewsite.loginEnabled;
     // Send call out to API to update the Viewsite
     this.manageViewsiteService.updateViewsite(requestData)
@@ -138,6 +142,7 @@ class Dashboard extends React.Component {
     let clearViewsite = this.state.viewsite;
     clearViewsite._id = "";
     clearViewsite.viewsiteName = "";
+    clearViewsite.viewsiteTheme = "default"
     clearViewsite.loginEnabled = false;
     this.setState({
       viewsite: clearViewsite,

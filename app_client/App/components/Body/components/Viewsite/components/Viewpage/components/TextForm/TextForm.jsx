@@ -39,9 +39,9 @@ var ErrorAlert = function(props) {
 var TextFormJSX = function() {
   return (
     <div className="container-fluid">
-      <h4>
+      <h2>
         {this.props.description}
-      </h4>
+      </h2>
 
       <SuccessAlert
       elementSuccess={this.props.elementSuccess} />
@@ -51,13 +51,17 @@ var TextFormJSX = function() {
 
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
-          <textarea
-          name="textValue"
-          className="form-control"
-          id="textValue"
-          placeholder="Write some text..."
-          value={this.props.text.textValue}
-          onChange={this.handleChange} />
+          <label htmlFor="textValue">
+            Text Value
+
+            <textarea
+            name="textValue"
+            className="form-control"
+            id="textValue"
+            placeholder="Write some text..."
+            value={this.props.text.textValue}
+            onChange={this.handleChange} />
+          </label>
         </div>
 
         <button type="submit" className="btn btn-primary">

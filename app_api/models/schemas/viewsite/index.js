@@ -20,6 +20,10 @@ var viewsiteSchema = new Schema({
     'required': true,
     'unique': true
   },
+  'viewsiteTheme': {
+    'type': String,
+    'default': "default"
+  },
   'loginEnabled': {
     'type': Boolean,
     'default': false

@@ -42,6 +42,18 @@ class ViewsiteChoose extends React.Component {
   }
 
   /*
+   * Method used for loading a requested Viewsite's theme
+   */
+  componentDidMount() {
+    var bootswatchTheme = "https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.min.css";
+    var file = document.createElement("link");
+    file.setAttribute("rel", "stylesheet");
+    file.setAttribute("type", "text/css");
+    file.setAttribute("href", bootswatchTheme);
+    document.head.appendChild(file);
+  }
+
+  /*
    * Render ViewsiteChoose
    * Only if no Viewsite is currently selected
    */

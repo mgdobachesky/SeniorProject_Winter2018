@@ -89,7 +89,7 @@ function TextElement(props) {
     <div className="card border-primary mb-3">
       <div className="card-body">
         <h4 className="card-title">
-          Text
+          <b>Text Value: </b>
         </h4>
         <p className="card-text">
           {props.element.textValue.split('\n').map(function(item, key) {
@@ -108,14 +108,18 @@ function TextElement(props) {
         className="card-link"
         href="javascript:;"
         onClick={() => props.onEditElement(editClick)}>
-          Edit
+          <button type="button" className="btn btn-link">
+            Edit Text
+          </button>
         </a>
 
         <a
-        className="card-link"
+        className="card-link float-right"
         href="javascript:;"
         onClick={() => props.onDeleteElement(deleteClick)}>
-          Delete
+        <button type="button" className="btn btn-danger">
+          Delete Text
+        </button>
         </a>
       </div>
     </div>
@@ -170,11 +174,11 @@ function DataViewElement(props) {
     <div className="card border-primary mb-3">
       <div className="card-body">
         <h4 className="card-title">
-          Data-View
+          <b>Data-View Source: </b>
         </h4>
 
         <p className="card-text">
-          Source: {sourceName}
+          {sourceName}
         </p>
       </div>
 
@@ -183,14 +187,18 @@ function DataViewElement(props) {
         className="card-link"
         href="javascript:;"
         onClick={() => props.onEditElement(editClick)}>
-          Edit
+          <button type="button" className="btn btn-link">
+            Edit Data-View
+          </button>
         </a>
 
         <a
-        className="card-link"
+        className="card-link float-right"
         href="javascript:;"
         onClick={() => props.onDeleteElement(deleteClick)}>
-          Delete
+          <button type="button" className="btn btn-danger">
+            Delete Data-View
+          </button>
         </a>
       </div>
     </div>

@@ -14,9 +14,7 @@ var LandingPageJSX = function() {
               {this.props.viewsite.viewsiteName}
             </h1>
 
-            <p className="lead">
-              The landing page.
-            </p>
+            <p className="lead"></p>
           </div>
         </div>
       </div>

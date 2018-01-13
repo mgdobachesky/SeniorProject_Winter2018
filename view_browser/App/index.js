@@ -26,6 +26,9 @@ class App extends React.Component {
     this.handleRequestUserDatabase = this.handleRequestUserDatabase.bind(this);
     this.handleUpdateUserTable = this.handleUpdateUserTable.bind(this);
 
+    // Other Methods
+    this.handleSetViewsiteTheme = this.handleSetViewsiteTheme.bind(this);
+
     // Set initial state
     this.state = {
       viewsite: "",
@@ -63,6 +66,8 @@ class App extends React.Component {
             }
           }
         }
+        // Set the Viewsite's Bootswatch theme
+        this.handleSetViewsiteTheme(results.data.viewsiteTheme);
         // Set state to reflect API call results
         this.setState({
           viewsite: results.data,
@@ -146,10 +151,32 @@ class App extends React.Component {
   }
 
   /*
+   * Method used for loading a requested Viewsite's theme
+   */
+  handleSetViewsiteTheme(viewsiteTheme) {
+    if(viewsiteTheme) {
+      // Choose the Bootswatch theme
+      var bootswatchTheme = "";
+      if(viewsiteTheme != "default") {
+        bootswatchTheme = "https://bootswatch.com/4/" + viewsiteTheme + "/bootstrap.min.css";
+      } else if(viewsiteTheme == "default") {
+        bootswatchTheme = "https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.min.css";
+      }
+      // Set the Bootstrap CSS
+      var file = document.createElement("link");
+      file.setAttribute("rel", "stylesheet");
+      file.setAttribute("type", "text/css");
+      file.setAttribute("href", bootswatchTheme);
+      document.head.appendChild(file);
+    }
+  }
+
+  /*
    * React component lifecycle method that is run before this component mounts
    * Used for loading a requested Viewsite automatically
    */
   componentWillMount() {
+    // Automatically load requested viewsite
     if(this.props.viewsiteName) {
       this.handleRequestViewsite(this.props.viewsiteName);
     }

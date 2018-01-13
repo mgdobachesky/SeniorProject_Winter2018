@@ -14,7 +14,7 @@ var HomeJSX = function() {
               Cadre
             </h1>
             <p className="lead">
-              The place where anyone can make a website.
+              The place where anyone can make a Viewsite.
             </p>
           </div>
         </div>
