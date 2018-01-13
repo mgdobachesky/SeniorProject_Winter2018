@@ -85,10 +85,11 @@ function NavigationContent(props) {
     return (
       <Content>
         <AppContent
+        viewsiteId={props.viewsite._id}
         viewpages={props.viewpages}
         userDatabase={props.userDatabase}
-        userTables={props.userTables}
-        onRequestUserDatabase={props.onRequestUserDatabase}
+        userForms={props.userForms}
+        onUpdateUserTable={props.onUpdateUserTable}
          />
       </Content>
     );
@@ -145,8 +146,8 @@ var DrawerLayoutJSX = function() {
       viewsite={this.state.viewsite}
       viewpages={this.state.viewsite.viewpages}
       userDatabase={this.state.userDatabase}
-      userTables={this.state.userTables}
-      onRequestUserDatabase={this.handleRequestUserDatabase}
+      userForms={this.state.userForms}
+      onUpdateUserTable={this.handleUpdateUserTable}
       onChange={this.handleChange}
       onSubmit={this.handleSubmit} />
 

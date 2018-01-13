@@ -25,8 +25,8 @@ var BodyJSX = function() {
       render={routeProps => <Viewsite {...routeProps}
         viewsite={this.props.viewsite}
         userDatabase={this.props.userDatabase}
-        userTables={this.props.userTables}
-        onRequestUserDatabase={this.handleRequestUserDatabase} />} />
+        userForms={this.props.userForms}
+        onUpdateUserTable={this.handleUpdateUserTable} />} />
     </Switch>
   );
 }

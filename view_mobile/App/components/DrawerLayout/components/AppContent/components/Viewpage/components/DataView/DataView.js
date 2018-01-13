@@ -59,15 +59,15 @@ var DataViewJSX = function() {
   // Determine what User Table this DataView represents
   // NOTE: Form Elements and User Tables share an ID
   let userTable = {};
-  for(const table of this.props.userDatabase.tables) {
+  for(const table of this.props.userDatabase) {
     if(table._id == this.props.element.formId) {
       userTable = table;
     }
   }
   // Determine the title of the Form represented by the User Table this Data View displays
   let formTitle = "";
-  if(this.props.userTables) {
-    for(const table of this.props.userTables) {
+  if(this.props.userForms) {
+    for(const table of this.props.userForms) {
       if(table._id == this.props.element.formId) {
         formTitle = table.formTitle;
       }

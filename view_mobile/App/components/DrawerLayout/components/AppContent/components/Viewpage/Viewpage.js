@@ -26,8 +26,8 @@ function ElementList(props) {
           <FormView
           key={element._id}
           element={element}
-          viewsiteId={props.userDatabase._id}
-          onRequestUserDatabase={props.onRequestUserDatabase} />
+          viewsiteId={props.viewsiteId}
+          onUpdateUserTable={props.onUpdateUserTable} />
         );
       } else if(element.kind === "dataView") {
         return (
@@ -35,7 +35,7 @@ function ElementList(props) {
           key={element._id}
           element={element}
           userDatabase={props.userDatabase}
-          userTables={props.userTables} />
+          userForms={props.userForms} />
         );
       }
     });
@@ -55,10 +55,11 @@ var ViewpageJSX = function() {
       </H1>
 
       <ElementList
+      viewsiteId={this.props.viewsiteId}
       elements={this.state.viewpage.elements}
       userDatabase={this.props.userDatabase}
-      userTables={this.props.userTables}
-      onRequestUserDatabase={this.handleRequestUserDatabase} />
+      userForms={this.props.userForms}
+      onUpdateUserTable={this.handleUpdateUserTable} />
     </Content>
   );
 }

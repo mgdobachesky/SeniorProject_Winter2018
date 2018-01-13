@@ -50,11 +50,8 @@ function userRecordsCreate(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              // Clean results and hand-back the new User Database
-              var cleanResults = results.toObject();
-              delete cleanResults.userId;
-              delete cleanResults.__v;
-              resolve(cleanResults);
+              // Return the updated user table
+              resolve(results.tables.id(request.body.elementId));
             }
           });
         }
@@ -126,11 +123,8 @@ function userRecordsUpdate(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              // Clean up results and return updated User Database
-              var cleanResults = results.toObject();
-              delete cleanResults.userId;
-              delete cleanResults.__v;
-              resolve(cleanResults);
+              // Return the updated user table
+              resolve(results.tables.id(request.body.elementId));
             }
           });
         }
@@ -184,11 +178,8 @@ function userRecordsDelete(request) {
               console.log(error.message);
               reject('Something went wrong!');
             } else {
-              // Clean up results and return the new User Database
-              var cleanResults = results.toObject();
-              delete cleanResults.userId;
-              delete cleanResults.__v;
-              resolve(cleanResults);
+              // Return the updated user table
+              resolve(results.tables.id(request.body.elementId));
             }
           });
         }

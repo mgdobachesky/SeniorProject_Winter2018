@@ -59,12 +59,13 @@ router.delete('/delete/form_inputs', controllerFormInputs.formInputsDelete);
 /*
  * Routes for public User Database methods
  */
-router.post('/read_one/user_databases', controllerUserDatabases.userDatabasesReadOne);
+//router.post('/read_one/user_databases', controllerUserDatabases.userDatabasesReadOne);
 
 /*
  * Routes for public User Table methods
  */
 router.post('/read_one/user_tables', controllerUserTables.userTablesReadOne);
+router.post('/read_all/user_tables', controllerUserTables.userTablesReadAll);
 
 /*
  * Routes for public User Record methods

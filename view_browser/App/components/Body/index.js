@@ -14,23 +14,23 @@ class Body extends React.Component {
     this.handleRequestViewsite = this.handleRequestViewsite.bind(this);
 
     // User Database Methods
-    this.handleRequestUserDatabase = this.handleRequestUserDatabase.bind(this);
+    this.handleUpdateUserTable = this.handleUpdateUserTable.bind(this);
   }
 
   /*
    * Method that allows components to request a Viewsite
    * Passed down from the main Application
    */
-  handleRequestViewsite(viewsiteName) {
-    this.props.onRequestViewsite(viewsiteName);
+  handleRequestViewsite(viewsiteId) {
+    this.props.onRequestViewsite(viewsiteId);
   }
 
   /*
    * Method that allows components to request a Viewsite's associated User Database
    * Passed down from the main Application
    */
-  handleRequestUserDatabase(viewsiteId) {
-    this.props.onRequestUserDatabase(viewsiteId);
+  handleUpdateUserTable(updatedTable) {
+    this.props.onUpdateUserTable(updatedTable);
   }
 
   /*

@@ -23,16 +23,17 @@ function ElementsView(props) {
         return (
           <Form
           key={element._id}
+          viewsiteId={props.viewsiteId}
           element={element}
           userDatabase={props.userDatabase}
-          onRequestUserDatabase={props.onRequestUserDatabase} />
+          onUpdateUserTable={props.onUpdateUserTable} />
         );
       } else if(element.kind === "dataView") {
         return (
           <DataView
           key={element._id}
           element={element}
-          userTables={props.userTables}
+          userForms={props.userForms}
           userDatabase={props.userDatabase} />
         );
       }
@@ -52,10 +53,11 @@ var ViewpageJSX = function() {
         <div className="col-10 offset-1">
           <h1>{this.props.viewpage.viewpageName}</h1>
           <ElementsView
+          viewsiteId={this.props.viewsiteId}
           elements={this.props.viewpage.elements}
           userDatabase={this.props.userDatabase}
-          userTables={this.props.userTables}
-          onRequestUserDatabase={this.handleRequestUserDatabase} />
+          userForms={this.props.userForms}
+          onUpdateUserTable={this.handleUpdateUserTable} />
         </div>
       </div>
     </div>

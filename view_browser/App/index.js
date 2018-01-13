@@ -7,7 +7,7 @@ import './app.css';
 
 // Import required services
 import ViewsiteService from './services/ViewsiteService';
-import UserDatabaseService from './services/UserDatabaseService';
+import UserTableService from './services/UserTableService';
 
 // Create main App
 class App extends React.Component {
@@ -17,20 +17,22 @@ class App extends React.Component {
 
     // Initialize service objects
     this.manageViewsiteService = new ViewsiteService();
-    this.manageUserDatabaseService = new UserDatabaseService();
+    this.manageUserTableService = new UserTableService();
 
     // Viewsite Methods
     this.handleRequestViewsite = this.handleRequestViewsite.bind(this);
 
-    // User Database Methods
+    // User Table Methods
     this.handleRequestUserDatabase = this.handleRequestUserDatabase.bind(this);
+    this.handleUpdateUserTable = this.handleUpdateUserTable.bind(this);
 
     // Set initial state
     this.state = {
       viewsite: "",
       userDatabase: "",
       viewsiteRequestError: "",
-      userTables: []
+      dataViews: [],
+      userForms: []
     };
   }
 
@@ -46,13 +48,16 @@ class App extends React.Component {
       this.manageViewsiteService.readOneViewsite(requestData)
       .then((results) => {
         // Collect an array of Forms whose data will be used to enrich associated User Tables
-        let userTables = [];
+        let dataViews = [];
+        let userForms = [];
         if(results.data.viewpages) {
           for(const viewpage of results.data.viewpages) {
             if(viewpage.elements) {
               for(const element of viewpage.elements) {
                 if(element.kind === "form") {
-                  userTables.push(element);
+                  userForms.push(element);
+                } else if(element.kind === "dataView") {
+                  dataViews.push(element);
                 }
               }
             }
@@ -61,7 +66,8 @@ class App extends React.Component {
         // Set state to reflect API call results
         this.setState({
           viewsite: results.data,
-          userTables: userTables,
+          dataViews: dataViews,
+          userForms: userForms,
           viewsiteRequestError: ""
         }, () => this.handleRequestUserDatabase(results.data._id));
       },
@@ -86,7 +92,7 @@ class App extends React.Component {
   /*
    * Method that loads the requested Viewsite's associated User Database
    *
-   * NOTE: User Databases share an ID with Viewsites
+   * NOTE: User Tables share an ID with Forms
    */
   handleRequestUserDatabase(viewsiteId) {
     // Only continue if a Viewsite ID exists
@@ -94,7 +100,8 @@ class App extends React.Component {
       // Set HTTP call request data
       let requestData = {};
       requestData.viewsiteId = viewsiteId;
-      this.manageUserDatabaseService.readOneUserDatabase(requestData)
+      requestData.elements = this.state.dataViews;
+      this.manageUserTableService.readAllUserTables(requestData)
       .then((results) => {
         // Set state to reflect the API call results
         this.setState({
@@ -113,8 +120,28 @@ class App extends React.Component {
       // If no Viewsite ID exists, set state to be blank
       this.setState({
         userDatabase: "",
-        viewsiteRequestError: "No user database specified!"
+        viewsiteRequestError: "No User Database specified!"
       });
+    }
+  }
+
+  /*
+   * Method that reloads a User Table that has changed
+   *
+   * NOTE: User Tables share an ID with Forms
+   */
+  handleUpdateUserTable(updatedTable) {
+    // Only continue if a User Table exists
+    if(updatedTable._id) {
+      let userDatabase = this.state.userDatabase;
+      // Find updated table
+      for(let i in userDatabase) {
+        if(userDatabase[i]._id == updatedTable._id) {
+          userDatabase[i] = updatedTable;
+        }
+      }
+      // Set state with new updated table
+      this.setState({userDatabase: userDatabase});
     }
   }
 

@@ -17,7 +17,7 @@ class Form extends React.Component {
     this.manageUserRecordService = new UserRecordService();
 
     // User Database Methods
-    this.handleRequestUserDatabase = this.handleRequestUserDatabase.bind(this);
+    this.handleUpdateUserTable = this.handleUpdateUserTable.bind(this);
     // Other Methods
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,8 +33,8 @@ class Form extends React.Component {
    * Method that allows components to request a Viewsite's associated User Database
    * Passed down from the main Application
    */
-  handleRequestUserDatabase(viewsiteId) {
-    this.props.onRequestUserDatabase(viewsiteId);
+  handleUpdateUserTable(updatedTable) {
+    this.props.onUpdateUserTable(updatedTable);
   }
 
   /*
@@ -59,7 +59,7 @@ class Form extends React.Component {
     event.preventDefault();
     // Set HTTP call request data
     let requestData = {};
-    requestData.viewsiteId = this.props.userDatabase._id;
+    requestData.viewsiteId = this.props.viewsiteId;
     requestData.elementId = this.props.element._id;
     requestData.record = this.state.record;
     // Send out an API call to request that a User Record be created
@@ -74,7 +74,7 @@ class Form extends React.Component {
         record: requestData.record
       });
       // Request the User Database again to display newly added User Record
-      this.handleRequestUserDatabase(this.props.userDatabase._id);
+      this.handleUpdateUserTable(results.data);
     },
     (error) => {
       // Handle errors

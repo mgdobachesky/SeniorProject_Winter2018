@@ -29,6 +29,36 @@ function userTablesReadOne(request) {
 }
 
 /*
+ * Method that allows an arrau of User Tables to be read
+ */
+function userTablesReadAll(request) {
+  var promise = new Promise(function(resolve, reject) {
+    if(!request.body.viewsiteId || !request.body.elements) {
+      reject('User Database ID and array of Tables are required!');
+    } else {
+      userDatabases.findOne({'_id': request.body.viewsiteId})
+      .exec(function(error, userDatabaseData) {
+        if(error) {
+          console.log(error.message);
+          reject('Something went wrong!');
+        } else if(!userDatabaseData) {
+          reject('User Database not found!');
+        } else {
+          let matchingTables = [];
+          for(let element of request.body.elements) {
+            if(userDatabaseData.tables.id(element.formId)) {
+              matchingTables.push(userDatabaseData.tables.id(element.formId));
+            }
+          }
+          resolve(matchingTables);
+        }
+      });
+    }
+  });
+  return promise;
+}
+
+/*
  * Method that allows Form Elements to create a User Table
  * Invoked after creating a Form Element
  *
@@ -141,5 +171,6 @@ function userTablesDelete(request) {
 
 // Export all public methods
 module.exports.userTablesReadOne = userTablesReadOne;
+module.exports.userTablesReadAll = userTablesReadAll;
 module.exports.userTablesCreate = userTablesCreate;
 module.exports.userTablesDelete = userTablesDelete;

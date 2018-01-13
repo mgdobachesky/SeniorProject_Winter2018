@@ -20,6 +20,18 @@ function userTablesReadOne(request, response) {
 }
 
 /*
+ * Controller used to read a list of User Tables
+ */
+function userTablesReadAll(request, response) {
+  userTablesDao.userTablesReadAll(request)
+  .then(function(results) {
+    sendJSONresponse(response, 200, results);
+  }, function(error) {
+    sendJSONresponse(response, 404, error);
+  });
+}
+
+/*
  * Controller used to create User Tables
  * Invoked after creating a Form Element
  */
@@ -47,5 +59,6 @@ function userTablesDelete(request, response) {
 
 // Export controller methods
 module.exports.userTablesReadOne = userTablesReadOne;
+module.exports.userTablesReadAll = userTablesReadAll;
 module.exports.userTablesCreate = userTablesCreate;
 module.exports.userTablesDelete = userTablesDelete;

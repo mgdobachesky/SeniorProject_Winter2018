@@ -10,7 +10,7 @@ class Viewpage extends React.Component {
     super(props);
 
     // User Database Methods
-    this.handleRequestUserDatabase = this.handleRequestUserDatabase.bind(this);
+    this.handleUpdateUserTable = this.handleUpdateUserTable.bind(this);
 
     // Set initial state
     this.state = {
@@ -22,8 +22,8 @@ class Viewpage extends React.Component {
    * Method that allows components to request a Viewsite's associated User Database
    * Passed down from the main Application
    */
-  handleRequestUserDatabase(viewsiteId) {
-    this.props.onRequestUserDatabase(viewsiteId);
+  handleUpdateUserTable(updatedTable) {
+    this.props.onUpdateUserTable(updatedTable);
   }
 
   /*

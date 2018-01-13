@@ -6,7 +6,7 @@ import DrawerLayoutJSX from './DrawerLayout.js';
 
 // Import required services
 import ViewsiteService from './services/ViewsiteService';
-import UserDatabaseService from './services/UserDatabaseService';
+import UserTableService from './services/UserTableService';
 
 class DrawerLayout extends React.Component {
   constructor(props) {
@@ -15,13 +15,14 @@ class DrawerLayout extends React.Component {
 
     // Initialize service objects
     this.manageViewsiteService = new ViewsiteService();
-    this.manageUserDatabaseService = new UserDatabaseService();
+    this.manageUserTableService = new UserTableService();
 
     // Viewsite Methods
     this.handleRequestViewsite = this.handleRequestViewsite.bind(this);
 
-    // User Database Methods
+    // User Table Methods
     this.handleRequestUserDatabase = this.handleRequestUserDatabase.bind(this);
+    this.handleUpdateUserTable = this.handleUpdateUserTable.bind(this);
 
     // Other Methods
     this.handleChange = this.handleChange.bind(this);
@@ -33,7 +34,8 @@ class DrawerLayout extends React.Component {
       viewsite: {},
       userDatabase: {},
       viewsiteRequestError: "",
-      userTables: []
+      dataViews: [],
+      userForms: []
     };
   }
 
@@ -49,13 +51,16 @@ class DrawerLayout extends React.Component {
       this.manageViewsiteService.readOneViewsite(requestData)
       .then((results) => {
         // Collect an array of Forms whose data will be used to enrich associated User Tables
-        let userTables = [];
+        let dataViews = [];
+        let userForms = [];
         if(results.data.viewpages) {
           for(const viewpage of results.data.viewpages) {
             if(viewpage.elements) {
               for(const element of viewpage.elements) {
                 if(element.kind === "form") {
-                  userTables.push(element);
+                  userForms.push(element);
+                } else if(element.kind === "dataView") {
+                  dataViews.push(element);
                 }
               }
             }
@@ -65,7 +70,8 @@ class DrawerLayout extends React.Component {
         this.setState({
           viewsite: results.data,
           viewsiteRequestError: "",
-          userTables: userTables
+          dataViews: dataViews,
+          userForms: userForms
         }, () => this.handleRequestUserDatabase(results.data._id));
       },
       (error) => {
@@ -97,7 +103,8 @@ class DrawerLayout extends React.Component {
       // Set HTTP call request data
       let requestData = {};
       requestData.viewsiteId = viewsiteId;
-      this.manageUserDatabaseService.readOneUserDatabase(requestData)
+      requestData.elements = this.state.dataViews;
+      this.manageUserTableService.readAllUserTables(requestData)
       .then((results) => {
         // Set state to API call results
         this.setState({
@@ -118,6 +125,26 @@ class DrawerLayout extends React.Component {
         userDatabase: "",
         viewsiteRequestError: "No user database specified!"
       });
+    }
+  }
+
+  /*
+   * Method that reloads a User Table that has changed
+   *
+   * NOTE: User Tables share an ID with Forms
+   */
+  handleUpdateUserTable(updatedTable) {
+    // Only continue if a User Table exists
+    if(updatedTable._id) {
+      let userDatabase = this.state.userDatabase;
+      // Find updated table
+      for(let i in userDatabase) {
+        if(userDatabase[i]._id == updatedTable._id) {
+          userDatabase[i] = updatedTable;
+        }
+      }
+      // Set state with new updated table
+      this.setState({userDatabase: userDatabase});
     }
   }
 

@@ -16,7 +16,7 @@ class FormView extends React.Component {
     this.manageUserRecordService = new UserRecordService();
 
     // User Database Methods
-    this.handleRequestUserDatabase = this.handleRequestUserDatabase.bind(this);
+    this.handleUpdateUserTable = this.handleUpdateUserTable.bind(this);
 
     // Other Methods
     this.handleChange = this.handleChange.bind(this);
@@ -33,8 +33,8 @@ class FormView extends React.Component {
    * Method that allows components to request a Viewsite's associated User Database
    * Passed down from the main Application
    */
-  handleRequestUserDatabase(viewsiteId) {
-    this.props.onRequestUserDatabase(viewsiteId);
+  handleUpdateUserTable(updatedTable) {
+    this.props.onUpdateUserTable(updatedTable);
   }
 
   /*
@@ -71,7 +71,7 @@ class FormView extends React.Component {
         record: requestData.record
       });
       // Request an updated User Database to display the new User Record
-      this.handleRequestUserDatabase(this.props.viewsiteId);
+      this.handleUpdateUserTable(results.data);
     }, (error) => {
       // Handle errors
       console.log(error.response.data);

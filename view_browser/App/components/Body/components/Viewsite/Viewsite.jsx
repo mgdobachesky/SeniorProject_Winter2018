@@ -21,10 +21,11 @@ function ViewpageContent(props) {
         aria-labelledby={viewpage._id + "-tab"}>
           <div className="col-10 offset-1">
             <Viewpage
+            viewsiteId={props.viewsite._id}
             viewpage={viewpage}
             userDatabase={props.userDatabase}
-            userTables={props.userTables}
-            onRequestUserDatabase={props.onRequestUserDatabase} />
+            userForms={props.userForms}
+            onUpdateUserTable={props.onUpdateUserTable} />
           </div>
         </div>
       );
@@ -53,8 +54,8 @@ var ViewsiteJSX = function() {
       viewsite={this.props.viewsite}
       viewpages={this.props.viewsite.viewpages}
       userDatabase={this.props.userDatabase}
-      userTables={this.props.userTables}
-      onRequestUserDatabase={this.handleRequestUserDatabase} />
+      userForms={this.props.userForms}
+      onUpdateUserTable={this.handleUpdateUserTable} />
     </div>
   );
 }

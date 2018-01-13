@@ -19,9 +19,9 @@ var AppJSX = function() {
       viewsite={this.state.viewsite}
       userDatabase={this.state.userDatabase}
       viewsiteRequestError={this.state.viewsiteRequestError}
-      userTables={this.state.userTables}
+      userForms={this.state.userForms}
       onRequestViewsite={this.handleRequestViewsite}
-      onRequestUserDatabase={this.handleRequestUserDatabase} />
+      onUpdateUserTable={this.handleUpdateUserTable} />
 
       <Footer
       viewsite={this.state.viewsite} />
