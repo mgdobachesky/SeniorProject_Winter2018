@@ -80,7 +80,7 @@ function TextboxFormInput(props) {
         className="p-2"
         href="javascript:;"
         onClick={() => props.onEditFormInput(editClick)}>
-        <button type="button" className="btn btn-link">
+        <button type="button" className="btn btn-link btn-sm">
           Edit Textbox
         </button>
         </a>
@@ -91,7 +91,7 @@ function TextboxFormInput(props) {
         className="p-2"
         href="javascript:;"
         onClick={() => props.onDeleteFormInput(deleteClick)}>
-          <button type="button" className="btn btn-danger">
+          <button type="button" className="btn btn-danger btn-sm">
             Delete Textbox
           </button>
         </a>
