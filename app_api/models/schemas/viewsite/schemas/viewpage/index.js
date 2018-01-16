@@ -8,6 +8,7 @@ var Schema = mongoose.Schema;
 var textSchema = require('./schemas/text');
 var formSchema = require('./schemas/form');
 var dataViewSchema = require('./schemas/dataView');
+var imageSchema = require('./schemas/image');
 
 // Define element parent class schema
 var elementSchema = new Schema({},
@@ -33,6 +34,7 @@ var elementArray = viewpageSchema.path('elements');
 var text = elementArray.discriminator('text', textSchema);
 var form = elementArray.discriminator('form', formSchema);
 var dataView = elementArray.discriminator('dataView', dataViewSchema);
+var image = elementArray.discriminator('image', imageSchema);
 
 // Export Viewpage schema
 module.exports = viewpageSchema;

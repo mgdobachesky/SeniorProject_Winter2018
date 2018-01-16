@@ -2,6 +2,7 @@
 var textDao = require('../../services/viewsites/textDao');
 var formsDao = require('../../services/viewsites/formsDao');
 var dataViewsDao = require('../../services/viewsites/dataViewsDao');
+var imagesDao = require('../../services/viewsites/imagesDao');
 
 
 // Handle JSON responses
@@ -35,6 +36,13 @@ function elementsCreate(request, response) {
     }, function(error) {
       sendJSONresponse(response, 404, error);
     });
+  } else if(request.body.kind === "image") {
+    imagesDao.imagesCreate(request)
+    .then(function(results) {
+      sendJSONresponse(response, 200, results);
+    }, function(error) {
+      sendJSONresponse(response, 404, error);
+    });
   }
 }
 
@@ -63,6 +71,13 @@ function elementsUpdate(request, response) {
     }, function(error) {
       sendJSONresponse(response, 404, error);
     });
+  } else if(request.body.kind === "image") {
+    imagesDao.imagesUpdate(request)
+    .then(function(results) {
+      sendJSONresponse(response, 200, results);
+    }, function(error) {
+      sendJSONresponse(response, 404, error);
+    });
   }
 }
 
@@ -86,6 +101,13 @@ function elementsDelete(request, response) {
     });
   } else if(request.body.kind === "dataView") {
     dataViewsDao.dataViewsDelete(request)
+    .then(function(results) {
+      sendJSONresponse(response, 200, results);
+    }, function(error) {
+      sendJSONresponse(response, 404, error);
+    });
+  } else if(request.body.kind === "image") {
+    imagesDao.imagesDelete(request)
     .then(function(results) {
       sendJSONresponse(response, 200, results);
     }, function(error) {

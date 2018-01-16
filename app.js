@@ -12,6 +12,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
+var fileUpload = require('express-fileupload');
 
 // Bring in the database connection and all its models
 require('./app_api/models/db');
@@ -34,11 +35,14 @@ app.locals.basedir = path.join(__dirname, 'public');
 // Set the application icon
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 
-// Configure the Express session middleware
+// Configure the Express Session middleware
 app.use(session({
   secret: '3Y8tQ9TUo9uJd6f',
   store: new mongoStore({mongooseConnection: db})
 }));
+
+// Configure the Express File Upload middleware
+app.use(fileUpload());
 
 // Configure the logger middleware
 app.use(logger('dev'));
