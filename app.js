@@ -56,7 +56,6 @@ app.use(cookieParser());
 
 // Configure the Static Application directories
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'app_client')));
 
 // Configure the Cross-Origin-Request middleware
 app.use(cors());
