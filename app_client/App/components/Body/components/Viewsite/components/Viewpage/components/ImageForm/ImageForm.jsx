@@ -68,10 +68,6 @@ var ImageFormJSX = function() {
           {this.props.description}
         </button>
       </form>
-
-      <img className="img-fluid rounded" src={this.props.image.imageLocation
-          + "?"
-          + new Date().getTime()} />
     </div>
   );
 }
