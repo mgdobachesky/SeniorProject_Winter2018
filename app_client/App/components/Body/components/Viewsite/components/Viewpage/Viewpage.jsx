@@ -6,6 +6,7 @@ import TextForm from './components/TextForm';
 import FormForm from './components/FormForm';
 import Form from './components/Form';
 import DataViewForm from './components/DataViewForm';
+import ImageForm from './components/ImageForm';
 
 /*
  * Create list of Elements a Viewpage owns
@@ -54,6 +55,17 @@ function ElementList(props) {
           viewpageId={viewpageId}
           element={element}
           userTables={userTables}
+          onEditElement={props.onEditElement}
+          onDeleteElement={props.onDeleteElement} />
+        );
+      } else if(element.kind === "image") {
+        // For Image Elements
+        return(
+          <ImageElement
+          key={_id}
+          viewsiteId={viewsiteId}
+          viewpageId={viewpageId}
+          element={element}
           onEditElement={props.onEditElement}
           onDeleteElement={props.onDeleteElement} />
         );
@@ -206,6 +218,61 @@ function DataViewElement(props) {
 }
 
 /*
+ * Display an Image Element
+ * Used by the ElementList in ViewpageJSX
+ */
+function ImageElement(props) {
+  // Data needed to edit a Text Element
+  const editClick = {
+    viewsiteId: props.viewsiteId,
+    viewpageId: props.viewpageId,
+    _id: props.element._id,
+    kind: props.element.kind,
+    imageLocation: props.element.imageLocation
+  };
+  // Data needed to delete a Text Element
+  const deleteClick = {
+    viewsiteId: props.viewsiteId,
+    viewpageId: props.viewpageId,
+    _id: props.element._id,
+    kind: props.element.kind
+  };
+
+  return (
+    <div className="card border-primary mb-3">
+      <div className="card-body">
+        <h4 className="card-title">
+          <b>Image: </b>
+        </h4>
+      <img className="img-fluid rounded mx-auto d-block" src={props.element.imageLocation
+          + "?"
+          + new Date().getTime()} />
+      </div>
+
+      <div className="card-footer">
+        <a
+        className="card-link"
+        href="javascript:;"
+        onClick={() => props.onEditElement(editClick)}>
+          <button type="button" className="btn btn-link">
+            Edit Image
+          </button>
+        </a>
+
+        <a
+        className="card-link float-right"
+        href="javascript:;"
+        onClick={() => props.onDeleteElement(deleteClick)}>
+        <button type="button" className="btn btn-danger">
+          Delete Image
+        </button>
+        </a>
+      </div>
+    </div>
+  );
+}
+
+/*
  * Method for preparing the forms for a Text creation
  * It hides every form other than the create Text form
  */
@@ -218,6 +285,9 @@ var prepareCreateText = function() {
 
   $( ".createDataView" ).hide(false);
   $( ".updateDataView" ).hide(false);
+
+  $( ".createImage" ).hide(false);
+  $( ".updateImage" ).hide(false);
 
   this.handleClearLocalState();
 };
@@ -236,6 +306,9 @@ var prepareCreateForm = function() {
   $( ".createDataView" ).hide(false);
   $( ".updateDataView" ).hide(false);
 
+  $( ".createImage" ).hide(false);
+  $( ".updateImage" ).hide(false);
+
   this.handleClearLocalState();
 };
 
@@ -245,6 +318,29 @@ var prepareCreateForm = function() {
  */
 var prepareCreateDataView = function() {
   $( ".createDataView" ).toggle("medium");
+  $( ".updateDataView" ).hide(false);
+
+  $( ".createText" ).hide(false);
+  $( ".updateText" ).hide(false);
+
+  $( ".createForm" ).hide(false);
+  $( ".updateForm" ).hide(false);
+
+  $( ".createImage" ).hide(false);
+  $( ".updateImage" ).hide(false);
+
+  this.handleClearLocalState();
+};
+
+/*
+ * Method for preparing the forms for an Image creation
+ * It hides every form other than the create Image form
+ */
+var prepareCreateImage = function() {
+  $( ".createImage" ).toggle("medium");
+  $( ".updateImage" ).hide(false);
+
+  $( ".createDataView" ).hide(false);
   $( ".updateDataView" ).hide(false);
 
   $( ".createText" ).hide(false);
@@ -271,6 +367,15 @@ var ViewpageJSX = function() {
             className="btn btn-link"
             onClick={() => {prepareCreateText.call(this);}}>
             <i className="fa fa-plus" aria-hidden="true"></i> Add Text
+            </button>
+          </div>
+
+          <div className="row">
+            <button
+            type="button"
+            className="btn btn-link"
+            onClick={() => {prepareCreateImage.call(this);}}>
+            <i className="fa fa-plus" aria-hidden="true"></i> Add Image
             </button>
           </div>
 
@@ -313,6 +418,36 @@ var ViewpageJSX = function() {
               description="Update Text"
               action="update"
               text={this.state.text}
+              elementSuccess={this.state.elementSuccess}
+              elementError={this.state.elementError}
+              onChange={this.handleChange}
+              onSubmit={this.handleUpdateElement} />
+            </div>
+          </div>
+
+          <div id="createImage" className="card createImage mb-3">
+            <div className="card-body">
+              <ImageForm
+              description="Add Image"
+              action="create"
+              image={this.state.image}
+              viewsiteId={this.state.viewsiteId}
+              viewpageId={this.state.viewpage._id}
+              elementSuccess={this.state.elementSuccess}
+              elementError={this.state.elementError}
+              onChange={this.handleChange}
+              onSubmit={this.handleCreateElement} />
+            </div>
+          </div>
+
+          <div id="updateImage" className="card updateImage mb-3">
+            <div className="card-body">
+              <ImageForm
+              description="Update Image"
+              action="update"
+              image={this.state.image}
+              viewsiteId={this.state.viewsiteId}
+              viewpageId={this.state.viewpage._id}
               elementSuccess={this.state.elementSuccess}
               elementError={this.state.elementError}
               onChange={this.handleChange}

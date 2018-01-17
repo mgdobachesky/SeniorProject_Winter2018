@@ -28,6 +28,8 @@ function clearAllForms() {
   $(".updateForm").hide(false);
   $(".createDataView").hide(false);
   $(".updateDataView").hide(false);
+  $(".createImage").hide(false);
+  $(".updateImage").hide(false);
 }
 
 /*

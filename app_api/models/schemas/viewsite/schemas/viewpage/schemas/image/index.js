@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var imageSchema = new Schema({
   'imageLocation': {
     'type': String,
-    'default': "none"
+    'required': true
   }
 });
 

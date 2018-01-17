@@ -11,6 +11,7 @@ class ElementService {
   createElement(requestData) {
     // Prepare data for API call
     var prepareData = {};
+    let headers = {'Content-Type': 'application/json'};
     prepareData.viewsiteId = requestData.viewsiteId;
     prepareData.viewpageId = requestData.viewpageId;
     prepareData.kind = requestData.kind;
@@ -21,15 +22,24 @@ class ElementService {
       prepareData.formTitle = requestData.formTitle;
     } else if(requestData.kind === "dataView") {
       prepareData.formId = requestData.formId;
+    } else if(requestData.kind === "image") {
+      // Create a new FormData
+      const formData = new FormData();
+      formData.append('viewsiteId', requestData.viewsiteId);
+      formData.append('viewpageId', requestData.viewpageId);
+      formData.append('kind', requestData.kind);
+      formData.append('fileUpload', requestData.fileUpload);
+      // Set multipart form-data headers
+      headers = { 'Content-Type': 'multipart/form-data' };
+      // Set the prepare data to the formData
+      prepareData = formData;
     }
     // Make API call
     return axios({
       url: '/create/elements',
       method: 'post',
       baseURL: API_LOCATION + '/api/v1/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: headers,
       data: prepareData
     });
   }
@@ -40,6 +50,7 @@ class ElementService {
   updateElement(requestData) {
     // Prepare data for API call
     var prepareData = {};
+    let headers = {'Content-Type': 'application/json'};
     prepareData.viewsiteId = requestData.viewsiteId;
     prepareData.viewpageId = requestData.viewpageId;
     prepareData.elementId = requestData.elementId;
@@ -51,15 +62,25 @@ class ElementService {
       prepareData.formTitle = requestData.formTitle;
     } else if(requestData.kind === "dataView") {
       prepareData.formId = requestData.formId;
+    } else if(requestData.kind === "image") {
+      // Create a new FormData
+      const formData = new FormData();
+      formData.append('viewsiteId', requestData.viewsiteId);
+      formData.append('viewpageId', requestData.viewpageId);
+      formData.append('elementId', requestData.elementId);
+      formData.append('kind', requestData.kind);
+      formData.append('fileUpload', requestData.fileUpload);
+      // Set multipart form-data headers
+      headers = { 'Content-Type': 'multipart/form-data' };
+      // Set the prepare data to the formData
+      prepareData = formData;
     }
     // Make API call
     return axios({
       url: '/update/elements',
       method: 'put',
       baseURL: API_LOCATION + '/api/v1/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: headers,
       data: prepareData
     });
   }

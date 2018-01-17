@@ -47,6 +47,12 @@ class Viewpage extends React.Component {
         kind: "dataView",
         formId: ""
       },
+      image: {
+        _id: "",
+        kind: "image",
+        imageLocation: "",
+        fileUpload: null
+      },
       elementSuccess: "",
       elementError: "",
       userTables: []
@@ -78,6 +84,11 @@ class Viewpage extends React.Component {
       let createDataView = this.state.dataView;
       requestData.formId = createDataView.formId;
       $(".createDataView").hide("medium");
+    }
+    else if(kind === "image") {
+      let createImage = this.state.image;
+      requestData.fileUpload = createImage.fileUpload[0];
+      $(".createImage").hide("medium");
     }
     // Send out API request to create a new Element
     this.manageElementService.createElement(requestData)
@@ -139,6 +150,19 @@ class Viewpage extends React.Component {
       let isVisible = $(".updateDataView").is(':visible');
       this.handleHideAllForms(".updateDataView", isVisible);
     }
+    else if(event.kind === "image") {
+        // Set Image Element state to Element to be updated
+        let editImage = this.state.image;
+        editImage._id = event._id;
+        editImage.kind = event.kind;
+        editImage.imageLocation = event.imageLocation;
+        this.setState({
+          image: editImage
+        });
+        // Show only the update Text form
+        let isVisible = $(".updateImage").is(':visible');
+        this.handleHideAllForms(".updateImage", isVisible);
+      }
   }
 
   /*
@@ -169,6 +193,12 @@ class Viewpage extends React.Component {
       requestData.elementId = updateDataView._id;
       requestData.formId = updateDataView.formId;
       $(".updateDataView").hide("medium");
+    }
+    else if(kind === "image") {
+      let updateImage = this.state.image;
+      requestData.elementId = updateImage._id;
+      requestData.fileUpload = updateImage.fileUpload[0];
+      $(".updateImage").hide("medium");
     }
     // Send out API request to update selected Element
     this.manageElementService.updateElement(requestData)
@@ -220,6 +250,7 @@ class Viewpage extends React.Component {
     $(".createText").hide(false);
     $(".createForm").hide(false);
     $(".createDataView").hide(false);
+    $(".createImage").hide(false);
 
     // Only hide update forms sharply if they are not the selector
     if(".updateText" != selector) {
@@ -228,8 +259,10 @@ class Viewpage extends React.Component {
       $(".updateForm").hide(false);
     } else if(".updateDataView" != selector) {
       $( ".updateDataView" ).hide(false);
+    } else if(".updateImage" != selector) {
+      $(".updateImage").hide(false);
     }
-
+    
     // Smooth animation on the targeted selector
     if(isVisible) {
       $(selector).hide("medium");
@@ -247,6 +280,7 @@ class Viewpage extends React.Component {
     let clearText = this.state.text;
     let clearForm = this.state.form;
     let clearDataView = this.state.dataView;
+    let clearImage = this.state.image;
     clearText._id = "";
     clearText.kind = "text";
     clearText.textValue = "";
@@ -256,10 +290,15 @@ class Viewpage extends React.Component {
     clearDataView._id = "";
     clearDataView.kind = "dataView";
     clearDataView.formId = "";
+    clearImage._id = "";
+    clearImage.kind = "image";
+    clearImage.imageLocation = "";
+    clearImage.fileUpload = null;
     this.setState({
       text: clearText,
       form: clearForm,
       dataView: clearDataView,
+      image: clearImage,
       elementSuccess: "",
       elementError: ""
     });
@@ -278,7 +317,15 @@ class Viewpage extends React.Component {
    */
   handleChange(event, toChange) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    let value = "";
+    if(target.type === 'text') {
+      value = target.value;
+    } else if(target.type === 'checkbox') {
+      value = target.checked;
+    } else if(target.type === 'file') {
+      value = target.files;
+    }
+    //const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     let changeProp = this.state[toChange];
     changeProp[name] = value;

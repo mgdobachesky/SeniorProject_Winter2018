@@ -14,6 +14,9 @@ function imagesCreate(request) {
     if(!request.body.viewsiteId || !request.body.viewpageId) {
       // Required IDs
       reject('Viewsite and Viewpage IDs are both required!');
+    } else if(!request.files) {
+      // Required fields
+      reject('All fields required!');
     } else if(!request.session.userId) {
       // Make sure a User is logged in
       reject('You must be logged in to create Images!');
@@ -28,24 +31,40 @@ function imagesCreate(request) {
           // Handle non-existent query results
           reject('Viewsite not found!');
         } else {
-          // Push a new Images Element onto the Viewsite's Viewpage
-          viewsiteData.viewpages.id(request.body.viewpageId).elements.push({
-            'kind': request.body.kind
+          let newElement = viewsiteData.viewpages.id(request.body.viewpageId).elements.push({
+            'kind': request.body.kind,
+            'imageLocation': 'none'
           });
-          // Save updated Viewsite
-          viewsiteData.save(function(error, results) {
-            if(error) {
-              // Handle unknown errors
-              console.log(error.message);
-              reject('Something went wrong!');
+          request.body.elementId = viewsiteData.viewpages.id(request.body.viewpageId).elements[newElement-1]._id;
+          console.log(request.elementId);
+          // Save image to proper location
+          saveNewImage(request).then(function(results) {
+            // Set the location of the image as the location of the new image
+            viewsiteData.viewpages.id(request.body.viewpageId).elements[newElement-1].imageLocation = results;
+            // Save updated Viewsite with new Images Element data
+            viewsiteData.save(function(error, results) {
+              if(error) {
+                // Handle unknown errors
+                console.log(error.message);
+                reject('Something went wrong!');
+              } else {
+                // Clean up the results and return up-to-date Viewsite
+                var cleanResults = results.toObject();
+                delete cleanResults.userId;
+                delete cleanResults.__v;
+                resolve(cleanResults);
+              }
+            });
+          }, function(error) {
+            // Find appropriate error message
+            if(error == "ERROR: mimetype") {
+              reject('Image must be png, gif, or jpeg');
             } else {
-              // Clean up results and return up-to-date Viewsite
-              var cleanResults = results.toObject();
-              delete cleanResults.userId;
-              delete cleanResults.__v;
-              resolve(cleanResults);
+              reject('Something went wrong!');
             }
           });
+
+
         }
       });
     }
@@ -57,6 +76,7 @@ function imagesCreate(request) {
  * Method that allows Users to update Images Elements
  */
 function imagesUpdate(request) {
+  console.log(request.files);
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId
       || !request.body.viewpageId
@@ -90,9 +110,8 @@ function imagesUpdate(request) {
           reject('Element doesn\'t exist!');
         } else {
           // Save image to proper location
-          let newImageLocation = "none";
           saveNewImage(request).then(function(results) {
-            newImageLocation = results;
+            let newImageLocation = results;
             // Set updated fields
             viewsiteData
             .viewpages.id(request.body.viewpageId)
@@ -166,7 +185,7 @@ function imagesDelete(request) {
           .elements.id(request.body.elementId)
           .imageLocation;
           // If an old image exists
-          if(oldImageLocation != "none") {
+          if(oldImageLocation) {
             // Delete old image
             deleteOldImage(oldImageLocation).then(function(results) {
               // Remove the Images element from the Viewsite's Viewpage
