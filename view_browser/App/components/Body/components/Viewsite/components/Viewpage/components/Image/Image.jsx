@@ -7,9 +7,9 @@ import React from 'react';
 var ImageJSX = function() {
   return (
     <div>
-      <img className="img-fluid rounded" src={this.props.element.imageLocation
-          + "?"
-          + new Date().getTime()} />
+      <img
+      className="img-fluid rounded mx-auto d-block"
+      src={this.props.element.imageLocation} />
 
       <br />
     </div>

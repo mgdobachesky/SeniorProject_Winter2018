@@ -82,6 +82,10 @@ var DataViewJSX = function() {
 
       <DisplayList
       userTable={userTable} />
+
+      <Text>
+        {"\n"}
+      </Text>
     </Content>
   );
 }

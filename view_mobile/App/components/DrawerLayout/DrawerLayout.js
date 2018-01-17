@@ -134,24 +134,25 @@ var DrawerLayoutJSX = function() {
         </Left>
         <Body>
           <Title>
-            {this.state.viewsiteName}
+            {this.state.viewsiteName ? this.state.viewsiteName : "Cadre"}
           </Title>
         </Body>
 
         <Right />
       </Header>
 
-      <NavigationContent
-      viewsiteName={this.state.viewsiteName}
-      viewsite={this.state.viewsite}
-      viewpages={this.state.viewsite.viewpages}
-      userDatabase={this.state.userDatabase}
-      userForms={this.state.userForms}
-      onUpdateUserTable={this.handleUpdateUserTable}
-      onChange={this.handleChange}
-      onSubmit={this.handleSubmit} />
-
-      <Footer></Footer>
+      <Content
+      style={styles.contentContainer}>
+        <NavigationContent
+        viewsiteName={this.state.viewsiteName}
+        viewsite={this.state.viewsite}
+        viewpages={this.state.viewsite.viewpages}
+        userDatabase={this.state.userDatabase}
+        userForms={this.state.userForms}
+        onUpdateUserTable={this.handleUpdateUserTable}
+        onChange={this.handleChange}
+        onSubmit={this.handleSubmit} />
+      </Content>
     </Drawer>
   );
 }

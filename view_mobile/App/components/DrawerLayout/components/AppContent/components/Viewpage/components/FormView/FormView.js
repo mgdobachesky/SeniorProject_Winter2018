@@ -63,6 +63,10 @@ var FormViewJSX = function() {
           </Text>
         </Button>
       </Form>
+
+      <Text>
+        {"\n"}
+      </Text>
     </Content>
   );
 }

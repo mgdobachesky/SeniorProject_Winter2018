@@ -1,11 +1,12 @@
 // Import required modules
 import React from 'react';
-import { H1, Content } from 'native-base';
+import { H1, Content, Text } from 'native-base';
 
 // Import requred components
 import TextView from './components/TextView';
 import FormView from './components/FormView';
 import DataView from './components/DataView';
+import ImageView from './components/ImageView';
 import styles from './styles.js';
 
 /*
@@ -37,6 +38,12 @@ function ElementList(props) {
           userDatabase={props.userDatabase}
           userForms={props.userForms} />
         );
+      } else if (element.kind === "image") {
+        return (
+          <ImageView
+          key={element._id}
+          element={element} />
+        );
       }
     });
   } else {
@@ -53,6 +60,10 @@ var ViewpageJSX = function() {
       <H1>
         {this.state.viewpage.viewpageName}
       </H1>
+
+      <Text>
+        {"\n"}
+      </Text>
 
       <ElementList
       viewsiteId={this.props.viewsiteId}

@@ -18,6 +18,10 @@ var TextViewJSX = function() {
           </Text>
         )
       })}
+
+      <Text>
+        {"\n"}
+      </Text>
     </Content>
   );
 }
