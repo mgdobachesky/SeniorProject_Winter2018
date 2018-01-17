@@ -399,6 +399,8 @@ var ViewpageJSX = function() {
         </div>
 
         <div className="col">
+          <h4>{this.state.viewpage.viewpageName}</h4>
+
           <div id="createText" className="card createText mb-3">
             <div className="card-body">
               <TextForm

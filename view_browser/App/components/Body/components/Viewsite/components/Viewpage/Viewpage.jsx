@@ -5,6 +5,7 @@ import React from 'react';
 import Text from './components/Text';
 import Form from './components/Form';
 import DataView from './components/DataView';
+import Image from './components/Image';
 
 /*
  * Display each element based on Element kind
@@ -36,6 +37,12 @@ function ElementsView(props) {
           userForms={props.userForms}
           userDatabase={props.userDatabase} />
         );
+      } else if(element.kind === "image") {
+        return(
+          <Image
+          key={element._id}
+          element={element} />
+        );
       }
     });
   } else {
@@ -50,7 +57,7 @@ var ViewpageJSX = function() {
   return (
     <div className="container-fluid">
       <br />
-      
+
       <div className="row">
         <div className="col-10 offset-1">
           <h1>{this.props.viewpage.viewpageName}</h1>

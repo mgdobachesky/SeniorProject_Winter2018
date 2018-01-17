@@ -73,22 +73,18 @@ class Viewpage extends React.Component {
     if(kind === "text") {
       let createText = this.state.text;
       requestData.textValue = createText.textValue;
-      $(".createText").hide("medium");
     }
     else if(kind === "form") {
       let createForm = this.state.form;
       requestData.formTitle = createForm.formTitle;
-      $(".createForm").hide("medium");
     }
     else if(kind === "dataView") {
       let createDataView = this.state.dataView;
       requestData.formId = createDataView.formId;
-      $(".createDataView").hide("medium");
     }
     else if(kind === "image") {
       let createImage = this.state.image;
       requestData.fileUpload = createImage.fileUpload[0];
-      $(".createImage").hide("medium");
     }
     // Send out API request to create a new Element
     this.manageElementService.createElement(requestData)
@@ -97,6 +93,8 @@ class Viewpage extends React.Component {
       this.handleSetGlobalState(results.data, "viewsite");
       // Follow up by clearing element state
       this.handleClearLocalState();
+      // Hide form
+      $(".create"+kind.charAt(0).toUpperCase()+kind.slice(1)).hide("medium");
     },
     (error) => {
       // Handle errors
@@ -180,25 +178,21 @@ class Viewpage extends React.Component {
       let updateText = this.state.text;
       requestData.elementId = updateText._id;
       requestData.textValue = updateText.textValue;
-      $(".updateText").hide("medium");
     }
     else if(kind === "form") {
       let updateForm = this.state.form;
       requestData.elementId = updateForm._id;
       requestData.formTitle = updateForm.formTitle;
-      $(".updateForm").hide("medium");
     }
     else if(kind === "dataView") {
       let updateDataView = this.state.dataView;
       requestData.elementId = updateDataView._id;
       requestData.formId = updateDataView.formId;
-      $(".updateDataView").hide("medium");
     }
     else if(kind === "image") {
       let updateImage = this.state.image;
       requestData.elementId = updateImage._id;
       requestData.fileUpload = updateImage.fileUpload[0];
-      $(".updateImage").hide("medium");
     }
     // Send out API request to update selected Element
     this.manageElementService.updateElement(requestData)
@@ -207,6 +201,8 @@ class Viewpage extends React.Component {
       this.handleSetGlobalState(results.data, "viewsite");
       // Follow up by clearing element state
       this.handleClearLocalState();
+      // Hide form
+      $(".update"+kind.charAt(0).toUpperCase()+kind.slice(1)).hide("medium");
     },
     (error) => {
       // Handle errors
@@ -262,7 +258,7 @@ class Viewpage extends React.Component {
     } else if(".updateImage" != selector) {
       $(".updateImage").hide(false);
     }
-    
+
     // Smooth animation on the targeted selector
     if(isVisible) {
       $(selector).hide("medium");
