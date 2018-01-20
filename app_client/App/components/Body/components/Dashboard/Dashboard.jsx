@@ -44,7 +44,7 @@ function ViewsiteList(props) {
         <div key={_id} className="card border-primary mb-3">
           <div className="card-body">
             <h4 className="card-title">
-              <b>Viewsite: </b>
+              <b>Website: </b>
               <NavLink to={"/" + viewsiteName} className="card-link">
                 {viewsiteName}
               </NavLink>
@@ -58,7 +58,7 @@ function ViewsiteList(props) {
             </p>
 
             <p className="card-text">
-              <b>Viewsite Theme: </b> {viewsiteThemeMessage}
+              <b>Website Theme: </b> {viewsiteThemeMessage}
             </p>
 
             <p className="card-text">
@@ -72,7 +72,7 @@ function ViewsiteList(props) {
             href="javascript:;"
             onClick={() => props.onEditViewsite(editClick)}>
               <button type="button" className="btn btn-link">
-                Edit Viewsite
+                Edit Website
               </button>
             </a>
 
@@ -81,7 +81,7 @@ function ViewsiteList(props) {
             href="javascript:;"
             onClick={() => props.onDeleteViewsite(deleteClick)}>
               <button type="button" className="btn btn-danger">
-                Delete Viewsite
+                Delete Website
               </button>
             </a>
 
