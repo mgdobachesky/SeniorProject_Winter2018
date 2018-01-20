@@ -33,7 +33,7 @@ app.set('view engine', 'pug');
 app.locals.basedir = path.join(__dirname, 'public');
 
 // Set the application icon
-app.use(favicon(__dirname + '/favicon/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 // Configure the Express Session middleware
 app.use(session({
