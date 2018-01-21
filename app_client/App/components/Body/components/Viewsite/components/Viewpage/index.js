@@ -314,7 +314,9 @@ class Viewpage extends React.Component {
   handleChange(event, toChange) {
     const target = event.target;
     let value = "";
-    if(target.type === 'text') {
+    if(target.type === 'text'
+      || target.type === 'textarea'
+      || target.type === 'select-one') {
       value = target.value;
     } else if(target.type === 'checkbox') {
       value = target.checked;

@@ -173,7 +173,7 @@ class Viewsite extends React.Component {
    *
    */
   handlePopulateUserTable(userTable) {
-    if(userTable._id) {
+    if(userTable && userTable._id) {
       // Prepare HTTP API request data
       let requestData = {};
       requestData.viewsiteId = this.state.viewsite._id;
