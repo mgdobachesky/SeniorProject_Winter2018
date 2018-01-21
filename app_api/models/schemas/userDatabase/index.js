@@ -7,6 +7,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Require dependent schemas
 var userTableSchema = require('./schemas/userTable');
+var userUserSchema = require('./schemas/userUser');
 
 // Create User Database schema
 var userDatabaseSchema = new Schema({
@@ -15,7 +16,8 @@ var userDatabaseSchema = new Schema({
     'ref': 'user',
     'required': true
   },
-  'tables': [userTableSchema]
+  'tables': [userTableSchema],
+  'users': [userUserSchema]
 });
 
 // Create User Database models

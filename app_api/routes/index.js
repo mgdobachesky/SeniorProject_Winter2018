@@ -15,6 +15,7 @@ var controllerFormInputs = require('../controllers/viewsites/formInputs');
 var controllerUserDatabases = require('../controllers/userDatabases/userDatabases');
 var controllerUserTables = require('../controllers/userDatabases/userTables');
 var controllerUserRecords = require('../controllers/userDatabases/userRecords');
+var controllerUserUsers = require('../controllers/userDatabases/userUsers');
 
 /*
  * Routes for public User methods
@@ -57,11 +58,6 @@ router.put('/update/form_inputs', controllerFormInputs.formInputsUpdate);
 router.delete('/delete/form_inputs', controllerFormInputs.formInputsDelete);
 
 /*
- * Routes for public User Database methods
- */
-//router.post('/read_one/user_databases', controllerUserDatabases.userDatabasesReadOne);
-
-/*
  * Routes for public User Table methods
  */
 router.post('/read_one/user_tables', controllerUserTables.userTablesReadOne);
@@ -73,6 +69,16 @@ router.post('/read_all/user_tables', controllerUserTables.userTablesReadAll);
 router.post('/create/user_records', controllerUserRecords.userRecordsCreate);
 router.put('/update/user_records', controllerUserRecords.userRecordsUpdate);
 router.delete('/delete/user_records', controllerUserRecords.userRecordsDelete);
+
+/*
+ * Routes for public User's User methods
+ */
+router.post('/read_one/user_users', controllerUserUsers.userUsersReadOne);
+router.post('/create/user_users', controllerUserUsers.userUsersCreate);
+router.put('/update/user_users', controllerUserUsers.userUsersUpdate);
+router.delete('/delete/user_users', controllerUserUsers.userUsersDelete);
+router.post('/login/user_users', controllerUserUsers.userUsersLogIn);
+router.get('/logout/user_users', controllerUserUsers.userUsersLogout);
 
 /*
  * Handle unmatched requests
