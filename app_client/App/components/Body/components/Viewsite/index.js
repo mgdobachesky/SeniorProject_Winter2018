@@ -43,7 +43,7 @@ class Viewsite extends React.Component {
       viewpage: {
         _id: "",
         viewpageName: "",
-        permissionLevel: 0
+        permissionLevel: 3
       },
       viewpageSuccess: "",
       viewpageError: "",
@@ -227,7 +227,7 @@ class Viewsite extends React.Component {
     let clearViewpage = this.state.viewpage;
     clearViewpage._id = "";
     clearViewpage.viewpageName = "";
-    clearViewpage.permissionLevel = 0;
+    clearViewpage.permissionLevel = 3;
     this.setState({
       viewpage: clearViewpage,
       viewpageSuccess: "",

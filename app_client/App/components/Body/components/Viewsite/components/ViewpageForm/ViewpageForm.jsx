@@ -75,10 +75,10 @@ var ViewpageFormJSX = function() {
             className="form-control"
             value={this.props.viewpage.permissionLevel}
             onChange={this.handleChange}>
-              <option value="0">Owner</option>
-              <option value="1">Administrators</option>
-              <option value="2">Private</option>
               <option value="3">Public</option>
+              <option value="2">Private</option>
+              <option value="1">Administrators</option>
+              <option value="0">Owner</option>
             </select>
           </label>
         </div>

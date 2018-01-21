@@ -20,6 +20,18 @@ function userUsersReadOne(request, response) {
 }
 
 /*
+ * Controller used to look up all Users
+ */
+function userUsersReadAll(request, response) {
+  userUsersDao.userUsersReadAll(request)
+  .then(function(results) {
+    sendJSONresponse(response, 200, results);
+  }, function(error) {
+    sendJSONresponse(response, 404, error);
+  });
+}
+
+/*
  * Controller used to create new Users
  */
 function userUsersCreate(request, response) {
@@ -81,6 +93,7 @@ function userUsersLogout(request, response) {
 
 // Export controller methods
 module.exports.userUsersReadOne = userUsersReadOne;
+module.exports.userUsersReadAll = userUsersReadAll;
 module.exports.userUsersCreate = userUsersCreate;
 module.exports.userUsersUpdate = userUsersUpdate;
 module.exports.userUsersDelete = userUsersDelete;

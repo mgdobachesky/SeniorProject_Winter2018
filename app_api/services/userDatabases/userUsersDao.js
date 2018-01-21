@@ -39,6 +39,45 @@ function userUsersReadOne(request) {
 }
 
 /*
+ * Method that allows Users to get all their Users
+ */
+ function userUsersReadAll(request) {
+   var promise = new Promise(function(resolve, reject) {
+     if(!request.body.viewsiteId) {
+       // Required fields
+       reject('User Database ID, Username, and Permission Level are all required!');
+     } else {
+       // Find Viewsite to create User's User for
+       userDatabases.findById(request.body.viewsiteId)
+       .exec(function(error, userDatabaseData) {
+         if(error) {
+           // Handle unknown errors
+           console.log(error.message);
+           reject('Something went wrong!');
+         } else if(userDatabaseData.userId != request.session.userId) {
+           // Make sure User owns the Viewsite
+           reject('You can only get Users signed up to your Viewsite!');
+         } else if(!userDatabaseData) {
+           // Handle non-existent query results
+           reject('Viewsite not found!');
+         } else {
+           let cleanResults = [];
+           // Clean up results and return the User's Users
+           userDatabaseData.users.forEach(function(user) {
+             let cleanUser = user.toObject();
+             delete cleanUser._id;
+             delete cleanUser.password;
+             cleanResults.push(cleanUser);
+           });
+           resolve(cleanResults);
+         }
+       });
+     }
+   });
+   return promise;
+ }
+
+/*
  * Method that allows User's Users to sign-up
  */
 function userUsersCreate(request) {
@@ -301,6 +340,7 @@ function userUsersLogout(request) {
 
 // Export public methods
 module.exports.userUsersReadOne = userUsersReadOne;
+module.exports.userUsersReadAll = userUsersReadAll;
 module.exports.userUsersCreate = userUsersCreate;
 module.exports.userUsersUpdate = userUsersUpdate;
 module.exports.userUsersDelete = userUsersDelete;

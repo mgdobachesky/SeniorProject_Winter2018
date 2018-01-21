@@ -74,6 +74,7 @@ router.delete('/delete/user_records', controllerUserRecords.userRecordsDelete);
  * Routes for public User's User methods
  */
 router.post('/read_one/user_users', controllerUserUsers.userUsersReadOne);
+router.post('/read_all/user_users', controllerUserUsers.userUsersReadAll);
 router.post('/create/user_users', controllerUserUsers.userUsersCreate);
 router.put('/update/user_users', controllerUserUsers.userUsersUpdate);
 router.delete('/delete/user_users', controllerUserUsers.userUsersDelete);
