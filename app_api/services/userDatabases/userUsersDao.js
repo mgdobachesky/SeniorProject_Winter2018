@@ -45,7 +45,7 @@ function userUsersReadOne(request) {
    var promise = new Promise(function(resolve, reject) {
      if(!request.body.viewsiteId) {
        // Required fields
-       reject('User Database ID, Username, and Permission Level are all required!');
+       reject('User Database ID is required!');
      } else {
        // Find Viewsite to create User's User for
        userDatabases.findById(request.body.viewsiteId)
