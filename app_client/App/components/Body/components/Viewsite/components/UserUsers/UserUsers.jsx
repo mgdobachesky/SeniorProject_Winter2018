@@ -9,7 +9,7 @@ function UserList(props) {
   if(props.userUsers && props.userUsers.length >= 1) {
     return props.userUsers.map((userUser, index) => {
       return(
-        <tr key={userUser._id}>
+        <tr key={userUser.username}>
           <td>
             <p>
               {userUser.username}
