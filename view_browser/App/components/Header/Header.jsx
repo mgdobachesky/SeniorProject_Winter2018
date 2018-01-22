@@ -3,6 +3,45 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 /*
+ * Choose login options based on User's User state
+ * Used by the main Header view
+ */
+function LoginOptions(props) {
+  if(props.viewsite.loginEnabled) {
+    if(props.loggedIn) {
+      // If a User is logged in return a logout button
+      return (
+        <ul className="navbar-nav justify-content-end">
+          <li className="nav-item">
+            <a className="nav-link" href="javascript:;" onClick={props.onLogoutUserUser}>
+              Logout
+            </a>
+          </li>
+        </ul>
+      );
+    } else {
+      // If no User is logged in return a sign-up & login button
+      return (
+        <ul className="navbar-nav justify-content-end">
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/signup">
+              Sign-Up
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/login">
+              Login
+            </NavLink>
+          </li>
+        </ul>
+      );
+    }
+  } else {
+    return null;
+  }
+}
+
+/*
  * Create links for each Viewpage a viewsite owns
  * Used in HeaderJSX
  */
@@ -58,11 +97,15 @@ var HeaderJSX = function() {
         <span className="navbar-toggler-icon" />
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <div className="nav navbar-nav" id="nav-tab" role="tablist">
+        <div className="nav navbar-nav mr-auto" id="nav-tab" role="tablist">
           <ViewpageLinks
           viewsite={this.props.viewsite}
           viewpages={this.props.viewsite.viewpages} />
         </div>
+        <LoginOptions
+        loggedIn={this.props.loggedIn}
+        viewsite={this.props.viewsite}
+        onLogoutUserUser={this.handleLogoutUserUser} />
       </div>
     </nav>
   );

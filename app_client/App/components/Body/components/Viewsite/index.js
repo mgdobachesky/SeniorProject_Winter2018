@@ -10,6 +10,7 @@ import './viewsite.css';
 import ViewsiteService from '../../../../services/ViewsiteService';
 import UserTableService from './services/UserTableService';
 import ViewpageService from './services/ViewpageService';
+import UserUserService from './services/UserUserService';
 
 class Viewsite extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class Viewsite extends React.Component {
     this.manageViewsiteService = new ViewsiteService();
     this.manageUserTableService = new UserTableService();
     this.manageViewpageService = new ViewpageService();
+    this.manageUserUserService = new UserUserService();
 
     // Viewpage Methods
     this.handleCreateViewpage = this.handleCreateViewpage.bind(this);
@@ -30,6 +32,11 @@ class Viewsite extends React.Component {
     // User Table Methods
     this.handlePopulateUserTable = this.handlePopulateUserTable.bind(this);
     this.handleUpdateUserTable = this.handleUpdateUserTable.bind(this);
+
+    // User User Methods
+    this.handleReadAllUserUsers = this.handleReadAllUserUsers.bind(this);
+    this.handleUpdateUserUsers = this.handleUpdateUserUsers.bind(this);
+    this.handleDeleteUserUsers = this.handleDeleteUserUsers.bind(this);
 
     // Other Methods
     this.handleGatherUserTables = this.handleGatherUserTables.bind(this);
@@ -50,7 +57,8 @@ class Viewsite extends React.Component {
       userTables: [],
       selectedUserTable: {},
       selectedUserTableHeaders: {},
-      userTableError: ""
+      userTableError: "",
+      userUsers: []
     };
   }
 
@@ -182,7 +190,9 @@ class Viewsite extends React.Component {
       this.manageUserTableService.readOneUserTable(requestData)
       .then((results) => {
         // Afterwards, set state to reflect changes
+        // Also, clear the User List so only the table is displayed
         this.setState({
+          userUsers: [],
           selectedUserTable: results.data,
           selectedUserTableHeaders: userTable,
           userTableError: ""
@@ -195,6 +205,48 @@ class Viewsite extends React.Component {
         });
       });
     }
+  }
+
+  /*
+   * Method to read all User's Users
+   */
+  handleReadAllUserUsers() {
+    if(this.state.viewsite.loginEnabled) {
+      // Prepare HTTP API request data
+      let requestData = {};
+      requestData.viewsiteId = this.state.viewsite._id;
+      // Send out API call to request that a Viewpage is created
+      this.manageUserUserService.readAllUserUsers(requestData)
+      .then((results) => {
+        if(results.data.length >= 1) {
+          // Afterwards, set state to reflect changes
+          // Also, clear the previous table so only the User List is displayed
+          this.setState({
+            selectedUserTable: "",
+            selectedUserTableHeaders: "",
+            userUsers: results.data
+          });
+        }
+      },
+      (error) => {
+        // Handle errors
+        console.log(error);
+      });
+    }
+  }
+
+  /*
+   * Method to update a User's Users
+   */
+  handleUpdateUserUsers() {
+
+  }
+
+  /*
+   * Method to delete a User's Users
+   */
+  handleDeleteUserUsers() {
+
   }
 
   /*
@@ -216,7 +268,15 @@ class Viewsite extends React.Component {
     // Follow up by setting Global User Table state to reflect changes
     this.setState({
       userTables: userTables
-    }, () => this.handlePopulateUserTable(userTables[0]));
+    }, () => {
+      if(!this.state.viewsite.loginEnabled) {
+        // If login is not enabled then load the first table
+        this.handlePopulateUserTable(userTables[0]);
+      } else {
+        // If login is enabled then read the users list
+        this.handleReadAllUserUsers();
+      }
+    });
   }
 
   /*

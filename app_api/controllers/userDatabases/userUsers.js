@@ -70,8 +70,8 @@ function userUsersDelete(request, response) {
 /*
  * Controller used to create a new session
  */
-function userUsersLogIn(request, response) {
-  userUsersDao.userUsersLogIn(request)
+function userUsersLogin(request, response) {
+  userUsersDao.userUsersLogin(request)
   .then(function(results) {
     sendJSONresponse(response, 200, results);
   }, function(error) {
@@ -97,5 +97,5 @@ module.exports.userUsersReadAll = userUsersReadAll;
 module.exports.userUsersCreate = userUsersCreate;
 module.exports.userUsersUpdate = userUsersUpdate;
 module.exports.userUsersDelete = userUsersDelete;
-module.exports.userUsersLogIn = userUsersLogIn;
+module.exports.userUsersLogin = userUsersLogin;
 module.exports.userUsersLogout = userUsersLogout;

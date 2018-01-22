@@ -78,7 +78,7 @@ router.post('/read_all/user_users', controllerUserUsers.userUsersReadAll);
 router.post('/create/user_users', controllerUserUsers.userUsersCreate);
 router.put('/update/user_users', controllerUserUsers.userUsersUpdate);
 router.delete('/delete/user_users', controllerUserUsers.userUsersDelete);
-router.post('/login/user_users', controllerUserUsers.userUsersLogIn);
+router.post('/login/user_users', controllerUserUsers.userUsersLogin);
 router.get('/logout/user_users', controllerUserUsers.userUsersLogout);
 
 /*

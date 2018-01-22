@@ -9,6 +9,17 @@ class Header extends React.Component {
   constructor(props) {
     // Call parent constructor
     super(props);
+
+    // User Methods
+    this.handleLogoutUserUser = this.handleLogoutUserUser.bind(this);
+  }
+
+  /*
+   * Method that destroys the current active session
+   * Passed down from the main Application
+   */
+  handleLogoutUserUser() {
+    this.props.onLogoutUserUser();
   }
 
   /*

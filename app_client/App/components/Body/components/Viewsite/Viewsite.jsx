@@ -5,6 +5,7 @@ import React from 'react';
 import ViewpageForm from './components/ViewpageForm';
 import Viewpage from './components/Viewpage';
 import UserTable from './components/UserTable';
+import UserUsers from './components/UserUsers';
 
 /*
  * Method used to prepare the create Viewpage forms for
@@ -235,8 +236,8 @@ function UserDatabasePills() {
       return (
           <a
           key={userTable._id}
-          type="button"
-          className={index == 0 ? "nav-link active" : "nav-link"}
+          className={index == 0 && !this.state.viewsite.loginEnabled
+            ? "nav-link active" : "nav-link"}
           href="javascript:;"
           data-toggle="pill"
           role="tab"
@@ -245,6 +246,26 @@ function UserDatabasePills() {
           </a>
       );
     });
+  } else {
+    return null;
+  }
+}
+
+/*
+ * Create User Users Pill
+ */
+function UserUsersPill() {
+  if(this.state.viewsite && this.state.viewsite.loginEnabled) {
+    return (
+      <a
+      className="nav-link active"
+      href="javascript:;"
+      data-toggle="pill"
+      role="tab"
+      onClick={() => {this.handleReadAllUserUsers()}}>
+        User Accounts
+      </a>
+    );
   } else {
     return null;
   }
@@ -269,11 +290,16 @@ function ManageDatabaseContent() {
           className="nav flex-column nav-pills"
           role="tablist"
           aria-orientation="vertical">
+            {UserUsersPill.call(this)}
             {UserDatabasePills.call(this)}
           </div>
         </div>
 
         <div className="col">
+          <UserUsers
+          viewsiteId={this.state.viewsite._id}
+          userUsers={this.state.userUsers} />
+
           <UserTable
           viewsiteId={this.state.viewsite._id}
           userTable={this.state.selectedUserTable}

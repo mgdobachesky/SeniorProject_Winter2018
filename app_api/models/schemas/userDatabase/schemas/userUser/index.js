@@ -8,8 +8,7 @@ var Schema = mongoose.Schema;
 var userUserSchema = new Schema({
   'username': {
     'type': String,
-    'required': true,
-    'unique': true
+    'required': true
   },
   'password': {
     'type': String,
@@ -18,24 +17,6 @@ var userUserSchema = new Schema({
   'permissionLevel': {
     'type': Number,
     'default': 3
-  }
-});
-
-// Catch duplicate username errors on create
-userUserSchema.post('save', function(error, doc, next) {
-  if(error.name === 'MongoError' && error.code === 11000) {
-    next(new Error('There was a duplicate key error'));
-  } else {
-    next(error);
-  }
-});
-
-// Catch duplicate username errors on update
-userUserSchema.post('update', function(error, res, next) {
-  if(error.name === 'MongoError' && error.code === 11000) {
-    next(new Error('There was a duplicate key error'));
-  } else {
-    next(error);
   }
 });
 

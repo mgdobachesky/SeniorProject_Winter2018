@@ -106,6 +106,11 @@ function userUsersCreate(request) {
               // Handle non-existent query results
               reject('Viewsite not found!');
             } else {
+              userDatabaseData.users.forEach(function(user) {
+                if(user.username == request.body.username) {
+                  reject('Username already exists!');
+                }
+              });
               // Add a new User's User to the Database
               let newUserIndex = userDatabaseData.users.push({
                 'username': request.body.username,
@@ -116,14 +121,7 @@ function userUsersCreate(request) {
               userDatabaseData.save(function(error, results) {
                 if(error) {
                   // Handle unknown errors
-                  console.log(error.message);
-                  if(error.message === 'There was a duplicate key error') {
-                    // Handle existing User names
-                    reject('Username already exists!');
-                  } else {
-                    // Otherwise, return generic error
-                    reject('Something went wrong!');
-                  }
+                  reject('Something went wrong!');
                 } else {
                   // Set the server session to the newly created User
                   request.session.userUserId = newUser._id;
@@ -151,7 +149,8 @@ function userUsersCreate(request) {
  function userUsersUpdate(request) {
    var promise = new Promise(function(resolve, reject) {
      if(!request.body.viewsiteId
-       || !request.body.username) {
+       || !request.body.username
+       || isNaN(request.body.permissionLevel)) {
        // Required fields
        reject('User Database ID, Username, and Permission Level are all required!');
      } else {
@@ -264,7 +263,7 @@ function userUsersCreate(request) {
 /*
  * Method that allows Users to begin an active session
  */
-function userUsersLogIn(request) {
+function userUsersLogin(request) {
   var promise = new Promise(function(resolve, reject) {
     if(!request.body.viewsiteId
       || !request.body.username
@@ -344,5 +343,5 @@ module.exports.userUsersReadAll = userUsersReadAll;
 module.exports.userUsersCreate = userUsersCreate;
 module.exports.userUsersUpdate = userUsersUpdate;
 module.exports.userUsersDelete = userUsersDelete;
-module.exports.userUsersLogIn = userUsersLogIn;
+module.exports.userUsersLogin = userUsersLogin;
 module.exports.userUsersLogout = userUsersLogout;
