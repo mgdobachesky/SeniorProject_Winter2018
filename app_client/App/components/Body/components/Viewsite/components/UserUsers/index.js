@@ -53,13 +53,7 @@ class UserUsers extends React.Component {
     if(this.props.userUsers.length >= 1) {
       return(UserUsersJSX.call(this));
     } else {
-      return(
-        <div>
-          <h4>User Accounts</h4>
-
-          <p>No users have been created yet!</p>
-        </div>
-      );
+      return null;
     }
   }
 }
