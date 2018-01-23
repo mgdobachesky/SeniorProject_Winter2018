@@ -39,6 +39,7 @@ public/**
 
 # Keep the favicon
 !public/favicon.ico
+!public/logo.png
 
 # Typescript v1 declaration files
 typings/
