@@ -35,11 +35,10 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-public/**
-
-# Keep the favicon
-!public/favicon.ico
-!public/logo.png
+public/cadre.min.js
+public/viewBrowser.min.js
+public/images/
+.idea/
 
 # Typescript v1 declaration files
 typings/

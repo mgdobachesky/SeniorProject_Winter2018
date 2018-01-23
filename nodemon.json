@@ -1,4 +1,9 @@
 {
   "verbose": true,
-  "ignore": ["public/*"]
+  "ignore": [
+    "public",
+    ".git",
+    "view_mobile",
+    "node_modules"
+  ]
 }
