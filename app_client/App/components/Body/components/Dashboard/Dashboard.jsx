@@ -90,7 +90,9 @@ function ViewsiteList(props) {
       );
     });
   } else {
-    return null;
+    return(
+      <p>No Viewsites have been created yet!</p>
+    );
   }
 }
 

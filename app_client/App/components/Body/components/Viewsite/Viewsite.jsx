@@ -105,7 +105,9 @@ function ViewpageList(props) {
       );
     });
   } else {
-    return null;
+    return (
+      <p>No Viewpages have been created yet!</p>
+    );
   }
 }
 
@@ -132,7 +134,13 @@ function ViewpageTabs(props) {
       );
     });
   } else {
-    return null;
+    return (
+      <p
+      className="dropdown-item"
+      role="tab">
+        No Viewpages have been created yet!
+      </p>
+    );
   }
 }
 
@@ -299,12 +307,14 @@ function ManageDatabaseContent() {
           <UserUsers
           viewsiteId={this.state.viewsite._id}
           userUsers={this.state.userUsers}
+          userTable={this.state.selectedUserTable}
           onUpdateUserUsers={this.handleUpdateUserUsers}
           onDeleteUserUsers={this.handleDeleteUserUsers} />
 
           <UserTable
           viewsiteId={this.state.viewsite._id}
           userTable={this.state.selectedUserTable}
+          userUsers={this.state.userUsers}
           userTableHeaders={this.state.selectedUserTableHeaders}
           onUpdateUserTable={this.handleUpdateUserTable} />
         </div>

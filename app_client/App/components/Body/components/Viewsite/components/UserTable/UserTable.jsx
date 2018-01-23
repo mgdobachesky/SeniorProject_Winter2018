@@ -48,21 +48,36 @@ function Records(props) {
 }
 
 /*
+ * Display a User's table
+ * Used by UserTableJSX
+ */
+function UsersTable() {
+  if(this.props.userTable.records.length > 0) {
+    return(
+      <table className="table table-hover">
+        <tbody>
+          <Records
+          userTable={this.props.userTable}
+          viewsiteId={this.props.viewsiteId}
+          onDeleteRecord={this.handleDeleteRecord} />
+        </tbody>
+      </table>
+    );
+  } else {
+    return(
+      <p>No records for this table yet!</p>
+    );
+  }
+}
+
+/*
  * UserTable view
  */
 var UserTableJSX = function() {
   return (
     <div>
       <h4>{this.props.userTableHeaders.formTitle}</h4>
-
-        <table className="table table-hover">
-          <tbody>
-            <Records
-            userTable={this.props.userTable}
-            viewsiteId={this.props.viewsiteId}
-            onDeleteRecord={this.handleDeleteRecord} />
-          </tbody>
-        </table>
+      {UsersTable.call(this)}
     </div>
   );
 }

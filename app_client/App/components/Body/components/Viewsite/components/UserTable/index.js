@@ -57,7 +57,7 @@ class UserTable extends React.Component {
    * Render the UserTable view
    */
   render() {
-    if(this.props.userTable) {
+    if(this.props.userUsers == null) {
       return(UserTableJSX.call(this));
     } else {
       return null;

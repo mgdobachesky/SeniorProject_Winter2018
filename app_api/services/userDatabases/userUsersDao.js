@@ -241,6 +241,7 @@ function userUsersCreate(request) {
            userDatabaseData.save(function(error, results) {
              if(error) {
                // Handle unknown errors
+               console.log(error);
                reject('Something went wrong!');
              } else {
                let cleanResults = [];

@@ -50,7 +50,7 @@ class UserUsers extends React.Component {
    * Render the UserUsers view
    */
   render() {
-    if(this.props.userUsers.length >= 1) {
+    if(this.props.userTable == null) {
       return(UserUsersJSX.call(this));
     } else {
       return null;

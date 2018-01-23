@@ -3,7 +3,7 @@ import React from 'react';
 
 /*
  * Create a table row for each record in the User Table
- * Used by DataViewJSX
+ * Used by UserTable
  */
 function UserList(props) {
   if(props.userUsers && props.userUsers.length >= 1) {
@@ -57,6 +57,30 @@ function UserList(props) {
 }
 
 /*
+ * Display a table of User's Users
+ * Used by UserUsersJSX
+ */
+function UsersTable() {
+  if(this.props.userUsers.length > 0) {
+    return(
+      <table className="table table-hover">
+        <tbody>
+          <UserList
+          userUsers={this.props.userUsers}
+          onUpdateUserUsers={this.handleUpdateUserUsers}
+          onDeleteUserUsers={this.handleDeleteUserUsers}
+          onChange={this.handleChange} />
+        </tbody>
+      </table>
+    );
+  } else {
+    return(
+      <p>No users have signed up yet!</p>
+    );
+  }
+}
+
+/*
  * UserUsers view
  */
 var UserUsersJSX = function() {
@@ -64,15 +88,7 @@ var UserUsersJSX = function() {
     <div>
       <h4>User Accounts</h4>
 
-        <table className="table table-hover">
-          <tbody>
-            <UserList
-            userUsers={this.props.userUsers}
-            onUpdateUserUsers={this.handleUpdateUserUsers}
-            onDeleteUserUsers={this.handleDeleteUserUsers}
-            onChange={this.handleChange} />
-          </tbody>
-        </table>
+      {UsersTable.call(this)}
     </div>
   );
 }

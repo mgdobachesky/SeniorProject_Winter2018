@@ -189,10 +189,14 @@ class Viewsite extends React.Component {
       // Send out API call to request that a Viewpage is created
       this.manageUserTableService.readOneUserTable(requestData)
       .then((results) => {
+        // Handle no records
+        if(!results.data) {
+          results.data = {};
+        }
         // Afterwards, set state to reflect changes
         // Also, clear the User List so only the table is displayed
         this.setState({
-          userUsers: [],
+          userUsers: null,
           selectedUserTable: results.data,
           selectedUserTableHeaders: userTable,
           userTableError: ""
@@ -222,9 +226,17 @@ class Viewsite extends React.Component {
           // Afterwards, set state to reflect changes
           // Also, clear the previous table so only the User List is displayed
           this.setState({
-            selectedUserTable: "",
+            selectedUserTable: null,
             selectedUserTableHeaders: "",
             userUsers: results.data
+          });
+        } else {
+          // Afterwards, set state to reflect changes
+          // Also, clear the previous table so only the User List is displayed
+          this.setState({
+            selectedUserTable: null,
+            selectedUserTableHeaders: "",
+            userUsers: []
           });
         }
       },
@@ -251,7 +263,7 @@ class Viewsite extends React.Component {
         // Afterwards, set state to reflect changes
         // Also, clear the previous table so only the User List is displayed
         this.setState({
-          selectedUserTable: "",
+          selectedUserTable: {},
           selectedUserTableHeaders: "",
           userUsers: results.data
         });
@@ -278,9 +290,15 @@ class Viewsite extends React.Component {
         // Afterwards, set state to reflect changes
         // Also, clear the previous table so only the User List is displayed
         this.setState({
-          selectedUserTable: "",
+          selectedUserTable: {},
           selectedUserTableHeaders: "",
           userUsers: results.data
+        });
+      } else {
+        this.setState({
+          selectedUserTable: {},
+          selectedUserTableHeaders: "",
+          userUsers: []
         });
       }
     },
