@@ -16,9 +16,35 @@ function UserList(props) {
             </p>
           </td>
           <td>
+            <div className="form-group">
+              <label htmlFor="permissionLevel">
+                Permission Level:
+
+                <select
+                id="permissionLevel"
+                name={userUser.username}
+                className="form-control"
+                defaultValue={userUser.permissionLevel}
+                onChange={props.onChange}>
+                  <option value="3">Public</option>
+                  <option value="2">Private</option>
+                  <option value="1">Administrators</option>
+                  <option value="0">Owner</option>
+                </select>
+              </label>
+            </div>
+          </td>
+          <td>
             <a
             href="javascript:;"
-            onClick={() => console.log(userUser)}>
+            onClick={() => props.onUpdateUserUsers(userUser)}>
+              <i className="fa fa-floppy-o" aria-hidden="true"></i>
+            </a>
+          </td>
+          <td>
+            <a
+            href="javascript:;"
+            onClick={() => props.onDeleteUserUsers(userUser)}>
               <i className="fa fa-times" aria-hidden="true"></i>
             </a>
           </td>
@@ -41,8 +67,10 @@ var UserUsersJSX = function() {
         <table className="table table-hover">
           <tbody>
             <UserList
-            viewsiteId={this.props.viewsiteId}
-            userUsers={this.props.userUsers} />
+            userUsers={this.props.userUsers}
+            onUpdateUserUsers={this.handleUpdateUserUsers}
+            onDeleteUserUsers={this.handleDeleteUserUsers}
+            onChange={this.handleChange} />
           </tbody>
         </table>
     </div>

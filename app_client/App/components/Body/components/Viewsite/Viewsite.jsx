@@ -298,7 +298,9 @@ function ManageDatabaseContent() {
         <div className="col">
           <UserUsers
           viewsiteId={this.state.viewsite._id}
-          userUsers={this.state.userUsers} />
+          userUsers={this.state.userUsers}
+          onUpdateUserUsers={this.handleUpdateUserUsers}
+          onDeleteUserUsers={this.handleDeleteUserUsers} />
 
           <UserTable
           viewsiteId={this.state.viewsite._id}

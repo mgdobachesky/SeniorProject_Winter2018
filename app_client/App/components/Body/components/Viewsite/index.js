@@ -238,15 +238,56 @@ class Viewsite extends React.Component {
   /*
    * Method to update a User's Users
    */
-  handleUpdateUserUsers() {
-
+  handleUpdateUserUsers(userUser) {
+    let requestData = {
+      viewsiteId: this.state.viewsite._id,
+      username: userUser.username,
+      permissionLevel: userUser.permissionLevel
+    }
+    // Send out API call to request that a User's User is updated
+    this.manageUserUserService.updateUserUser(requestData)
+    .then((results) => {
+      if(results.data.length >= 1) {
+        // Afterwards, set state to reflect changes
+        // Also, clear the previous table so only the User List is displayed
+        this.setState({
+          selectedUserTable: "",
+          selectedUserTableHeaders: "",
+          userUsers: results.data
+        });
+      }
+    },
+    (error) => {
+      // Handle errors
+      console.log(error);
+    });
   }
 
   /*
    * Method to delete a User's Users
    */
-  handleDeleteUserUsers() {
-
+  handleDeleteUserUsers(userUser) {
+    let requestData = {
+      viewsiteId: this.state.viewsite._id,
+      username: userUser.username
+    }
+    // Send out API call to request that a User's User is deleted
+    this.manageUserUserService.deleteUserUser(requestData)
+    .then((results) => {
+      if(results.data.length >= 1) {
+        // Afterwards, set state to reflect changes
+        // Also, clear the previous table so only the User List is displayed
+        this.setState({
+          selectedUserTable: "",
+          selectedUserTableHeaders: "",
+          userUsers: results.data
+        });
+      }
+    },
+    (error) => {
+      // Handle errors
+      console.log(error);
+    });
   }
 
   /*
