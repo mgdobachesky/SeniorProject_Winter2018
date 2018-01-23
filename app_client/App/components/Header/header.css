@@ -1,0 +1,13 @@
+.navbar {
+    background-color: #C09F80;
+    height: 60px;
+}
+
+.navbar-light {
+    color: #565656;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+}
