@@ -25,9 +25,9 @@ var config = {
       loader: 'babel-loader'
     },
     {
-      test: /\.css$/,
+      test: /\.scss$/,
       include: [APP_CLIENT_DIR, VIEW_BROWSER_DIR],
-      loaders: ['style-loader', 'css-loader']
+      loaders: ['style-loader', 'css-loader', 'sass-loader']
     }]
   },
   plugins: [

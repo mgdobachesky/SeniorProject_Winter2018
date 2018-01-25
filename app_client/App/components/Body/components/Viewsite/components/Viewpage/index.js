@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import requred components
 import ViewpageJSX from './Viewpage.jsx';
-import './viewpage.css';
+import './viewpage.scss';
 
 // Import required servicesc
 import ElementService from './services/ElementService';

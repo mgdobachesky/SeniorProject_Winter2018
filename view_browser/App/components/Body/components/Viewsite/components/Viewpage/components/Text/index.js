@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import required components
 import TextJSX from './Text.jsx';
-import './text.css';
+import './text.scss';
 
 class Text extends React.Component {
   constructor(props) {

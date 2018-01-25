@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import required components
 import AppJSX from './App.jsx';
-import './app.css';
+import './app.scss';
 
 // Import required services
 import ViewsiteService from './services/ViewsiteService';

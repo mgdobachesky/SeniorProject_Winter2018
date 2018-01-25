@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import required components
 import ViewsiteFormJSX from './ViewsiteForm.jsx';
-import './viewsiteForm.css';
+import './viewsiteForm.scss';
 
 class ViewsiteForm extends React.Component {
   constructor(props) {

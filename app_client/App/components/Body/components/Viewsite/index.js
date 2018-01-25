@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 // Import requred components
 import ViewsiteJSX from './Viewsite.jsx';
-import './viewsite.css';
+import './viewsite.scss';
 
 // Import required services
 import ViewsiteService from '../../../../services/ViewsiteService';

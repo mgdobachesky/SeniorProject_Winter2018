@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import required components
 import TextboxFormJSX from './TextboxForm.jsx';
-import './textboxForm.css';
+import './textboxForm.scss';
 
 class TextboxForm extends React.Component {
   constructor(props) {

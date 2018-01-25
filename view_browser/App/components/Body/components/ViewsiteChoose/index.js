@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 // Import requred components
 import ViewsiteChooseJSX from './ViewsiteChoose.jsx';
-import './viewsiteChoose.css';
+import './viewsiteChoose.scss';
 
 class ViewsiteChoose extends React.Component {
   constructor(props) {

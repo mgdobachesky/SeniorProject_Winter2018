@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 // Import requred components
 import DashboardJSX from './Dashboard.jsx';
-import './dashboard.css';
+import './dashboard.scss';
 
 // Import required services
 import ViewsiteService from '../../../../services/ViewsiteService';

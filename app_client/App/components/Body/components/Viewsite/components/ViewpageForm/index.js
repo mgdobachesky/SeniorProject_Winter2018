@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import required components
 import ViewpageFormJSX from './ViewpageForm.jsx';
-import './viewpageForm.css';
+import './viewpageForm.scss';
 
 
 class ViewpageForm extends React.Component {

@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 // Import required components
 import UserFormJSX from './UserForm.jsx';
-import './userForm.css';
+import './userForm.scss';
 
 // Import required services
 import UserService from '../../../../services/UserService';

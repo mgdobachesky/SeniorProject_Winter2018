@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import requred components
 import UserTableJSX from './UserTable.jsx';
-import './userTable.css';
+import './userTable.scss';
 
 // Import required services
 import UserRecordService from './services/UserRecordService';

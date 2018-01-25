@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import required components
 import FormJSX from './Form.jsx';
-import './form.css';
+import './form.scss';
 
 // Import required services
 import FormInputService from './services/FormInputService';

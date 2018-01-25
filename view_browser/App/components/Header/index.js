@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import requred components
 import HeaderJSX from './Header.jsx';
-import './header.css';
+import './header.scss';
 
 class Header extends React.Component {
   constructor(props) {

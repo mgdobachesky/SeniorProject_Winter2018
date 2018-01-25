@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 // Import requred components
 import LandingPageJSX from './LandingPage.jsx';
-import './landingPage.css';
+import './landingPage.scss';
 
 class LandingPage extends React.Component {
   constructor(props) {

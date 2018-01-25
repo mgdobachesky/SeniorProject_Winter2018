@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 // Import requred components
 import App from './App';
+import './scss/custom.scss';
 
 /*
  * Set the main Application mount point on the document root

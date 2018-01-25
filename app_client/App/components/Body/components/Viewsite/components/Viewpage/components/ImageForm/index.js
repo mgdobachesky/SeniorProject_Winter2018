@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import required components
 import ImageFormJSX from './ImageForm.jsx';
-import './imageForm.css';
+import './imageForm.scss';
 
 class ImageForm extends React.Component {
   constructor(props) {

@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import requred components
 import ViewsiteJSX from './Viewsite.jsx';
-import './viewsite.css';
+import './viewsite.scss';
 
 class Viewsite extends React.Component {
   constructor(props) {

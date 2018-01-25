@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import requred components
 import HomeJSX from './Home.jsx';
-import './home.css';
+import './home.scss';
 
 class Home extends React.Component {
   constructor(props) {

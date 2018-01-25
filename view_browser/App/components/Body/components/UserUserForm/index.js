@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 // Import required components
 import UserUserFormJSX from './UserUserForm.jsx';
-import './userUserForm.css';
+import './userUserForm.scss';
 
 
 class UserUserForm extends React.Component {

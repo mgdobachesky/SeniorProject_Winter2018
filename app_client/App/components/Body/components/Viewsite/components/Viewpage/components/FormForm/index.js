@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import required components
 import FormFormJSX from './FormForm.jsx';
-import './formForm.css';
+import './formForm.scss';
 
 class FormForm extends React.Component {
   constructor(props) {

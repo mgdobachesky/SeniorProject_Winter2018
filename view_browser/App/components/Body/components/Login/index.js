@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 // Import required components
 import LoginJSX from './Login.jsx';
-import './login.css';
+import './login.scss';
 
 class Login extends React.Component {
   constructor(props) {

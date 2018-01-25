@@ -79,7 +79,7 @@ function ViewpageList(props) {
               <b>Viewpage: </b>{viewpageName}
             </h4>
             <p className="card-text">
-              <b>Permission Level: </b>: {permissionLevelMessage}
+              <b>Permission Level: </b> {permissionLevelMessage}
             </p>
           </div>
           <div className="card-footer">

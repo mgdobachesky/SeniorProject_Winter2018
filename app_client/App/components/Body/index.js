@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import requred components
 import BodyJSX from './Body.jsx';
-import './body.css';
+import './body.scss';
 
 class Body extends React.Component {
   constructor(props) {

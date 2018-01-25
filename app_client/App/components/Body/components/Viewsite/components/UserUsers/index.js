@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import requred components
 import UserUsersJSX from './UserUsers.jsx';
-import './userUsers.css';
+import './userUsers.scss';
 
 class UserUsers extends React.Component {
   constructor(props) {

@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import requred components
 import FooterJSX from './Footer.jsx';
-import './footer.css';
+import './footer.scss';
 
 class Footer extends React.Component {
   constructor(props) {

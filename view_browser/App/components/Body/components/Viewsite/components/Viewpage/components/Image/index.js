@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import required components
 import ImageJSX from './Image.jsx';
-import './image.css';
+import './image.scss';
 
 class Image extends React.Component {
   constructor(props) {

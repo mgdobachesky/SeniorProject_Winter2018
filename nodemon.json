@@ -1,9 +1,18 @@
 {
-  "verbose": true,
+  "restartable": "rs",
   "ignore": [
-    "public",
     ".git",
-    "view_mobile",
-    "node_modules"
-  ]
+    "node_modules/**/node_modules"
+  ],
+  "verbose": true,
+  "watch": [
+    "app_api/",
+    "app_server/",
+    "app.js",
+    "server.js"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js json"
 }

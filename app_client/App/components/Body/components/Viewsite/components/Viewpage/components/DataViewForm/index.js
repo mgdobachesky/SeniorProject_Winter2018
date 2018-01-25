@@ -3,7 +3,7 @@ import React from 'react';
 
 // Import required components
 import DataViewFormJSX from './DataViewForm.jsx';
-import './dataViewForm.css';
+import './dataViewForm.scss';
 
 class DataViewForm extends React.Component {
   constructor(props) {
