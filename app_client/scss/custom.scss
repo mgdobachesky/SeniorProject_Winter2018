@@ -50,26 +50,19 @@ $body-color: $dark;
 // Jumbotron Options
 $jumbotron-bg: $light;
 
-// Card Options
-$card-bg: $light;
-$card-cap-bg: $light;
-$card-border-color: $dark;
-
 // Link Options
-$link-color: $primary;
+$link-color: $tan;
 $link-decoration: none;
 $link-hover-color: $secondary;
 $link-hover-decoration: none;
 
+// Nav Pills
+$nav-pills-link-active-bg: $dark;
+$nav-pills-link-active-color: $light;
+
 /*
- * Bootstrap and its default variables
+ * Bootstrap and Bootswatch dependencies
  */
-
-// Required
- @import "node_modules/bootstrap/scss/functions";
- @import "node_modules/bootstrap/scss/variables";
- @import "node_modules/bootstrap/scss/mixins";
-
- // Optional
- @import "node_modules/bootstrap/scss/navbar";
- @import "node_modules/bootstrap/scss/utilities";
+@import "node_modules/bootswatch/dist/lux/variables";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootswatch/dist/lux/bootswatch";
