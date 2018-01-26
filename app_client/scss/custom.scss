@@ -2,7 +2,7 @@
  * Bootstrap variable overrides
  */
 
- // Monochrome
+ // Monochrome Colors
 $white:    #fff;
 $gray-100: #f8f9fa;
 $gray-200: #e9ecef;
@@ -15,7 +15,7 @@ $gray-800: #343a40;
 $gray-900: #212529;
 $black:    #000;
 
-// Colors
+// Colorful Colors
 $blue:    #007bff;
 $indigo:  #6610f2;
 $purple:  #6f42c1;
@@ -43,22 +43,17 @@ $info: $cyan;
 $warning: $yellow;
 $danger: $red;
 
+// Add custom Bootstrap colors
+$theme-colors: (
+  "navbar": $tan
+);
+
 // Body Options
 $body-bg: $light;
 $body-color: $dark;
 
 // Jumbotron Options
 $jumbotron-bg: $light;
-
-// Link Options
-$link-color: $tan;
-$link-decoration: none;
-$link-hover-color: $secondary;
-$link-hover-decoration: none;
-
-// Nav Pills
-$nav-pills-link-active-bg: $dark;
-$nav-pills-link-active-color: $light;
 
 /*
  * Bootstrap and Bootswatch dependencies
