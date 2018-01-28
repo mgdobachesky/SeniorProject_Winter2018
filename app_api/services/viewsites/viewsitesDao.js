@@ -48,7 +48,6 @@ function viewsitesReadOne(request) {
     } else {
       // Find a Viewsite of the specified Viewsite Name sans sensitive fields
       viewsites.findOne({'viewsiteName': request.params.viewsiteName})
-      .select('-userId -__v')
       .exec(function(error, results) {
         if(error) {
           // Handle unknown errors
@@ -58,8 +57,49 @@ function viewsitesReadOne(request) {
           // Handle non-existent query results
           reject('Viewsite not found!');
         } else {
-          // Otherwise, return the requested Viewsite
-          resolve(results);
+          if(results.userId == request.session.userId) {
+            // If the user owns the Viewsite then return all of it
+            // after cleaning up sensitive data
+            var cleanResults = results.toObject();
+            delete cleanResults.userId;
+            delete cleanResults.__v;
+            resolve(cleanResults);
+          } else if(request.session.userUserId
+                    && request.session.userUserPermissionLevel) {
+            // Otherwise, return only what is appropriate for the permission level
+            let userUserViewsite = {
+              '_id': results._id,
+              'viewsiteName': results.viewsiteName,
+              'viewsiteTheme': results.viewsiteTheme,
+              'loginEnabled': results.loginEnabled,
+              'viewpages': []
+            };
+            // Filter only authorized Viewpages
+            for(viewpage of results.viewpages) {
+              if(request.session.userUserPermissionLevel <= viewpage.permissionLevel) {
+                userUserViewsite.viewpages.push(viewpage);
+              }
+            }
+            // Resolve the modified Viewsite
+            resolve(userUserViewsite);
+          } else {
+            // Otherwise, return only the public view of the Viewsite
+            let publicViewsite = {
+              '_id': results._id,
+              'viewsiteName': results.viewsiteName,
+              'viewsiteTheme': results.viewsiteTheme,
+              'loginEnabled': results.loginEnabled,
+              'viewpages': []
+            };
+            // Filter only public Viewpages
+            for(viewpage of results.viewpages) {
+              if(viewpage.permissionLevel == 3) {
+                publicViewsite.viewpages.push(viewpage);
+              }
+            }
+            // Resolve the modified Viewsite
+            resolve(publicViewsite);
+          }
         }
       });
     }

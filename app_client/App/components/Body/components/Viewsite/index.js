@@ -169,6 +169,7 @@ class Viewsite extends React.Component {
     if(updatedTable._id) {
       // Afterwards, set state to reflect changes
       this.setState({
+        userUsers: null,
         selectedUserTable: updatedTable,
         userTableError: ""
       });
@@ -263,7 +264,7 @@ class Viewsite extends React.Component {
         // Afterwards, set state to reflect changes
         // Also, clear the previous table so only the User List is displayed
         this.setState({
-          selectedUserTable: {},
+          selectedUserTable: null,
           selectedUserTableHeaders: "",
           userUsers: results.data
         });
@@ -290,13 +291,13 @@ class Viewsite extends React.Component {
         // Afterwards, set state to reflect changes
         // Also, clear the previous table so only the User List is displayed
         this.setState({
-          selectedUserTable: {},
+          selectedUserTable: null,
           selectedUserTableHeaders: "",
           userUsers: results.data
         });
       } else {
         this.setState({
-          selectedUserTable: {},
+          selectedUserTable: null,
           selectedUserTableHeaders: "",
           userUsers: []
         });

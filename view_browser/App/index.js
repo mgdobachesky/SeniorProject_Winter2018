@@ -130,7 +130,7 @@ class App extends React.Component {
           loggedIn: true,
           loginSuccess: "",
           loginError: ""
-        });
+        }, () => this.handleRequestViewsite(this.props.viewsiteName));
       },
       (error) => {
         // Handle errors
@@ -157,7 +157,7 @@ class App extends React.Component {
         loggedIn: false,
         loginSuccess: "",
         loginError: ""
-      });
+      }, () => this.handleRequestViewsite(this.props.viewsiteName));
     },
     (error) => {
       // Handle errors

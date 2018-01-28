@@ -117,7 +117,7 @@ var FormJSX = function() {
 
       <div className="card-body createTextbox">
         <TextboxForm
-        description="Create Text Input"
+        description="Create Textbox"
         action="create"
         textbox={this.state.textbox}
         formInputSuccess={this.state.formInputSuccess}
@@ -128,7 +128,7 @@ var FormJSX = function() {
 
       <div className="card-body updateTextbox">
         <TextboxForm
-        description="Update Text Input"
+        description="Update Textbox"
         action="update"
         textbox={this.state.textbox}
         formInputSuccess={this.state.formInputSuccess}

@@ -52,7 +52,11 @@ function DataViewOptions(props) {
       );
     });
   } else {
-    return null;
+    return (
+      <option disabled>
+        No Data-Views exist yet!
+      </option>
+    );
   }
 }
 

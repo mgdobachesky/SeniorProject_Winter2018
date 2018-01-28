@@ -125,6 +125,7 @@ function userUsersCreate(request) {
                 } else {
                   // Set the server session to the newly created User
                   request.session.userUserId = newUser._id;
+                  request.session.userUserPermissionLevel = newUser.permissionLevel;
                   // Clean up results and return the new User Database
                   var cleanResults = newUser.toObject();
                   delete cleanResults._id;
@@ -298,6 +299,7 @@ function userUsersLogin(request) {
             } else {
               // Set an active session of the successful credentials
               request.session.userUserId = loginUser._id;
+              request.session.userUserPermissionLevel = loginUser.permissionLevel;
               // Clean up results and return User information
               var cleanResults = loginUser.toObject();
               delete cleanResults._id;
