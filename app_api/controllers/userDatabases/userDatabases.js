@@ -8,18 +8,6 @@ function sendJSONresponse(res, status, content) {
 }
 
 /*
- * Controller used to read a User Database
- */
-function userDatabasesReadOne(request, response) {
-  userDatabasesDao.userDatabasesReadOne(request)
-  .then(function(results) {
-    sendJSONresponse(response, 200, results);
-  }, function(error) {
-    sendJSONresponse(response, 404, error);
-  });
-}
-
-/*
  * Controller used to create User Databases
  * Invoked after creating a Viewsite
  */
@@ -46,6 +34,5 @@ function userDatabasesDelete(request, response) {
 }
 
 // Export controller methods
-module.exports.userDatabasesReadOne = userDatabasesReadOne;
 module.exports.userDatabasesCreate = userDatabasesCreate;
 module.exports.userDatabasesDelete = userDatabasesDelete;

@@ -3,36 +3,6 @@ var mongoose = require('mongoose');
 var userDatabases = mongoose.model('userDatabase');
 
 /*
- * Method that allows Users to read a User Database
- */
-function userDatabasesReadOne(request) {
-  var promise = new Promise(function(resolve, reject) {
-    if(!request.body.viewsiteId) {
-      // Required fields
-      reject('User Database ID is required!');
-    } else {
-      // Find the User Database but leave out the User's ID and document version
-      userDatabases.findOne({'_id': request.body.viewsiteId})
-      .select('-userId -__v')
-      .exec(function(error, results) {
-        if(error) {
-          // Deal with unknown errors
-          console.log(error.message);
-          reject('Something went wrong!');
-        } else if(!results) {
-          // Deal with non-existent query results
-          reject('User Database not found!');
-        } else {
-          // Resolve the results
-          resolve(results);
-        }
-      });
-    }
-  });
-  return promise;
-}
-
-/*
  * Method that allows Viewsites to create a User Database
  * Invoked after creating a Viewsite
  *
@@ -150,7 +120,6 @@ function userDatabasesDeleteAll(request) {
 }
 
 // Export all public methods
-module.exports.userDatabasesReadOne = userDatabasesReadOne;
 module.exports.userDatabasesCreate = userDatabasesCreate;
 module.exports.userDatabasesDelete = userDatabasesDelete;
 module.exports.userDatabasesDeleteAll = userDatabasesDeleteAll;
