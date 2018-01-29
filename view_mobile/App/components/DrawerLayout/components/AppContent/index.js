@@ -9,6 +9,10 @@ class AppContent extends React.Component {
     // Call parent constructor
     super(props);
 
+    // User's User Methods
+    this.handleCreateUserUser = this.handleCreateUserUser.bind(this);
+    this.handleLoginUserUser = this.handleLoginUserUser.bind(this);
+
     // User Database Methods
     this.handleUpdateUserTable = this.handleUpdateUserTable.bind(this);
   }
@@ -19,6 +23,22 @@ class AppContent extends React.Component {
    */
   handleUpdateUserTable(updatedTable) {
     this.props.onUpdateUserTable(updatedTable);
+  }
+
+  /*
+   * Method that destroys the current active session
+   * Passed down from the main Application
+   */
+  handleCreateUserUser(request) {
+    this.props.onCreateUserUser(request);
+  }
+
+  /*
+   * Method that destroys the current active session
+   * Passed down from the main Application
+   */
+  handleLoginUserUser(request) {
+    this.props.onLoginUserUser(request);
   }
 
   /*

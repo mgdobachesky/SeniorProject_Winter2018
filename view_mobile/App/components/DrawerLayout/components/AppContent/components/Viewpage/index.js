@@ -48,6 +48,11 @@ class Viewpage extends React.Component {
           });
         }
       }
+    } else {
+      // If a new viewpage is not being viewed then clear viewpage state
+      this.setState({
+        viewpage: {}
+      });
     }
   }
 
@@ -73,6 +78,11 @@ class Viewpage extends React.Component {
           });
         }
       }
+    } else {
+      // If a new viewpage is not being viewed then clear viewpage state
+      this.setState({
+        viewpage: {}
+      });
     }
   }
 

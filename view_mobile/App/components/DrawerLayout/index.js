@@ -7,6 +7,7 @@ import DrawerLayoutJSX from './DrawerLayout.js';
 // Import required services
 import ViewsiteService from './services/ViewsiteService';
 import UserTableService from './services/UserTableService';
+import UserUserService from './services/UserUserService';
 
 class DrawerLayout extends React.Component {
   constructor(props) {
@@ -16,6 +17,13 @@ class DrawerLayout extends React.Component {
     // Initialize service objects
     this.manageViewsiteService = new ViewsiteService();
     this.manageUserTableService = new UserTableService();
+    this.manageUserUserService = new UserUserService();
+
+    // User's User Methods
+    this.handleReadOneUserUser = this.handleReadOneUserUser.bind(this);
+    this.handleCreateUserUser = this.handleCreateUserUser.bind(this);
+    this.handleLoginUserUser = this.handleLoginUserUser.bind(this);
+    this.handleLogoutUserUser = this.handleLogoutUserUser.bind(this);
 
     // Viewsite Methods
     this.handleRequestViewsite = this.handleRequestViewsite.bind(this);
@@ -25,18 +33,139 @@ class DrawerLayout extends React.Component {
     this.handleUpdateUserTable = this.handleUpdateUserTable.bind(this);
 
     // Other Methods
+    this.handlePostViewsiteMethods = this.handlePostViewsiteMethods.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     // Set initial state
     this.state = {
+      userUser: {},
+      userUserSuccess: "",
+      userUserError: "",
       viewsiteName: "",
       viewsite: {},
       userDatabase: {},
       viewsiteRequestError: "",
       dataViews: [],
-      userForms: []
+      userForms: [],
+      loggedIn: false,
+      loginSuccess: "",
+      loginError: ""
     };
+  }
+
+  /*
+   * Method for reading a User's User
+   */
+  handleReadOneUserUser(viewsiteId) {
+    if(viewsiteId) {
+      // Set request data used in HTTP API call
+      let requestData = {};
+      requestData.viewsiteId = viewsiteId;
+      // Read User's User in active session
+      this.manageUserUserService.readOneUserUser(requestData)
+      .then((results) => {
+        if(results.data.username) {
+          // If a User's User session is active on the server, set it in state
+          this.setState({
+            userUser: results.data,
+            loggedIn: true
+          });
+        }
+      },
+      (error) => {
+        // Handle errors
+        this.setState({
+          userUser: {},
+          loggedIn: false,
+        });
+      });
+    }
+  }
+
+  /*
+   * Method for creating a User's User
+   */
+  handleCreateUserUser(request) {
+    if(this.state.viewsite._id) {
+      // Set request data used in HTTP API call
+      let requestData = {};
+      requestData.viewsiteId = this.state.viewsite._id;
+      requestData.username = request.username;
+      requestData.password = request.password;
+      // Read User's User in active session
+      this.manageUserUserService.createUserUser(requestData)
+      .then((results) => {
+        // Set the User's User in state if it was successfully created
+        this.setState({
+          userUser: results.data,
+          loggedIn: true,
+          userUserSuccess: "",
+          userUserError: ""
+        }, () => this.handleRequestViewsite(this.state.viewsite.viewsiteName));
+      },
+      (error) => {
+        // Handle errors
+        this.setState({
+          userUser: {},
+          loggedIn: false,
+          userUserSuccess: "",
+          userUserError: error.response.data
+        });
+      });
+    }
+  }
+
+  /*
+   * Method for logging in a User's User
+   */
+  handleLoginUserUser(requestData) {
+    if(requestData.viewsiteId) {
+      // Login the User's User
+      this.manageUserUserService.loginUserUser(requestData)
+      .then((results) => {
+        // If successful, set state with results
+        this.setState({
+          userUser: results.data,
+          loggedIn: true,
+          loginSuccess: "",
+          loginError: ""
+        }, () => this.handleRequestViewsite(this.state.viewsite.viewsiteName));
+      },
+      (error) => {
+        // Handle errors
+        this.setState({
+          userUser: {},
+          loggedIn: false,
+          loginSuccess: "",
+          loginError: error.response.data
+        });
+      });
+    }
+  }
+
+  /*
+   * Method for logging out a User's User
+   */
+  handleLogoutUserUser() {
+    // Send HTTP request to API to destroy currently active session
+    this.manageUserUserService.logoutUserUser()
+    .then((results) => {
+      // Clear state if successful
+      this.setState({
+        userUser: results.data,
+        loggedIn: false,
+        loginSuccess: "",
+        loginError: ""
+      }, () => this.handleRequestViewsite(this.state.viewsite.viewsiteName));
+    },
+    (error) => {
+      // Handle errors
+      this.setState({
+        loginSuccess: "",
+        loginError: error.response.data
+      });
+    });
   }
 
   /*
@@ -72,7 +201,7 @@ class DrawerLayout extends React.Component {
           viewsiteRequestError: "",
           dataViews: dataViews,
           userForms: userForms
-        }, () => this.handleRequestUserDatabase(results.data._id));
+        }, () => this.handlePostViewsiteMethods(results.data));
       },
       (error) => {
         // Handle errors
@@ -90,6 +219,17 @@ class DrawerLayout extends React.Component {
         viewsiteRequestError: "No viewsite specified!"
       });
     }
+  }
+
+  /*
+   * Method for handling actions to be taken after a Viewsite has been
+   * set in state
+   */
+  handlePostViewsiteMethods(viewsite) {
+    // Request the Database associated with this Viewsite
+    this.handleRequestUserDatabase(viewsite._id);
+    // Check if there is an active User's User session
+    this.handleReadOneUserUser(viewsite._id);
   }
 
   /*
