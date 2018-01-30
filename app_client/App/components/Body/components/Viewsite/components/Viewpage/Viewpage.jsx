@@ -73,7 +73,7 @@ function ElementList(props) {
     });
   } else {
     return(
-      <p>No Viewpage Elements have been created yet!</p>
+      <p>No Webpage Elements have been created yet!</p>
     );
   }
 }

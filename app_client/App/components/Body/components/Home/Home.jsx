@@ -10,7 +10,7 @@ var HomeJSX = function() {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-4 offset-4">
-              <img src="/logo.png" className="img-fluid height:auto max-width:100%" />
+              <img src="/logo.png" className="img-fluid height:auto max-width:80%" />
             </div>
           </div>
 
