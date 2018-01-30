@@ -2,6 +2,7 @@
 import React from 'react';
 
 // Import requred components
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 import ViewpageForm from './components/ViewpageForm';
 import Viewpage from './components/Viewpage';
 import UserTable from './components/UserTable';
@@ -33,17 +34,38 @@ function clearAllForms() {
   $(".updateImage").hide(false);
 }
 
+
 /*
  * Create list of Viewpages a Viewsite owns
  * Used by ViewsiteJSX in the 'Manage Viewpages' tab
  */
 function ViewpageList(props) {
+   // this.state = { pages: [] };
+    let pages = [];
+
   if(props.viewpages && props.viewpages.length >= 1) {
     return props.viewpages.map((viewpage, index) => {
       const _id = viewpage._id;
       const viewsiteId = props.viewsiteId;
       const viewpageName = viewpage.viewpageName;
       const permissionLevel = viewpage.permissionLevel;
+        const SortableItem = SortableElement(({value}) => <ul>{value}</ul>); //value = placeholder
+
+        const SortableList = SortableContainer(({items}) => { //items = placeholder
+          //  if(this.state.pages && this.state.pages.length >= 1) {
+                return (
+                    <ul>
+                        {pages.map((value, index) => ( //value = placeholder -- pages.map needs to target state.pages
+                            // return(
+                            <SortableItem key={viewpage._id} index={index} value={value}/>
+                            // );
+                        ))}
+                    </ul>
+               );
+            //}
+        });
+
+
       // Set up a nice message representing Viewpage permission level
       let permissionLevelMessage = "";
       switch(permissionLevel) {
@@ -72,36 +94,76 @@ function ViewpageList(props) {
         _id: _id,
         viewsiteId: viewsiteId
       };
-      return (
-        <div key={viewpage._id} className="card border-primary mb-3">
-          <div className="card-body">
-            <h4 className="card-title">
-              <b>Webpage: </b>{viewpageName}
-            </h4>
-            <p className="card-text">
-              <b>Permission Level: </b> {permissionLevelMessage}
-            </p>
-          </div>
-          <div className="card-footer">
-            <a
-            className="card-link"
-            href="javascript:;"
-            onClick={() => props.onEditViewpage(editClick)}>
-              <button type="button" className="btn btn-link">
-                Edit Webpage
-              </button>
-            </a>
 
-            <a
-            className="card-link float-right"
-            href="javascript:;"
-            onClick={() => props.onDeleteViewpage(deleteClick)}>
-              <button type="button" className="btn btn-danger">
-                Delete Webpage
-              </button>
-            </a>
-          </div>
-        </div>
+        console.log("test");
+
+
+        let pageTest = <div key={viewpage._id} className="card border-primary mb-3">
+            <div className="card-body">
+                <h4 className="card-title">
+                    <b>Viewpage: </b>{viewpageName}
+                </h4>
+                <p className="card-text">
+                    <b>Permission Level: </b>: {permissionLevelMessage}
+                </p>
+            </div>
+            <div className="card-footer">
+                <a
+                    className="card-link"
+                    href="javascript:;"
+                    onClick={() => props.onEditViewpage(editClick)}>
+                    <button type="button" className="btn btn-link">
+                        Edit Viewpage
+                    </button>
+                </a>
+
+                <a
+                    className="card-link float-right"
+                    href="javascript:;"
+                    onClick={() => props.onDeleteViewpage(deleteClick)}>
+                    <button type="button" className="btn btn-danger">
+                        Delete Viewpage
+                    </button>
+                </a>
+            </div>
+        </div>;
+
+        //add to array when viewsite created
+        if (pages < props.viewpages) {
+            pages.push(pageTest);
+        }
+
+        //const pages1 = [];
+
+        // const add = () => {
+        //     if (pages.length < props.viewpages.length) {
+        //         // const newPages = pages.push(pageTest);
+        //         pages.push(pageTest);
+        //         // const pages1 = [...pages, ...pages];
+        //         this.setState({
+        //             pages: pages
+        //         });
+        //         console.log(pages);
+        //         //console.log(updatedList);
+        //     }
+        // };
+
+
+        //save order of array when done sorting
+      //   onSortEnd = ({oldIndex, newIndex}) =>{
+      //     this.setState({
+      //         pages: arrayMove(pages, oldIndex, newIndex),
+      //     });
+      // };
+//12
+
+      return (
+
+       <SortableList
+           items={pages}
+         //  onSortEnd={this.onSortEnd()}
+       />
+
       );
     });
   } else {
@@ -109,6 +171,7 @@ function ViewpageList(props) {
       <p>No Webpages have been created yet!</p>
     );
   }
+
 }
 
 /*

@@ -1,5 +1,6 @@
 // Import required modules
 import React from 'react';
+import ClickToEdit from 'react-click-to-edit'
 
 // Import requred components
 import Text from './components/Text';

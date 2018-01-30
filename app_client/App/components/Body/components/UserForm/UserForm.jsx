@@ -1,6 +1,6 @@
 // Import required modules
 import React from 'react';
-
+import { FormErrors } from './FormErrors';
 /*
  * Alert that notifies the User of any unsuccessful operations
  * Used by UserFormJSX
@@ -54,7 +54,9 @@ var UserFormJSX = function() {
 
       <ErrorAlert
       userError={this.state.userError} />
-
+        <div className="panel panel-default">
+            <FormErrors formErrors={this.state.formErrors} />
+        </div>
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">
@@ -66,11 +68,28 @@ var UserFormJSX = function() {
             className="form-control"
             id="username"
             placeholder="Enter Username"
-            value={this.state.user.username}
-            onChange={this.handleChange} />
+            value={this.state.username}
+            onChange={this.handleUserInput} />
           </label>
         </div>
-        <div className="form-group">
+
+          <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
+              <label htmlFor="email">
+                  Email Address
+
+                  <input
+                      name="email"
+                      type="text"
+                      className="form-control"
+                      id="email"
+                      placeholder="Enter Email"
+                      value={this.state.email}
+                      onChange={this.handleUserInput} />
+              </label>
+          </div>
+
+
+        <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
           <label htmlFor="password">
             Password
 
@@ -80,10 +99,25 @@ var UserFormJSX = function() {
             className="form-control"
             id="password"
             placeholder="Enter Password"
-            value={this.state.user.password}
-            onChange={this.handleChange} />
+            value={this.state.password}
+            onChange={this.handleUserInput} />
           </label>
         </div>
+
+          <div className={`form-group ${this.errorClass(this.state.formErrors.confirmPassword)}`}>
+              <label htmlFor="confirmPassword">
+                  Confirm Password
+
+                  <input
+                      name="confirmPassword"
+                      type="password"
+                      className="form-control"
+                      id="confirmPassword"
+                      placeholder="Confirm Password"
+                      value={this.state.confirmPassword}
+                      onChange={this.handleUserInput} />
+              </label>
+          </div>
 
         <button type="submit" className="btn btn-primary">
           {this.props.description}

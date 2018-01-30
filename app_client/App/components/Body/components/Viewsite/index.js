@@ -1,6 +1,7 @@
 // Import required modules
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
 // Import requred components
 import ViewsiteJSX from './Viewsite.jsx';
@@ -16,7 +17,6 @@ class Viewsite extends React.Component {
   constructor(props) {
     // Call parent constructor
     super(props);
-
     // Initialize service objects
     this.manageViewsiteService = new ViewsiteService();
     this.manageUserTableService = new UserTableService();
@@ -43,6 +43,7 @@ class Viewsite extends React.Component {
     this.handleSetGlobalState = this.handleSetGlobalState.bind(this);
     this.handleClearLocalState = this.handleClearLocalState.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    //this.onSortChange = this.onSortChange.bind(this);
 
     // Set initial state
     this.state = {
@@ -50,7 +51,7 @@ class Viewsite extends React.Component {
       viewpage: {
         _id: "",
         viewpageName: "",
-        permissionLevel: 3
+        permissionLevel: 3,
       },
       viewpageSuccess: "",
       viewpageError: "",
@@ -58,8 +59,11 @@ class Viewsite extends React.Component {
       selectedUserTable: {},
       selectedUserTableHeaders: {},
       userTableError: "",
-      userUsers: []
+      userUsers: [],
+      pages: []
     };
+      //this.add = this.add.bind(this);
+
   }
 
   /*
@@ -72,6 +76,7 @@ class Viewsite extends React.Component {
     requestData.viewsiteId = this.state.viewsite._id;
     requestData.viewpageName = createViewpage.viewpageName;
     requestData.permissionLevel = createViewpage.permissionLevel;
+
     // Send out API call to request that a Viewpage is created
     this.manageViewpageService.createViewpage(requestData)
     .then((results) => {
@@ -85,10 +90,12 @@ class Viewsite extends React.Component {
       // Handle errors
       this.setState({
         viewpageSuccess: "",
-        viewpageError: error.response.data
+        viewpageError: error.response.data,
       });
     });
   }
+
+
 
   /*
    * Method that prepares the Viewpage update form with Viewpage information
@@ -247,6 +254,12 @@ class Viewsite extends React.Component {
       });
     }
   }
+
+    // onSortEnd = ({oldIndex, newIndex}) =>{
+    //        this.setState({
+    //            pages: arrayMove(pages, oldIndex, newIndex),
+    //        });
+    //
 
   /*
    * Method to update a User's Users
