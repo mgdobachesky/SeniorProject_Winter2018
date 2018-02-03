@@ -22,10 +22,10 @@ var viewpageSchema = new Schema({
   },
   'permissionLevel': {
     'type': Number,
-    'default': 0
+    'default': 3
   },
   'elements': [elementSchema]
-});
+}, { discriminatorKey: 'kind' });
 
 // Get the parent array of Elements in the Viewpage
 var elementArray = viewpageSchema.path('elements');
