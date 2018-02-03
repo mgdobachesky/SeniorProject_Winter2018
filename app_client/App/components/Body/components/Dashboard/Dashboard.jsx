@@ -76,6 +76,14 @@ function ViewsiteList(props) {
               </button>
             </a>
 
+              <NavLink
+                  className="card-link"
+                  to={"/" + viewsiteName}>
+                  <button type="button" className="btn btn-link">
+                      Add Pages
+                  </button>
+              </NavLink>
+
             <a
             className="card-link float-right"
             href="javascript:;"
@@ -91,7 +99,7 @@ function ViewsiteList(props) {
     });
   } else {
     return(
-      <p>No Viewsites have been created yet!</p>
+      <p>No Websites have been created yet!</p>
     );
   }
 }
@@ -126,7 +134,7 @@ var DashboardJSX = function() {
             role="tab"
             aria-controls="v-pills-viewsites"
             aria-selected="true">
-              Viewsite Details
+              Your Websites
             </a>
 
             <a
@@ -152,12 +160,12 @@ var DashboardJSX = function() {
               type="button"
               className="btn btn-link"
               onClick={() => {prepareCreateViewsite.call(this);}}>
-              <i className="fa fa-plus" aria-hidden="true"></i> New Viewsite
+              <i className="fa fa-plus" aria-hidden="true"></i> New Website
               </button>
               <div id="createViewsite" className="card mb-3">
                 <div className="card-body">
                   <ViewsiteForm
-                  description="Create Viewsite"
+                  description="Create Website"
                   action="create"
                   viewsite={this.state.viewsite}
                   viewsiteSuccess={this.state.viewsiteSuccess}
@@ -171,7 +179,7 @@ var DashboardJSX = function() {
               <div id="updateViewsite" className="card mb-3">
                 <div className="card-body">
                   <ViewsiteForm
-                  description="Update Viewsite"
+                  description="Update Website"
                   action="update"
                   viewsite={this.state.viewsite}
                   viewsiteSuccess={this.state.viewsiteSuccess}

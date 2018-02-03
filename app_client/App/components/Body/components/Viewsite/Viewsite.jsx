@@ -76,7 +76,7 @@ function ViewpageList(props) {
         <div key={viewpage._id} className="card border-primary mb-3">
           <div className="card-body">
             <h4 className="card-title">
-              <b>Viewpage: </b>{viewpageName}
+              <b>Webpage: </b>{viewpageName}
             </h4>
             <p className="card-text">
               <b>Permission Level: </b> {permissionLevelMessage}
@@ -88,7 +88,7 @@ function ViewpageList(props) {
             href="javascript:;"
             onClick={() => props.onEditViewpage(editClick)}>
               <button type="button" className="btn btn-link">
-                Edit Viewpage
+                Edit Webpage
               </button>
             </a>
 
@@ -97,7 +97,7 @@ function ViewpageList(props) {
             href="javascript:;"
             onClick={() => props.onDeleteViewpage(deleteClick)}>
               <button type="button" className="btn btn-danger">
-                Delete Viewpage
+                Delete Webpage
               </button>
             </a>
           </div>
@@ -106,7 +106,7 @@ function ViewpageList(props) {
     });
   } else {
     return (
-      <p>No Viewpages have been created yet!</p>
+      <p>No Webpages have been created yet!</p>
     );
   }
 }
@@ -191,7 +191,7 @@ function ManageViewpagesContent() {
               type="button"
               className="btn btn-link nav-link"
               onClick={() => {prepareCreateViewpage.call(this);}}>
-              <i className="fa fa-plus" aria-hidden="true"></i> New Viewpage
+              <i className="fa fa-plus" aria-hidden="true"></i> New Webpage
               </button>
             </li>
           </ul>
@@ -353,7 +353,7 @@ var ViewsiteJSX = function() {
               role="tab"
               aria-controls="manage-viewpages"
               aria-selected="true">
-                Viewpage Details
+                Webpage Details
               </a>
             </li>
 
@@ -365,7 +365,7 @@ var ViewsiteJSX = function() {
               role="button"
               aria-haspopup="true"
               aria-expanded="false">
-                Viewpage Contents
+                Your Pages
               </a>
 
               <div className="dropdown-menu">

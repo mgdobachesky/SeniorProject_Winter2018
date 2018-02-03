@@ -32,11 +32,13 @@ function ViewsiteLinks(props) {
       const viewsiteId = viewsite._id;
       const viewsiteName = viewsite.viewsiteName;
       const viewsiteHref = '/' + viewsite.viewsiteName;
+      const viewsiteLink = "/viewsites/" + viewsite.viewsiteName;
+
       return (
         <li key={viewsiteId} className="nav-item">
-          <NavLink id={viewsiteId} className="nav-link" to={viewsiteHref}>
+          <a id={viewsiteId} className="nav-link" href={viewsiteLink}>
             {viewsiteName}
-          </NavLink>
+          </a>
         </li>
       );
     });
@@ -89,10 +91,7 @@ var HeaderJSX = function() {
       <NavLink className="navbar-brand" to="/">
           <img src="/logo.png" className="logo" /> Cadre
       </NavLink>
-      <ul className="navbar-nav mr-auto">
-        <HeaderOptions
-        loggedIn={this.props.loggedIn} />
-      </ul>
+
       <button
       className="navbar-toggler"
       type="button" data-toggle="collapse"
@@ -100,10 +99,12 @@ var HeaderJSX = function() {
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
       aria-label="Toggle navigation">
-        <i class="fa fa-bars" aria-hidden="true"></i>
+        <i className="fa fa-bars" aria-hidden="true"></i>
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
+            <HeaderOptions
+                loggedIn={this.props.loggedIn} />
           <ViewsiteLinks
           viewsites={this.props.viewsites} />
         </ul>
