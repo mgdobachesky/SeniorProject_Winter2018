@@ -147,10 +147,11 @@ function viewsitesCreate(request) {
               }
             }},
             function(error, model) {
-              console.log(error);
+              if(error) {
+                console.log(error);
+              }
             }
           );
-
           // Set the Viewsite ID in the request to use in
           // creating a User Database of the same ID
           request.body.viewsiteId = results._id;
