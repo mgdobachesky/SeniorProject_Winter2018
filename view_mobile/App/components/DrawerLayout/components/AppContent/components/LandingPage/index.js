@@ -10,7 +10,7 @@ class LandingPage extends React.Component {
     // Call parent constructor
     super(props);
   }
-
+  
   /*
    * Render Landing Page JSX view
    */

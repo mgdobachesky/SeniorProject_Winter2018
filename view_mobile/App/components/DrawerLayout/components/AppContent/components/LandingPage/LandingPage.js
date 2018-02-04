@@ -1,6 +1,6 @@
 // Import required modules
 import React from 'react';
-import { Content, H1, H4, Text } from 'native-base';
+import { Content, H1, H3, Text } from 'native-base';
 
 // Import requred components
 import TextView from '../TextView';
@@ -55,15 +55,19 @@ function ElementList(props) {
  * Landing Page JSX view
  */
 var LandingPageJSX = function() {
+  let landingPage = {};
+  if(this.props.landingPage && this.props.landingPage.kind == 'landingPage') {
+    landingPage = this.props.landingPage;
+  }
   return (
     <Content>
       <H1>
         {this.props.viewsiteName}
       </H1>
 
-      <H4>
-        {this.props.landingPage.catchPhrase}
-      </H4>
+      <H3>
+        {landingPage.catchPhrase ? landingPage.catchPhrase : ''}
+      </H3>
 
       <Text>
         {"\n"}
@@ -71,7 +75,7 @@ var LandingPageJSX = function() {
 
       <ElementList
       viewsiteId={this.props.viewsiteId}
-      elements={this.props.landingPage.elements}
+      elements={landingPage.elements}
       userDatabase={this.props.userDatabase}
       userForms={this.props.userForms}
       onUpdateUserTable={this.handleUpdateUserTable} />
