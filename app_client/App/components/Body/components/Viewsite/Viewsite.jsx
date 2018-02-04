@@ -72,37 +72,66 @@ function ViewpageList(props) {
         _id: _id,
         viewsiteId: viewsiteId
       };
-      return (
-        <div key={viewpage._id} className="card border-primary mb-3">
-          <div className="card-body">
-            <h4 className="card-title">
-              <b>Webpage: </b>{viewpageName}
-            </h4>
-            <p className="card-text">
-              <b>Permission Level: </b> {permissionLevelMessage}
-            </p>
+      if(viewpage.kind && viewpage.kind == 'landingPage') {
+        // Display a separate card for landing pages
+        editClick.kind = 'landingPage';
+        editClick.catchPhrase = viewpage.catchPhrase;
+        return(
+          <div key={viewpage._id} className="card border-primary mb-3">
+            <div className="card-body">
+              <h4 className="card-title">
+                <b>Webpage: </b>{viewpageName}
+              </h4>
+              <p className="card-text">
+                <b>Catch Phrase: </b> {viewpage.catchPhrase}
+              </p>
+            </div>
+            <div className="card-footer">
+              <a
+              className="card-link"
+              href="javascript:;"
+              onClick={() => props.onEditViewpage(editClick)}>
+                <button type="button" className="btn btn-link">
+                  Edit Webpage
+                </button>
+              </a>
+            </div>
           </div>
-          <div className="card-footer">
-            <a
-            className="card-link"
-            href="javascript:;"
-            onClick={() => props.onEditViewpage(editClick)}>
-              <button type="button" className="btn btn-link">
-                Edit Webpage
-              </button>
-            </a>
+        );
+      } else {
+        // Display a separate card for regular viewpages
+        return (
+          <div key={viewpage._id} className="card border-primary mb-3">
+            <div className="card-body">
+              <h4 className="card-title">
+                <b>Webpage: </b>{viewpageName}
+              </h4>
+              <p className="card-text">
+                <b>Permission Level: </b> {permissionLevelMessage}
+              </p>
+            </div>
+            <div className="card-footer">
+              <a
+              className="card-link"
+              href="javascript:;"
+              onClick={() => props.onEditViewpage(editClick)}>
+                <button type="button" className="btn btn-link">
+                  Edit Webpage
+                </button>
+              </a>
 
-            <a
-            className="card-link float-right"
-            href="javascript:;"
-            onClick={() => props.onDeleteViewpage(deleteClick)}>
-              <button type="button" className="btn btn-danger">
-                Delete Webpage
-              </button>
-            </a>
+              <a
+              className="card-link float-right"
+              href="javascript:;"
+              onClick={() => props.onDeleteViewpage(deleteClick)}>
+                <button type="button" className="btn btn-danger">
+                  Delete Webpage
+                </button>
+              </a>
+            </div>
           </div>
-        </div>
-      );
+        );
+      }
     });
   } else {
     return (

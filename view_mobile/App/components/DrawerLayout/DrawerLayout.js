@@ -166,13 +166,19 @@ function NavigationContent(props) {
  * Drawer Layout JSX view
  */
 var DrawerLayoutJSX = function() {
+  // Slice normal viewpages off of Viewpages array if it exists
+  let viewpages = [];
+  if(this.state.viewsite.viewpages
+    && this.state.viewsite.viewpages.length >= 1) {
+    viewpages = this.state.viewsite.viewpages.slice(1);
+  }
   if(this.state.viewsite._id) {
     return (
       <Drawer
       ref={(ref) => {this.drawer = ref;}}
       content={<NavigationView
         viewsite={this.state.viewsite}
-        viewpages={this.state.viewsite.viewpages}
+        viewpages={viewpages}
         loggedIn={this.state.loggedIn}
         onLogoutUserUser={this.handleLogoutUserUser}
         closeDrawer={this.closeDrawer.bind(this)} />}

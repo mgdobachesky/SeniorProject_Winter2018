@@ -14,12 +14,25 @@ import styles from './styles.js';
  * Used as a router for React Native navigation
  */
 var AppContentJSX = function() {
+  // Slice normal viewpages off of Viewpages array if it exists
+  let viewpages = [];
+  let landingPage = [];
+  if(this.props.viewpages
+    && this.props.viewpages.length >= 1) {
+    viewpages = this.props.viewpages.slice(1);
+    landingPage = this.props.viewpages.slice(0,1);
+  }
   return (
     <Switch>
       <Route
       exact path='/'
       render={routeProps => <LandingPage {...routeProps}
-        viewsiteName={this.props.viewsiteName}/>} />
+        viewsiteName={this.props.viewsiteName}
+        viewsiteId={this.props.viewsiteId}
+        landingPage={landingPage[0]}
+        userDatabase={this.props.userDatabase}
+        userForms={this.props.userForms}
+        onUpdateUserTable={this.handleUpdateUserTable} />} />
 
       <Route
       path='/login'
@@ -39,7 +52,7 @@ var AppContentJSX = function() {
       path='/:viewpageId'
       render={routeProps => <Viewpage {...routeProps}
         viewsiteId={this.props.viewsiteId}
-        viewpages={this.props.viewpages}
+        viewpages={viewpages}
         userDatabase={this.props.userDatabase}
         userForms={this.props.userForms}
         onUpdateUserTable={this.handleUpdateUserTable} />} />

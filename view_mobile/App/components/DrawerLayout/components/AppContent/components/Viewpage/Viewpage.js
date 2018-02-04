@@ -3,10 +3,10 @@ import React from 'react';
 import { H1, Content, Text } from 'native-base';
 
 // Import requred components
-import TextView from './components/TextView';
-import FormView from './components/FormView';
-import DataView from './components/DataView';
-import ImageView from './components/ImageView';
+import TextView from '../TextView';
+import FormView from '../FormView';
+import DataView from '../DataView';
+import ImageView from '../ImageView';
 import styles from './styles.js';
 
 /*
