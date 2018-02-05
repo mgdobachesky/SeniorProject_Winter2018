@@ -37,6 +37,21 @@ class Form extends React.Component {
         kind: "textbox",
         textboxLabel: ""
       },
+      number: {
+        _id: "",
+        kind: "number",
+        numberLabel: ""
+      },
+      textarea: {
+        _id: "",
+        kind: "textarea",
+        textareaLabel: ""
+      },
+      checkbox: {
+        _id: "",
+        kind: "checkbox",
+        checkboxLabel: ""
+      },
       formInputSuccess: "",
       formInputError: ""
     };
@@ -57,6 +72,21 @@ class Form extends React.Component {
       let createTextbox = this.state.textbox;
       requestData.textboxLabel = createTextbox.textboxLabel;
       $(".createTextbox").hide("medium");
+    }
+    else if(kind === "number"){
+      let createNumber = this.state.number;
+      requestData.numberLabel = createNumber.numberLabel;
+      $(".createNumber").hide("medium");
+    }
+    else if(kind === "textarea"){
+          let createTextarea = this.state.textarea;
+          requestData.textareaLabel = createTextarea.textareaLabel;
+          $(".createTextarea").hide("medium");
+      }
+    else if(kind === "checkbox"){
+        let createCheckbox = this.state.checkbox;
+        requestData.checkboxLabel = createCheckbox.checkboxLabel;
+        $(".createCheckbox").hide("medium");
     }
     // Send request to create a new Form Input
     this.manageFormInputService.createFormInput(requestData)
@@ -94,6 +124,48 @@ class Form extends React.Component {
       this.handleHideAllForms(".updateTextbox", isVisible);
       //$(".updateTextbox").toggle("medium");
     }
+    else if(event.kind === "number") {
+          // Set state of the Textbox form to selected Textbox
+          let editNumber = this.state.number;
+          editNumber._id = event._id;
+          editNumber.kind = event.kind;
+          editNumber.numberLabel = event.numberLabel;
+          this.setState({
+              number: editNumber
+          });
+          // Show the update Textbox form with populated local state information
+          let isVisible = $(".updateNumber").is(':visible');
+          this.handleHideAllForms(".updateNumber", isVisible);
+          //$(".updateTextbox").toggle("medium");
+      }
+    else if(event.kind === "textarea") {
+          // Set state of the Textbox form to selected Textbox
+          let editTextarea = this.state.textarea;
+          editTextarea._id = event._id;
+          editTextarea.kind = event.kind;
+          editTextarea.numberLabel = event.textareaLabel;
+          this.setState({
+              textarea: editTextarea
+          });
+          // Show the update Textbox form with populated local state information
+          let isVisible = $(".updateTextarea").is(':visible');
+          this.handleHideAllForms(".updateTextarea", isVisible);
+          //$(".updateTextbox").toggle("medium");
+      }
+    else if(event.kind === "checkbox") {
+        // Set state of the Textbox form to selected Textbox
+        let editCheckbox = this.state.checkbox;
+        editCheckbox._id = event._id;
+        editCheckbox.kind = event.kind;
+        editCheckbox.numberLabel = event.checkboxLabel;
+        this.setState({
+            checkbox: editCheckbox
+        });
+        // Show the update Textbox form with populated local state information
+        let isVisible = $(".updateCheckbox").is(':visible');
+        this.handleHideAllForms(".updateCheckbox", isVisible);
+        //$(".updateTextbox").toggle("medium");
+    }
   }
 
   /*
@@ -113,6 +185,24 @@ class Form extends React.Component {
       requestData.formInputId = updateTextbox._id;
       requestData.textboxLabel = updateTextbox.textboxLabel;
       $(".updateTextbox").hide("medium");
+    }
+    else if(kind === "number") {
+      let updateNumber = this.state.number;
+      requestData.formInputId = updateNumber._id;
+      requestData.numberLabel = updateNumber.numberLabel;
+      $(".updateNumber").hide("medium");
+    }
+    else if(kind === "textarea") {
+          let updateTextarea = this.state.textarea;
+          requestData.formInputId = updateTextarea._id;
+          requestData.textareaLabel = updateTextarea.textareaLabel;
+          $(".updateTextarea").hide("medium");
+      }
+    else if(kind === "checkbox") {
+        let updateCheckbox = this.state.checkbox;
+        requestData.formInputId = updateCheckbox._id;
+        requestData.checkboxLabel = updateCheckbox.checkboxLabel;
+        $(".updateCheckbox").hide("medium");
     }
     // Call out to the API with a Form Input update request
     this.manageFormInputService.updateFormInput(requestData)
@@ -163,13 +253,27 @@ class Form extends React.Component {
   handleHideAllForms(selector, isVisible) {
     // Sharply hide all create forms
     $(".createTextbox").hide(false);
-
+    $(".createNumber").hide(false);
+    $(".createTextarea").hide(false);
+    $(".createCheckbox").hide(false);
+     // $(".createTextbox").hide(false);
+      $(".updateNumber").hide(false);
+      $(".updateTextarea").hide(false);
+      $(".updateCheckbox").hide(false);
     // Only hide update forms sharply if they are not the selector
     if(".updateTextbox" != selector) {
       $(".updateTextbox").hide(false);
     }
-
-    // Smooth animation on the targeted selector
+    else if(".updateNumber" != selector){
+      $(".updateNumber").hide(false);
+    }
+    else if(".updateTextarea" != selector){
+      $(".updateTextarea").hide(false);
+    }
+    else if(".updateCheckbox" != selector){
+      $(".updateCheckbox").hide(false);
+    }
+// Smooth animation on the targeted selector
     if(isVisible) {
       $(selector).hide("medium");
     } else {
@@ -186,8 +290,23 @@ class Form extends React.Component {
     clearTextbox._id = "";
     clearTextbox.kind = "textbox";
     clearTextbox.textboxLabel = "";
+    let clearNumber = this.state.number;
+    clearNumber._id = "";
+    clearNumber.kind = "number";
+    clearNumber.numberLabel = "";
+    let clearTextarea = this.state.textarea;
+    clearTextarea._id = "";
+    clearTextarea.kind = "textarea";
+    clearTextarea.textareaLabel = "";
+    let clearCheckbox = this.state.checkbox;
+    clearCheckbox._id = "";
+    clearCheckbox.kind = "checkbox";
+    clearCheckbox.checkboxLabel = "";
     this.setState({
       textbox: clearTextbox,
+      number: clearNumber,
+      textarea: clearTextarea,
+      checkbox: clearCheckbox,
       formInputSuccess: "",
       formInputError: ""
     });

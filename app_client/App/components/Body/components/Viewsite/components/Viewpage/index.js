@@ -53,6 +53,11 @@ class Viewpage extends React.Component {
         imageLocation: "",
         fileUpload: null
       },
+      // number: {
+      //   _id: "",
+      //   kind: "number",
+      //   numberValue: ""
+      // },
       elementSuccess: "",
       elementError: "",
       userTables: []
@@ -86,6 +91,10 @@ class Viewpage extends React.Component {
       let createImage = this.state.image;
       requestData.fileUpload = createImage.fileUpload[0];
     }
+    // else if(kind === "number"){
+    //   let createNumber = this.state.number;
+    //   requestData.numberValue = createNumber.numberValue;
+    // }
     // Send out API request to create a new Element
     this.manageElementService.createElement(requestData)
     .then((results) => {
@@ -161,6 +170,12 @@ class Viewpage extends React.Component {
         let isVisible = $(".updateImage").is(':visible');
         this.handleHideAllForms(".updateImage", isVisible);
       }
+    // else if(event.kind === "number"){
+    //   let editNumber = this.state.number;
+    //   editNumber._id = event._id;
+    //   editNumber.kind = event.kind;
+    //   editNumber.numberValue = event.numberValue;
+    // }
   }
 
   /*
@@ -194,6 +209,11 @@ class Viewpage extends React.Component {
       requestData.elementId = updateImage._id;
       requestData.fileUpload = updateImage.fileUpload[0];
     }
+    // else if (kind === "number"){
+    //   let updateNumber = this.state.number;
+    //   requestData.elementId = updateNumber._id;
+    //   requestData.numberValue = updateNumber.numberValue;
+    // }
     // Send out API request to update selected Element
     this.manageElementService.updateElement(requestData)
     .then((results) => {
@@ -256,8 +276,11 @@ class Viewpage extends React.Component {
     } else if(".updateDataView" != selector) {
       $( ".updateDataView" ).hide(false);
     } else if(".updateImage" != selector) {
-      $(".updateImage").hide(false);
+        $(".updateImage").hide(false);
     }
+    // } else if(".updateNumber" != selector){
+    //   $(".updateNumber").hide(false);
+    // }
 
     // Smooth animation on the targeted selector
     if(isVisible) {
@@ -277,6 +300,7 @@ class Viewpage extends React.Component {
     let clearForm = this.state.form;
     let clearDataView = this.state.dataView;
     let clearImage = this.state.image;
+    let clearNumber = this.state.number;
     clearText._id = "";
     clearText.kind = "text";
     clearText.textValue = "";
@@ -290,11 +314,15 @@ class Viewpage extends React.Component {
     clearImage.kind = "image";
     clearImage.imageLocation = "";
     clearImage.fileUpload = null;
+    // clearNumber._id = "";
+    // clearNumber.kind = "number";
+    // clearNumber.numberValue = "";
     this.setState({
       text: clearText,
       form: clearForm,
       dataView: clearDataView,
       image: clearImage,
+     // number: clearNumber,
       elementSuccess: "",
       elementError: ""
     });

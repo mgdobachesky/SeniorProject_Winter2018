@@ -76,7 +76,6 @@ class Viewsite extends React.Component {
     requestData.viewsiteId = this.state.viewsite._id;
     requestData.viewpageName = createViewpage.viewpageName;
     requestData.permissionLevel = createViewpage.permissionLevel;
-
     // Send out API call to request that a Viewpage is created
     this.manageViewpageService.createViewpage(requestData)
     .then((results) => {

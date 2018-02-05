@@ -3,7 +3,7 @@ var textDao = require('../../services/viewsites/textDao');
 var formsDao = require('../../services/viewsites/formsDao');
 var dataViewsDao = require('../../services/viewsites/dataViewsDao');
 var imagesDao = require('../../services/viewsites/imagesDao');
-
+//var numberDao = require('../../services/viewsites/numberDao');
 
 // Handle JSON responses
 function sendJSONresponse(res, status, content) {

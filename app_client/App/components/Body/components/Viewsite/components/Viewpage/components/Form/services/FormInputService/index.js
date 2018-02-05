@@ -19,6 +19,15 @@ class FormInputService {
     if(requestData.kind === "textbox") {
       prepareData.textboxLabel = requestData.textboxLabel;
     }
+    else if(requestData.kind === "number"){
+      prepareData.numberLabel = requestData.numberLabel;
+    }
+    else if(requestData.kind === "textarea"){
+        prepareData.textareaLabel = requestData.textareaLabel;
+    }
+    else if(requestData.kind === "checkbox"){
+        prepareData.checkboxLabel = requestData.checkboxLabel;
+    }
     // Make API call
     return axios({
       url: '/create/form_inputs',
@@ -45,6 +54,15 @@ class FormInputService {
     // Finish preparing data based on the child class
     if(requestData.kind === "textbox") {
       prepareData.textboxLabel = requestData.textboxLabel;
+    }
+    else if(requestData.kind === "number") {
+      prepareData.numberLabel = requestData.numberLabel;
+    }
+    else if(requestData.kind === "textarea") {
+        prepareData.textareaLabel = requestData.textareaLabel;
+    }
+    else if(requestData.kind === "checkbox") {
+        prepareData.checkboxLabel = requestData.checkboxLabel;
     }
     // Make API call
     return axios({
