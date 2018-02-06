@@ -96,6 +96,12 @@ function viewpagesUpdate(request) {
           viewsiteData
           .viewpages.id(request.body.viewpageId)
           .permissionLevel = request.body.permissionLevel;
+          // Handle the landing page update
+          if(request.body.kind && request.body.kind == 'landingPage') {
+            viewsiteData
+            .viewpages.id(request.body.viewpageId)
+            .catchPhrase = request.body.catchPhrase;
+          }
           // Save the new Viewsite
           viewsiteData.save(function(error, results) {
             if(error) {

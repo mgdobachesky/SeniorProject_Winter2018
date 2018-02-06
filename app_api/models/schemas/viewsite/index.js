@@ -7,6 +7,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Require dependent schemas
 var viewpageSchema = require('./schemas/viewpage');
+var landingPageSchema = require('./schemas/landingPage');
 
 // Create Viewsite schema
 var viewsiteSchema = new Schema({
@@ -30,6 +31,12 @@ var viewsiteSchema = new Schema({
   },
   'viewpages': [viewpageSchema]
 });
+
+// Get the parent array of Viewpages in the Viewsite
+var viewpageArray = viewsiteSchema.path('viewpages');
+
+// Set an alternative kind of viewpage as a discriminator
+var LandingPage = viewpageArray.discriminator('landingPage', landingPageSchema);
 
 // Catch duplicate viewsite errors on create
 viewsiteSchema.post('save', function(error, doc, next) {

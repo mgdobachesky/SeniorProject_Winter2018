@@ -62,18 +62,32 @@ function LoginOptions(props) {
     if(props.loggedIn) {
       // If a User is logged in return a logout button
       return (
-        <ListItem>
-          <Button onPress={props.onLogoutUserUser}>
+        <Content>
+          <ListItem itemDivider>
             <Text>
-              Logout
+              Account Options
             </Text>
-          </Button>
-        </ListItem>
+          </ListItem>
+
+          <ListItem>
+            <Button onPress={props.onLogoutUserUser}>
+              <Text>
+                Logout
+              </Text>
+            </Button>
+          </ListItem>
+        </Content>
       );
     } else {
       // If no User is logged in return a sign-up & login button
       return (
         <Content>
+          <ListItem itemDivider>
+            <Text>
+              Account Options
+            </Text>
+          </ListItem>
+
           <ListItem>
             <Link to="/login">
               <Text>
@@ -118,12 +132,6 @@ function NavigationView(props) {
           <ViewpageLinks
           viewpages={props.viewpages} />
 
-          <ListItem itemDivider>
-            <Text>
-              Account Options
-            </Text>
-          </ListItem>
-
           <LoginOptions
           viewsite={props.viewsite}
           loggedIn={props.loggedIn}
@@ -167,12 +175,19 @@ function NavigationContent(props) {
  */
 var DrawerLayoutJSX = function() {
   if(this.state.viewsite._id) {
+    // Slice normal viewpages off of Viewpages array if it exists
+    let viewpages = [];
+    if(this.state.viewsite.viewpages
+      && this.state.viewsite.viewpages.length >= 1) {
+      viewpages = this.state.viewsite.viewpages.slice(1);
+    }
+    // Return main navigation view
     return (
       <Drawer
       ref={(ref) => {this.drawer = ref;}}
       content={<NavigationView
         viewsite={this.state.viewsite}
-        viewpages={this.state.viewsite.viewpages}
+        viewpages={viewpages}
         loggedIn={this.state.loggedIn}
         onLogoutUserUser={this.handleLogoutUserUser}
         closeDrawer={this.closeDrawer.bind(this)} />}

@@ -39,7 +39,9 @@ class ViewpageService {
         "viewsiteId": requestData.viewsiteId,
         "viewpageId": requestData.viewpageId,
         'viewpageName': requestData.viewpageName,
-        'permissionLevel': requestData.permissionLevel
+        'permissionLevel': requestData.permissionLevel,
+        'kind': requestData.kind,
+        'catchPhrase': requestData.catchPhrase
       }
     });
   }

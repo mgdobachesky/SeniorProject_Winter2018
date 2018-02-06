@@ -137,6 +137,21 @@ function viewsitesCreate(request) {
             reject('Something went wrong!');
           }
         } else {
+          // Push on a homepage
+          viewsites.findByIdAndUpdate(
+            results._id,
+            {$push: {
+              'viewpages': {
+                'kind': 'landingPage',
+                'viewpageName': 'Home'
+              }
+            }},
+            function(error, model) {
+              if(error) {
+                console.log(error);
+              }
+            }
+          );
           // Set the Viewsite ID in the request to use in
           // creating a User Database of the same ID
           request.body.viewsiteId = results._id;

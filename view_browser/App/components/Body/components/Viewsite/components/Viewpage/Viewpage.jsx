@@ -3,10 +3,10 @@ import React from 'react';
 import ClickToEdit from 'react-click-to-edit'
 
 // Import requred components
-import Text from './components/Text';
-import Form from './components/Form';
-import DataView from './components/DataView';
-import Image from './components/Image';
+import Text from '../Text';
+import Form from '../Form';
+import DataView from '../DataView';
+import Image from '../Image';
 
 /*
  * Display each element based on Element kind

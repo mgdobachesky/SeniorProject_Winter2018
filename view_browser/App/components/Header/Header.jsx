@@ -75,6 +75,12 @@ function ViewpageLinks(props) {
  * Header JSX view
  */
 var HeaderJSX = function() {
+  // Slice normal viewpages off of Viewpages array if it exists
+  let viewpages = [];
+  if(this.props.viewsite.viewpages
+    && this.props.viewsite.viewpages.length >= 1) {
+    viewpages = this.props.viewsite.viewpages.slice(1);
+  }
   return (
     <nav className="nav navbar navbar-expand-lg navbar-dark bg-primary">
       <a
@@ -100,7 +106,7 @@ var HeaderJSX = function() {
         <div className="nav navbar-nav mr-auto" id="nav-tab" role="tablist">
           <ViewpageLinks
           viewsite={this.props.viewsite}
-          viewpages={this.props.viewsite.viewpages} />
+          viewpages={viewpages} />
         </div>
         <LoginOptions
         loggedIn={this.props.loggedIn}

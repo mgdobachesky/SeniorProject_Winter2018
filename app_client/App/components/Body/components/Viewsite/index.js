@@ -52,6 +52,8 @@ class Viewsite extends React.Component {
         _id: "",
         viewpageName: "",
         permissionLevel: 3,
+        kind: "",
+        catchPhrase: ""
       },
       viewpageSuccess: "",
       viewpageError: "",
@@ -105,6 +107,15 @@ class Viewsite extends React.Component {
     editViewpage._id = event._id;
     editViewpage.viewpageName = event.viewpageName;
     editViewpage.permissionLevel = event.permissionLevel;
+    if(event.kind && event.kind == 'landingPage') {
+      // Handle landing page
+      editViewpage.kind = event.kind;
+      editViewpage.catchPhrase = event.catchPhrase;
+    } else {
+      // Handle all other pages
+      editViewpage.kind = "";
+      editViewpage.catchPhrase = "";
+    }
     this.setState({
       viewpage: editViewpage
     });
@@ -124,6 +135,15 @@ class Viewsite extends React.Component {
     requestData.viewpageId = updateViewpage._id;
     requestData.viewpageName = updateViewpage.viewpageName;
     requestData.permissionLevel = updateViewpage.permissionLevel;
+    if(updateViewpage.kind && updateViewpage.kind == 'landingPage') {
+      // Handle landing page
+      requestData.kind = updateViewpage.kind;
+      requestData.catchPhrase = updateViewpage.catchPhrase;
+    } else {
+      // Handle all other pages
+      requestData.kind = "";
+      requestData.catchPhrase = "";
+    }
     // Send call out to API to update the selected Viewpage
     this.manageViewpageService.updateViewpage(requestData)
     .then((results) => {
@@ -360,6 +380,8 @@ class Viewsite extends React.Component {
     clearViewpage._id = "";
     clearViewpage.viewpageName = "";
     clearViewpage.permissionLevel = 3;
+    clearViewpage.kind = "";
+    clearViewpage.catchPhrase = "";
     this.setState({
       viewpage: clearViewpage,
       viewpageSuccess: "",

@@ -12,7 +12,7 @@ import styles from './styles.js';
 var ImageViewJSX = function() {
   return (
     <Content
-    style={styles.imageContainer}>
+    contentContainerStyle={styles.imageContainer}>
       <Image
       style={styles.imageStyle}
       source={{uri: "http://159.203.105.123:3000/" + this.props.element.imageLocation}} />

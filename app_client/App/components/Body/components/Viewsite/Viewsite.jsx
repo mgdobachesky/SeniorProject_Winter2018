@@ -94,77 +94,66 @@ function ViewpageList(props) {
         _id: _id,
         viewsiteId: viewsiteId
       };
-
-        console.log("test");
-
-
-        let pageTest = <div key={viewpage._id} className="card border-primary mb-3">
+      if(viewpage.kind && viewpage.kind == 'landingPage') {
+        // Display a separate card for landing pages
+        editClick.kind = 'landingPage';
+        editClick.catchPhrase = viewpage.catchPhrase;
+        return(
+          <div key={viewpage._id} className="card border-primary mb-3">
             <div className="card-body">
-                <h4 className="card-title">
-                    <b>Viewpage: </b>{viewpageName}
-                </h4>
-                <p className="card-text">
-                    <b>Permission Level: </b>: {permissionLevelMessage}
-                </p>
+              <h4 className="card-title">
+                <b>Webpage: </b>{viewpageName}
+              </h4>
+              <p className="card-text">
+                <b>Catch Phrase: </b> {viewpage.catchPhrase}
+              </p>
             </div>
             <div className="card-footer">
-                <a
-                    className="card-link"
-                    href="javascript:;"
-                    onClick={() => props.onEditViewpage(editClick)}>
-                    <button type="button" className="btn btn-link">
-                        Edit Viewpage
-                    </button>
-                </a>
-
-                <a
-                    className="card-link float-right"
-                    href="javascript:;"
-                    onClick={() => props.onDeleteViewpage(deleteClick)}>
-                    <button type="button" className="btn btn-danger">
-                        Delete Viewpage
-                    </button>
-                </a>
+              <a
+              className="card-link"
+              href="javascript:;"
+              onClick={() => props.onEditViewpage(editClick)}>
+                <button type="button" className="btn btn-link">
+                  Edit Webpage
+                </button>
+              </a>
             </div>
-        </div>;
+          </div>
+        );
+      } else {
+        // Display a separate card for regular viewpages
+        return (
+          <div key={viewpage._id} className="card border-primary mb-3">
+            <div className="card-body">
+              <h4 className="card-title">
+                <b>Webpage: </b>{viewpageName}
+              </h4>
+              <p className="card-text">
+                <b>Permission Level: </b> {permissionLevelMessage}
+              </p>
+            </div>
+            <div className="card-footer">
+              <a
+              className="card-link"
+              href="javascript:;"
+              onClick={() => props.onEditViewpage(editClick)}>
+                <button type="button" className="btn btn-link">
+                  Edit Webpage
+                </button>
+              </a>
 
-        //add to array when viewsite created
-        if (pages < props.viewpages) {
-            pages.push(pageTest);
-        }
-
-        //const pages1 = [];
-
-        // const add = () => {
-        //     if (pages.length < props.viewpages.length) {
-        //         // const newPages = pages.push(pageTest);
-        //         pages.push(pageTest);
-        //         // const pages1 = [...pages, ...pages];
-        //         this.setState({
-        //             pages: pages
-        //         });
-        //         console.log(pages);
-        //         //console.log(updatedList);
-        //     }
-        // };
-
-
-        //save order of array when done sorting
-      //   onSortEnd = ({oldIndex, newIndex}) =>{
-      //     this.setState({
-      //         pages: arrayMove(pages, oldIndex, newIndex),
-      //     });
-      // };
-//12
-
-      return (
-
-       <SortableList
-           items={pages}
-         //  onSortEnd={this.onSortEnd()}
-       />
-
-      );
+              <a
+              className="card-link float-right"
+              href="javascript:;"
+              onClick={() => props.onDeleteViewpage(deleteClick)}>
+                <button type="button" className="btn btn-danger">
+                  Delete Webpage
+                </button>
+              </a>
+            </div>
+          </div>
+        );
+      }
     });
   } else {
     return (

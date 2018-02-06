@@ -39,6 +39,14 @@ function ViewpageContent(props) {
  * Viewsite JSX view
  */
 var ViewsiteJSX = function() {
+  // Slice normal viewpages off of Viewpages array if it exists
+  let viewpages = [];
+  let landingPage = [];
+  if(this.props.viewsite.viewpages
+    && this.props.viewsite.viewpages.length >= 1) {
+    viewpages = this.props.viewsite.viewpages.slice(1);
+    landingPage = this.props.viewsite.viewpages.slice(0,1);
+  }
   return (
     <div className="tab-content" id="nav-tabContent">
       <div
@@ -47,12 +55,16 @@ var ViewsiteJSX = function() {
       role="tabpanel"
       aria-labelledby="landingPage-tab">
         <LandingPage
-        viewsite={this.props.viewsite} />
+        viewsite={this.props.viewsite}
+        landingPage={landingPage[0]}
+        userDatabase={this.props.userDatabase}
+        userForms={this.props.userForms}
+        onUpdateUserTable={this.handleUpdateUserTable} />
       </div>
 
       <ViewpageContent
       viewsite={this.props.viewsite}
-      viewpages={this.props.viewsite.viewpages}
+      viewpages={viewpages}
       userDatabase={this.props.userDatabase}
       userForms={this.props.userForms}
       onUpdateUserTable={this.handleUpdateUserTable} />
