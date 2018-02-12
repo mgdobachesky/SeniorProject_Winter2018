@@ -3,11 +3,20 @@
 // Include required modules
 var debug = require('debug')('Express4');
 var app = require('./app');
+var fs = require('fs');
+var https = require('https');
 
-// Set the app to run on port 3000
-app.set('port', process.env.PORT || 3000);
+// HTTPS certificate information
+var key = fs.readFileSync('/etc/letsencrypt/live/cadre.me/privkey.pem');
+var cert = fs.readFileSync('/etc/letsencrypt/live/cadre.me/cert.pem');
+var ca = fs.readFileSync('/etc/letsencrypt/live/cadre.me/chain.pem');
 
-// Start the server to be listening on the selected port
-var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port);
-});
+// Create SSL options
+var options = {
+  key: key,
+  cert: cert,
+  ca: ca
+};
+
+// Start the server to be listening on the appropriate port
+https.createServer(options, app).listen(443);
