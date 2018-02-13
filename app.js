@@ -42,6 +42,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 // Configure the Express Session middleware
 app.use(session({
   secret: '3Y8tQ9TUo9uJd6f',
+  cookie: { secure: true },
   store: new mongoStore({mongooseConnection: db})
 }));
 
