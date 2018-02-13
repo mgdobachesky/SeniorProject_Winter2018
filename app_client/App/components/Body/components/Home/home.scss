@@ -1,17 +1,24 @@
 
 //Centering logo on homepage
 
-@mixin center($width, $height) {
-  position: absolute;
-  left: 50%;
+@mixin center {
+  //position: absolute;
   top: 50%;
-  height: $height;
-  width: $width;
-  margin-left: - $width / 2;
-  margin-top: - $height / 2;
+  //left: 50%;
+  //transform: translate(-50%, -50%);
 }
 
 
-.logo {
-  //@include center($logoWidth, $logoHeight);
+.info {
+  margin: auto;
+}
+
+.samplePic {
+  height: 60px;
+  width: 60px;
+}
+
+.featureCard {
+  margin: auto;
+  padding: 20px;
 }

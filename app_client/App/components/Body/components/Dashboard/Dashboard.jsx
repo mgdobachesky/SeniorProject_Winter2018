@@ -80,7 +80,7 @@ function ViewsiteList(props) {
                   className="card-link"
                   to={"/" + viewsiteName}>
                   <button type="button" className="btn btn-link">
-                      Add Pages
+                      Page Builder
                   </button>
               </NavLink>
 
