@@ -13,7 +13,7 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 var fileUpload = require('express-fileupload');
-var forceSsl = require('express-force-ssl');
+var force = require('express-force-domain');
 
 // Bring in the database connection and all its models
 require('./app_api/models/db');
@@ -33,8 +33,8 @@ app.set('view engine', 'pug');
 // Set the Application local directories
 app.locals.basedir = path.join(__dirname, 'public');
 
-// Force use of the HTTPS protocol
-app.use(forceSsl);
+// Force use of the proper domain
+app.use(force('https://www.cadre.me'));
 
 // Set the application icon
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
