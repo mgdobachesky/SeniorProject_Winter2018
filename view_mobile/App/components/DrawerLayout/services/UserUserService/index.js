@@ -9,7 +9,7 @@ class UserUserService {
     return axios({
       url: '/read_one/user_users',
       method: 'post',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: 'https://www.cadre.me/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -26,7 +26,7 @@ class UserUserService {
     return axios({
       url: '/create/user_users',
       method: 'post',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: 'https://www.cadre.me/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -45,7 +45,7 @@ class UserUserService {
     return axios({
       url: '/login/user_users',
       method: 'post',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: 'https://www.cadre.me/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -64,7 +64,7 @@ class UserUserService {
     return axios({
       url: '/logout/user_users/',
       method: 'get',
-      baseURL: 'http://159.203.105.123:3000/api/v1/'
+      baseURL: 'https://www.cadre.me/api/v1/'
     });
   }
 }

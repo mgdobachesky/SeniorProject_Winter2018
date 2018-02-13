@@ -9,7 +9,7 @@ class UserRecordService {
     return axios({
       url: '/create/user_records',
       method: 'post',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: 'https://www.cadre.me/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -28,7 +28,7 @@ class UserRecordService {
     return axios({
       url: '/update/user_records',
       method: 'put',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: 'https://www.cadre.me/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -48,7 +48,7 @@ class UserRecordService {
     return axios({
       url: '/delete/user_records',
       method: 'delete',
-      baseURL: 'http://159.203.105.123:3000/api/v1/',
+      baseURL: 'https://www.cadre.me/api/v1/',
       headers: {
         'Content-Type': 'application/json'
       },
