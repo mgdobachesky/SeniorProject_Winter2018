@@ -87,7 +87,7 @@ function LoginOptions(props) {
  */
 var HeaderJSX = function() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-navbar">
+    <nav className="navbar navbar-expand-lg bg-navbar">
       <NavLink className="navbar-brand" to="/">
           <img src="/logo.png" className="logo" /> Cadre
       </NavLink>
