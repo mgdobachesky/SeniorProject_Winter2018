@@ -15,7 +15,7 @@ var SuccessAlert = function(props) {
   } else {
     return null;
   }
-}
+};
 
 /*
  * Alert to notify users of any unsuccessful operations
@@ -31,7 +31,7 @@ var ErrorAlert = function(props) {
   } else {
     return null;
   }
-}
+};
 
 /*
  * Form Form JSX view
@@ -71,7 +71,7 @@ var FormFormJSX = function() {
       </form>
     </div>
   );
-}
+};
 
 // Export the Form Form JSX view
 export default FormFormJSX;

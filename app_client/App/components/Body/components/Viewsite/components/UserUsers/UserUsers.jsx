@@ -36,14 +36,14 @@ function UserList(props) {
           </td>
           <td>
             <a
-            href="javascript:;"
+            href="javascript:"
             onClick={() => props.onUpdateUserUsers(userUser)}>
               <i className="fa fa-floppy-o" aria-hidden="true"></i>
             </a>
           </td>
           <td>
             <a
-            href="javascript:;"
+            href="javascript:"
             onClick={() => props.onDeleteUserUsers(userUser)}>
               <i className="fa fa-times" aria-hidden="true"></i>
             </a>
@@ -91,7 +91,7 @@ var UserUsersJSX = function() {
       {UsersTable.call(this)}
     </div>
   );
-}
+};
 
 // Export the UserUsers view
 export default UserUsersJSX;

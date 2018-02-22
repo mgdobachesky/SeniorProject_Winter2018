@@ -12,7 +12,7 @@ var prepareCreateTextbox = function() {
   $( ".createTextbox" ).toggle("medium");
   $( ".updateTextbox" ).hide(false);
   this.handleClearLocalState();
-}
+};
 
 /*
  * Create list of Textboxs a Form owns
@@ -78,7 +78,7 @@ function TextboxFormInput(props) {
       <div>
         <a
         className="p-2"
-        href="javascript:;"
+        href="javascript:"
         onClick={() => props.onEditFormInput(editClick)}>
         <button type="button" className="btn btn-link btn-sm">
           Edit Textbox
@@ -89,7 +89,7 @@ function TextboxFormInput(props) {
       <div>
         <a
         className="p-2"
-        href="javascript:;"
+        href="javascript:"
         onClick={() => props.onDeleteFormInput(deleteClick)}>
           <button type="button" className="btn btn-danger btn-sm">
             Delete Textbox
@@ -158,7 +158,7 @@ var FormJSX = function() {
       <div className="card-footer">
         <a
         className="card-link"
-        href="javascript:;"
+        href="javascript:"
         onClick={() => this.props.onEditElement({
           viewsiteId: this.props.viewsiteId,
           viewpageId: this.props.viewpageId,
@@ -173,7 +173,7 @@ var FormJSX = function() {
 
         <a
         className="card-link float-right"
-        href="javascript:;"
+        href="javascript:"
         onClick={() => this.props.onDeleteElement({
           viewsiteId: this.props.viewsiteId,
           viewpageId: this.props.viewpageId,
@@ -187,7 +187,7 @@ var FormJSX = function() {
       </div>
     </div>
   );
-}
+};
 
 // Export the Form JSX view
 export default FormJSX;

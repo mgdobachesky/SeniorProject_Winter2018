@@ -51,7 +51,7 @@ var BodyJSX = function() {
         onUpdateUserTable={this.handleUpdateUserTable} />} />
     </Switch>
   );
-}
+};
 
 // Export the Body JSX view
 export default BodyJSX;

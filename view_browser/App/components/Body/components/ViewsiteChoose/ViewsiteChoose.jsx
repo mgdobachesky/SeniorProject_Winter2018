@@ -14,7 +14,7 @@ var ErrorAlert = function(props) {
   } else {
     return null;
   }
-}
+};
 
 /*
  * ViewsiteChoose JSX view
@@ -56,7 +56,7 @@ var ViewsiteChooseJSX = function() {
       </div>
     </div>
   );
-}
+};
 
 // Export Viewsite Choose JSX view
 export default ViewsiteChooseJSX;

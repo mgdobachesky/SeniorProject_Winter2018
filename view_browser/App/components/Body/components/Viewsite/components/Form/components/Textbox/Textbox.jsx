@@ -20,7 +20,7 @@ var TextboxJSX = function() {
       </label>
     </div>
   );
-}
+};
 
 // Export Textbox Form Input JSX view
 export default TextboxJSX;

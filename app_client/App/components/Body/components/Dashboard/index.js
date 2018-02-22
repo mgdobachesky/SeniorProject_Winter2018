@@ -142,7 +142,7 @@ class Dashboard extends React.Component {
     let clearViewsite = this.state.viewsite;
     clearViewsite._id = "";
     clearViewsite.viewsiteName = "";
-    clearViewsite.viewsiteTheme = "default"
+    clearViewsite.viewsiteTheme = "default";
     clearViewsite.loginEnabled = false;
     this.setState({
       viewsite: clearViewsite,

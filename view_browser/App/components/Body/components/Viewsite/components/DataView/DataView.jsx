@@ -73,7 +73,7 @@ var DataViewJSX = function() {
       <br />
     </div>
   );
-}
+};
 
 // Export Data View JSX view
 export default DataViewJSX;

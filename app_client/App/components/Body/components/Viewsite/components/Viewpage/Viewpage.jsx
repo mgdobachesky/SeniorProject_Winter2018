@@ -120,7 +120,7 @@ function TextElement(props) {
       <div className="card-footer">
         <a
         className="card-link"
-        href="javascript:;"
+        href="javascript:"
         onClick={() => props.onEditElement(editClick)}>
           <button type="button" className="btn btn-link">
             Edit Text
@@ -129,7 +129,7 @@ function TextElement(props) {
 
         <a
         className="card-link float-right"
-        href="javascript:;"
+        href="javascript:"
         onClick={() => props.onDeleteElement(deleteClick)}>
         <button type="button" className="btn btn-danger">
           Delete Text
@@ -199,7 +199,7 @@ function DataViewElement(props) {
       <div className="card-footer">
         <a
         className="card-link"
-        href="javascript:;"
+        href="javascript:"
         onClick={() => props.onEditElement(editClick)}>
           <button type="button" className="btn btn-link">
             Edit Data-View
@@ -208,7 +208,7 @@ function DataViewElement(props) {
 
         <a
         className="card-link float-right"
-        href="javascript:;"
+        href="javascript:"
         onClick={() => props.onDeleteElement(deleteClick)}>
           <button type="button" className="btn btn-danger">
             Delete Data-View
@@ -254,7 +254,7 @@ function ImageElement(props) {
       <div className="card-footer">
         <a
         className="card-link"
-        href="javascript:;"
+        href="javascript:"
         onClick={() => props.onEditElement(editClick)}>
           <button type="button" className="btn btn-link">
             Edit Image
@@ -263,7 +263,7 @@ function ImageElement(props) {
 
         <a
         className="card-link float-right"
-        href="javascript:;"
+        href="javascript:"
         onClick={() => props.onDeleteElement(deleteClick)}>
         <button type="button" className="btn btn-danger">
           Delete Image
@@ -527,7 +527,7 @@ var ViewpageJSX = function() {
       </div>
     </div>
   );
-}
+};
 
 // Export the ViewpageJSX view
 export default ViewpageJSX;

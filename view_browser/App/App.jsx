@@ -36,7 +36,7 @@ var AppJSX = function() {
       viewsite={this.state.viewsite} />
     </div>
   );
-}
+};
 
 // Export the main Application JSX view
 export default AppJSX;

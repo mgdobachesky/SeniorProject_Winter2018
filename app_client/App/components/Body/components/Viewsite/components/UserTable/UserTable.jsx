@@ -34,7 +34,7 @@ function Records(props) {
           <Data record={record} />
           <td>
             <a
-            href="javascript:;"
+            href="javascript:"
             onClick={() => props.onDeleteRecord(deleteClick, record._id)}>
               <i className="fa fa-times" aria-hidden="true"></i>
             </a>
@@ -80,7 +80,7 @@ var UserTableJSX = function() {
       {UsersTable.call(this)}
     </div>
   );
-}
+};
 
 // Export the UserTable view
 export default UserTableJSX;

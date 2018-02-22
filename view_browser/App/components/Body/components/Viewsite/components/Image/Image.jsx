@@ -14,7 +14,7 @@ var ImageJSX = function() {
       <br />
     </div>
   );
-}
+};
 
 // Export Image Element JSX view
 export default ImageJSX;

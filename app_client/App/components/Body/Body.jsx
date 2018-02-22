@@ -50,7 +50,7 @@ var BodyJSX = function() {
         loggedIn={this.props.loggedIn} />} />
     </Switch>
   );
-}
+};
 
 // Export the view for the Body
 export default BodyJSX;

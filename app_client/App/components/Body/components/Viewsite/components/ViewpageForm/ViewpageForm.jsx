@@ -15,7 +15,7 @@ var SuccessAlert = function(props) {
   } else {
     return null;
   }
-}
+};
 
 /*
  * Alert that notifies the User of any unsuccessful operations
@@ -31,7 +31,7 @@ var ErrorAlert = function(props) {
   } else {
     return null;
   }
-}
+};
 
 /*
  * Contents of the main Viewpage form
@@ -117,7 +117,7 @@ var ErrorAlert = function(props) {
        </form>
      );
    }
- }
+ };
 
 /*
  * Viewpage Form JSX view
@@ -138,7 +138,7 @@ var ViewpageFormJSX = function() {
       {ViewpageFormContents.call(this)}
     </div>
   );
-}
+};
 
 // Export the Viewpage Form view
 export default ViewpageFormJSX;

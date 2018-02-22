@@ -15,7 +15,7 @@ var SuccessAlert = function(props) {
   } else {
     return null;
   }
-}
+};
 
 /*
  * Alert that notifies users of any unsuccessful operation
@@ -31,7 +31,7 @@ var ErrorAlert = function(props) {
   } else {
     return null;
   }
-}
+};
 
 /*
  * Viewsite Form view
@@ -124,7 +124,7 @@ var ViewsiteFormJSX = function() {
       </form>
     </div>
   );
-}
+};
 
 // Export the Viewsite Form JSX
 export default ViewsiteFormJSX;

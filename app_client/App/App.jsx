@@ -29,7 +29,7 @@ var AppJSX = function() {
       <Footer />
     </div>
   );
-}
+};
 
 // Export the view for the main Application
 export default AppJSX;

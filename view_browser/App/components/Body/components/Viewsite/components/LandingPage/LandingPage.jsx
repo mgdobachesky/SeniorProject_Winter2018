@@ -88,7 +88,7 @@ var LandingPageJSX = function() {
       </div>
     </div>
   );
-}
+};
 
 // Export the Landing Page JSX view
 export default LandingPageJSX;

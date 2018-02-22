@@ -21,7 +21,7 @@ var TextJSX = function() {
       <br />
     </div>
   );
-}
+};
 
 // Export Text Element JSX view
 export default TextJSX;

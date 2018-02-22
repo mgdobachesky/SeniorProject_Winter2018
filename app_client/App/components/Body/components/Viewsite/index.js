@@ -276,7 +276,7 @@ class Viewsite extends React.Component {
       viewsiteId: this.state.viewsite._id,
       username: userUser.username,
       permissionLevel: userUser.permissionLevel
-    }
+    };
     // Send out API call to request that a User's User is updated
     this.manageUserUserService.updateUserUser(requestData)
     .then((results) => {
@@ -303,7 +303,7 @@ class Viewsite extends React.Component {
     let requestData = {
       viewsiteId: this.state.viewsite._id,
       username: userUser.username
-    }
+    };
     // Send out API call to request that a User's User is deleted
     this.manageUserUserService.deleteUserUser(requestData)
     .then((results) => {

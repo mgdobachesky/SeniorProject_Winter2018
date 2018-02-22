@@ -89,7 +89,7 @@ function ViewpageList(props) {
             <div className="card-footer">
               <a
               className="card-link"
-              href="javascript:;"
+              href="javascript:"
               onClick={() => props.onEditViewpage(editClick)}>
                 <button type="button" className="btn btn-link">
                   Edit Webpage
@@ -113,7 +113,7 @@ function ViewpageList(props) {
             <div className="card-footer">
               <a
               className="card-link"
-              href="javascript:;"
+              href="javascript:"
               onClick={() => props.onEditViewpage(editClick)}>
                 <button type="button" className="btn btn-link">
                   Edit Webpage
@@ -122,7 +122,7 @@ function ViewpageList(props) {
 
               <a
               className="card-link float-right"
-              href="javascript:;"
+              href="javascript:"
               onClick={() => props.onDeleteViewpage(deleteClick)}>
                 <button type="button" className="btn btn-danger">
                   Delete Webpage
@@ -275,7 +275,7 @@ function UserDatabasePills() {
           key={userTable._id}
           className={index == 0 && !this.state.viewsite.loginEnabled
             ? "nav-link active" : "nav-link"}
-          href="javascript:;"
+          href="javascript:"
           data-toggle="pill"
           role="tab"
           onClick={() => {this.handlePopulateUserTable(userTable)}}>
@@ -296,7 +296,7 @@ function UserUsersPill() {
     return (
       <a
       className="nav-link active"
-      href="javascript:;"
+      href="javascript:"
       data-toggle="pill"
       role="tab"
       onClick={() => {this.handleReadAllUserUsers()}}>
@@ -439,7 +439,7 @@ var ViewsiteJSX = function() {
       </div>
     </div>
   );
-}
+};
 
 // Export the Viewsite JSX view
 export default ViewsiteJSX;

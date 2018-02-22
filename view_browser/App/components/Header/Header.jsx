@@ -13,7 +13,7 @@ function LoginOptions(props) {
       return (
         <ul className="navbar-nav justify-content-end">
           <li className="nav-item">
-            <a className="nav-link" href="javascript:;" onClick={props.onLogoutUserUser}>
+            <a className="nav-link" href="javascript:" onClick={props.onLogoutUserUser}>
               Logout
             </a>
           </li>
@@ -115,7 +115,7 @@ var HeaderJSX = function() {
       </div>
     </nav>
   );
-}
+};
 
 // Export the Header JSX view
 export default HeaderJSX;

@@ -15,7 +15,7 @@ var SuccessAlert = function(props) {
   } else {
     return null;
   }
-}
+};
 
 /*
  * Alert to notify users of any unsuccessful operations
@@ -31,7 +31,7 @@ var ErrorAlert = function(props) {
   } else {
     return null;
   }
-}
+};
 
 /*
  * Text Form JSX view
@@ -70,7 +70,7 @@ var TextFormJSX = function() {
       </form>
     </div>
   );
-}
+};
 
 // Export the Text Form JSX view
 export default TextFormJSX;

@@ -8,7 +8,7 @@ var FooterJSX = function() {
   return (
     <div></div>
   );
-}
+};
 
 // Export Footer JSX view
 export default FooterJSX;

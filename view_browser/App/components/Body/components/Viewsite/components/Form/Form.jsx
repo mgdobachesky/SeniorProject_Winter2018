@@ -49,7 +49,7 @@ var FormJSX = function() {
       <br />
     </div>
   );
-}
+};
 
 // Export Form JSX view
 export default FormJSX;

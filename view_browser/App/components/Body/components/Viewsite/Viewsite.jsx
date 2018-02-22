@@ -70,7 +70,7 @@ var ViewsiteJSX = function() {
       onUpdateUserTable={this.handleUpdateUserTable} />
     </div>
   );
-}
+};
 
 // Export Viewsite JSX view
 export default ViewsiteJSX;

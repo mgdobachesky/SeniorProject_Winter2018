@@ -15,7 +15,7 @@ var SuccessAlert = function(props) {
   } else {
     return null;
   }
-}
+};
 
 /*
  * Alert to notify users of any unsuccessful operations
@@ -31,7 +31,7 @@ var ErrorAlert = function(props) {
   } else {
     return null;
   }
-}
+};
 
 /*
  * Create list of Form Options for the Data View
@@ -102,7 +102,7 @@ var DataViewFormJSX = function() {
       </form>
     </div>
   );
-}
+};
 
 // Export the Data View Form JSX view
 export default DataViewFormJSX;
