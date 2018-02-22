@@ -84,8 +84,8 @@ router.get('/logout/user_users', controllerUserUsers.userUsersLogout);
 /*
  * Handle unmatched requests
  */
-router.all('*', function(request, response) {
-  console.log("Invalid API route!");
+router.all('*', function (request, response) {
+    console.log("Invalid API route!");
 });
 
 // Export the router

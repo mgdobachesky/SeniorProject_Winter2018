@@ -4,10 +4,10 @@ import React from 'react';
 /*
  * The main Footer view
  */
-var FooterJSX = function() {
-  return (
-    <div></div>
-  );
+var FooterJSX = function () {
+    return (
+        <div></div>
+    );
 };
 
 // Export the main Footer view

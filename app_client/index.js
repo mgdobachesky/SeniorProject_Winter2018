@@ -1,7 +1,7 @@
 // Import required modules
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 
 // Import requred components
 import App from './App';
@@ -12,8 +12,8 @@ import './scss/custom.scss';
  * Nest it inside a Browser Router to allow for React SPA navigation
  */
 ReactDOM.render((
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-  ), document.getElementById('root')
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
+    ), document.getElementById('root')
 );
