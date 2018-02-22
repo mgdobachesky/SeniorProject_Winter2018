@@ -7,10 +7,10 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 // Create Data View schema
 var dataViewSchema = new Schema({
-  'formId': {
-    'type': ObjectId,
-    'required': true
-  }
+    'formId': {
+        'type': ObjectId,
+        'required': true
+    }
 });
 
 // Export Data View schema

@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 
 // Create Image Element schema
 var imageSchema = new Schema({
-  'imageLocation': {
-    'type': String,
-    'required': true
-  }
+    'imageLocation': {
+        'type': String,
+        'required': true
+    }
 });
 
 // Export Image schema

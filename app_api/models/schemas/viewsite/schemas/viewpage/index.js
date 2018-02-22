@@ -12,20 +12,20 @@ var imageSchema = require('./schemas/image');
 
 // Define element parent class schema
 var elementSchema = new Schema({},
-  { discriminatorKey: 'kind' });
+    {discriminatorKey: 'kind'});
 
 // Create main Viewpage schema
 var viewpageSchema = new Schema({
-  'viewpageName': {
-    'type': String,
-    'required': true
-  },
-  'permissionLevel': {
-    'type': Number,
-    'default': 3
-  },
-  'elements': [elementSchema]
-}, { discriminatorKey: 'kind' });
+    'viewpageName': {
+        'type': String,
+        'required': true
+    },
+    'permissionLevel': {
+        'type': Number,
+        'default': 3
+    },
+    'elements': [elementSchema]
+}, {discriminatorKey: 'kind'});
 
 // Get the parent array of Elements in the Viewpage
 var elementArray = viewpageSchema.path('elements');

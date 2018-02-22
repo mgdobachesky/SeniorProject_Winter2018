@@ -11,13 +11,13 @@ var userUserSchema = require('./schemas/userUser');
 
 // Create User Database schema
 var userDatabaseSchema = new Schema({
-  'userId': {
-    'type': ObjectId,
-    'ref': 'user',
-    'required': true
-  },
-  'tables': [userTableSchema],
-  'users': [userUserSchema]
+    'userId': {
+        'type': ObjectId,
+        'ref': 'user',
+        'required': true
+    },
+    'tables': [userTableSchema],
+    'users': [userUserSchema]
 });
 
 // Create User Database models

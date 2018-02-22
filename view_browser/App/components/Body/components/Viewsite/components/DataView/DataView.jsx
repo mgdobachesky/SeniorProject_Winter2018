@@ -6,15 +6,15 @@ import React from 'react';
  * Used by Records
  */
 function Data(props) {
-  if(props.record.data) {
-    return props.record.data.map((datum, index) => {
-      return(
-        <td key={datum._id}>
-          {datum.datum}
-        </td>
-      );
-    });
-  }
+    if (props.record.data) {
+        return props.record.data.map((datum, index) => {
+            return (
+                <td key={datum._id}>
+                    {datum.datum}
+                </td>
+            );
+        });
+    }
 }
 
 /*
@@ -22,58 +22,58 @@ function Data(props) {
  * Used by DataViewJSX
  */
 function Records(props) {
-  if(props.userTable.records) {
-    return props.userTable.records.map((record, index) => {
-      return(
-        <tr key={record._id}>
-          <Data record={record} />
-        </tr>
-      );
-    });
-  } else {
-    return null;
-  }
+    if (props.userTable.records) {
+        return props.userTable.records.map((record, index) => {
+            return (
+                <tr key={record._id}>
+                    <Data record={record}/>
+                </tr>
+            );
+        });
+    } else {
+        return null;
+    }
 }
 
 /*
  * Data View JSX view
  */
-var DataViewJSX = function() {
-  // Determine what User Table this DataView represents
-  // NOTE: Form Elements and User Tables share an ID
-  let userTable = {};
-  if(this.props.userDatabase) {
-    for(const databaseTable of this.props.userDatabase) {
-      if(databaseTable._id === this.props.element.formId) {
-        userTable = databaseTable;
-      }
+var DataViewJSX = function () {
+    // Determine what User Table this DataView represents
+    // NOTE: Form Elements and User Tables share an ID
+    let userTable = {};
+    if (this.props.userDatabase) {
+        for (const databaseTable of this.props.userDatabase) {
+            if (databaseTable._id === this.props.element.formId) {
+                userTable = databaseTable;
+            }
+        }
     }
-  }
-  // Determine the title of the Form represented by the User Table this Data View displays
-  let formTitle = "";
-  if(this.props.userForms) {
-    for(const userTableHeader of this.props.userForms) {
-      if(userTableHeader._id == this.props.element.formId) {
-        formTitle = userTableHeader.formTitle;
-      }
+    // Determine the title of the Form represented by the User Table this Data View displays
+    let formTitle = "";
+    if (this.props.userForms) {
+        for (const userTableHeader of this.props.userForms) {
+            if (userTableHeader._id == this.props.element.formId) {
+                formTitle = userTableHeader.formTitle;
+            }
+        }
     }
-  }
 
-  return (
-    <div>
-      <h2>{formTitle}</h2>
+    return (
+        <div>
+            <h2>{formTitle}</h2>
 
-      <table className="table table-hover">
-        <tbody>
-          <Records
-          userTable={userTable} />
-        </tbody>
-      </table>
+            <table className="table table-hover">
+                <tbody>
+                <Records
+                    userTable={userTable}/>
+                </tbody>
+            </table>
 
-      <br />
-    </div>
-  );
-}
+            <br/>
+        </div>
+    );
+};
 
 // Export Data View JSX view
 export default DataViewJSX;

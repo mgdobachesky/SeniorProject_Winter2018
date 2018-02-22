@@ -41,9 +41,9 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // Configure the Express Session middleware
 app.use(session({
-  secret: '3Y8tQ9TUo9uJd6f',
-  cookie: { secure: true },
-  store: new mongoStore({mongooseConnection: db})
+    secret: '3Y8tQ9TUo9uJd6f',
+    cookie: { secure: true },
+    store: new mongoStore({mongooseConnection: db})
 }));
 
 // Configure the Express File Upload middleware
@@ -54,7 +54,7 @@ app.use(logger('dev'));
 
 // Configure the Body Parser middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 
 // Configure the Cookie Parser middleware
 app.use(cookieParser());
@@ -73,10 +73,10 @@ app.use('/api/v1', routesApi);
 app.use('/', routesServer);
 
 // Catch 404 errors and forward to error handlers
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 /*
@@ -84,27 +84,27 @@ app.use(function(req, res, next) {
  */
 
 // Development error handler
-if(app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.json({
-      "error": {
-        "message": err.message,
-        "status": err.status
-      }
+if (app.get('env') === 'development') {
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        res.json({
+            "error": {
+                "message": err.message,
+                "status": err.status
+            }
+        });
     });
-  });
 }
 
 // Production error handler
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.json({
-    "error": {
-      "message": 'Something failed!',
-      "status": 500
-    }
-  });
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.json({
+        "error": {
+            "message": 'Something failed!',
+            "status": 500
+        }
+    });
 });
 
 // Export the Application

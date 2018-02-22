@@ -6,17 +6,17 @@ import DataViewJSX from './DataView.jsx';
 import './dataView.scss';
 
 class DataView extends React.Component {
-  constructor(props) {
-    // Call parent constructor
-    super(props);
-  }
+    constructor(props) {
+        // Call parent constructor
+        super(props);
+    }
 
-  /*
-   * Render Data View JSX view
-   */
-  render() {
-    return(DataViewJSX.call(this));
-  }
+    /*
+     * Render Data View JSX view
+     */
+    render() {
+        return (DataViewJSX.call(this));
+    }
 }
 
 // Export Data View
