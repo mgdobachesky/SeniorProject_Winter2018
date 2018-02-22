@@ -3,32 +3,32 @@ var userTablesDao = require('../../services/userDatabases/userTablesDao');
 
 // Handle JSON responses
 function sendJSONresponse(res, status, content) {
-  res.status(status);
-  res.json(content);
+    res.status(status);
+    res.json(content);
 }
 
 /*
  * Controller used to read and individual User Table
  */
 function userTablesReadOne(request, response) {
-  userTablesDao.userTablesReadOne(request)
-  .then(function(results) {
-    sendJSONresponse(response, 200, results);
-  }, function(error) {
-    sendJSONresponse(response, 404, error);
-  });
+    userTablesDao.userTablesReadOne(request)
+        .then(function (results) {
+            sendJSONresponse(response, 200, results);
+        }, function (error) {
+            sendJSONresponse(response, 404, error);
+        });
 }
 
 /*
  * Controller used to read a list of User Tables
  */
 function userTablesReadAll(request, response) {
-  userTablesDao.userTablesReadAll(request)
-  .then(function(results) {
-    sendJSONresponse(response, 200, results);
-  }, function(error) {
-    sendJSONresponse(response, 404, error);
-  });
+    userTablesDao.userTablesReadAll(request)
+        .then(function (results) {
+            sendJSONresponse(response, 200, results);
+        }, function (error) {
+            sendJSONresponse(response, 404, error);
+        });
 }
 
 /*
@@ -36,12 +36,12 @@ function userTablesReadAll(request, response) {
  * Invoked after creating a Form Element
  */
 function userTablesCreate(request, response) {
-  userTablesDao.userTablesCreate(request)
-  .then(function(results) {
-    sendJSONresponse(response, 200, results);
-  }, function(error) {
-    sendJSONresponse(response, 404, error);
-  });
+    userTablesDao.userTablesCreate(request)
+        .then(function (results) {
+            sendJSONresponse(response, 200, results);
+        }, function (error) {
+            sendJSONresponse(response, 404, error);
+        });
 }
 
 /*
@@ -49,12 +49,12 @@ function userTablesCreate(request, response) {
  * Invoked after deleting a Form Element
  */
 function userTablesDelete(request, response) {
-  userTablesDao.userTablesDelete(request)
-  .then(function(results) {
-    sendJSONresponse(response, 200, results);
-  }, function(error) {
-    sendJSONresponse(response, 404, error);
-  });
+    userTablesDao.userTablesDelete(request)
+        .then(function (results) {
+            sendJSONresponse(response, 200, results);
+        }, function (error) {
+            sendJSONresponse(response, 404, error);
+        });
 }
 
 // Export controller methods

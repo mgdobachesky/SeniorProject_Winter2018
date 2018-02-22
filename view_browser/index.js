@@ -1,7 +1,7 @@
 // Import required modules
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 
 // Import requred components
 import App from './App';
@@ -11,8 +11,8 @@ import App from './App';
  * Nest it inside a Browser Router to allow for React SPA navigation
  */
 ReactDOM.render((
-  <BrowserRouter>
-    <App viewsiteName={document.body.id} />
-  </BrowserRouter>
-  ), document.getElementById('root')
+        <BrowserRouter>
+            <App viewsiteName={document.body.id}/>
+        </BrowserRouter>
+    ), document.getElementById('root')
 );
