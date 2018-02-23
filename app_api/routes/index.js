@@ -82,10 +82,17 @@ router.post('/login/user_users', controllerUserUsers.userUsersLogin);
 router.get('/logout/user_users', controllerUserUsers.userUsersLogout);
 
 /*
+ * Routes for sorting
+ */
+router.post('/sort/viewpages', controllerViewsites.viewsitesSortViewpages);
+router.post('/sort/elements', controllerViewpages.viewpagesSortElements);
+router.post('/sort/form_inputs', controllerElements.formsSortFormInputs);
+
+/*
  * Handle unmatched requests
  */
-router.all('*', function(request, response) {
-  console.log("Invalid API route!");
+router.all('*', function (request, response) {
+    console.log("Invalid API route!");
 });
 
 // Export the router

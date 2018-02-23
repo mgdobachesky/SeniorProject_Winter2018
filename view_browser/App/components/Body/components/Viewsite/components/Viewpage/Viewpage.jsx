@@ -82,7 +82,7 @@ var ViewpageJSX = function() {
       </div>
     </div>
   );
-}
+};
 
 // Export the Viewpage JSX view
 export default ViewpageJSX;

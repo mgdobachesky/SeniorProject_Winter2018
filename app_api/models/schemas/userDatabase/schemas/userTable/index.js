@@ -9,7 +9,7 @@ var userRecordSchema = require('./schemas/userRecord');
 
 // Create user table sub-schema for the user database schema
 var userTableSchema = new Schema({
-  'records': [userRecordSchema]
+    'records': [userRecordSchema]
 });
 
 // Export schema

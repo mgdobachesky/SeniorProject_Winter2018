@@ -7,6 +7,7 @@ import './form.scss';
 
 // Import required services
 import FormInputService from './services/FormInputService';
+import ElementService from '../../services/ElementService';
 
 class Form extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Form extends React.Component {
 
     // Services
     this.manageFormInputService = new FormInputService();
+        this.manageElementService = new ElementService();
 
     // Form Text Input Methods
     this.handleCreateFormInput = this.handleCreateFormInput.bind(this);
@@ -26,6 +28,7 @@ class Form extends React.Component {
     this.handleSetGlobalState = this.handleSetGlobalState.bind(this);
     this.handleClearLocalState = this.handleClearLocalState.bind(this);
     this.handleChange = this.handleChange.bind(this);
+        this.handleSortableUpdate = this.handleSortableUpdate.bind(this);
 
     // Set initial state
     this.state = {
@@ -335,6 +338,32 @@ class Form extends React.Component {
   }
 
   /*
+     * Method for updating the order of elements
+     */
+    handleSortableUpdate(event, ui) {
+        // Get both the form input and form IDs and separate them
+        let idList = ui.item.attr("id").split(",");
+
+        // Prepare request data
+        let requestData = {};
+        requestData.viewsiteId = idList[3];
+        requestData.viewpageId = idList[2];
+        requestData.elementId = idList[1];
+        requestData.formInputId = idList[0];
+        requestData.sortOrder = ui.item.index();
+
+        // Send out API request to update selected Element
+        this.manageElementService.sortFormInputs(requestData)
+            .then((results) => {
+                    // Afterwards, set Global Viewsite state to reflect changes
+                    this.handleSetGlobalState(results.data, "viewsite");
+                },
+                (error) => {
+                    console.log(error);
+                });
+    }
+
+    /*
    * React component lifecycle method that controls what happens before this
    * component receives props
    * Used to update Form appearance after a global state change
@@ -360,6 +389,12 @@ class Form extends React.Component {
     });
     // Hide forms when component first mounts
     this.handleHideAllForms();
+
+        // Set up sortable
+        $( ".formInputs-sortable" ).sortable({
+            update: this.handleSortableUpdate,
+            cursor: "move"
+        });
   }
 
   /*

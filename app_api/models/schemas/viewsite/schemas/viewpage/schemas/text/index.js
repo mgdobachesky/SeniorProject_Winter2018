@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 
 // Create Text Element schema
 var textSchema = new Schema({
-  'textValue': {
-    'type': String,
-    'required': true
-  }
+    'textValue': {
+        'type': String,
+        'required': true
+    }
 });
 
 // Export Text schema

@@ -15,7 +15,7 @@ var ErrorAlert = function(props) {
   } else {
     return null;
   }
-}
+};
 
 /*
  * View for the Login form
@@ -73,7 +73,7 @@ var LoginJSX = function() {
       </form>
     </div>
   );
-}
+};
 
 // Export the Login form view
 export default LoginJSX;

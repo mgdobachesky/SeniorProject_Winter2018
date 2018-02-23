@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 
 // Create Text Element schema
 var landingPageSchema = new Schema({
-  'catchPhrase': {
-    'type': String,
-    'default': ''
-  }
+    'catchPhrase': {
+        'type': String,
+        'default': ''
+    }
 });
 
 // Export Landing Page schema

@@ -9,7 +9,7 @@ var userDatumSchema = require('./schemas/userDatum');
 
 // Create user record sub-schema for the user table schema
 var userRecordSchema = new Schema({
-  'data': [userDatumSchema]
+    'data': [userDatumSchema]
 });
 
 // Export schema
