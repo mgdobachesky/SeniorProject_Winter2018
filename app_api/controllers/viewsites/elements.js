@@ -116,7 +116,20 @@ function elementsDelete(request, response) {
     }
 }
 
+/*
+ * Controller used to sort form inputs
+ */
+function formsSortFormInputs(request, response) {
+    formsDao.formsSortFormInputs(request)
+        .then(function (results) {
+            sendJSONresponse(response, 200, results);
+        }, function (error) {
+            sendJSONresponse(response, 404, error);
+        });
+}
+
 // Export controller methods
 module.exports.elementsCreate = elementsCreate;
 module.exports.elementsUpdate = elementsUpdate;
 module.exports.elementsDelete = elementsDelete;
+module.exports.formsSortFormInputs = formsSortFormInputs;

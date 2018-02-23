@@ -207,7 +207,83 @@ function formsDelete(request) {
     return promise;
 }
 
+/*
+ * Method that allows for the sorting of form inputs
+ */
+function formsSortFormInputs(request) {
+    var promise = new Promise(function (resolve, reject) {
+        if (!request.body.viewsiteId
+            || !request.body.viewpageId
+            || !request.body.elementId
+            || !request.body.formInputId) {
+            // Required IDs
+            reject('Viewsite, Viewpage, Element, and Form Input IDs are all required!');
+        } else if (request.body.sortOrder == null || isNaN(request.body.sortOrder)) {
+            // Required fields
+            reject('Sort order required!!');
+        } else if (!request.session.userId) {
+            // Make sure a User is logged in
+            reject('You must be logged in to update a Form!');
+        } else {
+            // Find Form with Form Input to update
+            viewsites.findById(request.body.viewsiteId)
+                .exec(function (error, viewsiteData) {
+                    if (error) {
+                        // Handle unknown errors
+                        console.log(error.message);
+                        reject('Something went wrong!');
+                    } else if (!viewsiteData) {
+                        // Handle non-existent query results
+                        reject('Viewsite not found!');
+                    } else if (viewsiteData.userId != request.session.userId) {
+                        // Make sure User owns Viewsite
+                        reject('You can only update Forms you own!');
+                    } else if (!viewsiteData
+                            .viewpages.id(request.body.viewpageId)
+                            .elements.id(request.body.elementId)
+                            .formInputs.id(request.body.formInputId)) {
+                        // Handle non-existent sub-documents
+                        reject('Form Input doesn\'t exist!');
+                    } else {
+                        // Copy element to move
+                        let formInputMoving = viewsiteData
+                            .viewpages.id(request.body.viewpageId)
+                            .elements.id(request.body.elementId)
+                            .formInputs.id(request.body.formInputId);
+                        // Delete element to move
+                        viewsiteData
+                            .viewpages.id(request.body.viewpageId)
+                            .elements.id(request.body.elementId)
+                            .formInputs.id(request.body.formInputId).remove();
+                        // Push element back on in new position
+                        viewsiteData
+                            .viewpages.id(request.body.viewpageId)
+                            .elements.id(request.body.elementId)
+                            .formInputs.splice(request.body.sortOrder, 0, formInputMoving);
+                        // Save the new Viewsite
+                        viewsiteData.save(function (error, results) {
+                            if (error) {
+                                // Handle unknown errors
+                                console.log(error.message);
+                                reject('Something went wrong!');
+                            } else {
+                                // Clean up results and return up-to-date Viewsite
+                                var cleanResults = results.toObject();
+                                delete cleanResults.userId;
+                                delete cleanResults.__v;
+                                resolve(cleanResults);
+                            }
+                        });
+                    }
+
+                });
+        }
+    });
+    return promise;
+}
+
 // Export public methods
 module.exports.formsCreate = formsCreate;
 module.exports.formsUpdate = formsUpdate;
 module.exports.formsDelete = formsDelete;
+module.exports.formsSortFormInputs = formsSortFormInputs;

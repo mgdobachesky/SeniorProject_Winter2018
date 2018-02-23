@@ -104,6 +104,27 @@ class ElementService {
             }
         });
     }
+
+    /*
+     * HTTP call used to sort Form Inputs
+     */
+    sortFormInputs(requestData) {
+        return axios({
+            url: '/sort/form_inputs',
+            method: 'post',
+            baseURL: API_LOCATION + '/api/v1/',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+                "viewsiteId": requestData.viewsiteId,
+                "viewpageId": requestData.viewpageId,
+                "elementId": requestData.elementId,
+                "formInputId": requestData.formInputId,
+                "sortOrder": requestData.sortOrder
+            }
+        });
+    }
 }
 
 // Export the HTTP service

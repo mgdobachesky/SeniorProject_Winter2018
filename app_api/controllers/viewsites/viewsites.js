@@ -67,9 +67,22 @@ function viewsitesDelete(request, response) {
         });
 }
 
+/*
+ * Controller used to sort Viewsite Viewpages
+ */
+function viewsitesSortViewpages(request, response) {
+    viewsitesDao.viewsitesSortViewpages(request)
+        .then(function (results) {
+            sendJSONresponse(response, 200, results);
+        }, function (error) {
+            sendJSONresponse(response, 404, error);
+        });
+}
+
 // Export controller methods
 module.exports.viewsitesReadAll = viewsitesReadAll;
 module.exports.viewsitesReadOne = viewsitesReadOne;
 module.exports.viewsitesCreate = viewsitesCreate;
 module.exports.viewsitesUpdate = viewsitesUpdate;
 module.exports.viewsitesDelete = viewsitesDelete;
+module.exports.viewsitesSortViewpages = viewsitesSortViewpages;

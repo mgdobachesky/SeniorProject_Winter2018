@@ -82,6 +82,25 @@ class ViewsiteService {
             }
         });
     }
+
+    /*
+ * HTTP call used to sort Viewsite Viewpages
+ */
+    sortViewsiteViewpages(requestData) {
+        return axios({
+            url: '/sort/viewpages',
+            method: 'post',
+            baseURL: API_LOCATION + '/api/v1/',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+                "viewsiteId": requestData.viewsiteId,
+                "viewpageId": requestData.viewpageId,
+                "sortOrder": requestData.sortOrder
+            }
+        });
+    }
 }
 
 // Export the HTTP service

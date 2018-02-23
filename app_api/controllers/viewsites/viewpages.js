@@ -43,7 +43,20 @@ function viewpagesDelete(request, response) {
         });
 }
 
+/*
+ * Controller used to sort viewpage elements
+ */
+function viewpagesSortElements(request, response) {
+    viewpagesDao.viewpagesSortElements(request)
+        .then(function (results) {
+            sendJSONresponse(response, 200, results);
+        }, function (error) {
+            sendJSONresponse(response, 404, error);
+        });
+}
+
 // Export controller methods
 module.exports.viewpagesCreate = viewpagesCreate;
 module.exports.viewpagesUpdate = viewpagesUpdate;
 module.exports.viewpagesDelete = viewpagesDelete;
+module.exports.viewpagesSortElements = viewpagesSortElements;
