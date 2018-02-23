@@ -77,65 +77,71 @@ function ViewpageList(props) {
                 editClick.kind = 'landingPage';
                 editClick.catchPhrase = viewpage.catchPhrase;
                 return (
-                    <div key={viewpage._id} className="card border-primary mb-3">
-                        <div className="card-body">
-                            <h4 className="card-title">
-                                <b>Webpage: </b>{viewpageName}
-                            </h4>
-                            <p className="card-text">
-                                <b>Catch Phrase: </b> {viewpage.catchPhrase}
-                            </p>
+                    <li key={_id} id={_id}>
+                        <div className="card border-primary mb-3">
+                            <div className="card-body">
+                                <h4 className="card-title">
+                                    <b>Webpage: </b>{viewpageName}
+                                </h4>
+                                <p className="card-text">
+                                    <b>Catch Phrase: </b> {viewpage.catchPhrase}
+                                </p>
+                            </div>
+                            <div className="card-footer">
+                                <a
+                                    className="card-link"
+                                    href="javascript:"
+                                    onClick={() => props.onEditViewpage(editClick)}>
+                                    <button type="button" className="btn btn-link">
+                                        Edit Webpage
+                                    </button>
+                                </a>
+                            </div>
                         </div>
-                        <div className="card-footer">
-                            <a
-                                className="card-link"
-                                href="javascript:"
-                                onClick={() => props.onEditViewpage(editClick)}>
-                                <button type="button" className="btn btn-link">
-                                    Edit Webpage
-                                </button>
-                            </a>
-                        </div>
-                    </div>
+                    </li>
                 );
             } else {
                 // Display a separate card for regular viewpages
                 return (
-                    <div key={viewpage._id} className="card border-primary mb-3">
-                        <div className="card-body">
-                            <h4 className="card-title">
-                                <b>Webpage: </b>{viewpageName}
-                            </h4>
-                            <p className="card-text">
-                                <b>Permission Level: </b> {permissionLevelMessage}
-                            </p>
-                        </div>
-                        <div className="card-footer">
-                            <a
-                                className="card-link"
-                                href="javascript:"
-                                onClick={() => props.onEditViewpage(editClick)}>
-                                <button type="button" className="btn btn-link">
-                                    Edit Webpage
-                                </button>
-                            </a>
+                    <li key={_id} id={_id} className="sortable-viewpage">
+                        <div className="card border-primary mb-3">
+                            <div className="card-body">
+                                <h4 className="card-title">
+                                    <b>Webpage: </b>{viewpageName}
+                                </h4>
+                                <p className="card-text">
+                                    <b>Permission Level: </b> {permissionLevelMessage}
+                                </p>
+                            </div>
+                            <div className="card-footer">
+                                <a
+                                    className="card-link"
+                                    href="javascript:"
+                                    onClick={() => props.onEditViewpage(editClick)}>
+                                    <button type="button" className="btn btn-link">
+                                        Edit Webpage
+                                    </button>
+                                </a>
 
-                            <a
-                                className="card-link float-right"
-                                href="javascript:"
-                                onClick={() => props.onDeleteViewpage(deleteClick)}>
-                                <button type="button" className="btn btn-danger">
-                                    Delete Webpage
-                                </button>
-                            </a>
+                                <a
+                                    className="card-link float-right"
+                                    href="javascript:"
+                                    onClick={() => props.onDeleteViewpage(deleteClick)}>
+                                    <button type="button" className="btn btn-danger">
+                                        Delete Webpage
+                                    </button>
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    </li>
                 );
             }
         });
     } else {
         return (
-            <p>No Webpages have been created yet!</p>
+            <li>
+                <p>No Webpages have been created yet!</p>
+            </li>
         );
     }
 }
@@ -153,9 +159,9 @@ function ViewpageTabs(props) {
                     className="nav-link dropdown-item"
                     id={viewpage._id + "-tab"}
                     data-toggle="tab"
-                    href={"#" + viewpage._id}
+                    href={"#" + viewpage._id + "-content"}
                     role="tab"
-                    aria-controls={viewpage._id}
+                    aria-controls={viewpage._id + "-content"}
                     aria-selected="false"
                     onClick={() => {
                         clearAllForms.call(this);
@@ -186,7 +192,7 @@ function ViewpageContent(props) {
                 <div
                     key={viewpage._id}
                     className="tab-pane fade"
-                    id={viewpage._id}
+                    id={viewpage._id + "-content"}
                     role="tabpanel"
                     aria-labelledby={viewpage._id + "-tab"}>
                     <Viewpage
@@ -255,11 +261,14 @@ function ManageViewpagesContent() {
                                 onSubmit={this.handleUpdateViewpage}/>
                         </div>
                     </div>
-                    <ViewpageList
-                        viewsiteId={this.state.viewsite._id}
-                        viewpages={this.state.viewsite.viewpages}
-                        onEditViewpage={this.handleEditViewpage}
-                        onDeleteViewpage={this.handleDeleteViewpage}/>
+
+                    <ul className="viewpages-sortable">
+                        <ViewpageList
+                            viewsiteId={this.state.viewsite._id}
+                            viewpages={this.state.viewsite.viewpages}
+                            onEditViewpage={this.handleEditViewpage}
+                            onDeleteViewpage={this.handleDeleteViewpage}/>
+                    </ul>
                 </div>
                 <div className="col-1"></div>
             </div>
