@@ -77,7 +77,7 @@ function ViewpageList(props) {
                 editClick.kind = 'landingPage';
                 editClick.catchPhrase = viewpage.catchPhrase;
                 return (
-                    <li key={_id} id={_id}>
+                    <li key={_id} id={_id + "," + viewsiteId}>
                         <div className="card border-primary mb-3">
                             <div className="card-body">
                                 <h4 className="card-title">
@@ -103,7 +103,7 @@ function ViewpageList(props) {
             } else {
                 // Display a separate card for regular viewpages
                 return (
-                    <li key={_id} id={_id} className="sortable-viewpage">
+                    <li key={_id} id={_id + "," + viewsiteId} className="sortable-viewpage">
                         <div className="card border-primary mb-3">
                             <div className="card-body">
                                 <h4 className="card-title">
