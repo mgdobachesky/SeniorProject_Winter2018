@@ -223,14 +223,14 @@ class Form extends React.Component {
      */
     handleSortableUpdate(event, ui) {
         // Get both the form input and form IDs and separate them
-        let formInputAndFormIds = ui.item.attr("id").split(",");
+        let idList = ui.item.attr("id").split(",");
 
         // Prepare request data
         let requestData = {};
-        requestData.viewsiteId = this.state.viewsiteId;
-        requestData.viewpageId = this.state.viewpageId;
-        requestData.elementId = formInputAndFormIds[1];
-        requestData.formInputId = formInputAndFormIds[0];
+        requestData.viewsiteId = idList[3];
+        requestData.viewpageId = idList[2];
+        requestData.elementId = idList[1];
+        requestData.formInputId = idList[0];
         requestData.sortOrder = ui.item.index();
 
         // Send out API request to update selected Element
