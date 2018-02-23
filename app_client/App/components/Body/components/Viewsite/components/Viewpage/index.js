@@ -339,10 +339,13 @@ class Viewpage extends React.Component {
      * Method for updating the order of elements
      */
     handleSortableUpdate(event, ui) {
+        // Get both the form input and form IDs and separate them
+        let elementAndViewpageIds = ui.item.attr("id").split(",");
+
         let requestData = {};
         requestData.viewsiteId = this.state.viewsiteId;
-        requestData.viewpageId = this.state.viewpage._id;
-        requestData.elementId = ui.item.attr("id");
+        requestData.viewpageId = elementAndViewpageIds[1];
+        requestData.elementId = elementAndViewpageIds[0];
         requestData.sortOrder = ui.item.index();
 
 
