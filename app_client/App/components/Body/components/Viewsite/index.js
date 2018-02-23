@@ -407,12 +407,12 @@ class Viewsite extends React.Component {
  */
     handleSortableUpdate(event, ui) {
         // Get both the form input and form IDs and separate them
-        let viewpageAndViewsiteIds = ui.item.attr("id").split(",");
+        let idList = ui.item.attr("id").split(",");
 
         // Prepare data
         let requestData = {};
-        requestData.viewsiteId = viewpageAndViewsiteIds[1];
-        requestData.viewpageId = viewpageAndViewsiteIds[0];
+        requestData.viewsiteId = idList[1];
+        requestData.viewpageId = idList[0];
         requestData.sortOrder = ui.item.index();
 
         // Send out API request to update selected Element

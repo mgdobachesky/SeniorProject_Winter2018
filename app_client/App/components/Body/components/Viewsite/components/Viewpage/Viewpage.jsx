@@ -24,7 +24,7 @@ function ElementList(props) {
             if (element.kind === "text") {
                 // For Text Elements
                 return (
-                    <li key={_id} id={_id + "," + viewpageId}>
+                    <li key={_id} id={_id + "," + viewpageId + "," + viewsiteId}>
                         <TextElement
                             viewsiteId={viewsiteId}
                             viewpageId={viewpageId}
@@ -37,7 +37,7 @@ function ElementList(props) {
             else if (element.kind === "form") {
                 // For Form Elements
                 return (
-                    <li key={_id} id={_id + "," + viewpageId}>
+                    <li key={_id} id={_id + "," + viewpageId + "," + viewsiteId}>
                         <FormElement
                             viewsiteId={viewsiteId}
                             viewpageId={viewpageId}
@@ -51,7 +51,7 @@ function ElementList(props) {
             else if (element.kind === "dataView") {
                 // For Data View Elements
                 return (
-                    <li key={_id} id={_id + "," + viewpageId}>
+                    <li key={_id} id={_id + "," + viewpageId + "," + viewsiteId}>
                         <DataViewElement
                             viewsiteId={viewsiteId}
                             viewpageId={viewpageId}
@@ -64,7 +64,7 @@ function ElementList(props) {
             } else if (element.kind === "image") {
                 // For Image Elements
                 return (
-                    <li key={_id} id={_id + "," + viewpageId}>
+                    <li key={_id} id={_id + "," + viewpageId + "," + viewsiteId}>
                         <ImageElement
                             viewsiteId={viewsiteId}
                             viewpageId={viewpageId}
