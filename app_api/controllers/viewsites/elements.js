@@ -4,7 +4,7 @@ var formsDao = require('../../services/viewsites/formsDao');
 var dataViewsDao = require('../../services/viewsites/dataViewsDao');
 var imagesDao = require('../../services/viewsites/imagesDao');
 //var numberDao = require('../../services/viewsites/numberDao');
-
+var headerDao = require('../../services/viewsites/headersDao')
 // Handle JSON responses
 function sendJSONresponse(res, status, content) {
   res.status(status);
@@ -39,6 +39,13 @@ function elementsCreate(request, response) {
   } else if(request.body.kind === "image") {
     imagesDao.imagesCreate(request)
     .then(function(results) {
+      sendJSONresponse(response, 200, results);
+    }, function(error) {
+      sendJSONresponse(response, 404, error);
+    });
+  } else if(request.body.kind === "header"){
+    headerDao.headerCreate(request)
+    .then(function(results){
       sendJSONresponse(response, 200, results);
     }, function(error) {
       sendJSONresponse(response, 404, error);
@@ -78,6 +85,13 @@ function elementsUpdate(request, response) {
     }, function(error) {
       sendJSONresponse(response, 404, error);
     });
+  } else if(request.body.kind === "header") {
+      headerDao.headerUpdate(request)
+          .then(function(results) {
+              sendJSONresponse(response, 200, results);
+          }, function(error) {
+              sendJSONresponse(response, 404, error);
+          });
   }
 }
 
@@ -85,35 +99,42 @@ function elementsUpdate(request, response) {
  * Controller used to delete Elements
  */
 function elementsDelete(request, response) {
-  if(request.body.kind === "text") {
-    textDao.textDelete(request)
-    .then(function(results) {
-      sendJSONresponse(response, 200, results);
-    }, function(error) {
-      sendJSONresponse(response, 404, error);
-    });
-  } else if(request.body.kind === "form") {
-    formsDao.formsDelete(request)
-    .then(function(results) {
-      sendJSONresponse(response, 200, results);
-    }, function(error) {
-      sendJSONresponse(response, 404, error);
-    });
-  } else if(request.body.kind === "dataView") {
-    dataViewsDao.dataViewsDelete(request)
-    .then(function(results) {
-      sendJSONresponse(response, 200, results);
-    }, function(error) {
-      sendJSONresponse(response, 404, error);
-    });
-  } else if(request.body.kind === "image") {
-    imagesDao.imagesDelete(request)
-    .then(function(results) {
-      sendJSONresponse(response, 200, results);
-    }, function(error) {
-      sendJSONresponse(response, 404, error);
-    });
-  }
+    if (request.body.kind === "text") {
+        textDao.textDelete(request)
+            .then(function (results) {
+                sendJSONresponse(response, 200, results);
+            }, function (error) {
+                sendJSONresponse(response, 404, error);
+            });
+    } else if (request.body.kind === "form") {
+        formsDao.formsDelete(request)
+            .then(function (results) {
+                sendJSONresponse(response, 200, results);
+            }, function (error) {
+                sendJSONresponse(response, 404, error);
+            });
+    } else if (request.body.kind === "dataView") {
+        dataViewsDao.dataViewsDelete(request)
+            .then(function (results) {
+                sendJSONresponse(response, 200, results);
+            }, function (error) {
+                sendJSONresponse(response, 404, error);
+            });
+    } else if (request.body.kind === "image") {
+        imagesDao.imagesDelete(request)
+            .then(function (results) {
+                sendJSONresponse(response, 200, results);
+            }, function (error) {
+                sendJSONresponse(response, 404, error);
+            });
+    } else if (request.body.kind === "header") {
+        headerDao.headerDelete(request)
+            .then(function (results) {
+                sendJSONresponse(response, 200, results);
+            }, function (error) {
+                sendJSONresponse(response, 404, error);
+            });
+    }
 }
 
 // Export controller methods

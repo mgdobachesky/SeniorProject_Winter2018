@@ -7,6 +7,7 @@ import Text from '../Text';
 import Form from '../Form';
 import DataView from '../DataView';
 import Image from '../Image';
+import Header from '../Header';
 
 /*
  * Display each element based on Element kind
@@ -21,7 +22,13 @@ function ElementsView(props) {
           key={element._id}
           element={element} />
         );
-      } else if(element.kind === "form") {
+      } else if(element.kind === "header") {
+          return (
+              <Header
+                  key={element._id}
+                  element={element} />
+          );
+      }else if(element.kind === "form") {
         return (
           <Form
           key={element._id}

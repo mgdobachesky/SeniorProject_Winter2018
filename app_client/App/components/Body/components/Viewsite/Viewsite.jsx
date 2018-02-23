@@ -1,5 +1,7 @@
 // Import required modules
 import React from 'react';
+import $ from 'jquery';
+import { findDOMNode } from 'react-dom';
 
 // Import requred components
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
@@ -7,7 +9,7 @@ import ViewpageForm from './components/ViewpageForm';
 import Viewpage from './components/Viewpage';
 import UserTable from './components/UserTable';
 import UserUsers from './components/UserUsers';
-
+import DragList from 'drag-list-react';
 /*
  * Method used to prepare the create Viewpage forms for
  * creating a Viewpage
@@ -42,28 +44,13 @@ function clearAllForms() {
 function ViewpageList(props) {
    // this.state = { pages: [] };
     let pages = [];
-
+    let pages2 = [];
   if(props.viewpages && props.viewpages.length >= 1) {
     return props.viewpages.map((viewpage, index) => {
       const _id = viewpage._id;
       const viewsiteId = props.viewsiteId;
       const viewpageName = viewpage.viewpageName;
       const permissionLevel = viewpage.permissionLevel;
-        const SortableItem = SortableElement(({value}) => <ul>{value}</ul>); //value = placeholder
-
-        const SortableList = SortableContainer(({items}) => { //items = placeholder
-          //  if(this.state.pages && this.state.pages.length >= 1) {
-                return (
-                    <ul>
-                        {pages.map((value, index) => ( //value = placeholder -- pages.map needs to target state.pages
-                            // return(
-                            <SortableItem key={viewpage._id} index={index} value={value}/>
-                            // );
-                        ))}
-                    </ul>
-               );
-            //}
-        });
 
 
       // Set up a nice message representing Viewpage permission level
@@ -94,6 +81,8 @@ function ViewpageList(props) {
         _id: _id,
         viewsiteId: viewsiteId
       };
+
+
       if(viewpage.kind && viewpage.kind == 'landingPage') {
         // Display a separate card for landing pages
         editClick.kind = 'landingPage';
@@ -123,35 +112,36 @@ function ViewpageList(props) {
       } else {
         // Display a separate card for regular viewpages
         return (
-          <div key={viewpage._id} className="card border-primary mb-3">
-            <div className="card-body">
+            <div key={viewpage._id} className="card border-primary mb-3">
+              <div className="card-body">
               <h4 className="card-title">
-                <b>Webpage: </b>{viewpageName}
-              </h4>
-              <p className="card-text">
-                <b>Permission Level: </b> {permissionLevelMessage}
-              </p>
-            </div>
-            <div className="card-footer">
-              <a
+              <b>Webpage: </b>{viewpageName}
+      </h4>
+        <p className="card-text">
+          <b>Permission Level: </b> {permissionLevelMessage}
+        </p>
+      </div>
+        <div className="card-footer">
+          <a
               className="card-link"
               href="javascript:;"
               onClick={() => props.onEditViewpage(editClick)}>
-                <button type="button" className="btn btn-link">
-                  Edit Webpage
-                </button>
-              </a>
+            <button type="button" className="btn btn-link">
+              Edit Webpage
+            </button>
+          </a>
 
-              <a
+          <a
               className="card-link float-right"
               href="javascript:;"
               onClick={() => props.onDeleteViewpage(deleteClick)}>
-                <button type="button" className="btn btn-danger">
-                  Delete Webpage
-                </button>
-              </a>
-            </div>
-          </div>
+            <button type="button" className="btn btn-danger">
+              Delete Webpage
+            </button>
+          </a>
+        </div>
+      </div>
+
         );
       }
     });
