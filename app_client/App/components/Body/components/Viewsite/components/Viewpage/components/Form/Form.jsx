@@ -70,7 +70,7 @@ function TextboxFormInput(props) {
     };
 
     return (
-        <li key={props.formInput._id} className="list-group-item d-flex" id={props.formInput._id}>
+        <li key={props.formInput._id} className="list-group-item d-flex" id={props.formInput._id + "," + props.elementId}>
             <div className="mr-auto p-2">
                 <p><b>Textbox Label: </b>{props.formInput.textboxLabel}</p>
             </div>

@@ -104,7 +104,7 @@ function ViewpageList(props) {
                 // Display a separate card for regular viewpages
                 return (
                     <li key={_id} id={_id} className="sortable-viewpage">
-                        <div key={viewpage._id} className="card border-primary mb-3">
+                        <div className="card border-primary mb-3">
                             <div className="card-body">
                                 <h4 className="card-title">
                                     <b>Webpage: </b>{viewpageName}
@@ -139,7 +139,9 @@ function ViewpageList(props) {
         });
     } else {
         return (
-            <p>No Webpages have been created yet!</p>
+            <li>
+                <p>No Webpages have been created yet!</p>
+            </li>
         );
     }
 }
@@ -157,9 +159,9 @@ function ViewpageTabs(props) {
                     className="nav-link dropdown-item"
                     id={viewpage._id + "-tab"}
                     data-toggle="tab"
-                    href={"#" + viewpage._id}
+                    href={"#" + viewpage._id + "-content"}
                     role="tab"
-                    aria-controls={viewpage._id}
+                    aria-controls={viewpage._id + "-content"}
                     aria-selected="false"
                     onClick={() => {
                         clearAllForms.call(this);
@@ -190,7 +192,7 @@ function ViewpageContent(props) {
                 <div
                     key={viewpage._id}
                     className="tab-pane fade"
-                    id={viewpage._id}
+                    id={viewpage._id + "-content"}
                     role="tabpanel"
                     aria-labelledby={viewpage._id + "-tab"}>
                     <Viewpage
@@ -260,7 +262,7 @@ function ManageViewpagesContent() {
                         </div>
                     </div>
 
-                    <ul className={"viewpages-sortable"}>
+                    <ul className="viewpages-sortable">
                         <ViewpageList
                             viewsiteId={this.state.viewsite._id}
                             viewpages={this.state.viewsite.viewpages}
