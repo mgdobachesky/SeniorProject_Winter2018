@@ -43,6 +43,7 @@ class Viewsite extends React.Component {
         this.handleSetGlobalState = this.handleSetGlobalState.bind(this);
         this.handleClearLocalState = this.handleClearLocalState.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSortableUpdate = this.handleSortableUpdate.bind(this);
 
         // Set initial state
         this.state = {
@@ -402,6 +403,26 @@ class Viewsite extends React.Component {
     }
 
     /*
+ * Method for updating the order of elements
+ */
+    handleSortableUpdate(event, ui) {
+        let requestData = {};
+        requestData.viewsiteId = this.state.viewsite._id;
+        requestData.viewpageId = ui.item.attr("id");
+        requestData.sortOrder = ui.item.index();
+
+        // Send out API request to update selected Element
+        this.manageViewsiteService.sortViewsiteViewpages(requestData)
+            .then((results) => {
+                    // Afterwards, set Global Viewsite state to reflect changes
+                    this.handleSetGlobalState(results.data, "viewsite");
+                },
+                (error) => {
+                    console.log(error);
+                });
+    }
+
+    /*
      * React component lifecycle method used to control what happens before this
      * component receives props
      * Used to update state based on what Viewsite is selected
@@ -452,6 +473,13 @@ class Viewsite extends React.Component {
         // Hide forms when component first mounts
         $("#createViewpage").hide(false);
         $("#updateViewpage").hide(false);
+
+        // Set up sortable
+        $( ".viewpages-sortable" ).sortable({
+            update: this.handleSortableUpdate,
+            items: ".sortable-viewpage",
+            cursor: "move"
+        });
     }
 
     /*

@@ -334,6 +334,66 @@ function viewsitesDeleteAll(request) {
     return promise;
 }
 
+/*
+ * Method that allows for the sorting of elements
+ */
+function viewsitesSortViewpages(request) {
+    var promise = new Promise(function (resolve, reject) {
+        if (!request.body.viewsiteId || !request.body.viewpageId) {
+            // Required IDs
+            reject('Viewsite and Viewpage IDs are both required!');
+        } else if (request.body.sortOrder == null || isNaN(request.body.sortOrder)) {
+            // Required fields
+            reject('Sort order required!');
+        } else if (!request.session.userId) {
+            // Make sure a User is logged in
+            reject('You must be logged in to update a Viewsite!');
+        } else {
+            // Find Viewsite with Viewpage to update
+            viewsites.findById(request.body.viewsiteId)
+                .exec(function (error, viewsiteData) {
+                    if (error) {
+                        // Handle unknown errors
+                        console.log(error.message);
+                        reject('Something went wrong!');
+                    } else if (!viewsiteData) {
+                        // Handle non-existent query results
+                        reject('Viewsite not found!');
+                    } else if (viewsiteData.userId != request.session.userId) {
+                        // Make sure User owns Viewsite
+                        reject('You can only update Viewpages you own!');
+                    } else if (!viewsiteData.viewpages.id(request.body.viewpageId)) {
+                        // Handle non-existent sub-documents
+                        reject('Viewpage doesn\'t exist!');
+                    } else {
+                        // Copy element to move
+                        let viewpageMoving = viewsiteData.viewpages.id(request.body.viewpageId);
+                        // Delete element to move
+                        viewsiteData.viewpages.id(request.body.viewpageId).remove();
+                        // Push element back on in new position
+                        viewsiteData.viewpages.splice(request.body.sortOrder, 0, viewpageMoving);
+                        // Save the new Viewsite
+                        viewsiteData.save(function (error, results) {
+                            if (error) {
+                                // Handle unknown errors
+                                console.log(error.message);
+                                reject('Something went wrong!');
+                            } else {
+                                // Clean up results and return up-to-date Viewsite
+                                var cleanResults = results.toObject();
+                                delete cleanResults.userId;
+                                delete cleanResults.__v;
+                                resolve(cleanResults);
+                            }
+                        });
+                    }
+
+                });
+        }
+    });
+    return promise;
+}
+
 // Export public methods
 module.exports.viewsitesReadAll = viewsitesReadAll;
 module.exports.viewsitesReadOne = viewsitesReadOne;
@@ -341,3 +401,4 @@ module.exports.viewsitesCreate = viewsitesCreate;
 module.exports.viewsitesUpdate = viewsitesUpdate;
 module.exports.viewsitesDelete = viewsitesDelete;
 module.exports.viewsitesDeleteAll = viewsitesDeleteAll;
+module.exports.viewsitesSortViewpages = viewsitesSortViewpages;

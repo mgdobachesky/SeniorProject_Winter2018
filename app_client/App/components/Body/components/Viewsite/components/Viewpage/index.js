@@ -355,9 +355,6 @@ class Viewpage extends React.Component {
                 (error) => {
                     console.log(error);
                 });
-
-        // Cancel normal sortable activity in favor of React DOM handling
-        $( ".sortable" ).sortable("cancel");
     }
 
     /*
@@ -390,8 +387,9 @@ class Viewpage extends React.Component {
         this.handleHideAllForms();
 
         // Set up sortable
-        $( ".sortable" ).sortable({
-            update: this.handleSortableUpdate
+        $( ".elements-sortable" ).sortable({
+            update: this.handleSortableUpdate,
+            cursor: "move"
         });
     }
 

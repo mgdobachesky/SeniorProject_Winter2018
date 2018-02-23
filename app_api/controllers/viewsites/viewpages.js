@@ -44,7 +44,7 @@ function viewpagesDelete(request, response) {
 }
 
 /*
- * Controller used to delete an existing Viewpage
+ * Controller used to sort viewpage elements
  */
 function viewpagesSortElements(request, response) {
     viewpagesDao.viewpagesSortElements(request)

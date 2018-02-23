@@ -525,7 +525,7 @@ var ViewpageJSX = function () {
                         </div>
                     </div>
 
-                    <ul className={"sortable"}>
+                    <ul className={"elements-sortable"}>
                         <ElementList
                             viewsiteId={this.state.viewsiteId}
                             viewpageId={this.state.viewpage._id}
