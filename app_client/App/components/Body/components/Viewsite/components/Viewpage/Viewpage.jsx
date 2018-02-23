@@ -24,50 +24,54 @@ function ElementList(props) {
             if (element.kind === "text") {
                 // For Text Elements
                 return (
-                    <TextElement
-                        key={_id}
-                        viewsiteId={viewsiteId}
-                        viewpageId={viewpageId}
-                        element={element}
-                        onEditElement={props.onEditElement}
-                        onDeleteElement={props.onDeleteElement}/>
+                    <li key={_id} id={_id}>
+                        <TextElement
+                            viewsiteId={viewsiteId}
+                            viewpageId={viewpageId}
+                            element={element}
+                            onEditElement={props.onEditElement}
+                            onDeleteElement={props.onDeleteElement}/>
+                    </li>
                 );
             }
             else if (element.kind === "form") {
                 // For Form Elements
                 return (
-                    <FormElement
-                        key={_id}
-                        viewsiteId={viewsiteId}
-                        viewpageId={viewpageId}
-                        element={element}
-                        onEditElement={props.onEditElement}
-                        onDeleteElement={props.onDeleteElement}
-                        onSetGlobalState={props.onSetGlobalState}/>
+                    <li key={_id} id={_id}>
+                        <FormElement
+                            viewsiteId={viewsiteId}
+                            viewpageId={viewpageId}
+                            element={element}
+                            onEditElement={props.onEditElement}
+                            onDeleteElement={props.onDeleteElement}
+                            onSetGlobalState={props.onSetGlobalState}/>
+                    </li>
                 );
             }
             else if (element.kind === "dataView") {
                 // For Data View Elements
                 return (
-                    <DataViewElement
-                        key={_id}
-                        viewsiteId={viewsiteId}
-                        viewpageId={viewpageId}
-                        element={element}
-                        userTables={userTables}
-                        onEditElement={props.onEditElement}
-                        onDeleteElement={props.onDeleteElement}/>
+                    <li key={_id} id={_id}>
+                        <DataViewElement
+                            viewsiteId={viewsiteId}
+                            viewpageId={viewpageId}
+                            element={element}
+                            userTables={userTables}
+                            onEditElement={props.onEditElement}
+                            onDeleteElement={props.onDeleteElement}/>
+                    </li>
                 );
             } else if (element.kind === "image") {
                 // For Image Elements
                 return (
-                    <ImageElement
-                        key={_id}
-                        viewsiteId={viewsiteId}
-                        viewpageId={viewpageId}
-                        element={element}
-                        onEditElement={props.onEditElement}
-                        onDeleteElement={props.onDeleteElement}/>
+                    <li key={_id} id={_id}>
+                        <ImageElement
+                            viewsiteId={viewsiteId}
+                            viewpageId={viewpageId}
+                            element={element}
+                            onEditElement={props.onEditElement}
+                            onDeleteElement={props.onDeleteElement}/>
+                    </li>
                 );
             }
         });
@@ -521,14 +525,16 @@ var ViewpageJSX = function () {
                         </div>
                     </div>
 
-                    <ElementList
-                        viewsiteId={this.state.viewsiteId}
-                        viewpageId={this.state.viewpage._id}
-                        elements={this.state.viewpage.elements}
-                        userTables={this.state.userTables}
-                        onEditElement={this.handleEditElement}
-                        onDeleteElement={this.handleDeleteElement}
-                        onSetGlobalState={this.handleSetGlobalState}/>
+                    <ul className={"sortable"}>
+                        <ElementList
+                            viewsiteId={this.state.viewsiteId}
+                            viewpageId={this.state.viewpage._id}
+                            elements={this.state.viewpage.elements}
+                            userTables={this.state.userTables}
+                            onEditElement={this.handleEditElement}
+                            onDeleteElement={this.handleDeleteElement}
+                            onSetGlobalState={this.handleSetGlobalState}/>
+                    </ul>
                 </div>
 
                 <div className="col-1"></div>

@@ -7,6 +7,7 @@ import './viewpage.scss';
 
 // Import required servicesc
 import ElementService from './services/ElementService';
+import ViewpageService from '../../services/ViewpageService';
 
 class Viewpage extends React.Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class Viewpage extends React.Component {
 
         // Initialize service objects
         this.manageElementService = new ElementService();
+        this.manageViewpageService = new ViewpageService();
 
         // Element Methods
         this.handleCreateElement = this.handleCreateElement.bind(this);
@@ -27,6 +29,7 @@ class Viewpage extends React.Component {
         this.handleSetGlobalState = this.handleSetGlobalState.bind(this);
         this.handleClearLocalState = this.handleClearLocalState.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSortableUpdate = this.handleSortableUpdate.bind(this);
 
         // Set initial state
         this.state = {
@@ -333,6 +336,31 @@ class Viewpage extends React.Component {
     }
 
     /*
+     * Method for updating the order of elements
+     */
+    handleSortableUpdate(event, ui) {
+        let requestData = {};
+        requestData.viewsiteId = this.state.viewsiteId;
+        requestData.viewpageId = this.state.viewpage._id;
+        requestData.elementId = ui.item.attr("id");
+        requestData.sortOrder = ui.item.index();
+
+
+        // Send out API request to update selected Element
+        this.manageViewpageService.sortViewpageElements(requestData)
+            .then((results) => {
+                    // Afterwards, set Global Viewsite state to reflect changes
+                    this.handleSetGlobalState(results.data, "viewsite");
+                },
+                (error) => {
+                    console.log(error);
+                });
+
+        // Cancel normal sortable activity in favor of React DOM handling
+        $( ".sortable" ).sortable("cancel");
+    }
+
+    /*
      * React component lifecycle method that controls what happens before
      * a component receives props
      * Used to set Viewpage state based on props passed from the Viewsite component
@@ -360,6 +388,11 @@ class Viewpage extends React.Component {
         });
         // Hide all forms when component first mounts
         this.handleHideAllForms();
+
+        // Set up sortable
+        $( ".sortable" ).sortable({
+            update: this.handleSortableUpdate
+        });
     }
 
     /*

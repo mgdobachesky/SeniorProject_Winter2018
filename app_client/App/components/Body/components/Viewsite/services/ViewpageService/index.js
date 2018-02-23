@@ -63,6 +63,26 @@ class ViewpageService {
             }
         });
     }
+
+    /*
+     * HTTP call used to sort Viewpage Elements
+     */
+    sortViewpageElements(requestData) {
+        return axios({
+            url: '/sort/elements',
+            method: 'post',
+            baseURL: API_LOCATION + '/api/v1/',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+                "viewsiteId": requestData.viewsiteId,
+                "viewpageId": requestData.viewpageId,
+                "elementId": requestData.elementId,
+                "sortOrder": requestData.sortOrder
+            }
+        });
+    }
 }
 
 // Export the HTTP service

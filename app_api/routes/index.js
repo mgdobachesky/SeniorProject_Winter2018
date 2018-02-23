@@ -82,6 +82,11 @@ router.post('/login/user_users', controllerUserUsers.userUsersLogin);
 router.get('/logout/user_users', controllerUserUsers.userUsersLogout);
 
 /*
+ * Routes for sorting
+ */
+router.post('/sort/elements', controllerViewpages.viewpagesSortElements);
+
+/*
  * Handle unmatched requests
  */
 router.all('*', function (request, response) {
