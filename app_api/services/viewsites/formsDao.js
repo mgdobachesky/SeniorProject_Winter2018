@@ -242,7 +242,6 @@ function formsSortFormInputs(request) {
                             .viewpages.id(request.body.viewpageId)
                             .elements.id(request.body.elementId)
                             .formInputs.id(request.body.formInputId)) {
-                        console.log(viewsiteData.viewpages.id(request.body.viewpageId).elements.id(request.body.elementId));
                         // Handle non-existent sub-documents
                         reject('Form Input doesn\'t exist!');
                     } else {
