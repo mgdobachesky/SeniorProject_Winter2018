@@ -285,13 +285,17 @@ class Viewpage extends React.Component {
         // Only hide update forms sharply if they are not the selector
         if (".updateText" != selector) {
             $(".updateText").hide(false);
-        } else if (".updateForm" != selector) {
+        }
+        if (".updateForm" != selector) {
             $(".updateForm").hide(false);
-        } else if (".updateDataView" != selector) {
+        }
+        if (".updateDataView" != selector) {
             $(".updateDataView").hide(false);
-        } else if (".updateImage" != selector) {
+        }
+        if (".updateImage" != selector) {
             $(".updateImage").hide(false);
-        } else if (".updateHeader" != selector) {
+        }
+        if (".updateHeader" != selector) {
             $(".updateHeader").hide(false);
         }
 

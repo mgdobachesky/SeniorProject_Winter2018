@@ -61,7 +61,9 @@ class Viewsite extends React.Component {
             selectedUserTable: {},
             selectedUserTableHeaders: {},
             userTableError: "",
-            userUsers: []
+            userUsers: [],
+            userUserSuccess: "",
+            userUserError: ""
         };
     }
 
@@ -287,13 +289,21 @@ class Viewsite extends React.Component {
                         this.setState({
                             selectedUserTable: null,
                             selectedUserTableHeaders: "",
-                            userUsers: results.data
+                            userUsers: results.data,
+                            userUserSuccess: "User successfully updated!",
+                            userUserError: ""
                         });
                     }
                 },
                 (error) => {
                     // Handle errors
                     console.log(error);
+
+                    // Update error status
+                    this.setState({
+                        userUserSuccess: "",
+                        userUserError: "Something went wrong!"
+                    });
                 });
     }
 
@@ -314,19 +324,29 @@ class Viewsite extends React.Component {
                         this.setState({
                             selectedUserTable: null,
                             selectedUserTableHeaders: "",
-                            userUsers: results.data
+                            userUsers: results.data,
+                            userUserSuccess: "",
+                            userUserError: ""
                         });
                     } else {
                         this.setState({
                             selectedUserTable: null,
                             selectedUserTableHeaders: "",
-                            userUsers: []
+                            userUsers: [],
+                            userUserSuccess: "",
+                            userUserError: ""
                         });
                     }
                 },
                 (error) => {
                     // Handle errors
                     console.log(error);
+
+                    // Update error status
+                    this.setState({
+                        userUserSuccess: "",
+                        userUserError: "Something went wrong!"
+                    });
                 });
     }
 

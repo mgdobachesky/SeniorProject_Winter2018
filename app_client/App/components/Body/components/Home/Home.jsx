@@ -113,7 +113,7 @@ var HomeJSX = function () {
 
             {/*Footer Stuff*/}
             <div className="row footer">
-                <i class="fa fa-copyright"></i><p>2018 Cadre</p>
+                <i className="fa fa-copyright"></i><p>2018 Cadre</p>
             </div>
 
 

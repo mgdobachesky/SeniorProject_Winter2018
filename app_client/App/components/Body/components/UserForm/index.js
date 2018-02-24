@@ -36,11 +36,10 @@ class UserForm extends React.Component {
             userSuccess: "",
             userError: "",
             confirmPassword: "",
-            formErrors: {username: "", password: "", confirmPassword: "", email: "",},
-            userValid: false,
+            formErrors: {username: "", password: "", confirmPassword: "", email: ""},
             passwordValid: false,
             confirmPasswordValid: false,
-            emailValid: false,
+            emailValid: true,
         }
     }
 
@@ -52,6 +51,7 @@ class UserForm extends React.Component {
         let requestData = {};
         let newUser = this.state;
         requestData.username = newUser.username;
+        requestData.email = newUser.email;
         requestData.password = newUser.password;
         // Send request to create User
         this.manageUserService.createUser(requestData)
@@ -78,6 +78,7 @@ class UserForm extends React.Component {
         let requestData = {};
         let updatedUser = this.state;
         requestData.username = updatedUser.username;
+        requestData.email = updatedUser.email;
         requestData.password = updatedUser.password;
         // Send request out to API to update User
         this.manageUserService.updateUser(requestData)
@@ -112,6 +113,14 @@ class UserForm extends React.Component {
      */
     handleSubmit(event) {
         event.preventDefault();
+
+        // Don't submit if there are invalid entries
+        if(!this.state.emailValid
+            || !this.state.passwordValid
+            || !this.state.confirmPasswordValid) {
+            return;
+        }
+
         if (this.props.action === "create") {
             // Create if currently creating a User
             this.handleCreateUser();
@@ -156,7 +165,8 @@ class UserForm extends React.Component {
         this.setState({
             formErrors: fieldValidationErrors,
             emailValid: emailValid,
-            passwordValid: passwordValid
+            passwordValid: passwordValid,
+            confirmPasswordValid: confirmPasswordValid
         }, this.validateForm);
     }
 
@@ -176,8 +186,10 @@ class UserForm extends React.Component {
      */
     componentWillReceiveProps(nextProps) {
         if (nextProps.user) {
+            let user = nextProps.user;
             this.setState({
-                user: nextProps.user,
+                username: user.username ? user.username : "",
+                email: user.email ? user.email : "",
                 userSuccess: "",
                 userError: ""
             });
@@ -192,8 +204,10 @@ class UserForm extends React.Component {
      */
     componentDidMount() {
         if (this.props.user) {
+            let user = this.props.user;
             this.setState({
-                user: this.props.user,
+                username: user.username ? user.username : "",
+                email: user.email ? user.email : "",
                 userSuccess: "",
                 userError: ""
             });

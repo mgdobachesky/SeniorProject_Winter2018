@@ -48,17 +48,8 @@ function ViewsiteList(props) {
                     <div className="card-body">
                         <h4 className="card-title">
                             <b>Website: </b>
-                            <NavLink to={"/" + viewsiteName} className="card-link">
-                                {viewsiteName}
-                            </NavLink>
+                            {viewsiteName}
                         </h4>
-
-                        <p>
-                            <b>Preview: </b>
-                            <a href={viewsiteLink} className="card-link">
-                                {"cadre.me" + viewsiteLink}
-                            </a>
-                        </p>
 
                         <p className="card-text">
                             <b>Website Theme: </b> {viewsiteThemeMessage}

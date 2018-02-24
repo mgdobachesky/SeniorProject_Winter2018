@@ -58,6 +58,7 @@ function usersCreate(request) {
                     // Create user with hased password
                     users.create({
                         'username': request.body.username,
+                        'email': request.body.email ? request.body.email : "",
                         'password': hash
                     }, function (error, results) {
                         if (error) {
@@ -111,6 +112,7 @@ function usersUpdate(request) {
                     } else {
                         // Set new User information
                         userData.username = request.body.username;
+                        userData.email = request.body.email ? request.body.email : "";
                         // If a new password was requested, set it as well
                         if (request.body.password) {
                             let hash = bcrypt.hashSync(request.body.password, 10);

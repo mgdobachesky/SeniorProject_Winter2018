@@ -1,6 +1,34 @@
 // Import required modules
 import React from 'react';
 
+var ErrorAlert = function (props) {
+    if (props.userUserError) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                {props.userUserError}
+            </div>
+        );
+    } else {
+        return null;
+    }
+};
+
+/*
+ * Alert that notifies the User of any successful operations
+ * Used by UserFormJSX
+ */
+var SuccessAlert = function (props) {
+    if (props.userUserSuccess) {
+        return (
+            <div className="alert alert-success" role="alert">
+                {props.userUserSuccess}
+            </div>
+        );
+    } else {
+        return null;
+    }
+};
+
 /*
  * Create a table row for each record in the User Table
  * Used by UserTable
@@ -87,6 +115,12 @@ var UserUsersJSX = function () {
     return (
         <div>
             <h4>User Accounts</h4>
+
+            <SuccessAlert
+                userUserSuccess={this.props.userUserSuccess}/>
+
+            <ErrorAlert
+                userUserError={this.props.userUserError}/>
 
             {UsersTable.call(this)}
         </div>
