@@ -479,7 +479,7 @@ class Viewsite extends React.Component {
         $("#updateViewpage").hide(false);
 
         // Set up sortable
-        $( ".viewpages-sortable" ).sortable({
+        $(".viewpages-sortable").sortable({
             update: this.handleSortableUpdate,
             items: ".sortable-viewpage",
             cursor: "move"

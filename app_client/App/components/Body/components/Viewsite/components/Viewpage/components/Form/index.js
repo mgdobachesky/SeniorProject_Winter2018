@@ -272,7 +272,7 @@ class Form extends React.Component {
         this.handleHideAllForms();
 
         // Set up sortable
-        $( ".formInputs-sortable" ).sortable({
+        $(".formInputs-sortable").sortable({
             update: this.handleSortableUpdate,
             cursor: "move"
         });

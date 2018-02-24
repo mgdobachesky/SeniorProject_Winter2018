@@ -390,7 +390,7 @@ class Viewpage extends React.Component {
         this.handleHideAllForms();
 
         // Set up sortable
-        $( ".elements-sortable" ).sortable({
+        $(".elements-sortable").sortable({
             update: this.handleSortableUpdate,
             cursor: "move"
         });
