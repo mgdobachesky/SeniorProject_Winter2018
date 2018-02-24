@@ -6,17 +6,17 @@ import HomeJSX from './Home.jsx';
 import './home.scss';
 
 class Home extends React.Component {
-  constructor(props) {
-    // Call parent constructor
-    super(props);
-  }
+    constructor(props) {
+        // Call parent constructor
+        super(props);
+    }
 
-  /*
-   * Render the Home view
-   */
-  render() {
-    return(HomeJSX.call(this));
-  }
+    /*
+     * Render the Home view
+     */
+    render() {
+        return (HomeJSX.call(this));
+    }
 }
 
 // Export the Homepage

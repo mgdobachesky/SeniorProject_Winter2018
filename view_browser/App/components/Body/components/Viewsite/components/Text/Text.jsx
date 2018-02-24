@@ -4,24 +4,24 @@ import React from 'react';
 /*
  * Text Element JSX view
  */
-var TextJSX = function() {
-  return (
-    <div>
-      <p>
-        {this.props.element.textValue.split('\n').map(function(item, key) {
-          return (
-            <span key={key}>
+var TextJSX = function () {
+    return (
+        <div>
+            <p>
+                {this.props.element.textValue.split('\n').map(function (item, key) {
+                    return (
+                        <span key={key}>
               {item}
-              <br/>
+                            <br/>
             </span>
-          )
-        })}
-      </p>
+                    )
+                })}
+            </p>
 
-      <br />
-    </div>
-  );
-}
+            <br/>
+        </div>
+    );
+};
 
 // Export Text Element JSX view
 export default TextJSX;

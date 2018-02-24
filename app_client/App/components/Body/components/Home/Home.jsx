@@ -113,7 +113,7 @@ var HomeJSX = function() {
 
       </div>
   );
-}
+};
 
 // Export the Home view
 export default HomeJSX;

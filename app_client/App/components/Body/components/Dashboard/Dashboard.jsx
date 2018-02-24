@@ -72,7 +72,7 @@ function ViewsiteList(props) {
           <div className="card-footer">
             <a
             className="card-link"
-            href="javascript:;"
+                            href="javascript:"
             onClick={() => props.onEditViewsite(editClick)}>
               <button type="button" className="btn btn-link">
                 Edit Website
@@ -93,7 +93,7 @@ function ViewsiteList(props) {
 
             <a
             className="card-link float-right"
-            href="javascript:;"
+                            href="javascript:"
             onClick={() => props.onDeleteViewsite(deleteClick)}>
               <button type="button" className="btn btn-danger">
                 Delete Website
@@ -166,7 +166,9 @@ var DashboardJSX = function() {
               <button
               type="button"
               className="btn btn-link"
-              onClick={() => {prepareCreateViewsite.call(this);}}>
+                                onClick={() => {
+                                    prepareCreateViewsite.call(this);
+                                }}>
               <i className="fa fa-plus" aria-hidden="true"></i> New Website
               </button>
               <div id="createViewsite" className="card mb-3">
@@ -222,7 +224,7 @@ var DashboardJSX = function() {
       </div>
     </div>
   );
-}
+};
 
 // Export the Dashboard JSX view
 export default DashboardJSX;

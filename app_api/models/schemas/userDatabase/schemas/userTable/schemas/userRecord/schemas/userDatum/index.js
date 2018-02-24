@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 
 // Create user datum sub-schema for the user record schema
 var userDatumSchema = new Schema({
-  'datum': {
-    'type': String,
-    'default': ''
-  }
+    'datum': {
+        'type': String,
+        'default': ''
+    }
 });
 
 // Export schema

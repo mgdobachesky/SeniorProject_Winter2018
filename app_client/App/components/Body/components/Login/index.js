@@ -1,63 +1,63 @@
 // Import required modules
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 // Import required components
 import LoginJSX from './Login.jsx';
 import './login.scss';
 
 class Login extends React.Component {
-  constructor(props) {
-    // Call parent constructor
-    super(props);
+    constructor(props) {
+        // Call parent constructor
+        super(props);
 
-    // Other Methods
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+        // Other Methods
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
 
-    // Set initial state
-    this.state = {
-      loginCredentials: {
-        username: "",
-        password: ""
-      }
+        // Set initial state
+        this.state = {
+            loginCredentials: {
+                username: "",
+                password: ""
+            }
+        }
     }
-  }
 
-  /*
-   * Method that allows local state to reflect what a User types
-   */
-  handleChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    let changeLoginCredentials = this.state.loginCredentials;
-    changeLoginCredentials[name] = value;
-    this.setState({
-      'loginCredentials': changeLoginCredentials
-    });
-  }
-
-  /*
-   * Method that controls what happens after a form has been submited
-   */
-  handleSubmit(event) {
-    event.preventDefault();
-    let loginCredentials = this.state.loginCredentials;
-    this.props.onLoginUser(loginCredentials);
-  }
-
-  /*
-   * Render the Login form view
-   * Only if a user is not logged in
-   */
-  render() {
-    if(this.props.loggedIn) {
-      return(<Redirect to="/" />);
-    } else {
-      return(LoginJSX.call(this));
+    /*
+     * Method that allows local state to reflect what a User types
+     */
+    handleChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        let changeLoginCredentials = this.state.loginCredentials;
+        changeLoginCredentials[name] = value;
+        this.setState({
+            'loginCredentials': changeLoginCredentials
+        });
     }
-  }
+
+    /*
+     * Method that controls what happens after a form has been submited
+     */
+    handleSubmit(event) {
+        event.preventDefault();
+        let loginCredentials = this.state.loginCredentials;
+        this.props.onLoginUser(loginCredentials);
+    }
+
+    /*
+     * Render the Login form view
+     * Only if a user is not logged in
+     */
+    render() {
+        if (this.props.loggedIn) {
+            return (<Redirect to="/"/>);
+        } else {
+            return (LoginJSX.call(this));
+        }
+    }
 }
 
 // Export the Login form

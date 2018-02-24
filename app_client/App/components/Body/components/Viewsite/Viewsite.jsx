@@ -77,7 +77,8 @@ function ViewpageList(props) {
         editClick.kind = 'landingPage';
         editClick.catchPhrase = viewpage.catchPhrase;
         return(
-          <div key={viewpage._id} className="card border-primary mb-3">
+                    <li key={_id} id={_id + "," + viewsiteId}>
+                        <div className="card border-primary mb-3">
             <div className="card-body">
               <h4 className="card-title">
                 <b>Webpage: </b>{viewpageName}
@@ -89,7 +90,7 @@ function ViewpageList(props) {
             <div className="card-footer">
               <a
               className="card-link"
-              href="javascript:;"
+                                    href="javascript:"
               onClick={() => props.onEditViewpage(editClick)}>
                 <button type="button" className="btn btn-link">
                   Edit Webpage
@@ -97,11 +98,13 @@ function ViewpageList(props) {
               </a>
             </div>
           </div>
+                    </li>
         );
       } else {
         // Display a separate card for regular viewpages
         return (
-          <div key={viewpage._id} className="card border-primary mb-3">
+                    <li key={_id} id={_id + "," + viewsiteId} className="sortable-viewpage">
+                        <div className="card border-primary mb-3">
             <div className="card-body">
               <h4 className="card-title">
                 <b>Webpage: </b>{viewpageName}
@@ -113,7 +116,7 @@ function ViewpageList(props) {
             <div className="card-footer">
               <a
               className="card-link"
-              href="javascript:;"
+                                    href="javascript:"
               onClick={() => props.onEditViewpage(editClick)}>
                 <button type="button" className="btn btn-link">
                   Edit Webpage
@@ -122,7 +125,7 @@ function ViewpageList(props) {
 
               <a
               className="card-link float-right"
-              href="javascript:;"
+                                    href="javascript:"
               onClick={() => props.onDeleteViewpage(deleteClick)}>
                 <button type="button" className="btn btn-danger">
                   Delete Webpage
@@ -130,12 +133,15 @@ function ViewpageList(props) {
               </a>
             </div>
           </div>
+                    </li>
         );
       }
     });
   } else {
     return (
+            <li>
       <p>No Webpages have been created yet!</p>
+            </li>
     );
   }
 
@@ -154,11 +160,13 @@ function ViewpageTabs(props) {
         className="nav-link dropdown-item"
         id={viewpage._id + "-tab"}
         data-toggle="tab"
-        href={"#" + viewpage._id}
+                    href={"#" + viewpage._id + "-content"}
         role="tab"
-        aria-controls={viewpage._id}
+                    aria-controls={viewpage._id + "-content"}
         aria-selected="false"
-        onClick={() => {clearAllForms.call(this);}}>
+                    onClick={() => {
+                        clearAllForms.call(this);
+                    }}>
           {viewpage.viewpageName}
         </a>
       );
@@ -185,7 +193,7 @@ function ViewpageContent(props) {
         <div
         key={viewpage._id}
         className="tab-pane fade"
-        id={viewpage._id}
+                    id={viewpage._id + "-content"}
         role="tabpanel"
         aria-labelledby={viewpage._id + "-tab"}>
           <Viewpage
@@ -220,7 +228,9 @@ function ManageViewpagesContent() {
               <button
               type="button"
               className="btn btn-link nav-link"
-              onClick={() => {prepareCreateViewpage.call(this);}}>
+                                onClick={() => {
+                                    prepareCreateViewpage.call(this);
+                                }}>
               <i className="fa fa-plus" aria-hidden="true"></i> New Webpage
               </button>
             </li>
@@ -252,11 +262,14 @@ function ManageViewpagesContent() {
               onSubmit={this.handleUpdateViewpage} />
             </div>
           </div>
+
+                    <ul className="viewpages-sortable">
           <ViewpageList
           viewsiteId={this.state.viewsite._id}
           viewpages={this.state.viewsite.viewpages}
           onEditViewpage={this.handleEditViewpage}
           onDeleteViewpage={this.handleDeleteViewpage} />
+                    </ul>
         </div>
         <div className="col-1"></div>
       </div>
@@ -276,10 +289,12 @@ function UserDatabasePills() {
           key={userTable._id}
           className={index == 0 && !this.state.viewsite.loginEnabled
             ? "nav-link active" : "nav-link"}
-          href="javascript:;"
+                    href="javascript:"
           data-toggle="pill"
           role="tab"
-          onClick={() => {this.handlePopulateUserTable(userTable)}}>
+                    onClick={() => {
+                        this.handlePopulateUserTable(userTable)
+                    }}>
             {userTable.formTitle}
           </a>
       );
@@ -297,10 +312,12 @@ function UserUsersPill() {
     return (
       <a
       className="nav-link active"
-      href="javascript:;"
+                href="javascript:"
       data-toggle="pill"
       role="tab"
-      onClick={() => {this.handleReadAllUserUsers()}}>
+                onClick={() => {
+                    this.handleReadAllUserUsers()
+                }}>
         User Accounts
       </a>
     );
@@ -440,7 +457,7 @@ var ViewsiteJSX = function() {
       </div>
     </div>
   );
-}
+};
 
 // Export the Viewsite JSX view
 export default ViewsiteJSX;

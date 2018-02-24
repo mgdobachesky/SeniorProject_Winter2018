@@ -9,15 +9,15 @@ var textboxSchema = require('./schemas/textbox');
 
 // Define Form Input parent class schema
 var formInputSchema = new Schema({},
-  { discriminatorKey: 'kind' });
+    {discriminatorKey: 'kind'});
 
 // Define main Form schema
 var formSchema = new Schema({
-  'formTitle': {
-    'type': String,
-    'required': true
-  },
-  'formInputs': [formInputSchema]
+    'formTitle': {
+        'type': String,
+        'required': true
+    },
+    'formInputs': [formInputSchema]
 });
 
 // Get the parent array of Form Inputs in the Form
