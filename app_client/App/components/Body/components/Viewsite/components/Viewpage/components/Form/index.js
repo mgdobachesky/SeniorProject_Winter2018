@@ -259,10 +259,7 @@ class Form extends React.Component {
         $(".createNumber").hide(false);
         $(".createTextarea").hide(false);
         $(".createCheckbox").hide(false);
-        // $(".createTextbox").hide(false);
-        $(".updateNumber").hide(false);
-        $(".updateTextarea").hide(false);
-        $(".updateCheckbox").hide(false);
+
         // Only hide update forms sharply if they are not the selector
         if (".updateTextbox" != selector) {
             $(".updateTextbox").hide(false);
@@ -276,7 +273,8 @@ class Form extends React.Component {
         else if (".updateCheckbox" != selector) {
             $(".updateCheckbox").hide(false);
         }
-// Smooth animation on the targeted selector
+
+        // Smooth animation on the targeted selector
         if (isVisible) {
             $(selector).hide("medium");
         } else {

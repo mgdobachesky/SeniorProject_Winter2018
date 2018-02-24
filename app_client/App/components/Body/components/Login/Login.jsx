@@ -1,6 +1,5 @@
 // Import required modules
 import React from 'react';
-import {FormErrors} from './FormErrors';
 /*
  * Alert that notifies the User of any unsuccessful operations
  * Used by LoginJSX

@@ -1,7 +1,5 @@
 // Import required modules
 import React from 'react';
-import $ from 'jquery';
-import {findDOMNode} from 'react-dom';
 
 // Import requred components
 import ViewpageForm from './components/ViewpageForm';
@@ -146,7 +144,6 @@ function ViewpageList(props) {
             </li>
         );
     }
-
 }
 
 /*

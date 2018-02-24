@@ -21,7 +21,7 @@ class UserForm extends React.Component {
         this.handleCreateUser = this.handleCreateUser.bind(this);
         this.handleUpdateUser = this.handleUpdateUser.bind(this);
         // Other Methods
-        this.handleChange = this.handleChange.bind(this);
+        this.handleSetGlobalState = this.handleSetGlobalState.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleUserInput = this.handleUserInput.bind(this);
         this.validateField = this.validateField.bind(this);
@@ -105,20 +105,6 @@ class UserForm extends React.Component {
      */
     handleSetGlobalState(newStateData, toSet) {
         this.props.onSetGlobalState(newStateData, toSet);
-    }
-
-    /*
-     * Method that keeps local state consistent with what the user types
-     */
-    handleChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        let changeUser = this.state.user;
-        changeUser[name] = value;
-        this.setState({
-            'user': changeUser
-        });
     }
 
     /*
