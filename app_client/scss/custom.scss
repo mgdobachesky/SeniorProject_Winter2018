@@ -63,12 +63,20 @@ $link-hover-color: $secondary;
 $link-hover-decoration: none;
 
 // Pill Options
-$nav-pills-link-active-color: $dark;
-$nav-pills-link-active-bg: $dark;
+$nav-pills-link-active-color: $light;
+$nav-pills-link-active-bg: $blackboard;
 
 // Navbar Options
 $navbar-padding-y: 0.5rem;
 //$navbar-default-link-active-color:  $dark;
+
+.tooltip {
+    background-color: #73AD21;
+    color: #FFFFFF;
+    border: 1px solid green;
+    padding: 15px;
+    font-size: 20px;
+}
 
 
 /*

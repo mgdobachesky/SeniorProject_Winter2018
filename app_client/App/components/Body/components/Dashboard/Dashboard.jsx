@@ -15,6 +15,9 @@ function prepareCreateViewsite() {
   $("#createViewsite").toggle("medium");
   $("#updateViewsite").hide(false);
   this.handleClearLocalState();
+
+  $('[data-toggle="tooltip"]').tooltip();
+
 }
 
 /*
@@ -82,6 +85,10 @@ function ViewsiteList(props) {
                   <button type="button" className="btn btn-link">
                       Page Builder
                   </button>
+                  <i className="fa fa-question-circle fa-lg" data-toggle="tooltip" data-placement="auto"
+                     title="The page builder allows you to add new web pages,
+                     as well as add elements to your existing pages."></i>
+
               </NavLink>
 
             <a
