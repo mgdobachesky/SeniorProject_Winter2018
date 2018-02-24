@@ -182,7 +182,9 @@ function NumberFormInput(props) {
     };
 
     return (
-        <li key={props.formInput._id} className="list-group-item d-flex">
+        <li key={props.formInput._id}
+            className="list-group-item d-flex"
+            id={props.formInput._id + "," + props.elementId + "," + props.viewpageId + "," + props.viewsiteId}>
             <div className="mr-auto p-2">
                 <p><b>Number Label: </b>{props.formInput.numberLabel}</p>
             </div>
@@ -232,7 +234,9 @@ function TextareaFormInput(props) {
     };
 
     return (
-        <li key={props.formInput._id} className="list-group-item d-flex">
+        <li key={props.formInput._id}
+            className="list-group-item d-flex"
+            id={props.formInput._id + "," + props.elementId + "," + props.viewpageId + "," + props.viewsiteId}>
             <div className="mr-auto p-2">
                 <p><b>Textarea Label: </b>{props.formInput.textareaLabel}</p>
             </div>
@@ -282,7 +286,9 @@ function CheckboxFormInput(props) {
     };
 
     return (
-        <li key={props.formInput._id} className="list-group-item d-flex">
+        <li key={props.formInput._id}
+            className="list-group-item d-flex"
+            id={props.formInput._id + "," + props.elementId + "," + props.viewpageId + "," + props.viewsiteId}>
             <div className="mr-auto p-2">
                 <p><b>Checkbox Label: </b>{props.formInput.checkboxLabel}</p>
             </div>

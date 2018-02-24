@@ -35,7 +35,6 @@ class ElementService {
       prepareData = formData;
     } else if(requestData.kind === "header"){
       prepareData.headerValue = requestData.headerValue;
-      prepareData.selected.label = requestData.selected.label;
     }
     // Make API call
     return axios({

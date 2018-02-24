@@ -8,7 +8,7 @@ import ViewpageForm from './components/ViewpageForm';
 import Viewpage from './components/Viewpage';
 import UserTable from './components/UserTable';
 import UserUsers from './components/UserUsers';
-import DragList from 'drag-list-react';
+
 /*
  * Method used to prepare the create Viewpage forms for
  * creating a Viewpage
