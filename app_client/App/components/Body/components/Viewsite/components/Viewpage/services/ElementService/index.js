@@ -33,6 +33,8 @@ class ElementService {
             headers = {'Content-Type': 'multipart/form-data'};
             // Set the prepare data to the formData
             prepareData = formData;
+        } else if (requestData.kind === "header") {
+            prepareData.headerValue = requestData.headerValue;
         }
         // Make API call
         return axios({
@@ -60,6 +62,8 @@ class ElementService {
             prepareData.textValue = requestData.textValue;
         } else if (requestData.kind === "form") {
             prepareData.formTitle = requestData.formTitle;
+        } else if (requestData.kind === "header") {
+            prepareData.headerValue = requestData.headerValue;
         } else if (requestData.kind === "dataView") {
             prepareData.formId = requestData.formId;
         } else if (requestData.kind === "image") {

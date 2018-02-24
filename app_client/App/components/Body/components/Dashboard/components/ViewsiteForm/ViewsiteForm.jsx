@@ -60,7 +60,7 @@ var ViewsiteFormJSX = function () {
                             className="form-control"
                             id="viewsiteName"
                             placeholder="Enter Viewsite Name"
-                            value={this.props.viewsite.viewsiteName}
+                            value={this.props.viewsite.viewsiteName.replace(/\s+/g, '')}
                             onChange={this.handleChange}/>
                     </label>
                 </div>

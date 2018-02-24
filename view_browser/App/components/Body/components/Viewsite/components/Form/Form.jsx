@@ -1,8 +1,11 @@
 // Import required modules
 import React from 'react';
 
-// Import requred components
+// Import required components
 import Textbox from './components/Textbox';
+import Number from './components/Number';
+import Textarea from './components/Textarea';
+import Checkbox from './components/Checkbox';
 
 /*
  * Create list of Form Inputs a Form owns
@@ -20,6 +23,33 @@ function FormInputList(props) {
                         formInputValue={formInputValue}
                         onChange={props.onChange}/>
                 );
+            }
+            else if (formInput.kind === "number") {
+                return (
+                    <Number
+                        key={formInput._id}
+                        formInput={formInput}
+                        formInputValue={formInputValue}
+                        onChange={props.onChange}/>
+                )
+            }
+            else if (formInput.kind === "textarea") {
+                return (
+                    <Textarea
+                        key={formInput._id}
+                        formInput={formInput}
+                        formInputValue={formInputValue}
+                        onChange={props.onChange}/>
+                )
+            }
+            else if (formInput.kind === "checkbox") {
+                return (
+                    <Checkbox
+                        key={formInput._id}
+                        formInput={formInput}
+                        formInputValue={formInputValue}
+                        onChange={props.onChange}/>
+                )
             }
         });
     } else {

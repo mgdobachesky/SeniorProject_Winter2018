@@ -1,6 +1,6 @@
 // Import required modules
 import React from 'react';
-
+import {FormErrors} from './FormErrors';
 /*
  * Alert that notifies the User of any unsuccessful operations
  * Used by LoginJSX
@@ -29,6 +29,7 @@ var LoginJSX = function () {
                 Login
             </h2>
 
+
             <ErrorAlert
                 loginError={this.props.loginError}/>
 
@@ -43,25 +44,25 @@ var LoginJSX = function () {
                             className="form-control"
                             id="username"
                             placeholder="Enter Username"
-                            value={this.state.loginCredentials.username}
-                            onChange={this.handleChange}/>
+                            value={this.state.username}
+                            onChange={this.handleUserInput}/>
                     </label>
                 </div>
 
-                <div className="form-group">
-                    <label htmlFor="password">
-                        Password
 
-                        <input
-                            name="password"
-                            type="password"
-                            className="form-control"
-                            id="password"
-                            placeholder="Enter Password"
-                            value={this.state.loginCredentials.password}
-                            onChange={this.handleChange}/>
-                    </label>
-                </div>
+                <label htmlFor="password">
+                    Password
+
+                    <input
+                        name="password"
+                        type="password"
+                        className="form-control"
+                        id="password"
+                        placeholder="Enter Password"
+                        value={this.state.password}
+                        onChange={this.handleUserInput}/>
+                </label>
+
 
                 <button type="submit" className="btn btn-primary">
                     Login
