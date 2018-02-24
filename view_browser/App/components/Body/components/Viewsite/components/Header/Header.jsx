@@ -4,24 +4,24 @@ import React from 'react';
 /*
  * Text Element JSX view
  */
-var HeaderJSX = function() {
-  return (
-    <div>
-      <h1>
-        {this.props.element.headerValue.split('\n').map(function(item, key) {
-          return (
-            <span key={key}>
+var HeaderJSX = function () {
+    return (
+        <div>
+            <h1>
+                {this.props.element.headerValue.split('\n').map(function (item, key) {
+                    return (
+                        <span key={key}>
               {item}
-              <br/>
+                            <br/>
             </span>
-          )
-        })}
-      </h1>
+                    )
+                })}
+            </h1>
 
-      <br />
-    </div>
-  );
-}
+            <br/>
+        </div>
+    );
+};
 
 // Export Text Element JSX view
 export default HeaderJSX;

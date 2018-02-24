@@ -6,27 +6,27 @@ import CheckboxJSX from './Checkbox.jsx';
 import './checkbox.scss';
 
 class Checkbox extends React.Component {
-  constructor(props) {
-    // Call parent constructor
-    super(props);
+    constructor(props) {
+        // Call parent constructor
+        super(props);
 
-    // Other Methods
-    this.handleChange = this.handleChange.bind(this);
-  }
+        // Other Methods
+        this.handleChange = this.handleChange.bind(this);
+    }
 
-  /*
-   * Method used to update local state based on what a user types
-   */
-  handleChange(event) {
-    this.props.onChange(event, "record")
-  }
+    /*
+     * Method used to update local state based on what a user types
+     */
+    handleChange(event) {
+        this.props.onChange(event, "record")
+    }
 
-  /*
-   * Render Textbox Form Input JSX view
-   */
-  render() {
-    return(CheckboxJSX.call(this));
-  }
+    /*
+     * Render Textbox Form Input JSX view
+     */
+    render() {
+        return (CheckboxJSX.call(this));
+    }
 }
 
 // Export Textbox Form Input

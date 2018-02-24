@@ -6,17 +6,17 @@ import HeaderJSX from './Header.jsx';
 import './header.scss';
 
 class Header extends React.Component {
-  constructor(props) {
-    // Call parent constructor
-    super(props);
-  }
+    constructor(props) {
+        // Call parent constructor
+        super(props);
+    }
 
-  /*
-   * Render Text Element JSX view
-   */
-  render() {
-    return(HeaderJSX.call(this));
-  }
+    /*
+     * Render Text Element JSX view
+     */
+    render() {
+        return (HeaderJSX.call(this));
+    }
 }
 
 // Export Text Element

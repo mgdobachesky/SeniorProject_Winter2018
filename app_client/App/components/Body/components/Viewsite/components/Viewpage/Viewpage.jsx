@@ -35,17 +35,17 @@ function ElementList(props) {
                     </li>
                 );
             }
-            else if(element.kind === "header") {
+            else if (element.kind === "header") {
                 // For Text Elements
                 return (
                     <li key={_id} id={_id + "," + viewpageId + "," + viewsiteId}>
-                    <HeaderElement
-                        key={_id}
-                        viewsiteId={viewsiteId}
-                        viewpageId={viewpageId}
-                        element={element}
-                        onEditElement={props.onEditElement}
-                        onDeleteElement={props.onDeleteElement} />
+                        <HeaderElement
+                            key={_id}
+                            viewsiteId={viewsiteId}
+                            viewpageId={viewpageId}
+                            element={element}
+                            onEditElement={props.onEditElement}
+                            onDeleteElement={props.onDeleteElement}/>
                     </li>
                 );
             }
@@ -167,7 +167,7 @@ function HeaderElement(props) {
         _id: props.element._id,
         kind: props.element.kind,
         headerValue: props.element.headerValue,
-      //  type: props.element.selected.label
+        //  type: props.element.selected.label
     };
     // Data needed to delete a Text Element
     const deleteClick = {
@@ -179,41 +179,41 @@ function HeaderElement(props) {
 
     return (
         <div className="card border-primary mb-3">
-          <div className="card-body">
-            <h4 className="card-title">
-              <b>Header Value: </b>
-            </h4>
-            <p className="card-text">
-                {props.element.headerValue.split('\n').map(function(item, key) {
-                    return (
-                        <span key={key}>
+            <div className="card-body">
+                <h4 className="card-title">
+                    <b>Header Value: </b>
+                </h4>
+                <p className="card-text">
+                    {props.element.headerValue.split('\n').map(function (item, key) {
+                        return (
+                            <span key={key}>
                 {item}
-                          <br />
+                                <br/>
               </span>
-                    )
-                })}
-            </p>
-          </div>
+                        )
+                    })}
+                </p>
+            </div>
 
-          <div className="card-footer">
-            <a
-                className="card-link"
-                href="javascript:;"
-                onClick={() => props.onEditElement(editClick)}>
-              <button type="button" className="btn btn-link">
-                Edit Header
-              </button>
-            </a>
+            <div className="card-footer">
+                <a
+                    className="card-link"
+                    href="javascript:"
+                    onClick={() => props.onEditElement(editClick)}>
+                    <button type="button" className="btn btn-link">
+                        Edit Header
+                    </button>
+                </a>
 
-            <a
-                className="card-link float-right"
-                href="javascript:;"
-                onClick={() => props.onDeleteElement(deleteClick)}>
-              <button type="button" className="btn btn-danger">
-                Delete Header
-              </button>
-            </a>
-          </div>
+                <a
+                    className="card-link float-right"
+                    href="javascript:"
+                    onClick={() => props.onDeleteElement(deleteClick)}>
+                    <button type="button" className="btn btn-danger">
+                        Delete Header
+                    </button>
+                </a>
+            </div>
         </div>
     );
 }
@@ -444,23 +444,22 @@ var prepareCreateImage = function () {
     this.handleClearLocalState();
 };
 
-var prepareCreateHeader = function() {
+var prepareCreateHeader = function () {
 
     $(".createHeader").toggle("medium");
     $(".updateHeader").hide(false);
 
-    $( ".createImage" ).hide(false);
-    $( ".updateImage" ).hide(false);
+    $(".createImage").hide(false);
+    $(".updateImage").hide(false);
 
-    $( ".createDataView" ).hide(false);
-    $( ".updateDataView" ).hide(false);
+    $(".createDataView").hide(false);
+    $(".updateDataView").hide(false);
 
-    $( ".createText" ).hide(false);
-    $( ".updateText" ).hide(false);
+    $(".createText").hide(false);
+    $(".updateText").hide(false);
 
-    $( ".createForm" ).hide(false);
-    $( ".updateForm" ).hide(false);
-
+    $(".createForm").hide(false);
+    $(".updateForm").hide(false);
 
 
     this.handleClearLocalState();
@@ -543,7 +542,7 @@ var ViewpageJSX = function () {
                                 elementSuccess={this.state.elementSuccess}
                                 elementError={this.state.elementError}
                                 onChange={this.handleChange}
-                                onSubmit={this.handleCreateElement} />
+                                onSubmit={this.handleCreateElement}/>
                         </div>
                     </div>
 
@@ -556,7 +555,7 @@ var ViewpageJSX = function () {
                                 elementSuccess={this.state.elementSuccess}
                                 elementError={this.state.elementError}
                                 onChange={this.handleChange}
-                                onSubmit={this.handleUpdateElement} />
+                                onSubmit={this.handleUpdateElement}/>
                         </div>
                     </div>
 

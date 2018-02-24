@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 
 // Create Textbox Form Input schema
 var textareaSchema = new Schema({
-  'textareaLabel': {
-    'type': String,
-    'required': true
-  }
+    'textareaLabel': {
+        'type': String,
+        'required': true
+    }
 });
 
 // Export Textbox Form Input schema

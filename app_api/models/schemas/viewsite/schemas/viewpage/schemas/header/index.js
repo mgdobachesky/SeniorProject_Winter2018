@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 
 // Create Text Element schema
 var headerSchema = new Schema({
-  'headerValue': {
-    'type': String,
-    'required': true
-  }
+    'headerValue': {
+        'type': String,
+        'required': true
+    }
 });
 
 // Export Text schema

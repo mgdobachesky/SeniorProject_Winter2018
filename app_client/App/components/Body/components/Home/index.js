@@ -6,33 +6,33 @@ import HomeJSX from './Home.jsx';
 import './home.scss';
 
 class Home extends React.Component {
-  constructor(props) {
-    // Call parent constructor
-    super(props);
+    constructor(props) {
+        // Call parent constructor
+        super(props);
 
-    //this.manageViewpageService = new ViewpageService();
-    this.handleEditViewpage = this.handleEditViewpage.bind(this);
-    this.handleUpdateViewpage = this.handleUpdateViewpage.bind(this);
+        //this.manageViewpageService = new ViewpageService();
+        this.handleEditViewpage = this.handleEditViewpage.bind(this);
+        this.handleUpdateViewpage = this.handleUpdateViewpage.bind(this);
 
 
-      // Set initial state
-      this.state = {
-          viewsite: {},
-          viewpage: {
-              _id: "0",
-              viewpageName: "Home",
-              permissionLevel: 3
-          },
-          viewpageSuccess: "",
-          viewpageError: "",
-          userTables: [],
-          selectedUserTable: {},
-          selectedUserTableHeaders: {},
-          userTableError: "",
-          userUsers: []
-      };
+        // Set initial state
+        this.state = {
+            viewsite: {},
+            viewpage: {
+                _id: "0",
+                viewpageName: "Home",
+                permissionLevel: 3
+            },
+            viewpageSuccess: "",
+            viewpageError: "",
+            userTables: [],
+            selectedUserTable: {},
+            selectedUserTableHeaders: {},
+            userTableError: "",
+            userUsers: []
+        };
 
-  }
+    }
 
     /*
      * Method that prepares the Viewpage update form with Viewpage information
@@ -120,12 +120,12 @@ class Home extends React.Component {
         });
     }
 
-  /*
-   * Render the Home view
-   */
-  render() {
-    return(HomeJSX.call(this));
-  }
+    /*
+     * Render the Home view
+     */
+    render() {
+        return (HomeJSX.call(this));
+    }
 }
 
 // Export the Homepage

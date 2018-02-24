@@ -57,7 +57,7 @@ class Viewpage extends React.Component {
                 imageLocation: "",
                 fileUpload: null
             },
-            header:{
+            header: {
                 _id: "",
                 kind: "header",
                 headerValue: "",
@@ -96,7 +96,7 @@ class Viewpage extends React.Component {
             let createImage = this.state.image;
             requestData.fileUpload = createImage.fileUpload[0];
         }
-        else if(kind === "header") {
+        else if (kind === "header") {
             let createHeader = this.state.header;
             requestData.headerValue = createHeader.headerValue;
             requestData.typeOfHeader = createHeader.type;
@@ -176,7 +176,7 @@ class Viewpage extends React.Component {
             let isVisible = $(".updateImage").is(':visible');
             this.handleHideAllForms(".updateImage", isVisible);
         }
-        else if(event.kind === "header") {
+        else if (event.kind === "header") {
             // Set Text Element state to Element to be updated
             let editHeader = this.state.header;
             editHeader._id = event._id;
@@ -223,7 +223,7 @@ class Viewpage extends React.Component {
             requestData.elementId = updateImage._id;
             requestData.fileUpload = updateImage.fileUpload[0];
         }
-        else if(kind === "header") {
+        else if (kind === "header") {
             let updateHeader = this.state.header;
             requestData.elementId = updateHeader._id;
             requestData.headerValue = updateHeader.headerValue;
@@ -293,7 +293,7 @@ class Viewpage extends React.Component {
             $(".updateDataView").hide(false);
         } else if (".updateImage" != selector) {
             $(".updateImage").hide(false);
-        } else if (".updateHeader" != selector){
+        } else if (".updateHeader" != selector) {
             $(".updateHeader").hide(false);
         }
 
@@ -433,7 +433,7 @@ class Viewpage extends React.Component {
         this.handleHideAllForms();
 
         // Set up sortable
-        $( ".elements-sortable" ).sortable({
+        $(".elements-sortable").sortable({
             update: this.handleSortableUpdate,
             cursor: "move"
         });

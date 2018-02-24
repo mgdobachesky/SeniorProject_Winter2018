@@ -6,24 +6,24 @@ var viewsites = mongoose.model('viewsite');
  * Method that allows Users to create Text Elements
  */
 function headerCreate(request) {
-    var promise = new Promise(function(resolve, reject) {
-        if(!request.body.viewsiteId || !request.body.viewpageId) {
+    var promise = new Promise(function (resolve, reject) {
+        if (!request.body.viewsiteId || !request.body.viewpageId) {
             // Required IDs
             reject('Viewsite and Viewpage IDs are both required!');
-        } else if(!request.body.headerValue) {
+        } else if (!request.body.headerValue) {
             // Required fields
             reject('All fields required!');
-        } else if(!request.session.userId) {
+        } else if (!request.session.userId) {
             // Make sure a User is logged in
             reject('You must be logged in to create Headers!');
         } else {
             // Find Viewsite to add Text Element to
             viewsites.findById(request.body.viewsiteId)
-                .exec(function(error, viewsiteData) {
-                    if(viewsiteData.userId != request.session.userId) {
+                .exec(function (error, viewsiteData) {
+                    if (viewsiteData.userId != request.session.userId) {
                         // Make sure User owns Viewsite
                         reject('You can only create Headers for Viewsites you own!');
-                    } else if(!viewsiteData) {
+                    } else if (!viewsiteData) {
                         // Handle non-existent query results
                         reject('Viewsite not found!');
                     } else {
@@ -33,8 +33,8 @@ function headerCreate(request) {
                             'headerValue': request.body.headerValue
                         });
                         // Save updated Viewsite
-                        viewsiteData.save(function(error, results) {
-                            if(error) {
+                        viewsiteData.save(function (error, results) {
+                            if (error) {
                                 // Handle unknown errors
                                 console.log(error.message);
                                 reject('Something went wrong!');
@@ -57,33 +57,33 @@ function headerCreate(request) {
  * Method that allows Users to update Text Elements
  */
 function headerUpdate(request) {
-    var promise = new Promise(function(resolve, reject) {
-        if(!request.body.viewsiteId
+    var promise = new Promise(function (resolve, reject) {
+        if (!request.body.viewsiteId
             || !request.body.viewpageId
             || !request.body.elementId) {
             // Required IDs
             reject('Viewsite, Viewpage, and Element IDs are all required!');
-        } else if(!request.body.headerValue) {
+        } else if (!request.body.headerValue) {
             // Required fields
             reject('All fields required!');
-        } else if(!request.session.userId) {
+        } else if (!request.session.userId) {
             // Be sure a User is logged in
             reject('You must be logged in to update Text!');
         } else {
             // Find Viewsite that has a Text Element to update
             viewsites.findById(request.body.viewsiteId)
-                .exec(function(error, viewsiteData) {
-                    if(error) {
+                .exec(function (error, viewsiteData) {
+                    if (error) {
                         // Handle unknown errors
                         console.log(error.message);
                         reject('Something went wrong!');
-                    } else if(!viewsiteData) {
+                    } else if (!viewsiteData) {
                         // Handle non-existent query results
                         reject('Viewsite not found!');
-                    } else if(viewsiteData.userId != request.session.userId) {
+                    } else if (viewsiteData.userId != request.session.userId) {
                         // Make sure User owns Viewsite
                         reject('You can only update Text you own!');
-                    } else if(!viewsiteData
+                    } else if (!viewsiteData
                             .viewpages.id(request.body.viewpageId)
                             .elements.id(request.body.elementId)) {
                         // Handle non-existent sub-documents
@@ -95,8 +95,8 @@ function headerUpdate(request) {
                             .elements.id(request.body.elementId)
                             .headerValue = request.body.headerValue;
                         // Save updated Viewsite with new Text Element data
-                        viewsiteData.save(function(error, results) {
-                            if(error) {
+                        viewsiteData.save(function (error, results) {
+                            if (error) {
                                 // Handle unknown errors
                                 console.log(error.message);
                                 reject('Something went wrong!');
@@ -119,30 +119,30 @@ function headerUpdate(request) {
  * Method that allows Users to delete Text Elements
  */
 function headerDelete(request) {
-    var promise = new Promise(function(resolve, reject) {
-        if(!request.body.viewsiteId
+    var promise = new Promise(function (resolve, reject) {
+        if (!request.body.viewsiteId
             || !request.body.viewpageId
             || !request.body.elementId) {
             // Required IDs
             reject('Viewsite, Viewpage, and Element IDs are all required!');
-        } else if(!request.session.userId) {
+        } else if (!request.session.userId) {
             // Make sure a User is logged in
             reject('You must be logged in to delete Text!');
         } else {
             // Find Viewsite with Text Element to remove
             viewsites.findById(request.body.viewsiteId)
-                .exec(function(error, viewsiteData) {
-                    if(error) {
+                .exec(function (error, viewsiteData) {
+                    if (error) {
                         // Handle unknown errors
                         console.log(error.message);
                         reject('Something went wrong!');
-                    } else if(!viewsiteData) {
+                    } else if (!viewsiteData) {
                         // Handle non-existent query results
                         reject('Viewsite not found!');
-                    } else if(viewsiteData.userId != request.session.userId) {
+                    } else if (viewsiteData.userId != request.session.userId) {
                         // Make sure User owns Viewsite
                         reject('You can only delete Text you own!');
-                    } else if(!viewsiteData
+                    } else if (!viewsiteData
                             .viewpages.id(request.body.viewpageId)
                             .elements.id(request.body.elementId)) {
                         // Handle non-existent sub-documents
@@ -153,8 +153,8 @@ function headerDelete(request) {
                             .viewpages.id(request.body.viewpageId)
                             .elements.id(request.body.elementId).remove();
                         // Save updated Viewsite
-                        viewsiteData.save(function(error, results) {
-                            if(error) {
+                        viewsiteData.save(function (error, results) {
+                            if (error) {
                                 // Handle unknown errors
                                 console.log(error.message);
                                 reject('Something went wrong!');
