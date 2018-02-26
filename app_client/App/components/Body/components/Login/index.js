@@ -12,7 +12,6 @@ class Login extends React.Component {
         super(props);
 
         // Other Methods
-        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleUserInput = this.handleUserInput.bind(this);
         this.validateField = this.validateField.bind(this);
@@ -31,20 +30,6 @@ class Login extends React.Component {
             confirmPasswordValid: false,
 
         }
-    }
-
-    /*
-     * Method that allows local state to reflect what a User types
-     */
-    handleChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-        let changeLoginCredentials = this.state;
-        changeLoginCredentials[name] = value;
-        this.setState({
-            'loginCredentials': changeLoginCredentials,
-        });
     }
 
     /*
@@ -116,7 +101,6 @@ class Login extends React.Component {
         }
     }
 }
-
 
 // Export the Login form
 export default Login;

@@ -282,18 +282,21 @@ class Viewpage extends React.Component {
         $(".createDataView").hide(false);
         $(".createImage").hide(false);
         $(".createHeader").hide(false);
-        $(".updateHeader").hide(false);
 
         // Only hide update forms sharply if they are not the selector
         if (".updateText" != selector) {
             $(".updateText").hide(false);
-        } else if (".updateForm" != selector) {
+        }
+        if (".updateForm" != selector) {
             $(".updateForm").hide(false);
-        } else if (".updateDataView" != selector) {
+        }
+        if (".updateDataView" != selector) {
             $(".updateDataView").hide(false);
-        } else if (".updateImage" != selector) {
+        }
+        if (".updateImage" != selector) {
             $(".updateImage").hide(false);
-        } else if (".updateHeader" != selector) {
+        }
+        if (".updateHeader" != selector) {
             $(".updateHeader").hide(false);
         }
 
@@ -315,7 +318,6 @@ class Viewpage extends React.Component {
         let clearForm = this.state.form;
         let clearDataView = this.state.dataView;
         let clearImage = this.state.image;
-        let clearNumber = this.state.number;
         let clearHeader = this.state.header;
         clearText._id = "";
         clearText.kind = "text";
@@ -359,15 +361,13 @@ class Viewpage extends React.Component {
     handleChange(event, toChange) {
         const target = event.target;
         let value = "";
-        if (target.type === 'text'
-            || target.type === 'textarea'
-            || target.type === 'select-one'
-            || target.type === 'header') {
-            value = target.value;
-        } else if (target.type === 'checkbox') {
+
+        if (target.type === 'checkbox') {
             value = target.checked;
         } else if (target.type === 'file') {
             value = target.files;
+        } else {
+            value = target.value;
         }
         //const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;

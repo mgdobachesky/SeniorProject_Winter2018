@@ -29,6 +29,7 @@ class UserService {
             },
             data: {
                 'username': requestData.username,
+                'email': requestData.email,
                 'password': requestData.password
             }
         });
@@ -47,6 +48,7 @@ class UserService {
             },
             data: {
                 'username': requestData.username,
+                'email': requestData.email,
                 'password': requestData.password
             }
         });

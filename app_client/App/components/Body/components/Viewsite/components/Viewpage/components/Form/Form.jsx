@@ -14,23 +14,63 @@ import CheckboxForm from './components/CheckboxForm';
 var prepareCreateTextbox = function () {
     $(".createTextbox").toggle("medium");
     $(".updateTextbox").hide(false);
+
+    $(".createTextarea").hide(false);
+    $(".updateTextarea").hide(false);
+
+    $(".createNumber").hide(false);
+    $(".updateNumber").hide(false);
+
+    $(".createCheckbox").hide(false);
+    $(".updateCheckbox").hide(false);
+
     this.handleClearLocalState();
 };
 
 var prepareCreateTextarea = function () {
     $(".createTextarea").toggle("medium");
     $(".updateTextarea").hide(false);
+
+    $(".createTextbox").hide(false);
+    $(".updateTextbox").hide(false);
+
+    $(".createNumber").hide(false);
+    $(".updateNumber").hide(false);
+
+    $(".createCheckbox").hide(false);
+    $(".updateCheckbox").hide(false);
+
     this.handleClearLocalState();
 };
 
 var prepareCreateNumber = function () {
     $(".createNumber").toggle("medium");
     $(".updateNumber").hide(false);
+
+    $(".createTextbox").hide(false);
+    $(".updateTextbox").hide(false);
+
+    $(".createTextarea").hide(false);
+    $(".updateTextarea").hide(false);
+
+    $(".createCheckbox").hide(false);
+    $(".updateCheckbox").hide(false);
+
     this.handleClearLocalState();
 };
 var prepareCreateCheckbox = function () {
     $(".createCheckbox").toggle("medium");
     $(".updateCheckbox").hide(false);
+
+    $(".createTextbox").hide(false);
+    $(".updateTextbox").hide(false);
+
+    $(".createTextarea").hide(false);
+    $(".updateTextarea").hide(false);
+
+    $(".createNumber").hide(false);
+    $(".updateNumber").hide(false);
+
     this.handleClearLocalState();
 };
 
@@ -104,7 +144,6 @@ function FormInputList(props) {
         return null;
     }
 }
-
 
 /*
  * Method used to display individual Form Inputs
@@ -358,7 +397,6 @@ var FormJSX = function () {
                     <i className="fa fa-plus" aria-hidden="true"></i> Add Checkbox
                 </button>
             </div>
-
 
             <div className="card-body createTextbox">
                 <TextboxForm

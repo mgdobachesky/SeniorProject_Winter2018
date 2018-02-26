@@ -125,7 +125,6 @@ class Form extends React.Component {
             // Show the update Textbox form with populated local state information
             let isVisible = $(".updateTextbox").is(':visible');
             this.handleHideAllForms(".updateTextbox", isVisible);
-            //$(".updateTextbox").toggle("medium");
         }
         else if (event.kind === "number") {
             // Set state of the Textbox form to selected Textbox
@@ -139,7 +138,6 @@ class Form extends React.Component {
             // Show the update Textbox form with populated local state information
             let isVisible = $(".updateNumber").is(':visible');
             this.handleHideAllForms(".updateNumber", isVisible);
-            //$(".updateTextbox").toggle("medium");
         }
         else if (event.kind === "textarea") {
             // Set state of the Textbox form to selected Textbox
@@ -153,7 +151,6 @@ class Form extends React.Component {
             // Show the update Textbox form with populated local state information
             let isVisible = $(".updateTextarea").is(':visible');
             this.handleHideAllForms(".updateTextarea", isVisible);
-            //$(".updateTextbox").toggle("medium");
         }
         else if (event.kind === "checkbox") {
             // Set state of the Textbox form to selected Textbox
@@ -167,7 +164,6 @@ class Form extends React.Component {
             // Show the update Textbox form with populated local state information
             let isVisible = $(".updateCheckbox").is(':visible');
             this.handleHideAllForms(".updateCheckbox", isVisible);
-            //$(".updateTextbox").toggle("medium");
         }
     }
 
@@ -259,24 +255,22 @@ class Form extends React.Component {
         $(".createNumber").hide(false);
         $(".createTextarea").hide(false);
         $(".createCheckbox").hide(false);
-        // $(".createTextbox").hide(false);
-        $(".updateNumber").hide(false);
-        $(".updateTextarea").hide(false);
-        $(".updateCheckbox").hide(false);
+
         // Only hide update forms sharply if they are not the selector
         if (".updateTextbox" != selector) {
             $(".updateTextbox").hide(false);
         }
-        else if (".updateNumber" != selector) {
+        if (".updateNumber" != selector) {
             $(".updateNumber").hide(false);
         }
-        else if (".updateTextarea" != selector) {
+        if (".updateTextarea" != selector) {
             $(".updateTextarea").hide(false);
         }
-        else if (".updateCheckbox" != selector) {
+        if (".updateCheckbox" != selector) {
             $(".updateCheckbox").hide(false);
         }
-// Smooth animation on the targeted selector
+
+        // Smooth animation on the targeted selector
         if (isVisible) {
             $(selector).hide("medium");
         } else {

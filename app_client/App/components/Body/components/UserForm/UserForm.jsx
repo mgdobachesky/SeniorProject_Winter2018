@@ -54,9 +54,11 @@ var UserFormJSX = function () {
 
             <ErrorAlert
                 userError={this.state.userError}/>
+
             <div className="panel panel-default">
                 <FormErrors formErrors={this.state.formErrors}/>
             </div>
+
             <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="username">
