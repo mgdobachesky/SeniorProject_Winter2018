@@ -35,6 +35,7 @@ class ElementService {
             prepareData = formData;
         } else if (requestData.kind === "header") {
             prepareData.headerValue = requestData.headerValue;
+            prepareData.headerSize = requestData.headerSize;
         }
         // Make API call
         return axios({
@@ -64,6 +65,7 @@ class ElementService {
             prepareData.formTitle = requestData.formTitle;
         } else if (requestData.kind === "header") {
             prepareData.headerValue = requestData.headerValue;
+            prepareData.headerSize = requestData.headerSize;
         } else if (requestData.kind === "dataView") {
             prepareData.formId = requestData.formId;
         } else if (requestData.kind === "image") {

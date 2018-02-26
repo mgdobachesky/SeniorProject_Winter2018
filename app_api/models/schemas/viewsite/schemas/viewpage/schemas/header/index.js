@@ -9,6 +9,10 @@ var headerSchema = new Schema({
     'headerValue': {
         'type': String,
         'required': true
+    },
+    'headerSize':{
+        'type': Number,
+        'default': 3
     }
 });
 

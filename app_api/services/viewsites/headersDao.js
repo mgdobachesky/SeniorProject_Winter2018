@@ -30,8 +30,10 @@ function headerCreate(request) {
                         // Push a new Text Element onto the Viewsite's Viewpage
                         viewsiteData.viewpages.id(request.body.viewpageId).elements.push({
                             'kind': request.body.kind,
-                            'headerValue': request.body.headerValue
+                            'headerValue': request.body.headerValue,
+                            'headerSize': request.body.headerSize
                         });
+
                         // Save updated Viewsite
                         viewsiteData.save(function (error, results) {
                             if (error) {
@@ -94,6 +96,10 @@ function headerUpdate(request) {
                             .viewpages.id(request.body.viewpageId)
                             .elements.id(request.body.elementId)
                             .headerValue = request.body.headerValue;
+                        viewsiteData
+                            .viewpages.id(request.body.viewpageId)
+                            .elements.id(request.body.elementId)
+                            .headerSize = request.body.headerSize;
                         // Save updated Viewsite with new Text Element data
                         viewsiteData.save(function (error, results) {
                             if (error) {
