@@ -49,18 +49,20 @@ var LoginJSX = function () {
                 </div>
 
 
-                <label htmlFor="password">
-                    Password
+                <div className="form-group">
+                    <label htmlFor="password">
+                        Password
 
-                    <input
-                        name="password"
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        placeholder="Enter Password"
-                        value={this.state.password}
-                        onChange={this.handleUserInput}/>
-                </label>
+                        <input
+                            name="password"
+                            type="password"
+                            className="form-control"
+                            id="password"
+                            placeholder="Enter Password"
+                            value={this.state.password}
+                            onChange={this.handleUserInput}/>
+                    </label>
+                </div>
 
 
                 <button type="submit" className="btn btn-primary">
