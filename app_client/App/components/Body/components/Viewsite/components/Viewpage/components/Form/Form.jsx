@@ -189,9 +189,10 @@ function TextboxFormInput(props) {
 
             <div>
                 <a
-                    className="p-2"
+                    className="p-2 delete-button"
                     href="javascript:"
-                    onClick={() => props.onDeleteFormInput(deleteClick)}>
+                    onClick={() => { if (window.confirm('Are you sure you wish to delete this text box?'))
+                    props.onDeleteFormInput(deleteClick)} }>
                     <button type="button" className="btn btn-danger btn-sm">
                         Delete Textbox
                     </button>
@@ -241,9 +242,10 @@ function NumberFormInput(props) {
 
             <div>
                 <a
-                    className="p-2"
+                    className="p-2 delete-button"
                     href="javascript:"
-                    onClick={() => props.onDeleteFormInput(deleteClick)}>
+                    onClick={() => { if (window.confirm('Are you sure you wish to delete this number box?'))
+                        props.onDeleteFormInput(deleteClick)} }>
                     <button type="button" className="btn btn-danger btn-sm">
                         Delete Number Label
                     </button>
@@ -293,9 +295,10 @@ function TextareaFormInput(props) {
 
             <div>
                 <a
-                    className="p-2"
+                    className="p-2 delete-button"
                     href="javascript:"
-                    onClick={() => props.onDeleteFormInput(deleteClick)}>
+                    onClick={() => { if (window.confirm('Are you sure you wish to delete this text area?'))
+                        props.onDeleteFormInput(deleteClick)} }>
                     <button type="button" className="btn btn-danger btn-sm">
                         Delete Textarea
                     </button>
@@ -345,9 +348,10 @@ function CheckboxFormInput(props) {
 
             <div>
                 <a
-                    className="p-2"
+                    className="p-2 delete-button"
                     href="javascript:"
-                    onClick={() => props.onDeleteFormInput(deleteClick)}>
+                    onClick={() => { if (window.confirm('Are you sure you wish to delete this checkbox?'))
+                        props.onDeleteFormInput(deleteClick)} }>
                     <button type="button" className="btn btn-danger btn-sm">
                         Delete Checkbox
                     </button>
@@ -518,14 +522,16 @@ var FormJSX = function () {
                 </a>
 
                 <a
-                    className="card-link float-right"
+                    className="card-link float-right delete-button"
                     href="javascript:"
-                    onClick={() => this.props.onDeleteElement({
+
+                    onClick={() => { if (window.confirm('Are you sure you wish to delete this form?'))
+                    () => this.props.onDeleteElement({
                         viewsiteId: this.props.viewsiteId,
                         viewpageId: this.props.viewpageId,
                         _id: this.props.element._id,
                         kind: "form"
-                    })}>
+                    }) }}>
                     <button type="button" className="btn btn-danger">
                         Delete Form
                     </button>

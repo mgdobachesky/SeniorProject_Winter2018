@@ -147,9 +147,10 @@ function TextElement(props) {
                 </a>
 
                 <a
-                    className="card-link float-right"
+                    className="card-link float-right delete-button"
                     href="javascript:"
-                    onClick={() => props.onDeleteElement(deleteClick)}>
+                    onClick={() => { if (window.confirm('Are you sure you wish to delete this text box?'))
+                    props.onDeleteElement(deleteClick)} }>
                     <button type="button" className="btn btn-danger">
                         Delete Text
                     </button>
@@ -207,9 +208,10 @@ function HeaderElement(props) {
                 </a>
 
                 <a
-                    className="card-link float-right"
+                    className="card-link float-right delete-button"
                     href="javascript:"
-                    onClick={() => props.onDeleteElement(deleteClick)}>
+                    onClick={() => { if (window.confirm('Are you sure you wish to delete this header?'))
+                    props.onDeleteElement(deleteClick)} }>
                     <button type="button" className="btn btn-danger">
                         Delete Header
                     </button>
@@ -281,16 +283,17 @@ function DataViewElement(props) {
                     href="javascript:"
                     onClick={() => props.onEditElement(editClick)}>
                     <button type="button" className="btn btn-link">
-                        Edit Data-View
+                        Edit Data Viewer
                     </button>
                 </a>
 
                 <a
-                    className="card-link float-right"
+                    className="card-link float-right delete-button"
                     href="javascript:"
-                    onClick={() => props.onDeleteElement(deleteClick)}>
+                    onClick={() => { if (window.confirm('Are you sure you wish to delete this data viewer?'))
+                        props.onDeleteElement(deleteClick)} }>
                     <button type="button" className="btn btn-danger">
-                        Delete Data-View
+                        Delete Data Viewer
                     </button>
                 </a>
             </div>
@@ -341,9 +344,10 @@ function ImageElement(props) {
                 </a>
 
                 <a
-                    className="card-link float-right"
+                    className="card-link float-right delete-button"
                     href="javascript:"
-                    onClick={() => props.onDeleteElement(deleteClick)}>
+                    onClick={() => { if (window.confirm('Are you sure you wish to delete this image?'))
+                        props.onDeleteElement(deleteClick)} }>
                     <button type="button" className="btn btn-danger">
                         Delete Image
                     </button>
@@ -526,7 +530,7 @@ var ViewpageJSX = function () {
                             onClick={() => {
                                 prepareCreateDataView.call(this);
                             }}>
-                            <i className="fa fa-plus" aria-hidden="true"></i> Add Data-View
+                            <i className="fa fa-plus" aria-hidden="true"></i> Add Data Viewer
                         </button>
                     </div>
                 </div>
