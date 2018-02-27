@@ -412,8 +412,13 @@ var ViewsiteJSX = function () {
                                 role="button"
                                 aria-haspopup="true"
                                 aria-expanded="false">
-                                Your Pages
+                                Your Pages <a>  </a>
+
+                                <i className="fa fa-question-circle fa-lg" data-toggle="tooltip" data-placement="auto"
+                                   title="To add new elements to your pages, select the page you want to edit from the dropdown menu. You can add text, images, and more. "></i>
                             </a>
+
+
 
                             <div className="dropdown-menu">
                                 <ViewpageTabs
@@ -430,7 +435,10 @@ var ViewsiteJSX = function () {
                                 role="tab"
                                 aria-controls="manage-database"
                                 aria-selected="true">
-                                Manage Database
+                                Manage Database <a>  </a>
+
+                                <i className="fa fa-question-circle fa-lg" data-toggle="tooltip" data-placement="auto"
+                                   title="Manage your user accounts, as well as any data gathered from any forms you've created."></i>
                             </a>
                         </li>
 
