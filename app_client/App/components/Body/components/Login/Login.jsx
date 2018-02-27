@@ -32,7 +32,7 @@ var LoginJSX = function () {
             <ErrorAlert
                 loginError={this.props.loginError}/>
 
-            <form onSubmit={this.handleSubmit}>
+            <form className="login-test" onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="username">
                         Username
