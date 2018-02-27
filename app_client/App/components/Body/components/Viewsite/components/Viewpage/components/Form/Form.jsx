@@ -365,6 +365,14 @@ function CheckboxFormInput(props) {
  * Form JSX view
  */
 var FormJSX = function () {
+
+    let deleteClick = {
+        viewsiteId: this.props.viewsiteId,
+        viewpageId: this.props.viewpageId,
+        _id: this.props.element._id,
+        kind: "form"
+    };
+
     return (
         <div key={this.props.element._id} className="card border-primary mb-3">
             <div className="card-header">
@@ -526,12 +534,7 @@ var FormJSX = function () {
                     href="javascript:"
 
                     onClick={() => { if (window.confirm('Are you sure you wish to delete this form?'))
-                    () => this.props.onDeleteElement({
-                        viewsiteId: this.props.viewsiteId,
-                        viewpageId: this.props.viewpageId,
-                        _id: this.props.element._id,
-                        kind: "form"
-                    }) }}>
+                     this.props.onDeleteElement(deleteClick) }}>
                     <button type="button" className="btn btn-danger">
                         Delete Form
                     </button>
