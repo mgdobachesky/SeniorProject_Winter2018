@@ -11,7 +11,7 @@ var FooterJSX = function () {
 
             <div className="row"><p></p></div>
             <div>
-                <p><i class="fa fa-copyright"></i> 2018 Cadre</p>
+                <p><i className="fa fa-copyright"></i> 2018 Cadre</p>
             </div>
         </div>
 

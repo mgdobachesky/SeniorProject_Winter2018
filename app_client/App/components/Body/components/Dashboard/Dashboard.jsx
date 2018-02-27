@@ -83,12 +83,15 @@ function ViewsiteList(props) {
                         </NavLink>
 
                         <a
-                            className="card-link float-right"
+                            className="card-link float-right delete-button"
                             href="javascript:"
-                            onClick={() => props.onDeleteViewsite(deleteClick)}>
+                            onClick={() => { if (window.confirm('Are you sure you wish to delete your website?'))
+                                props.onDeleteViewsite(deleteClick)} }>
                             <button type="button" className="btn btn-danger">
                                 Delete Website
                             </button>
+
+
                         </a>
 
                     </div>
