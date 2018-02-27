@@ -42,6 +42,7 @@ app.use(force('https://www.cadre.me'));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // Configure the Express Session middleware
+// NOTE: This secret is only for development
 app.use(session({
     secret: '3Y8tQ9TUo9uJd6f',
     cookie: { secure: true },
