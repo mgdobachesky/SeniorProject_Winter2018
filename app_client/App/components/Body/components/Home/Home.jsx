@@ -15,7 +15,7 @@ var HomeJSX = function () {
                     <img src="/logo.png" className="img-fluid height:auto max-width:80%"/>
                 </div>
 
-                <div className="col-md-4 info">
+                <div className="col-md-3 info">
                     <h2>Welcome to Cadre!</h2>
                     <p>Cadre is a unique way to create websites that have your own flair! Whether you want a simple
                         website to advertise your business,
