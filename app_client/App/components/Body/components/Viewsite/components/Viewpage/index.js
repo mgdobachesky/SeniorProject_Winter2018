@@ -60,7 +60,7 @@ class Viewpage extends React.Component {
                 _id: "",
                 kind: "header",
                 headerValue: "",
-                headerSize: ""
+                headerSize: 3
             },
             elementSuccess: "",
             elementError: "",
@@ -335,7 +335,7 @@ class Viewpage extends React.Component {
         clearHeader._id = "";
         clearHeader.kind = "header";
         clearHeader.headerValue = "";
-        clearHeader.headerSize = "";
+        clearHeader.headerSize = 3;
         this.setState({
             text: clearText,
             form: clearForm,
