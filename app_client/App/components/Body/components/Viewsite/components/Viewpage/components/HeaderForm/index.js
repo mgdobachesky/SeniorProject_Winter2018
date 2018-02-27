@@ -41,6 +41,14 @@ class HeaderForm extends React.Component {
         this.props.onSubmit("header");
     }
 
+    // componentDidMount(){
+    //     console.log(this.props.header);
+    // }
+
+    componentWillReceiveProps(){
+        console.log(this.props.header);
+    }
+
     /*
      * Render that Text Form JSX view
      */

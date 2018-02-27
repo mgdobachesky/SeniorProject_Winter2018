@@ -1,6 +1,5 @@
 // Import required modules
 import React from 'react';
-import Dropdown from 'react-dropdown'
 /*
  * Alert to notify users of any successful operations
  * Used by TextFormJSX
@@ -62,13 +61,29 @@ var HeaderFormJSX = function () {
                             name="headerValue"
                             className="form-control"
                             id="headerValue"
-                            placeholder="Write some text..."
-                            value={this.props.text.headerValue}
+                            placeholder="Insert header text..."
+                            value={this.props.header.headerValue}
                             onChange={this.handleChange}/>
                     </label>
-                    <Dropdown options={headerType} onChange={this._onSelect} value={defaultOption}
-                              placeholder="Select an option"/>
-                    typeOfHeader={placeHolderValue}
+                        {/*<Dropdown options={headerType} onChange={this._onSelect} value={defaultOption}*/}
+                              {/*placeholder="Select an option"/>*/}
+                    <div className="form-group">
+                        <label htmlFor="headerSize">
+                            Header Size:
+
+                            <select
+                                id="headerSize"
+                                name="headerSize"
+                                className="form-control"
+                                value={this.props.header.headerSize}
+                                onChange={this.handleChange}>
+                                <option value="3">Large</option>
+                                <option value="2">Medium</option>
+                                <option value="1">Small</option>
+                            </select>
+                        </label>
+                    </div>
+                    {/*typeOfHeader={placeHolderValue}*/}
                 </div>
 
                 <button type="submit" className="btn btn-primary">

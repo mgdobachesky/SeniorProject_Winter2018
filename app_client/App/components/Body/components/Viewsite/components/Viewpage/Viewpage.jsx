@@ -167,7 +167,8 @@ function HeaderElement(props) {
         _id: props.element._id,
         kind: props.element.kind,
         headerValue: props.element.headerValue,
-        //  type: props.element.selected.label
+        headerSize: props.element.headerSize
+
     };
     // Data needed to delete a Text Element
     const deleteClick = {
@@ -533,12 +534,14 @@ var ViewpageJSX = function () {
                 <div className="col">
                     <h4>{this.state.viewpage.viewpageName}</h4>
 
+
+
                     <div id="createHeader" className="card createHeader mb-3">
                         <div className="card-body">
                             <HeaderForm
                                 description="Add Header"
                                 action="create"
-                                text={this.state.header}
+                                header={this.state.header}
                                 elementSuccess={this.state.elementSuccess}
                                 elementError={this.state.elementError}
                                 onChange={this.handleChange}
@@ -551,7 +554,7 @@ var ViewpageJSX = function () {
                             <HeaderForm
                                 description="Update Header"
                                 action="update"
-                                text={this.state.header}
+                                header={this.state.header}
                                 elementSuccess={this.state.elementSuccess}
                                 elementError={this.state.elementError}
                                 onChange={this.handleChange}

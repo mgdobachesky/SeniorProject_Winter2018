@@ -60,7 +60,7 @@ class Viewpage extends React.Component {
                 _id: "",
                 kind: "header",
                 headerValue: "",
-                type: ""
+                headerSize: ""
             },
             elementSuccess: "",
             elementError: "",
@@ -98,7 +98,7 @@ class Viewpage extends React.Component {
         else if (kind === "header") {
             let createHeader = this.state.header;
             requestData.headerValue = createHeader.headerValue;
-            requestData.typeOfHeader = createHeader.type;
+            requestData.headerSize = createHeader.headerSize;
         }
         // Send out API request to create a new Element
         this.manageElementService.createElement(requestData)
@@ -180,8 +180,8 @@ class Viewpage extends React.Component {
             let editHeader = this.state.header;
             editHeader._id = event._id;
             editHeader.kind = event.kind;
-            editHeader.textValue = event.textValue;
-            editHeader.type = event.type;
+            editHeader.headerValue = event.headerValue;
+            editHeader.headerSize = event.headerSize;
             this.setState({
                 header: editHeader
             });
@@ -226,6 +226,7 @@ class Viewpage extends React.Component {
             let updateHeader = this.state.header;
             requestData.elementId = updateHeader._id;
             requestData.headerValue = updateHeader.headerValue;
+            requestData.headerSize = updateHeader.headerSize;
         }
         // Send out API request to update selected Element
         this.manageElementService.updateElement(requestData)
@@ -334,7 +335,7 @@ class Viewpage extends React.Component {
         clearHeader._id = "";
         clearHeader.kind = "header";
         clearHeader.headerValue = "";
-        clearHeader.type = "";
+        clearHeader.headerSize = "";
         this.setState({
             text: clearText,
             form: clearForm,
