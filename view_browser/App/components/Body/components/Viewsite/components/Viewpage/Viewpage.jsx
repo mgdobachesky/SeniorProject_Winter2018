@@ -67,10 +67,6 @@ var ViewpageJSX = function () {
 
             <div className="row">
                 <div className="col-10 offset-1">
-                    <h1>{this.props.viewpage.viewpageName}</h1>
-
-                    <br/>
-
                     <ElementsView
                         viewsiteId={this.props.viewsiteId}
                         elements={this.props.viewpage.elements}

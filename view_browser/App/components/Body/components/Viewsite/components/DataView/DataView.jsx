@@ -61,7 +61,7 @@ var DataViewJSX = function () {
 
     return (
         <div>
-            <h2>{formTitle}</h2>
+            <h2>{formTitle + " Data"}</h2>
 
             <table className="table table-hover">
                 <tbody>
