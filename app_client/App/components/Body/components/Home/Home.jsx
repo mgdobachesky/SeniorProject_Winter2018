@@ -111,11 +111,6 @@ var HomeJSX = function () {
 
             </div>
 
-            {/*Footer Stuff*/}
-            <div className="row footer">
-                <i className="fa fa-copyright"></i><p>2018 Cadre</p>
-            </div>
-
 
         </div>
     );
