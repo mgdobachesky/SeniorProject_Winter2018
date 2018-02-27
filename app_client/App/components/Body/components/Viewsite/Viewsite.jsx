@@ -126,9 +126,10 @@ function ViewpageList(props) {
                                 </a>
 
                                 <a
-                                    className="card-link float-right"
+                                    className="card-link float-right delete-button"
                                     href="javascript:"
-                                    onClick={() => props.onDeleteViewpage(deleteClick)}>
+                                    onClick={() => { if (window.confirm('Are you sure you wish to delete your webpage?'))
+                                        props.onDeleteViewpage(deleteClick)} }>
                                     <button type="button" className="btn btn-danger">
                                         Delete Webpage
                                     </button>
@@ -415,7 +416,7 @@ var ViewsiteJSX = function () {
                                 role="button"
                                 aria-haspopup="true"
                                 aria-expanded="false">
-                                Your Pages <a>  </a>
+                                Your Pages <span> </span>
 
                                 <i className="fa fa-question-circle fa-lg" data-toggle="tooltip" data-placement="auto"
                                    title="To add new elements to your pages, select the page you want to edit from the dropdown menu. You can add text, images, and more. "></i>
@@ -438,7 +439,7 @@ var ViewsiteJSX = function () {
                                 role="tab"
                                 aria-controls="manage-database"
                                 aria-selected="true">
-                                Manage Database <a>  </a>
+                                Manage Database <span> </span>
 
                                 <i className="fa fa-question-circle fa-lg" data-toggle="tooltip" data-placement="auto"
                                    title="Manage your user accounts, as well as any data gathered from any forms you've created."></i>
