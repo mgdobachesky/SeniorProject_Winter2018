@@ -1,6 +1,5 @@
 // Import required modules
 import React from 'react';
-import Dropdown from 'react-dropdown'
 /*
  * Alert to notify users of any successful operations
  * Used by TextFormJSX
