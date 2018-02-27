@@ -9,6 +9,7 @@ var textSchema = require('./schemas/text');
 var formSchema = require('./schemas/form');
 var dataViewSchema = require('./schemas/dataView');
 var imageSchema = require('./schemas/image');
+var headerSchema = require('./schemas/header');
 
 // Define element parent class schema
 var elementSchema = new Schema({},
@@ -35,6 +36,7 @@ var text = elementArray.discriminator('text', textSchema);
 var form = elementArray.discriminator('form', formSchema);
 var dataView = elementArray.discriminator('dataView', dataViewSchema);
 var image = elementArray.discriminator('image', imageSchema);
+var header = elementArray.discriminator('header', headerSchema);
 
 // Export Viewpage schema
 module.exports = viewpageSchema;

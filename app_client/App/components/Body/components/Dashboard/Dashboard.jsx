@@ -15,6 +15,9 @@ function prepareCreateViewsite() {
     $("#createViewsite").toggle("medium");
     $("#updateViewsite").hide(false);
     this.handleClearLocalState();
+
+    $('[data-toggle="tooltip"]').tooltip();
+
 }
 
 /*
@@ -45,17 +48,8 @@ function ViewsiteList(props) {
                     <div className="card-body">
                         <h4 className="card-title">
                             <b>Website: </b>
-                            <NavLink to={"/" + viewsiteName} className="card-link">
-                                {viewsiteName}
-                            </NavLink>
+                            {viewsiteName}
                         </h4>
-
-                        <p>
-                            <b>Preview: </b>
-                            <a href={viewsiteLink} className="card-link">
-                                {"cadre.me" + viewsiteLink}
-                            </a>
-                        </p>
 
                         <p className="card-text">
                             <b>Website Theme: </b> {viewsiteThemeMessage}
@@ -80,8 +74,12 @@ function ViewsiteList(props) {
                             className="card-link"
                             to={"/" + viewsiteName}>
                             <button type="button" className="btn btn-link">
-                                Add Pages
+                                Page Builder
                             </button>
+                            <i className="fa fa-question-circle fa-lg" data-toggle="tooltip" data-placement="auto"
+                               title="The page builder allows you to add new web pages,
+                     as well as add elements to your existing pages."></i>
+
                         </NavLink>
 
                         <a

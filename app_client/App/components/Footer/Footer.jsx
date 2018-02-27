@@ -6,7 +6,17 @@ import React from 'react';
  */
 var FooterJSX = function () {
     return (
-        <div></div>
+
+        <div className="footer container-fluid bg-navbar">
+
+            <div className="row"><p></p></div>
+            <div>
+                <p><i class="fa fa-copyright"></i> 2018 Cadre</p>
+            </div>
+        </div>
+
+
+
     );
 };
 
