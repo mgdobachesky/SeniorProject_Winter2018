@@ -31,6 +31,8 @@ function clearAllForms() {
     $(".updateDataView").hide(false);
     $(".createImage").hide(false);
     $(".updateImage").hide(false);
+    $(".createHeader").hide(false);
+    $(".updateHeader").hide(false);
 }
 
 /*
@@ -144,7 +146,6 @@ function ViewpageList(props) {
             </li>
         );
     }
-
 }
 
 /*
@@ -354,6 +355,8 @@ function ManageDatabaseContent() {
                     <UserUsers
                         viewsiteId={this.state.viewsite._id}
                         userUsers={this.state.userUsers}
+                        userUserSuccess={this.state.userUserSuccess}
+                        userUserError={this.state.userUserError}
                         userTable={this.state.selectedUserTable}
                         onUpdateUserUsers={this.handleUpdateUserUsers}
                         onDeleteUserUsers={this.handleDeleteUserUsers}/>

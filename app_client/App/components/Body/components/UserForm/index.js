@@ -22,17 +22,24 @@ class UserForm extends React.Component {
         this.handleUpdateUser = this.handleUpdateUser.bind(this);
         // Other Methods
         this.handleSetGlobalState = this.handleSetGlobalState.bind(this);
-        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleUserInput = this.handleUserInput.bind(this);
+        this.validateField = this.validateField.bind(this);
+        this.validateForm = this.validateForm.bind(this);
+        this.errorClass = this.errorClass.bind(this);
 
         // Set initial state
         this.state = {
-            user: {
-                'username': "",
-                'password': ""
-            },
+            username: "",
+            password: "",
+            email: "",
             userSuccess: "",
-            userError: ""
+            userError: "",
+            confirmPassword: "",
+            formErrors: {username: "", password: "", confirmPassword: "", email: ""},
+            passwordValid: false,
+            confirmPasswordValid: false,
+            emailValid: true,
         }
     }
 
@@ -42,8 +49,9 @@ class UserForm extends React.Component {
     handleCreateUser() {
         // Prepare HTTP API request data
         let requestData = {};
-        let newUser = this.state.user;
+        let newUser = this.state;
         requestData.username = newUser.username;
+        requestData.email = newUser.email;
         requestData.password = newUser.password;
         // Send request to create User
         this.manageUserService.createUser(requestData)
@@ -68,8 +76,9 @@ class UserForm extends React.Component {
     handleUpdateUser() {
         // Set HTTP API request data
         let requestData = {};
-        let updatedUser = this.state.user;
+        let updatedUser = this.state;
         requestData.username = updatedUser.username;
+        requestData.email = updatedUser.email;
         requestData.password = updatedUser.password;
         // Send request out to API to update User
         this.manageUserService.updateUser(requestData)
@@ -100,24 +109,18 @@ class UserForm extends React.Component {
     }
 
     /*
-     * Method that keeps local state consistent with what the user types
-     */
-    handleChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        let changeUser = this.state.user;
-        changeUser[name] = value;
-        this.setState({
-            'user': changeUser
-        });
-    }
-
-    /*
      * Method that controls what happens after the User form has been submitted
      */
     handleSubmit(event) {
         event.preventDefault();
+
+        // Don't submit if there are invalid entries
+        if(!this.state.emailValid
+            || !this.state.passwordValid
+            || !this.state.confirmPasswordValid) {
+            return;
+        }
+
         if (this.props.action === "create") {
             // Create if currently creating a User
             this.handleCreateUser();
@@ -125,6 +128,54 @@ class UserForm extends React.Component {
             // Update if currently updating a User
             this.handleUpdateUser();
         }
+    }
+
+    handleUserInput(event) {
+        const target = event.target;
+        const name = target.name;
+        const value = target.value;
+        this.setState({[name]: value},
+            () => {
+                this.validateField(name, value)
+            });
+    };
+
+    validateField(fieldName, value) {
+        let fieldValidationErrors = this.state.formErrors;
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+        let confirmPasswordValid = this.state.confirmPasswordValid;
+
+        switch (fieldName) {
+            case 'email':
+                emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+                fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+                break;
+            case 'password':
+                passwordValid = value.length >= 6;
+                fieldValidationErrors.password = passwordValid ? '' : ' is too short';
+                break;
+            case 'confirmPassword':
+                confirmPasswordValid = value.match(password.value);
+                fieldValidationErrors.confirmPassword = confirmPasswordValid ? '' : ' does not match';
+                break;
+            default:
+                break;
+        }
+        this.setState({
+            formErrors: fieldValidationErrors,
+            emailValid: emailValid,
+            passwordValid: passwordValid,
+            confirmPasswordValid: confirmPasswordValid
+        }, this.validateForm);
+    }
+
+    validateForm() {
+        this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+    }
+
+    errorClass(error) {
+        return (error.length === 0 ? '' : 'has-error');
     }
 
     /*
@@ -135,8 +186,10 @@ class UserForm extends React.Component {
      */
     componentWillReceiveProps(nextProps) {
         if (nextProps.user) {
+            let user = nextProps.user;
             this.setState({
-                user: nextProps.user,
+                username: user.username ? user.username : "",
+                email: user.email ? user.email : "",
                 userSuccess: "",
                 userError: ""
             });
@@ -151,8 +204,10 @@ class UserForm extends React.Component {
      */
     componentDidMount() {
         if (this.props.user) {
+            let user = this.props.user;
             this.setState({
-                user: this.props.user,
+                username: user.username ? user.username : "",
+                email: user.email ? user.email : "",
                 userSuccess: "",
                 userError: ""
             });

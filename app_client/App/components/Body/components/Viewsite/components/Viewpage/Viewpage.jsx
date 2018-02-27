@@ -7,6 +7,7 @@ import FormForm from './components/FormForm';
 import Form from './components/Form';
 import DataViewForm from './components/DataViewForm';
 import ImageForm from './components/ImageForm';
+import HeaderForm from './components/HeaderForm';
 
 /*
  * Create list of Elements a Viewpage owns
@@ -26,6 +27,20 @@ function ElementList(props) {
                 return (
                     <li key={_id} id={_id + "," + viewpageId + "," + viewsiteId}>
                         <TextElement
+                            viewsiteId={viewsiteId}
+                            viewpageId={viewpageId}
+                            element={element}
+                            onEditElement={props.onEditElement}
+                            onDeleteElement={props.onDeleteElement}/>
+                    </li>
+                );
+            }
+            else if (element.kind === "header") {
+                // For Text Elements
+                return (
+                    <li key={_id} id={_id + "," + viewpageId + "," + viewsiteId}>
+                        <HeaderElement
+                            key={_id}
                             viewsiteId={viewsiteId}
                             viewpageId={viewpageId}
                             element={element}
@@ -137,6 +152,66 @@ function TextElement(props) {
                     onClick={() => props.onDeleteElement(deleteClick)}>
                     <button type="button" className="btn btn-danger">
                         Delete Text
+                    </button>
+                </a>
+            </div>
+        </div>
+    );
+}
+
+function HeaderElement(props) {
+    // Data needed to edit a Text Element
+    const editClick = {
+        viewsiteId: props.viewsiteId,
+        viewpageId: props.viewpageId,
+        _id: props.element._id,
+        kind: props.element.kind,
+        headerValue: props.element.headerValue,
+        headerSize: props.element.headerSize
+
+    };
+    // Data needed to delete a Text Element
+    const deleteClick = {
+        viewsiteId: props.viewsiteId,
+        viewpageId: props.viewpageId,
+        _id: props.element._id,
+        kind: props.element.kind
+    };
+
+    return (
+        <div className="card border-primary mb-3">
+            <div className="card-body">
+                <h4 className="card-title">
+                    <b>Header Value: </b>
+                </h4>
+                <p className="card-text">
+                    {props.element.headerValue.split('\n').map(function (item, key) {
+                        return (
+                            <span key={key}>
+                {item}
+                                <br/>
+              </span>
+                        )
+                    })}
+                </p>
+            </div>
+
+            <div className="card-footer">
+                <a
+                    className="card-link"
+                    href="javascript:"
+                    onClick={() => props.onEditElement(editClick)}>
+                    <button type="button" className="btn btn-link">
+                        Edit Header
+                    </button>
+                </a>
+
+                <a
+                    className="card-link float-right"
+                    href="javascript:"
+                    onClick={() => props.onDeleteElement(deleteClick)}>
+                    <button type="button" className="btn btn-danger">
+                        Delete Header
                     </button>
                 </a>
             </div>
@@ -295,6 +370,9 @@ var prepareCreateText = function () {
     $(".createImage").hide(false);
     $(".updateImage").hide(false);
 
+    $(".createHeader").hide(false);
+    $(".updateHeader").hide(false);
+
     this.handleClearLocalState();
 };
 
@@ -314,6 +392,9 @@ var prepareCreateForm = function () {
 
     $(".createImage").hide(false);
     $(".updateImage").hide(false);
+
+    $(".createHeader").hide(false);
+    $(".updateHeader").hide(false);
 
     this.handleClearLocalState();
 };
@@ -335,6 +416,9 @@ var prepareCreateDataView = function () {
     $(".createImage").hide(false);
     $(".updateImage").hide(false);
 
+    $(".createHeader").hide(false);
+    $(".updateHeader").hide(false);
+
     this.handleClearLocalState();
 };
 
@@ -355,9 +439,33 @@ var prepareCreateImage = function () {
     $(".createForm").hide(false);
     $(".updateForm").hide(false);
 
+    $(".createHeader").hide(false);
+    $(".updateHeader").hide(false);
+
     this.handleClearLocalState();
 };
 
+var prepareCreateHeader = function () {
+
+    $(".createHeader").toggle("medium");
+    $(".updateHeader").hide(false);
+
+    $(".createImage").hide(false);
+    $(".updateImage").hide(false);
+
+    $(".createDataView").hide(false);
+    $(".updateDataView").hide(false);
+
+    $(".createText").hide(false);
+    $(".updateText").hide(false);
+
+    $(".createForm").hide(false);
+    $(".updateForm").hide(false);
+
+
+    this.handleClearLocalState();
+};
+//a
 /*
  * Viewpage JSX view
  */
@@ -367,6 +475,17 @@ var ViewpageJSX = function () {
             <div className="row">
                 <div className="col-1"></div>
                 <div className="col-auto">
+                    <div className="row">
+                        <button
+                            type="button"
+                            className="btn btn-link"
+                            onClick={() => {
+                                prepareCreateHeader.call(this);
+                            }}>
+                            <i className="fa fa-plus" aria-hidden="true"></i> Add Header
+                        </button>
+                    </div>
+
                     <div className="row">
                         <button
                             type="button"
@@ -414,6 +533,34 @@ var ViewpageJSX = function () {
 
                 <div className="col">
                     <h4>{this.state.viewpage.viewpageName}</h4>
+
+
+
+                    <div id="createHeader" className="card createHeader mb-3">
+                        <div className="card-body">
+                            <HeaderForm
+                                description="Add Header"
+                                action="create"
+                                header={this.state.header}
+                                elementSuccess={this.state.elementSuccess}
+                                elementError={this.state.elementError}
+                                onChange={this.handleChange}
+                                onSubmit={this.handleCreateElement}/>
+                        </div>
+                    </div>
+
+                    <div id="updateHeader" className="card updateHeader mb-3">
+                        <div className="card-body">
+                            <HeaderForm
+                                description="Update Header"
+                                action="update"
+                                header={this.state.header}
+                                elementSuccess={this.state.elementSuccess}
+                                elementError={this.state.elementError}
+                                onChange={this.handleChange}
+                                onSubmit={this.handleUpdateElement}/>
+                        </div>
+                    </div>
 
                     <div id="createText" className="card createText mb-3">
                         <div className="card-body">

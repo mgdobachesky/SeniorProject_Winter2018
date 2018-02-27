@@ -56,6 +56,12 @@ class Viewpage extends React.Component {
                 imageLocation: "",
                 fileUpload: null
             },
+            header: {
+                _id: "",
+                kind: "header",
+                headerValue: "",
+                headerSize: ""
+            },
             elementSuccess: "",
             elementError: "",
             userTables: []
@@ -88,6 +94,11 @@ class Viewpage extends React.Component {
         else if (kind === "image") {
             let createImage = this.state.image;
             requestData.fileUpload = createImage.fileUpload[0];
+        }
+        else if (kind === "header") {
+            let createHeader = this.state.header;
+            requestData.headerValue = createHeader.headerValue;
+            requestData.headerSize = createHeader.headerSize;
         }
         // Send out API request to create a new Element
         this.manageElementService.createElement(requestData)
@@ -164,6 +175,20 @@ class Viewpage extends React.Component {
             let isVisible = $(".updateImage").is(':visible');
             this.handleHideAllForms(".updateImage", isVisible);
         }
+        else if (event.kind === "header") {
+            // Set Text Element state to Element to be updated
+            let editHeader = this.state.header;
+            editHeader._id = event._id;
+            editHeader.kind = event.kind;
+            editHeader.headerValue = event.headerValue;
+            editHeader.headerSize = event.headerSize;
+            this.setState({
+                header: editHeader
+            });
+            // Show only the update Text form
+            let isVisible = $(".updateHeader").is(':visible');
+            this.handleHideAllForms(".updateHeader", isVisible);
+        }
     }
 
     /*
@@ -196,6 +221,12 @@ class Viewpage extends React.Component {
             let updateImage = this.state.image;
             requestData.elementId = updateImage._id;
             requestData.fileUpload = updateImage.fileUpload[0];
+        }
+        else if (kind === "header") {
+            let updateHeader = this.state.header;
+            requestData.elementId = updateHeader._id;
+            requestData.headerValue = updateHeader.headerValue;
+            requestData.headerSize = updateHeader.headerSize;
         }
         // Send out API request to update selected Element
         this.manageElementService.updateElement(requestData)
@@ -250,16 +281,23 @@ class Viewpage extends React.Component {
         $(".createForm").hide(false);
         $(".createDataView").hide(false);
         $(".createImage").hide(false);
+        $(".createHeader").hide(false);
 
         // Only hide update forms sharply if they are not the selector
         if (".updateText" != selector) {
             $(".updateText").hide(false);
-        } else if (".updateForm" != selector) {
+        }
+        if (".updateForm" != selector) {
             $(".updateForm").hide(false);
-        } else if (".updateDataView" != selector) {
+        }
+        if (".updateDataView" != selector) {
             $(".updateDataView").hide(false);
-        } else if (".updateImage" != selector) {
+        }
+        if (".updateImage" != selector) {
             $(".updateImage").hide(false);
+        }
+        if (".updateHeader" != selector) {
+            $(".updateHeader").hide(false);
         }
 
         // Smooth animation on the targeted selector
@@ -280,6 +318,7 @@ class Viewpage extends React.Component {
         let clearForm = this.state.form;
         let clearDataView = this.state.dataView;
         let clearImage = this.state.image;
+        let clearHeader = this.state.header;
         clearText._id = "";
         clearText.kind = "text";
         clearText.textValue = "";
@@ -293,11 +332,16 @@ class Viewpage extends React.Component {
         clearImage.kind = "image";
         clearImage.imageLocation = "";
         clearImage.fileUpload = null;
+        clearHeader._id = "";
+        clearHeader.kind = "header";
+        clearHeader.headerValue = "";
+        clearHeader.headerSize = "";
         this.setState({
             text: clearText,
             form: clearForm,
             dataView: clearDataView,
             image: clearImage,
+            header: clearHeader,
             elementSuccess: "",
             elementError: ""
         });
@@ -317,14 +361,13 @@ class Viewpage extends React.Component {
     handleChange(event, toChange) {
         const target = event.target;
         let value = "";
-        if (target.type === 'text'
-            || target.type === 'textarea'
-            || target.type === 'select-one') {
-            value = target.value;
-        } else if (target.type === 'checkbox') {
+
+        if (target.type === 'checkbox') {
             value = target.checked;
         } else if (target.type === 'file') {
             value = target.files;
+        } else {
+            value = target.value;
         }
         //const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
