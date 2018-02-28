@@ -77,7 +77,7 @@ var DataViewJSX = function() {
   return (
     <Content>
       <H2>
-        {formTitle}
+        {formTitle + " Data"}
       </H2>
 
       <DisplayList

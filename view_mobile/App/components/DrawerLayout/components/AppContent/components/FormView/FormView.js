@@ -14,6 +14,9 @@ import {
 
 // Import requred components
 import Textbox from './components/Textbox';
+import Textarea from './components/Textarea';
+import Checkbox from './components/Checkbox';
+import Number from './components/Number';
 import styles from './styles.js';
 
 /*
@@ -27,11 +30,38 @@ function FormInputList(props) {
       if(formInput.kind === "textbox") {
         return (
           <Textbox
-          key={formInput._id}
-          formInput={formInput}
-          formInputValue={formInputValue}
-          onChange={props.onChange} />
+            key={formInput._id}
+            formInput={formInput}
+            formInputValue={formInputValue}
+            onChange={props.onChange} />
         );
+      }
+      else if (formInput.kind === "number") {
+        return (
+          <Number
+            key={formInput._id}
+            formInput={formInput}
+            formInputValue={formInputValue}
+            onChange={props.onChange} />
+        )
+      }
+      else if (formInput.kind === "textarea") {
+        return (
+          <Textarea
+            key={formInput._id}
+            formInput={formInput}
+            formInputValue={formInputValue}
+            onChange={props.onChange} />
+        )
+      }
+      else if (formInput.kind === "checkbox") {
+        return (
+          <Checkbox
+            key={formInput._id}
+            formInput={formInput}
+            formInputValue={formInputValue}
+            onChange={props.onChange} />
+        )
       }
     });
   } else {

@@ -7,6 +7,7 @@ import TextView from '../TextView';
 import FormView from '../FormView';
 import DataView from '../DataView';
 import ImageView from '../ImageView';
+import HeaderView from '../HeaderView';
 import styles from './styles.js';
 
 /*
@@ -44,6 +45,12 @@ function ElementList(props) {
           key={element._id}
           element={element} />
         );
+      } else if (element.kind === "header") {
+        return (
+          <HeaderView
+          key={element._id}
+          element={element} />
+        );
       }
     });
   } else {
@@ -57,14 +64,6 @@ function ElementList(props) {
 var ViewpageJSX = function() {
   return (
     <Content>
-      <H1>
-        {this.state.viewpage.viewpageName}
-      </H1>
-
-      <Text>
-        {"\n"}
-      </Text>
-
       <ElementList
       viewsiteId={this.props.viewsiteId}
       elements={this.state.viewpage.elements}

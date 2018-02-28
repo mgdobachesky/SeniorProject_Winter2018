@@ -15,7 +15,7 @@ var ImageViewJSX = function() {
     contentContainerStyle={styles.imageContainer}>
       <Image
       style={styles.imageStyle}
-      source={{uri: "http://159.203.105.123:3000/" + this.props.element.imageLocation}} />
+      source={{uri: "https://www.cadre.me/" + this.props.element.imageLocation}} />
 
       <Text>
         {"\n"}
