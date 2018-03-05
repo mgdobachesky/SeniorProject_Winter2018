@@ -35,10 +35,10 @@ var HomeJSX = function () {
                     <h4>Organize your pages</h4>
                     <div className="row">
 
-                        <div className="col-xl-5">
-                            <img src="/pages.png" className="samplePic"/>
+                        <div className="col-md-5">
+                            <img src="/pages.png" className="samplePic img-fluid"/>
                         </div>
-                        <div className="col-xl-7">
+                        <div className="col-md-7">
                             <p>Your web pages can be adorned with anything from images to forms to social media feeds.
                                 You can also adjust
                                 privacy settings on each page, so whether you'd like a page to be public or
@@ -52,10 +52,10 @@ var HomeJSX = function () {
                 <div className="col-md-5 featureCard">
                     <h4>Themes</h4>
                     <div className="row">
-                        <div className="col-xl-5">
-                            <img src="/bootswatch.png" className="samplePic"/>
+                        <div className="col-md-5">
+                            <img src="/bootswatch.png" className="samplePic img-fluid"/>
                         </div>
-                        <div className="col-xl-7">
+                        <div className="col-md-7">
                             <p>Select from over 20 beautiful themes to decorate your websites. All of our themes come
                                 from direct from the
                                 open source project Bootswatch. If you'd like to learn more about all of the themes,
@@ -78,10 +78,10 @@ var HomeJSX = function () {
                     <h4>Manage your own users and data</h4>
                     <div className="row">
 
-                        <div className="col-xl-5">
-                            <img src="/users.png" className="samplePic"/>
+                        <div className="col-md-5">
+                            <img src="/users.png" className="samplePic img-fluid"/>
                         </div>
-                        <div className="col-xl-7">
+                        <div className="col-md-7">
                             <p>To go hand in hand with our optional privacy settings on each page, you may define both
                                 administrator accounts
                                 and accounts for all the users you may need on your site. Your admins could have the
@@ -94,14 +94,13 @@ var HomeJSX = function () {
 
 
                 <div className="col-md-5 featureCard">
-                    <h4>Connect to social media</h4>
+                    <h4>View your websites on mobile</h4>
                     <div className="row">
-                        <div className="col-xl-5">
-                            <img src="/socialMedia.jpg" className="samplePic"/>
+                        <div className="col-md-5">
+                            <img src="/android.png" className="samplePic  img-fluid"/>
                         </div>
-                        <div className="col-xl-7">
-                            <p>Is the social media scene more your style? You can add your streams from Facebook,
-                                Instagram, and Twitter right onto your webpages.</p>
+                        <div className="col-md-7">
+                            <p>Any of your users can view your website via our Android App! You can get it on the Google Play store <a href={"https://play.google.com/store/apps/details?id=com.view_mobile"} target={"_blank"}>here</a></p>
                         </div>
 
                     </div>
