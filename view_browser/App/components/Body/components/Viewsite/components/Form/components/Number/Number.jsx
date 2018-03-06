@@ -8,7 +8,7 @@ var NumberJSX = function () {
     return (
         <div className="form-group">
             <label htmlFor={this.props.formInput._id}>
-                {this.props.formInput.numberLabel}
+                <h5>{this.props.formInput.numberLabel}</h5>
 
                 <input
                     type="number"

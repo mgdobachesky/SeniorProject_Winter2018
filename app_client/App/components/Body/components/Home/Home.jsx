@@ -15,7 +15,7 @@ var HomeJSX = function () {
                     <img src="/logo.png" className="img-fluid height:auto max-width:80%"/>
                 </div>
 
-                <div className="col-md-3 info">
+                <div className="col-md-4 info">
                     <h2>Welcome to Cadre!</h2>
                     <p>Cadre is a unique way to create websites that have your own flair! Whether you want a simple
                         website to advertise your business,
@@ -59,7 +59,7 @@ var HomeJSX = function () {
                             <p>Select from over 20 beautiful themes to decorate your websites. All of our themes come
                                 from direct from the
                                 open source project Bootswatch. If you'd like to learn more about all of the themes,
-                                click <a href={"https://bootswatch.com/"} target={"_blank"}>here</a></p>
+                                click <a href={"https://bootswatch.com/"} target={"_blank"} className="here">here</a></p>
                         </div>
 
                     </div>
@@ -100,7 +100,7 @@ var HomeJSX = function () {
                             <img src="/android.png" className="samplePic  img-fluid"/>
                         </div>
                         <div className="col-md-7">
-                            <p>Any of your users can view your website via our Android App! You can get it on the Google Play store <a href={"https://play.google.com/store/apps/details?id=com.view_mobile"} target={"_blank"}>here</a></p>
+                            <p>Any of your users can view your website via our Android App! You can get it on the Google Play store <a href={"https://play.google.com/store/apps/details?id=com.view_mobile"} target={"_blank"} className="here">here</a></p>
                         </div>
 
                     </div>
