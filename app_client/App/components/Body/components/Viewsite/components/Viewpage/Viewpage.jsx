@@ -530,7 +530,7 @@ var ViewpageJSX = function () {
                             onClick={() => {
                                 prepareCreateDataView.call(this);
                             }}>
-                            <i className="fa fa-plus" aria-hidden="true"></i> Add Data Viewer
+                            <i className="fa fa-plus" aria-hidden="true"></i> Add Data-View
                         </button>
                     </div>
                 </div>

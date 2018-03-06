@@ -8,7 +8,6 @@ import Dashboard from './components/Dashboard';
 import UserForm from './components/UserForm';
 import Viewsite from './components/Viewsite';
 import Home from './components/Home';
-//import Tutorial from '.components/Tutorial';
 
 /*
  * Create the Body view

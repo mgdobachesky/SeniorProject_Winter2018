@@ -7,17 +7,19 @@ import React from 'react';
 var CheckboxJSX = function () {
     return (
         <div className="form-group">
-            <label htmlFor={this.props.formInput._id}>
-                {this.props.formInput.checkboxLabel}
-
+            <div className="form-check">
                 <input
                     type="checkbox"
-                    className="form-control"
+                    className="form-check-input"
                     id={this.props.formInput._id}
                     name={this.props.formInput._id}
                     value={this.props.formInputValue}
-                    onChange={this.handleChange}/>
-            </label>
+                    onChange={this.handleChange} />
+
+                <label className="form-check-label" htmlFor={this.props.formInput._id}>
+                    {this.props.formInput.checkboxLabel}
+                </label>
+            </div>
         </div>
     );
 };
