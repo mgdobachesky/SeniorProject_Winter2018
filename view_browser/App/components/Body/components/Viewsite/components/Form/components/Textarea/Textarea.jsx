@@ -8,7 +8,7 @@ var TextareaJSX = function () {
     return (
         <div className="form-group">
             <label htmlFor={this.props.formInput._id} >
-                <h3>{this.props.formInput.textareaLabel}</h3>
+                <h5>{this.props.formInput.textareaLabel}</h5>
 
                 <input
                     type="textarea"

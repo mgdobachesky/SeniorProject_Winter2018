@@ -17,7 +17,7 @@ var CheckboxJSX = function () {
                     onChange={this.handleChange} />
 
                 <label className="form-check-label" htmlFor={this.props.formInput._id}>
-                    {this.props.formInput.checkboxLabel}
+                    <h5>{this.props.formInput.checkboxLabel}</h5>
                 </label>
             </div>
         </div>
