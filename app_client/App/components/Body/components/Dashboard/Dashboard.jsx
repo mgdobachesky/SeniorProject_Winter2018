@@ -2,7 +2,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
-// Import requred components
+// Import required components
 import ViewsiteForm from './components/ViewsiteForm';
 import UserForm from '../UserForm';
 

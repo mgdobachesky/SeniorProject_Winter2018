@@ -269,7 +269,7 @@ function DataViewElement(props) {
         <div className="card border-primary mb-3">
             <div className="card-body">
                 <h4 className="card-title">
-                    <b>Data-View Source: </b>
+                    <b>Data Viewer Source: </b>
                 </h4>
 
                 <p className="card-text">
@@ -651,7 +651,7 @@ var ViewpageJSX = function () {
                     <div id="createDataView" className="card createDataView mb-3">
                         <div className="card-body">
                             <DataViewForm
-                                description="Create Data-View"
+                                description="Create Data Viewer"
                                 action="create"
                                 dataView={this.state.dataView}
                                 userTables={this.state.userTables}
@@ -659,13 +659,15 @@ var ViewpageJSX = function () {
                                 elementError={this.state.elementError}
                                 onChange={this.handleChange}
                                 onSubmit={this.handleCreateElement}/>
+
                         </div>
+
                     </div>
 
                     <div id="updateDataView" className="card updateDataView mb-3">
                         <div className="card-body">
                             <DataViewForm
-                                description="Update Data-View"
+                                description="Update Data Viewer"
                                 action="update"
                                 dataView={this.state.dataView}
                                 userTables={this.state.userTables}

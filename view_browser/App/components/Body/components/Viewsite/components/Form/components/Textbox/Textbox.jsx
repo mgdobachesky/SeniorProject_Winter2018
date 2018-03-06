@@ -8,7 +8,7 @@ var TextboxJSX = function () {
     return (
         <div className="form-group">
             <label htmlFor={this.props.formInput._id}>
-                {this.props.formInput.textboxLabel}
+                <h5>{this.props.formInput.textboxLabel}</h5>
 
                 <input
                     type="text"

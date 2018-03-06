@@ -7,8 +7,8 @@ import React from 'react';
 var TextareaJSX = function () {
     return (
         <div className="form-group">
-            <label htmlFor={this.props.formInput._id}>
-                {this.props.formInput.textareaLabel}
+            <label htmlFor={this.props.formInput._id} >
+                <h5>{this.props.formInput.textareaLabel}</h5>
 
                 <input
                     type="textarea"

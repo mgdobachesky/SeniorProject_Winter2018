@@ -7,7 +7,7 @@ import React from 'react';
 var TextJSX = function () {
     return (
         <div>
-            <p>
+            <p className="element">
                 {this.props.element.textValue.split('\n').map(function (item, key) {
                     return (
                         <span key={key}>
