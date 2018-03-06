@@ -53,7 +53,7 @@ var TextareaFormJSX = function () {
             <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="textareaLabel">
-                        Textarea Label
+                        Text Area Label
 
                         <input
                             type="text"

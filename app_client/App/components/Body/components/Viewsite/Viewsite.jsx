@@ -255,7 +255,7 @@ function ManageViewpagesContent() {
                     <div id="updateViewpage" className="card mb-3">
                         <div className="card-body">
                             <ViewpageForm
-                                description="Update Viewpage"
+                                description="Update Webpage"
                                 action="update"
                                 viewpage={this.state.viewpage}
                                 viewpageSuccess={this.state.viewpageSuccess}

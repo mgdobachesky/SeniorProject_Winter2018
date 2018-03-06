@@ -54,7 +54,7 @@ function DataViewOptions(props) {
     } else {
         return (
             <option disabled>
-                No Data-Views exist yet!
+                No Forms exist yet!
             </option>
         );
     }
@@ -67,7 +67,9 @@ var DataViewFormJSX = function () {
     return (
         <div className="container-fluid">
             <h2>
-                {this.props.description}
+                {this.props.description} <span> </span>
+                <i className="fa fa-question-circle fa-xs" data-toggle="tooltip" data-placement="auto"
+                   title="Data Viewers allow you to view all the data you collect through your forms. To implement a data viewer, you must first create your form, and then select that form in the dropdown below."></i>
             </h2>
 
             <SuccessAlert
@@ -79,7 +81,7 @@ var DataViewFormJSX = function () {
             <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="formId">
-                        Data-View:
+                        Data Viewer:
 
                         <select
                             id="formId"
@@ -88,7 +90,7 @@ var DataViewFormJSX = function () {
                             value={this.props.dataView.formId}
                             onChange={this.handleChange}>
                             <option value="" disabled hidden>
-                                Choose Data-View...
+                                Choose Form...
                             </option>
 
                             <DataViewOptions userTables={this.props.userTables}/>
